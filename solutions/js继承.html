@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js继承</title>
+</head>
+<body>
+<a href="http://javascript.crockford.com/zh/inheritance.html" target="_blank">http://javascript.crockford.com/zh/inheritance.html</a>
+<a href="http://purplebamboo.github.io/2015/03/16/javascript-component/" target="_blank">http://purplebamboo.github.io/2015/03/16/javascript-component/</a>
+<a href="https://github.com/isaacs/inherits" target="_blank"> https://github.com/isaacs/inherits</a>
+<a href="http://www.cnblogs.com/yexiaochai/p/3530269.html" target="_blank">http://www.cnblogs.com/yexiaochai/p/3530269.html</a>
+    <script type="text/javascript">
+        var inherits = (function(){
+            if (typeof Object.create === 'function') {
+                // implementation from standard node.js 'util' module
+                return function (ctor, superCtor) {
+                    ctor.super_ = superCtor
+                    ctor.prototype = Object.create(superCtor.prototype, {
+                        constructor: {
+                            value: ctor,
+                            enumerable: false,
+                            writable: true,
+                            configurable: true
+                        }
+                    });
+                }
+            } else {
+                // old school shim for old browsers
+                return function (ctor, superCtor) {
+                    ctor.super_ = superCtor
+                    var TempCtor = function() {}
+                    TempCtor.prototype = superCtor.prototype
+                    ctor.prototype = new TempCtor()
+                    ctor.prototype.constructor = ctor
+                }
+            }
+        })();
+
+        // 测试
+        if(!window.console){
+            console.log = console.assert = function(){};
+        }
+        function test(c) {
+          console.assert(c.constructor === Child)
+          console.assert(c.constructor.super_ === Parent)
+          console.assert(Object.getPrototypeOf(c) === Child.prototype)
+          console.assert(Object.getPrototypeOf(Object.getPrototypeOf(c)) === Parent.prototype)
+          console.assert(c instanceof Child)
+          console.assert(c instanceof Parent)
+        }
+
+        function Child() {
+          Parent.call(this);
+          test(this);
+        }
+
+        function Parent() {}
+
+        inherits(Child, Parent);
+
+        var c = new Child;
+        test(c);
+
+        console.log('ok');
+
+        var Big = function(name){
+            this.name = name;
+        };
+        Big.prototype = {
+            say:function(){
+                alert('my name is '+this.name);
+            }
+        };
+        var Small = function(name){
+        };
+        inherits(Small, Big);
+        var s1 = new Small('s1');
+
+    </script>
+
+    <script type="text/javascript">
+        var Class = function(parent) {
+            var slice = [].slice;
+            var noop = function() {};
+            // 新建类，init为构造函数入口
+            var klass = function() {
+                this.init.apply(this, arguments);
+            };
+            klass.superclass = parent;
+            klass.subclasses = [];
+            // 如果存在父类就需要继承
+            if (parent) {
+                //新建一个空类用以继承，其存在的意义是不希望构造函数被执行
+                //比如 klass.prototype = new parent;就会执行其init方法
+                var subclass = function() {};
+                subclass.prototype = parent.prototype;
+                klass.prototype = new subclass;
+                parent.subclasses.push(klass);
+            }
+
+            if (!klass.prototype.init) {
+                klass.prototype.init = noop;
+            }
+
+            klass.prototype.constructor = klass;
+
+            klass.fn = klass.prototype;
+            klass.fn.parent = klass;
+
+            klass.fnProxy = function(func) {
+                var self = this;
+                return (function() {
+                    return func.apply(self, func);
+                });
+            }
+
+            klass.fn.fnProxy = klass.fnProxy;
+            // 给类添加属性
+            klass.extend = function(obj) {
+                var extended = obj.extended;
+                for (var i in obj) {
+                    klass[i] = obj[i];
+                }
+                // 回调
+                if (extended) {
+                    extended(klass);
+                }
+            };
+            // 给实例添加属性
+            klass.include = function(obj) {
+
+                var included = obj.included;
+                // for (var i in obj) {
+                //     klass.fn[i] = obj[i];
+                // }
+                var ancestor = klass.superclass && klass.superclass.prototype;
+                for (var k in obj) {
+                    var value = obj[k];
+
+                    //满足条件就重写
+                    if (ancestor && typeof value == 'function') {
+                        var argslist = /^\s*function\s*\(([^\(\)]*?)\)\s*?\{/i.exec(value.toString())[1].replace(/\s/i, '').split(',');
+                        //只有在第一个参数为$super情况下才需要处理（是否具有重复方法需要用户自己决定）
+                        if (argslist[0] === '$super' && ancestor[k]) {
+                            value = (function(methodName, fn) {
+                                return function() {
+                                    var scope = this;
+                                    var args = [function() {
+                                        return ancestor[methodName].apply(scope, arguments);
+                                    }];
+                                    return fn.apply(this, args.concat(slice.call(arguments)));
+                                };
+                            })(k, value);
+                        }
+                    }
+
+                    klass.prototype[k] = value;
+                }
+                // 回调
+                if (included) {
+                    included(klass);
+                }
+            };
+
+            return klass;
+        };
+        // Uglify代码
+        var Class=function(g){var k=[].slice,l=function(){},a=function(){this.init.apply(this,arguments)};a.superclass=g;a.subclasses=[];if(g){var h=function(){};h.prototype=g.prototype;a.prototype=new h;g.subclasses.push(a)}a.prototype.init||(a.prototype.init=l);a.prototype.constructor=a;a.fn=a.prototype;a.fn.parent=a;a.proxy=function(a){var c=this;return function(){return a.apply(c,a)}};a.fn.proxy=a.proxy;a.extend=function(b){var c=b.extended,d;for(d in b)a[d]=b[d];c&&c(a)};a.include=function(b){var c=
+        b.included,d=a.superclass&&a.superclass.prototype,e;for(e in b){var f=b[e];d&&"function"==typeof f&&"$super"===/^\s*function\s*\(([^\(\)]*?)\)\s*?\{/i.exec(f.toString())[1].replace(/\s/i,"").split(",")[0]&&d[e]&&(f=function(a,b){return function(){var c=this;return b.apply(this,[function(){return d[a].apply(c,arguments)}].concat(k.call(arguments)))}}(e,f));a.prototype[e]=f}c&&c(a)};return a};
+
+
+        // init为构造函数的方法，不继承，默认是空方法，什么都不执行
+        var BBtn = new Class();
+        BBtn.include({
+            init:function(opt){
+                this.name = opt.name;
+            },
+            sayHi:function(){
+                console.log('Hi,我是'+this.name);
+            },
+            say:function(cont){
+                console.log(cont);
+            }
+        });
+        SBtn = new Class(BBtn);
+        SBtn.include({
+            init:function(opt){
+                this.name = opt.name;
+                this.age = opt.age;
+            },
+            sayHi:function($super,sex){
+                // 调用父级同名方法
+                $super();
+                console.log('我'+ this.age+'岁，'+sex+'生');
+            },
+            included:function(){
+                console.log('included完成');
+            }
+        });
+        var BBtn1 = new BBtn({
+            name:'父类',
+            age:'0'
+        });
+        var SBtn1 = new SBtn({
+            name:'子类',
+            age:'0'
+        });
+        BBtn1.sayHi();
+        console.log('---------------------------------------');
+        SBtn1.sayHi('女');
+        console.log('---------------------------------------');
+        BBtn1.say('BBtn1');
+        console.log('---------------------------------------');
+        SBtn1.say('SBtn1');
+
+        /*
+            1.可以继承
+            2.分开定义类属性和实例属性
+            3.子类可覆盖父类方法
+            4.子类可调用父类方法：同名的方法，用参数$super来调用,不同名的父类方法和子类的方法一样。
+         */
+    </script>
+</body>
+</html>

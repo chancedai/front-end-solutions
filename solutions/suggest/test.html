@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+#suggest {
+    position: absolute;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCFF;
+    font-size: 90%;
+    width: 200px;
+}
+#suggest div {
+    display: block;
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#suggest div.select{ /* keydown, keyup */
+    color: #FFFFFF;
+    background-color: #3366FF;
+}
+#suggest div.over{ /* mouse over */
+    background-color: #99CCFF;
+}
+	</style>
+</head>
+<body>
+	<!-- Input form -->
+    <input id="text" type="text" name="pattern" value="" autocomplete="off" size="10" style="display: block">
+    <!-- suggestion area -->
+    <div id="suggest" style="display:none;"></div>
+	<script type="text/javascript" src="suggest.js"></script>
+	<script type="text/javascript">
+	var list = ['Java', 'JavaScript', 'Perl', 'Ruby', 'PHP', 'Python', 'C', 'C++', '.NET',
+		'MySQL', 'Oracle', 'PostgreSQL'
+	];
+	new Suggest.Local(
+		"text", // input element id.
+		"suggest", // suggestion area id.
+		list, // suggest candidates list
+		{
+			dispMax: 10,
+			interval: 1000
+		}); // options
+	</script>
+</body>
+</html>

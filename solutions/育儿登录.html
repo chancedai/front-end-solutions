@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="xh_cont01"></div>
+  <script type="text/javascript">
+  var byId = function(id){
+    return document.getElementById(id);
+  };
+  var jsonp = function(url, callback, callbackName) {
+    if (!url) {
+      return;
+    }
+    if (url.indexOf('?') === -1) {
+      url += '?callback=';
+    } else {
+      url += '&callback=';
+    }
+    url += callbackName + '&_=' + (Date.parse(new Date())).toString().substring(0, 8) + '&dpc=1';
+    var script = document.createElement('script');
+    window[callbackName] = function(data) {
+      callback && callback(data);
+    }
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  };
+
+  var render_login = function(data){
+      var userLnk = 'http://product.baby.sina.com.cn/home.php';
+      var tmp ='<div class="b_logined">\
+              <div class="b_info">\
+                  <div class="blk_tw tw01"> \
+      <a href="'+userLnk+'" target="_blank" class="twpic"><img src="'+data.face_url+'" width="45" height="45" class="b0" alt="" /></a>\
+        <div class="b_txt">\
+          <p><a href="'+userLnk+'" target="_blank">'+data.nickname+'</a>，您好！<br />'+data.status_desc+'</p>\
+        </div>\
+      </div>\
+              </div>\
+              <div class="b_link"><a href="' + data.url + '" target="_blank">宝宝同龄圈</a>  |  <a href="http://product.baby.sina.com.cn/home.php?block=info&r=http://baby.sina.com.cn/guide/0-1/21.html" target="_blank">修改宝宝出生日期</a>  |  <a href="http://product.baby.sina.com.cn/home.php?block=info&r=http://baby.sina.com.cn/guide/0-1/21.html" target="_blank">上传宝宝照片</a></div>\
+              <ul class="b_other">\
+                  <li><a href="http://www.weibo.com" target="_blank">我的微博</a></li>\
+                  <li><a href="http://blog.baby.sina.com.cn/u/' + data.uid + '" target="_blank">我的博客</a></li>\
+                  <li><a href="http://ask.baby.sina.com.cn/" target="_blank">专家问答</a></li>\
+                  <li><a href="http://baby.sina.com.cn/tv/" target="_blank">育儿视频</a></li>\
+                  <li><a href="http://club.baby.sina.com.cn/" target="_blank">亲子论坛</a></li>\
+                  <li><a href="http://product.baby.sina.com.cn/tryout_new.php" target="_blank">免费试用</a></li>\
+              </ul>\
+          </div>';
+        wrap.innerHTML = tmp;
+  };
+
+  var render_logout = function(){
+      var tmp ='<div class="b_unlogin">\
+            <div class="bp">\
+                <div class="bp_btn"><a href="javascript:;" action-type="baby-side-login">登录</a> <a href="https://login.sina.com.cn/signup/signup.php" target="_blank">注册</a></div>\
+                <p>成为新浪育儿注册用户，定制<a href="http://baby.sina.com.cn/edu/" target="_blank" class="fred"><strong>养育知识</strong></a>，马上向<a href="http://ask.baby.sina.com.cn/" target="_blank" class="fred"><strong>育儿专家</strong></a>提问！</p>\
+            </div>\
+        </div>';
+        wrap.innerHTML = tmp;
+  };
+  var wrap = byId('xh_cont01');
+  wrap.onclick = function(){
+     var type = this.getAttribute('action-type');
+     if(type&&type==='baby-side-login'){
+        alert('弹出登录层');
+     }
+  };
+  if(0){
+    // 退出成功
+    render_logout();
+  }else{
+    // 登录成功
+    jsonp('http://product.baby.sina.com.cn/interface/get_login_user.php?_type=new',function(data){
+        render_login(data);
+    },'SINA_BABY_INFO_CB');
+  }
+
+  </script>
+</body>
+</html>

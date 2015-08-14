@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        @font-face { font-family: 'icon'; src: url('http://bq69.qiniudn.com/blog/wp-content/themes/dcTheme/img/ico/icon.eot?-9bpax788'); src: url('http://bq69.qiniudn.com/blog/wp-content/themes/dcTheme/img/ico/icon.eot?#iefix-9bpax788') format('embedded-opentype'), url('http://bq69.qiniudn.com/blog/wp-content/themes/dcTheme/img/ico/icon.woff?-9bpax788') format('woff'), url('http://bq69.qiniudn.com/blog/wp-content/themes/dcTheme/img/ico/icon.ttf?-9bpax788') format('truetype'), url('http://bq69.qiniudn.com/blog/wp-content/themes/dcTheme/img/ico/icon.svg?-9bpax788#icon') format('svg'); font-weight: normal; font-style: normal; }
+        .icon{font-family: "icon"}
+    </style>
+</head>
+<body>
+    <i class="icon icon-category">&#xe946</i>
+    <i class="icon icon-time">&#xe94f</i>
+    <ol>
+        <li>进入 <a href="https://portal.qiniu.com/bucket/setting/advanced?bucket=bq69" target="_blank">https://portal.qiniu.com/bucket/setting/advanced?bucket=bq69</a></li>
+        <li>
+            空间设置-高级设置-去刷新
+        </li>
+        <li>
+            填上要更新的资源地址：
+            <pre>
+http://bq69.qiniudn.com/blog/wp-content/themes/dcTheme/main_20150105183333.css
+http://bq69.qiniudn.com/blog/wp-content/themes/dcTheme/main_mobile_20150105183333.css
+http://bq69.qiniudn.com/blog/wp-content/themes/dcTheme/img/ico/icon.eot
+http://bq69.qiniudn.com/blog/wp-content/themes/dcTheme/img/ico/icon.woff
+http://bq69.qiniudn.com/blog/wp-content/themes/dcTheme/img/ico/icon.ttf
+http://bq69.qiniudn.com/blog/wp-content/themes/dcTheme/img/ico/icon.svg
+            </pre>
+        </li>
+        <li>参考： <a href="http://kb.qiniu.com/Qiniu-Cloud-Storage-Cache-Strategy" target="_blank">http://kb.qiniu.com/Qiniu-Cloud-Storage-Cache-Strategy</a></li>
+    </ol>
+    <ol>
+<li>可在wordpress 七牛镜像存储上直接更新</li>
+<li>
+    <a href="http://bq69.com/blog/wp-admin/admin.php?page=wpjam-qiniutek-update" target="_blank">http://bq69.com/blog/wp-admin/admin.php?page=wpjam-qiniutek-update</a>-文件更新（需要填写AK和SK码，可在七牛账号处获取）
+</li>
+    </ol>
+    <ol>
+        <li>内容管理搜索如：blog/wp-content/themes/dcTheme/main_mobile_20150105183333.css</li>
+        <li>搜索接口：https://portal.qiniu.com/bucket/bq69/files?marker=&limit=169&prefix=blog/wp-content/themes/dcTheme/main_mobile_20150105183333.css</li>
+    </ol>
+
+
+
+
+
+</body>
+</html>

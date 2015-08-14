@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+    <script type="text/javascript">
+    (function(con) {
+        var methods = ['error', 'info', 'log', 'warn'],func;
+        for (var i = methods.length - 1; i >= 0; i--) {
+            func = methods[i];
+            con[func] = con[func] || function(){};
+        }
+    }(window.console = window.console || {}));
+    console = window.console;
+    </script>
+</head>
+<body>
+	<ol>
+		<li>同步js会阻塞该js之下的所有内容。</li>
+		<li>同步js当然也就会阻塞domready。</li>
+		<li>异步js一般会在所有同步js后加载，因为一般同步js触发请求时间点在异步js之前。（同步js遇到阻塞时，异步js会在同步js之前）</li>
+	</ol>
+	<script src="a.js"> </script>
+	<script src="c.js"> </script>
+	<script src="d.js"> </script>
+
+
+	<!--<script src="http://www.google.com/"> </script>
+	<script src="http://www.google.com/"> </script>
+	<script src="http://www.google.com/"> </script>
+	<script src="http://www.google.com/"> </script>
+	<script src="http://www.google.com/"> </script>-->
+	<iframe src="http://www.google.com/"></iframe>
+	<iframe src="http://www.google.com/"></iframe>
+	<iframe src="http://www.google.com/"></iframe>
+	<iframe src="http://www.google.com/"></iframe>
+	<p>我和图片都在http://www.google.com/之后</p>
+	<img src="http://ww1.sinaimg.cn/large/7fa25d67jw1eitfalexkej20c8099dgo.jpg" alt="">
+
+	<script src="e.js"> </script>
+	<script src="f.js"> </script>
+
+</body>
+</html>

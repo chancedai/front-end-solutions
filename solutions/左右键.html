@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <button onmouseup="whichButton(event);" oncontextmenu="preventDefault(event);">请点击鼠标...</button>
+</body>
+<script language="javascript">
+    var whichButton = function(e) {
+        e = window.event || e;
+        if (e.button <= 1) {//左键  IE中左键为1  FF中为0 点击滚轮为1
+            document.title = '左键'+(new Date()).getTime();
+        }else if (e.button == 2) {//右键
+            document.title = '右键'+(new Date()).getTime();
+        }
+    };
+    var preventDefault = function(e){
+        e = window.event || e;
+        if(e.preventDefault){
+            e.preventDefault();
+        }else{
+            e.returnValue = false;
+        };
+    };
+</script>
+</html>

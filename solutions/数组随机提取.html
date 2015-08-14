@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var getArrayRandomItems = function(arr, num) {
+			var tempArr = [];
+			for (var i = 0, len = arr.length; i < len; i++) {
+				tempArr.push(arr[i]);
+			}
+			var newArr = [];
+			for (var i = 0; i < num; i++) {
+				if (tempArr.length > 0) {
+					var arrIndex = Math.floor(Math.random() * tempArr.length);
+					newArr[i] = tempArr[arrIndex];
+					tempArr.splice(arrIndex, 1);
+				} else {
+					break;
+				}
+			}
+			return newArr;
+		};
+		var names = ['刘德华', '郭富城', '张学友', '黎明', '陈奕迅', '谭咏麟', '齐奏', '林子祥', '陈百强'];
+		console.log(4,getArrayRandomItems(names,4));
+		console.log(55,getArrayRandomItems(names,55));
+		console.log(1,getArrayRandomItems(names,1));
+		console.log(0,getArrayRandomItems(names,0));
+	</script>
+</body>
+</html>

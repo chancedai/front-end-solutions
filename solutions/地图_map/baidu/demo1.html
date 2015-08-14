@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";}
+		#map{width:1000px;height:800px;margin:0 auto;}
+		p{margin-left:5px; font-size:14px;background: url(d.png) no-repeat 0 0;}
+
+	</style>
+	<!-- uvHWIaLkXyrp4Ia8LH2igABH 我的密钥 -->
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=uvHWIaLkXyrp4Ia8LH2igABH"></script>
+	<title>添加自定义覆盖物</title>
+</head>
+<body>
+	<div id="map"></div>
+</body>
+</html>
+<script type="text/javascript">
+	var locations = [
+	    ['Oman', 21.512583,55.923254999999926, 4],
+	    ['Ahmedabad', 23.022505, 72.57136209999999, 3],
+	    ['Varanasi', 25.3176452,82.97391440000001, 2],
+	    ['Mandalay', 21.975,96.08333300000004, 1],
+	    ['Chongqing', 29.56301,106.551557, 1],
+	    ['Nanjing', 32.060255,118.796877, 1],
+	    ['Hawaii', 17.8967662,-155.58278180000002, 1],
+	    ['Las Vegas', 36.1699412,-115.13982959999998, 1],
+	    ['New York', 40.7127837,-74.00594130000002, 1],
+	    ['Alger', 36.752887,3.0420480000000225, 1]
+	];
+	// BMAP_HYBRID_MAP 卫星混合
+	var mp = new BMap.Map("map", {mapType:BMAP_HYBRID_MAP});
+
+	mp.centerAndZoom(new BMap.Point(54.36666700000001,24.466667), 5);
+	mp.enableScrollWheelZoom();
+	// 复杂的自定义覆盖物
+    function ComplexCustomOverlay(point){
+      this._point = point;
+    }
+    ComplexCustomOverlay.prototype = new BMap.Overlay();
+    ComplexCustomOverlay.prototype.initialize = function(map){
+      this._map = map;
+      var div = this._div = document.createElement("div");
+      div.style.position = "absolute";
+      div.style.zIndex = BMap.Overlay.getZIndex(this._point.lat);
+      div.innerHTML = '<img width="120" src="d.png" alt="飞机" />'
+      div.style.width = '120px';
+      mp.getPanes().labelPane.appendChild(div);
+      console.log(div);
+      return div;
+    }
+    ComplexCustomOverlay.prototype.draw = function(){
+      var map = this._map;
+      var pixel = map.pointToOverlayPixel(this._point);
+      this._div.style.left = (pixel.x-60) + "px";
+      this._div.style.top  = (pixel.y-60) + "px";
+    }
+
+    var myCompOverlay = new ComplexCustomOverlay(new BMap.Point(24.466667, 54.36666700000001));
+
+    mp.addOverlay(myCompOverlay);
+
+
+    for (i = 0; i < locations.length; i++) {
+    	var icon = new BMap.Icon('p.png', new BMap.Size(13,13));
+    	var marker = new BMap.Marker(new BMap.Point(locations[i][2], locations[i][1]),{icon:icon,title:locations[i][0]}); // 创建点
+    	mp.addOverlay(marker);
+    }
+
+    	var polyline1 = new BMap.Polyline([
+    		new BMap.Point(54.36666700000001,24.466667),
+    		new BMap.Point(55.923254999999926,21.512583),
+    		new BMap.Point(72.57136209999999,23.022505),
+    		new BMap.Point(82.97391440000001,25.3176452),
+    		new BMap.Point(96.08333300000004,21.975),
+    		new BMap.Point(106.551557,29.56301),
+    		new BMap.Point(118.796877,32.060255)
+    		// new BMap.Point(-155.58278180000002,17.8967662),
+    		// new BMap.Point(-130.58278180000002,29.3967662)
+    	], {strokeColor:"yellow", strokeWeight:2, strokeOpacity:0.5});
+    	var polyline2 = new BMap.Polyline([
+    		new BMap.Point(-155.58278180000002,17.8967662),
+    		new BMap.Point(-130.58278180000002,29.3967662)
+    	], {strokeColor:"yellow", strokeWeight:2, strokeOpacity:0.5});
+
+    	mp.addOverlay(polyline1);
+    	mp.addOverlay(polyline2);
+
+</script>

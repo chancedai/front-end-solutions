@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>添加开机启动</title>
+</head>
+<body>
+    <ol>
+        <li>在项目路径命令：npm install -g grunt-cli;npm install grunt</li>
+        <li>安装在package.json依赖的相关模块，如npm install load-grunt-tasks</li>
+        <li>使用jshintrc时，需要一个在项目根目录有一个.jshintrc的配置文件</li>
+        <li>gbk文件需要在Gruntfile.js中设置 grunt.file.defaultEncoding = 'gbk';</li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
+    <ol>
+    	<li>提示Expected '(' to have an indentation错误，可在.jshintrc中关闭indent选项</li>
+    	<li>提示This character may get silently deleted by one or more browsers 错误,中文行报错，文件格式改为uft-8即可</li>
+    	<li>jshint全部配置在jshit.js里</li>
+    	<li>类似的语句faces = faces||{}, list=[];，会提示 Expected an assignment or function call and instead saw an expression 设置"expr":true</li>
+    	<li>不使用=== eqeqeq:false;</li>
+    	<li>不使用==比较null eqnull:true</li>
+    </ol>
+    <ol>
+        <li>安装grunt-jsdoc</li>
+        <li>git</li>
+        <li>配置文件： jsdoc.conf.json
+            <ul>
+            <li>outputSourceFiles：是否输出js源文件，也就是生成的jsdoc里是否显示源js文件的链接。不想让用户看到js源文件的话，这项改成false，或者整个default项删除也行。</li>
+            <li>systemName：js产品的名称。也就是生成的jsdoc页面上方的名称。这个改成你自己的。</li>
+            <li>copyright：版权信息。</li>
+            <li>navType：导航方式。就是页面上方的Classes导航下拉菜单。支持vertical和inline两种方式。建议用vertical。inline我觉得不方便。</li>
+            <li>theme：皮肤模板。默认这个就挺好。Docstrap现在提供了13种效果。感兴趣的，可以自己去看看其它效果：https://github.com/terryweiss/docstrap</li>
+            <li>linenums：是否显示所在行数。比如当前方法位于js源文件12行。false的话，就不显示这个信息。</li>
+            <li>collapseSymbols：是否将类，方法，属性等doc信息以加号的方式收起</li>
+            </ul>
+        </li>
+    </ol>
+    <ol>
+        <li>安装grunt-karma</li>
+        <li>npm install grunt-karma --save-dev</li>
+        <li>在gruntfile.js中添加grunt.loadNpmTasks('grunt-karma');</li>
+    </ol>
+
+</body>
+</html>

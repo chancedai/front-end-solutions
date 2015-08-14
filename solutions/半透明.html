@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.wrap{font-size: 50px;color:#333;}
+		.dialog-wrap{font-size:12px;border:1px solid #FFE0C3; margin:20px;position: absolute;left:10px;top:10px;border-radius: 5px;}
+		.dialog-wrap .hd{text-align: right;padding:10px;background: #FEE8E4;color:#f00;}
+		.dialog-wrap .bd{opacity: 0.5;background: #E8F8FE;}
+		.dialog-wrap .close{position:absolute; right:10px;top:80px;font-size: 18px;z-index: 1;background: #333;}
+		.dialog-wrap .close:link,.dialog-wrap .close:visited{color:#fff;text-decoration: none;}
+		.dialog-wrap .close:hover,.dialog-wrap .close:active{color:#fff;text-decoration: none;}
+	</style>
+</head>
+<body>
+	<div class="wrap" id="js_wrap">
+		<div class="list-wrap">
+			<ul>
+				<li>
+					<div class="img">
+						<img src="">
+					</div>
+					<div class="txt">
+						<div class="title">标题标题标题标题标题标题</div>
+						<div class="desc">描述描述描述描述描述描述描述</div>
+						<p class="price"></p>
+						<p class="score"></p>
+						<a href="#url" target="_blank">积分乐购</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="dialog-wrap">
+			<div class="hd">积分兑换规则</div>
+			<a class="close" href="javascript:;">关闭</a>
+			<div class="bd">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+
+	<script type="text/javascript">
+	$(function(){
+		$('#js_wrap').on('click','.close',function(){
+			$(this).parent().hide();
+		});
+	});
+	</script>
+</body>
+</html>

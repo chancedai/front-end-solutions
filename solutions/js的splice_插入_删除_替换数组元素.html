@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script language="javascript">
+    var arr = ['php','java','javascript'];
+    //删除
+    var removed = arr.splice(1,1);
+    alert(arr); //php,javascript
+    alert(removed); //java ,返回删除的项
+    //插入
+    var insert = arr.splice(0,0,'asp'); //从第0个位置开始插入
+    alert(insert); //返回空数组
+    alert(arr); //asp,php,javascript
+    //替换
+    var replace = arr.splice(1,1,'c#','ruby'); //删除一项，插入两项
+    alert(arr); //asp,c#,ruby
+    alert(replace); //php,返回删除的项
+</script>
+</body>
+</html>

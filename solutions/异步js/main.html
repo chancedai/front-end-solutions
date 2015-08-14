@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="gb2312">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+	<script src="a.js"> </script>
+	<script type="text/javascript">
+	;(function(win,doc,js) {
+	  var js = doc.createElement('script')
+	  js.src = 'b.js';
+	  js.async = 'false';
+	  var head = doc.getElementsByTagName('head')[0];
+	  head.appendChild(js)
+	})(window, document);
+	</script>
+	<script src="c.js"> </script>
+	<script src="d.js"> </script>
+	<script src="e.js"> </script>
+	<script src="f.js"> </script>
+
+	<script src="c.js?ver=2"> </script>
+	<script src="d.js?ver=2"> </script>
+	<script src="e.js?ver=2"> </script>
+	<script src="f.js?ver=2"> </script>
+
+	<script src="g.js"> </script>
+	<script src="http://news.sina.com.cn/pvcounter/pvcounter.js"></script>
+
+</body>
+</html>

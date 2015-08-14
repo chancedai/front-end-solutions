@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+    <style type="text/css">
+		div.line {
+		    position:absolute;
+		    z-index:2;
+		    width:1px;
+		    height:1px;
+		    font-size:1px;
+		    background-color:#0000FF;
+		    overflow:hidden;
+		}
+    </style>
+</head>
+<body>
+		<div id="container" style="width:400px;height:400px;border:1px solid #000000;margin-left:50px"></div>
+		 <input type="button" value="line" onclick="testLine();"/>
+		<script type="text/javascript">
+		function line(startX, startY, endX, endY, container) {
+			var flag = document.createDocumentFragment();
+		    if (startX == endX) {
+		        if (startY > endY) {
+		            var tempY = startY;
+		            startY = endY;
+		            endY = tempY;
+		        }
+		        for (var k = startY; k < endY; k++) {
+		            createPoint(flag, startX, k);
+		        }
+		    }
+		    // y = ax + b
+		    var a = (startY - endY) / (startX - endX);
+		    var b = startY - ((startY - endY) / (startX - endX)) * startX;
+		    if (Math.abs(startX - endX) > Math.abs(startY - endY)) {
+		        if (startX > endX) {
+		            var tempX = endX;
+		            endX = startX;
+		            startX = tempX;
+		        }
+		        for (var i = startX; i <= endX; i++) {
+		            createPoint(flag, i, a * i + b);
+		        }
+		    } else {
+		        if (startY > endY) {
+		            var tempY = startY;
+		            startY = endY;
+		            endY = tempY;
+		        }
+		        for (var j = startY; j <= endY; j++) {
+		            createPoint(flag, (j - b) / a, j);
+		        }
+		    }
+		    container.appendChild(flag);
+
+		}
+
+		function createPoint(flag, x, y) {
+		    var node = document.createElement('div');
+		    node.className = 'line';
+		    node.style.marginTop = y + 'px';
+		    node.style.marginLeft = x + 'px';
+		    flag.appendChild(node);
+		}
+
+	    line(0, 0, 1000, 1000, document.getElementById('container'));
+		</script>
+</body>
+</html>

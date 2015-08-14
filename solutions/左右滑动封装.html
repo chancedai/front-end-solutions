@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+        <title>滑动回弹</title>
+        <!--[if lt IE 9]>      <![endif]-->
+        <noscript></noscript>
+        <style type="text/css">
+            #wrap{position: relative;width:1000px;height:200px; margin:50px auto;overflow: hidden;  background-color: #fff;cursor: pointer !important;background-color:#333;line-height: 2.0; font-family: 'Microsoft YaHei';}
+                #barWrap{position: absolute; left: 0;bottom:0; height: 10px; width: 100%;visibility: hidden;}
+                    #barInner{position: absolute; left:0; height: 100%;  background-color: #aaa;}
+                #cont{position: absolute;width:2000px; left:0px;background-color: #ddd;}
+                #cont .item{width:96px;height:200px;border:1px solid #000;margin:0 1px;float:left;display:inline;}
+        </style>
+    </head>
+    <body>
+        <div id="contain">
+            <div id="wrap">
+                <div id="cont"></div>
+                <div id="barWrap">
+                    <div id="barInner"></div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+        (function(exports){
+            var requestFrame = (function() {
+                return exports.requestAnimationFrame || exports.webkitRequestAnimationFrame || exports.mozRequestAnimationFrame || exports.oRequestAnimationFrame || function(callback) {
+                    return exports.setTimeout(callback, 1000 / 60);
+                };
+            })();
+            var cancelFrame = (function() {
+                return exports.cancelAnimationFrame || exports.webkitCancelAnimationFrame || exports.mozCancelAnimationFrame || exports.oCancelAnimationFrame || function(id) {
+                    exports.clearTimeout(id);
+                };
+            })();
+            var TouchScroll = function(config, callback) {
+                this.wrap = config.wrap;
+                this.cont = config.cont;
+                this.bar = config.bar;
+                this.barWrap = config.barWrap;
+                this.callbackfn = callback;
+                this.move();
+            };
+
+            TouchScroll.prototype = {
+                move : function(e) {
+                    var wrap = this.wrap, //监听容器
+                    cont = this.cont, //移动目标
+                    bar = this.bar, //自定义滚动条
+                    barWrap = this.barWrap, //滚动条区域
+
+                    lslow = 4, //到顶/底减基数
+                    lMove = 0, //滑块到顶top值
+                    lMoveL = lMove + 500, //到顶允许下拉范围
+                    rMove = wrap.offsetWidth - cont.offsetWidth, //滑块到底top值
+                    rMoveL = rMove - 500, //到底允许上滑范围
+                    callbackfn = this.callbackfn, //回调函数
+                    moving = false, //标记是否滑动
+                    startX, //标记起始位置
+                    startLeft, //标记滑动起始时的高度值
+                    move = 0;
+                    //移动距离
+                    //鼠标事件注册
+                    addEvent(wrap, 'mousedown', moveStart);
+                    addEvent(wrap, 'mousemove', moveIn);
+                    addEvent(wrap, 'mouseup', moveEnd);
+                    addEvent(window, 'mousemove', moveIn);
+                    addEvent(window, 'mouseup', moveEnd);
+                    //移动设备触摸事件注册
+                    addEvent(wrap, 'touchstart', moveStart);
+                    addEvent(wrap, 'touchmove', moveIn);
+                    addEvent(wrap, 'touchend', moveEnd);
+
+                    /*事件监听 */
+                    function addEvent(el, type, fn) {
+                        if (el.addEventListener) {
+                            el.addEventListener(type, fn, false);
+                        } else if (el.attachEvent) {
+                            el.attachEvent('on' + type, fn);
+                        } else {
+                            el['on' + type] = fn;
+                        }
+                    }
+
+                    //取消浏览器默认行为
+                    function stop(e) {
+                        //Opera/Chrome/FF
+                        if (e.preventDefault)
+                            e.preventDefault();
+                        //IE
+                        e.returnValue = false;
+                    }
+
+                    var Bar = (function(){
+                        var wrap = null;
+                        var inner = null;
+                        var width = 1000;
+                        return {
+                            init:function(barWrap,barInner){
+                                wrap = barWrap;
+                                inner = bar;
+                                if(wrap&&inner){
+                                    //自定义滚动条的长度
+                                    width = wrap.offsetWidth / cont.offsetWidth * wrap.offsetWidth;
+                                    //移动块对应滚轮单位长度
+                                    this.st = (cont.offsetWidth - wrap.offsetWidth) / (wrap.offsetWidth - width);
+                                    alert(this.st);
+                                    //滚动条长度初始化
+                                    inner.style.width = width + 'px';
+                                }
+
+                            },
+                            move:function(left){
+                                if(inner&&!isNaN(left)){
+                                    document.title = left;
+                                    animate(inner,'left',inner.style.left,left,2000);
+                                    // inner.style.left = left + 'px';
+                                }
+                            },
+                            toggle:function(isShow){
+                                if(wrap){
+                                   wrap.style.visibility = isShow?'visible':'hidden';
+                                }
+                            }
+                        };
+                    })();
+                    Bar.init(barWrap,bar);
+
+                    var contMove = function(left){
+                        cont.style.left = left + 'px';
+                    };
+
+                    //惯性缓动参数
+                    var lastMoveTime = 0;
+                    var lastMoveStart = 0;
+                    var stopInertiaMove = false;
+                    /*移动触发*/
+                    function moveStart(e) {
+                        stop(e);
+                        moving = true;
+                        if (e.touches)
+                            e = e.touches[0];
+                        startX = e.clientX;
+                        startLeft = cont.style.left || 0;
+                        //惯性缓动
+                        lastMoveStart = startX;
+                        lastMoveTime = new Date().getTime();
+                        stopInertiaMove = true;
+                        Bar.toggle(true);
+                    }
+
+                    /*移动过程中*/
+                    function moveIn(e) {
+                        if (moving) {
+                            stop(e);
+                            if (e.touches)
+                                e = e.touches[0];
+                            move = e.clientX - startX + parseInt(startLeft);
+                            if (move > lMove) {
+                                (move - lMove) / lslow + lMove > lMoveL ? move = lMoveL : move = (move - lMove) / lslow + lMove
+                            } else if (move < rMove)
+                                (move - rMove) / lslow + rMove < rMoveL ? move = rMoveL : move = (move - rMove) / lslow + rMove;
+                            contMove(move);
+                            Bar.move(-move / Bar.st);
+                            //惯性缓动
+                            var nowTime = new Date().getTime();
+                            stopInertiaMove = true;
+                            if (nowTime - lastMoveTime > 300) {
+                                lastMoveTime = nowTime;
+                                lastMoveStart = e.clientX;
+                            }
+                        }
+                    }
+
+                    /*移动结束*/
+                    function moveEnd(e) {
+                        stop(e);
+                        if (e.touches)
+                            e = e.touches[0];
+                        //惯性缓动
+                        var contentTop = cont.style.left.replace('px', '');
+                        var contentX = (parseInt(contentTop) + e.clientX - lastMoveStart);
+                        var nowTime = new Date().getTime();
+                        //最后一段时间手指划动速度
+                        var v = (e.clientX - lastMoveStart) / (nowTime - lastMoveTime);
+                        stopInertiaMove = false;
+                        (function(v, startTime, contentX) {
+                            //加速度方向
+                            var dir = v > 0 ? -1 : 1;
+                            // 负加速度
+                            var deceleration = dir * 0.005;
+                            function inertiaMove() {
+                                if (stopInertiaMove){
+                                    return;
+                                }
+                                var nowTime = new Date().getTime();
+                                var t = nowTime - startTime;
+                                var nowV = v + t * deceleration;
+                                var moveX = (v + nowV) / 2 * t;
+                                // 速度方向变化表示速度达到0了
+                                if (dir * nowV > 0) {
+                                    if (move > lMove) {
+                                        callbackfn('到顶了');
+                                        contMove(lMove);
+                                        Bar.move(lMove);
+                                    } else if (move < rMove) {
+                                        callbackfn('到底了');
+                                        contMove(rMove);
+                                        Bar.move(-rMove / Bar.st);
+                                    }
+                                    setTimeout(function() {
+                                        if (!stopInertiaMove){
+                                            Bar.toggle(false);
+                                        }
+                                    }, 4000);
+                                    return;
+                                }
+                                move = contentX + moveX;
+                                if (move > lMove) {
+                                    t /= 20;
+                                    move = (move - lMove) / 10 + lMove;
+                                } else if (move < rMove) {
+                                    t /= 20;
+                                    move = (move - rMove) / 10 + rMove;
+                                }
+                                contMove(move);
+                                Bar.move(-move / Bar.st);
+                                setTimeout(inertiaMove, 10);
+                            }
+
+                            inertiaMove();
+                        })(v, nowTime, contentX);
+                        move = 0;
+                        moving = false;
+                    }
+                }
+            };
+            exports.TouchScroll = TouchScroll;
+        })(window);
+        window.onload = function() {
+            var byId = function(id){
+                return document.getElementById(id);
+            };
+            /*测试数据*/
+            var insert = '';
+            for (var i = 0; i < 20; i++) {
+                insert += '<div class="item">'+i+'</div>';
+            }
+            byId('cont').innerHTML = insert;
+            /*测试数据   */
+            var at = new TouchScroll({
+                wrap : byId('wrap'),
+                cont : byId('cont')
+               /* barWrap : byId('barWrap'),
+                barInner : byId('barInner')*/
+            }, onmoveend);
+            //到顶/底回调
+            function onmoveend(m) {
+                console.log(m);
+            }
+
+        }
+        </script>
+    </body>
+</html>

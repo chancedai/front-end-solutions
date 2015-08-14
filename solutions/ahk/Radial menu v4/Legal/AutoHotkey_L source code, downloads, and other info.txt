@@ -1,0 +1,8 @@
+﻿AutoHotkey_L is a custom build of AutoHotkey maintained by Lexikos, which is licensed under GNU General public license. AutoHotkey_L later become official AutoHotkey.
+
+You can get the source code and other relevant information at:
+	https://github.com/Lexikos/AutoHotkey_L
+	http://ahkscript.org/
+	http://www.autohotkey.com/
+	http://www.autohotkey.com/forum/topic34070.html
+

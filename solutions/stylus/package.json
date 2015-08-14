@@ -1,0 +1,14 @@
+{
+  "name": "StylusTest",
+  "version": "1.0.0",
+  "dependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-watch": "~0.6.0",
+    "grunt-contrib-stylus": "~0.15.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-watch": "~0.6.0",
+    "grunt-contrib-stylus": "~0.15.0"
+  }
+}

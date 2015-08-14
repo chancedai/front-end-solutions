@@ -1,0 +1,32 @@
+﻿[Item1]	
+Icon=		Notepad.png	
+Action= 		%A_WinDir%\notepad.exe
+
+[Item2]
+Icon=		Calculator.png
+Action= 		%A_WinDir%\system32\calc.exe
+
+[Item3]
+Icon=		Paint.png
+Action= 		%A_WinDir%\system32\mspaint.exe
+
+[Item4]
+Icon= 		Windows Media Player.png
+Action= 		%A_ProgramFiles%\Windows Media Player\wmplayer.exe
+
+[Item5]
+Icon= 		Word.png
+Action= 		.doc
+
+[Item6]
+Icon= 		Excel.png
+Action= 		.xls
+
+[Item7] 			
+Text= 		App7
+[Item8]
+Text= 		App8
+[Item9]
+Text= 		App9
+[Item10]
+Text= 		etc.

@@ -1,0 +1,18 @@
+﻿My Documents
+	My Documents = %A_MyDocuments%
+	My Pictures = C:\Users\%A_UserName%\Pictures
+	My Music = C:\Users\%A_UserName%\Music
+	My Videos = C:\Users\%A_UserName%\Videos
+System
+	My Computer = 17
+	Program files = %A_ProgramFiles%
+	Windows = %A_WinDir%
+	Start up all users= %A_StartupCommon%
+	Start up current user = %A_Startup%
+	----------------------------------
+	Temp = %A_Temp%
+	App data = %A_AppData%
+RM = RM\	
+
+
+

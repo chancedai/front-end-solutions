@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+<style type="text/css">
+	.demo-20150619182538{margin:0 auto;width:1000px;}
+	.demo-20150619182538 .group{width:250px;float: left;margin:10px 10px 0 0;padding:10px;background: #eee;}
+</style>
+<div class="demo-20150619182538">
+	<button id="render">重新生成队长</button>
+	<div id="wrap">
+
+	</div>
+	<script type="text/javascript">
+	// 队长数
+	var leaderNum = 2;
+	// 每组队员
+	var arrs = [
+		['刘德华1', '郭富城1', '张学友1', '黎明1', '陈奕迅1', '谭咏麟1', '齐奏1', '林子祥1', '陈百强1','范冰冰1'],
+		['刘德华2', '郭富城2', '张学友2', '黎明2', '陈奕迅2', '谭咏麟2', '齐奏2', '林子祥2', '陈百强2','范冰冰2'],
+		['刘德华3', '郭富城3', '张学友3', '黎明3', '陈奕迅3', '谭咏麟3', '齐奏3', '林子祥3', '陈百强3','范冰冰3']
+	];
+
+	var getArrayRandomItems = function(arr, num) {var tempArr = []; for (var i = 0, len = arr.length; i < len; i++) {tempArr.push(arr[i]); } var newArr = []; for (var i = 0; i < num; i++) {if (tempArr.length > 0) {var arrIndex = Math.floor(Math.random() * tempArr.length); newArr[i] = tempArr[arrIndex]; tempArr.splice(arrIndex, 1); } else {break; } } return newArr; }; var render = function(){var html = []; for (var i = 0, len = arrs.length; i < len; i++) {var arr = arrs[i]; var leaders = getArrayRandomItems(arr,2); html.push('<div class="group"><h2>'); for (var i1 = 0, len1 = leaders.length; i1 < len1; i1++) {var leader = leaders[i1]; html.push(leader+'&nbsp;'); } html.push('</h2>'); html.push('<ol>'); for (var i2 = 0, len1 = arr.length; i2 < len1; i2++) {var item = arr[i2]; html.push('<li>'+item+'</li>'); } html.push('</ol></div>'); } document.getElementById('wrap').innerHTML = html.join(''); }; document.getElementById('render').onclick = render; render();
+
+	</script>
+</div>
+
+</body>
+</html>

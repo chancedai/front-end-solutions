@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>防被iframe</title>
+</head>
+<body>
+	<pre>
+;(function() {
+	if (window != window.top) {
+		window.top.location.href = window.location.href
+	}
+})();
+
+	</pre>
+    <div class="demo">
+        <iframe src="http://dc.sina.com.cn/Sina/task/0924_NBA%E6%8E%A5%E5%8F%A3%E4%BF%AE%E6%94%B9/live.html?id=2014060524"></iframe>
+    </div>
+</body>
+</html>

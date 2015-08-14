@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	function getDataUrl(src) {
+		var canvas = document.createElement('canvas');
+		var ctx = canvas.getContext('2d');
+		var img = new Image();
+		img.crossOrigin = "anonymous";
+		img.src = src;
+		img.onload = function() {
+			canvas.width = img.width;
+			canvas.height = img.height;
+		    ctx.drawImage(img, 0, 0);
+		    try{
+		    	var url = ctx.canvas.toDataURL('image/png');
+		    }catch(e){
+		    	console.log(e);
+		    }
+		    cb(url);
+		}
+	}
+	getDataUrl('http://www.sinaimg.cn/dy/slidenews/9_img/2014_20/53075_3312795_876124.jpg',function(url){
+		console.log(url);
+	});
+
+
+	</script>
+	<img id="preview1" crossorigin="anonymous" src="http://www.gravatar.com/avatar/0e39d18b89822d1d9871e0d1bc839d06?s=128&d=identicon&r=PG">
+
+<script type="text/javascript">
+
+	function getBase64() {
+    var img = document.getElementById("preview1");
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.width;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataURL = canvas.toDataURL("image/png");
+    alert(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
+}
+getBase64();
+</script>
+</body>
+</html>

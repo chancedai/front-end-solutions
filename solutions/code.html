@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正计时</title>
+    <style type="text/css">
+    .sdk-code{border:1px solid #333;padding:5px;background:#eee;}
+    </style>
+</head>
+<body>
+    <pre lang="c" class="sdk-code">
+        // &#x8ba1;&#x65f6;&#x5668;
+        (function(){
+            var Timer = (function(){
+                var getTime = function(seconds){
+                    var minutes = seconds/60;
+                    minutes = parseInt(minutes);
+                    var seconds = seconds%60;
+
+                    var hours = minutes/60;
+                    hours = parseInt(hours);
+                    minutes = minutes%60;
+                    return {
+                        hours:hours,
+                        minutes:minutes,
+                        seconds:seconds
+                    };
+                };
+                var doubleNum = function(num){
+                    var str = num;
+                    if(num&lt;10){
+                        str = &#039;0&#039;+num;
+                    }
+                    return str;
+                };
+                var render = function(wrap,seconds){
+                    var spliter = &#039;:&#039;;
+                    var time = getTime(seconds);
+                    var text = doubleNum(time.hours) +spliter+doubleNum(time.minutes) +spliter+doubleNum(time.seconds) ;
+                    if(wrap){
+                        wrap.innerHTML = text;
+                    }
+                    return text;
+                };
+                var Timer = function(wrap,start){
+                    this.wrap = wrap;
+                    this.time = start;
+                    this.runing = false;
+                    this.interval = null;
+                    this.timing();
+                };
+                Timer.prototype = {
+                    start:function(){
+                        this.runing = true;
+                    },
+                    stop:function(){
+                        this.runing = false;
+                    },
+                    timing:function(){
+                        var self = this;
+                        render(wrap,self.time);
+                        self.interval = setInterval(function(){
+                            if(!self.runing){
+                                return;
+                            }
+                            self.time++;
+                            render(wrap,self.time);
+                        },1e3);
+                    },
+                    destroy:function(){
+                        var self = this;
+                        clearInterval(self.interval);
+                    }
+                };
+                return Timer;
+            })();
+            //&#x521d;&#x59cb;&#x5316;
+            var wrap = document.getElementById(&#039;demo_201402111612&#039;);
+            var T1 = new Timer(wrap,0);
+            T1.start();
+        })();
+    </pre>
+</body>
+</html>

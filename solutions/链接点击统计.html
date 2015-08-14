@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="gb2312" />
+	<title>链接点击统计</title>
+	<style type="text/css">
+
+	</style>
+
+</head>
+<body>
+    <div class="demo_201401151448">
+        <a href="http://sina.com.cn/" onclick="_S_uaTrack_Test('videoapp_web_entrance','video_ipad')">免费下载</a>
+        <a href="http://sina.com.cn/" >免费下载2</a>
+        <script type="text/javascript">
+        // https://itunes.apple.com/cn/app/xin-lang-shi-pinhd/id577327596?mt=8
+        // http://beacon.sina.com.cn/e.gif?UATrack||61.135.152.208_1388717222.586774||10.218.36.68_1390181882.477141||4:340433246%40qq.com:1822079330::||videoapp_web_entrance||video_ipad||||https%3A//itunes.apple.com/cn/app/xin-lang-shi-pinhd/id577327596%3Fmt%3D8||&gUid_1390200939539
+        // key=videoapp_web_entrance&value=video_ipad
+            function _S_uaTrack_Test(self,key,val,opt){
+                var image = new Image();
+                var loadSucc = function() {
+                    image = null;
+                    if(timer){
+                        clearTimeout(timer);
+                        if(opt&&opt.callback&&typeof opt.callback=='function'){
+                            opt.callback();
+                        }
+                    }
+                };
+                var timer = setTimeout(function(){
+                    loadSucc();
+                },(opt&&opt.timeout)||2e3);
+
+                image.onload = function() {
+                    image.onreadystatechange = null;
+                    loadSucc();
+                }
+                image.onreadystatechange = function() {
+                    if(image.readyState == 'complete') {
+                        image.onload = null;
+                        loadSucc();
+                    }
+                }
+                var t = Math.abs((new Date()).getTime()) + '_' + Math.round(Math.random() * 1e8);
+                image.src = 'http://beacon.sina.com.cn/e.gif?UATrack||61.135.152.208_1388717222.586774||10.218.36.68_1390181882.477141||4:340433246%40qq.com:1822079330::||'+key+'||'+val+'||||https%3A//itunes.apple.com/cn/app/xin-lang-shi-pinhd/id577327596%3Fmt%3D8||&gUid_1390200939539&'+t;
+            };
+            (function(){
+                var body = document.getElementsByTagName('body')[0];
+                var addEvent = function(o, s, fn) {
+                    if (o.attachEvent) {
+                        o.attachEvent('on' + s, fn);
+                    } else {
+                        o.addEventListener(s, fn, false);
+                    }
+                    return o;
+                };
+                var stop = function(e) {
+                    if (e && e.preventDefault) {
+                        e.preventDefault();
+                    } else {
+                        window.event.returnValue = false;
+                    }
+                };
+                addEvent(body,'click',function(e){
+                    e=window.event||e;
+                    var target = e.target||e.srcElement;
+                    // ="key=videoapp_web_entrance&amp;value=video_ipad"
+                    var sudaStr = target.getAttribute('suda-uatrack');
+                    var href = target.href;
+                    if(sudaStr){
+                        setTimeout(function(){
+                            loaction.href = href;
+                        },2e3);
+                    }
+                    stop(e);
+
+                });
+            })();
+        </script>
+    </div>
+</body>
+</html>

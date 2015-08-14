@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr" id="html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>图片居中</title>
+    <style type="text/css">
+    li{clear:both;border-bottom:1px solid #000;padding:10px; margin-bottom:0 0 10px;}
+    </style>
+</head>
+<body>
+    <ol>
+        <li>
+            <style type="text/css">
+.item-a {
+    /*非IE的主流浏览器识别的垂直居中的方法*/
+    display: table-cell;
+    vertical-align:middle;
+
+    /*设置水平居中*/
+    text-align:center;
+
+    /* 针对IE的Hack */
+    *display: block;
+    *font-size: 175px;/*约为高度的0.873，200*0.873 约为175*/
+    *font-family:Arial;/*防止非utf-8引起的hack失效问题，如gbk编码*/
+
+    width:200px;
+    height:200px;
+    border: 1px solid #000;
+}
+.item-a img {
+    /*设置图片垂直居中*/
+    vertical-align:middle;
+}
+</style>
+            <div class="item-a">
+                <img src="http://i0.sinaimg.cn/2008/temp/119/2008/0702/U1396P461T119D5F2470DT20080823150541.jpg" />
+            </div>
+        </li>
+        <li>
+            <style type="text/css">
+.item-table{
+    display:table;
+    text-align:center;
+    /* IE 7 */
+    *position:relative;
+    *display:block;
+
+    width:200px;
+    height:200px;
+    border: 1px solid #000;
+}
+.item-table .item-cell{
+    display: table-cell;
+    vertical-align: middle;
+    /* IE 7 */
+    *display:block;
+    *position:absolute;
+    *top:50%;
+}
+.item-table .item-cont{
+    /* IE 7 */
+    *display:block;
+    *position:relative;
+    *top:-50%;
+    *left:-50%;
+}
+</style>
+            <div class="item-table">
+                <div class="item-cell">
+                    <div class="item-cont">
+                        <img src="http://i0.sinaimg.cn/2008/temp/119/2008/0702/U1396P461T119D5F2470DT20080823150541.jpg" />
+                    </div>
+                </div>
+            </div>
+            <div class="item-table">
+                <div class="item-cell">
+                    <div class="item-cont">文字也可以居中?</div>
+                </div>
+            </div>
+        </li>
+        <li>
+
+            <style type="text/css">
+.item-b{
+    width:200px;
+    height:200px;
+    border: 1px solid #000;
+}
+.item-b img{
+    width:200px;
+    height:200px;
+    background:url(http://i2.sinaimg.cn/cha/images/c.gif) no-repeat center center;
+}
+</style>
+            <div class="item-b">
+                <img src="http://i2.sinaimg.cn/cha/images/c.gif" style="background-image:url(http://i0.sinaimg.cn/2008/temp/119/2008/0702/U1396P461T119D5F2470DT20080823150541.jpg)"></div>
+        </li>
+        <li>
+
+            <style type="text/css">
+    .item-c{
+        display:inline-block;
+        text-align:center;
+        width:200px;
+        height:200px;
+        line-height:200px;
+        border:1px solid #000;
+    }
+    .item-c i{
+        display:inline-block;
+        width:0;
+        height:100%;
+        overflow:hidden;
+        vertical-align:middle;
+    }
+    .item-c img{
+        vertical-align:middle;
+    }
+  </style>
+            <div class="item-c">
+                <img src="http://i0.sinaimg.cn/2008/temp/119/2008/0702/U1396P461T119D5F2470DT20080823150541.jpg" /> <i></i>
+            </div>
+        </li>
+        <li>
+            <style type="text/css">
+.item-d{
+    display:inline-block;
+    text-align:center;
+    font-size:0;
+    width:200px;
+    height:200px;
+    border:1px solid #000;
+}
+.item-d .item-hack{
+    width:0;
+    height:100%;
+    overflow:hidden;
+    vertical-align:middle;
+}
+.item-d img{
+    vertical-align:middle;
+}
+</style>
+            <div class="item-d">
+                <img class="item-hack" src="http://i2.sinaimg.cn/cha/images/c.gif">
+                <img src="http://i0.sinaimg.cn/2008/temp/119/2008/0702/U1396P461T119D5F2470DT20080823150541.jpg" />
+            </div>
+        </li>
+        <li>
+            <style type="text/css">
+.item-e{
+    display:inline-block;
+    text-align:center;
+    width:200px;
+    height:200px;
+    border:1px solid #000;
+}
+.item-e button{
+    width:100%;
+    height:100%;
+    border:0;
+    background:none;
+}
+
+</style>
+            <div class="item-e">
+                <button>
+                    <img src="http://i0.sinaimg.cn/2008/temp/119/2008/0702/U1396P461T119D5F2470DT20080823150541.jpg" />
+                </button>
+            </div>
+        </li>
+    </ol>
+</body>
+</html>

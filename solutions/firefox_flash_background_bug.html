@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>浮动等高</title>
+    <style type="text/css">
+    /*负边距*/
+    .demo-201401131725{overflow:hidden;}
+    .demo-201401131725 .item{position:absolute;top:50px;left:100px;}
+    .demo-201401131725 .item div{width:50px;height:61px;}
+    .demo-201401131725 .a{background:url(http://i0.sinaimg.cn/jc/iframe/109/2012/1024/U6917P27T109D11F2056DT20140114104831.jpg) no-repeat scroll 0 0 #fff;}
+    .demo-201401131725 .b{background-color:red;}
+    </style>
+</head>
+<body>
+    <div class="demo-201401131725">
+        <div class="item">
+            <div class="a"></div>
+            <div class="b"></div>
+        </div>
+        <div>
+            <embed width="1000px" height="90px" wmode="opaque" name="sinaadtk_swf_uid_0" align="middle" src="http://d1.sina.com.cn/201401/13/533536.swf" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+            <embed width="1000px" height="90px"  name="sinaadtk_swf_uid_0" align="middle" src="http://d1.sina.com.cn/201401/13/533536.swf" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+        </div>
+
+        <p>
+           一、 Opaque 模式<br>
+
+            这是一种无窗口模式，在这种情况下flash player没有自己的窗口句柄，这就需要浏览器需要告诉flash player在浏览器的渲染表面绘制的时间和位置。这时flash影片就不会在高于浏览器HTML渲染表面而是与其他元素一样在同一个页面上,因此你就可以使用z-index值来控制DHTML元素是遮盖flash或者被遮盖。
+        </p>
+        <p>
+            二、background-color:red
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+﻿[Item1]
+Text=	Skin & profile changer
+Icon=	
+Action=	RWRM RM\Internal\Codes\Skin and profile changer.ahk
+
+[Item2]
+Text=	Visit RM website
+Icon=	
+Action=	fun RMApp_RunWebsite
+
+[Item3]
+Text=	Exit
+Icon=	
+Action=	fun RMApp_ExitRM
+
+[Item4]
+Text=	Reload
+Icon=	
+Action=	fun RMApp_ReloadRM
+
+[Item5]
+Text=	My codes
+Icon=	
+Action=	explore RM\My codes
+
+[Item6]
+Text=	Radial menu designer
+Icon=	
+Action=	RWRM RM\Internal\Codes\RMD.ahk
+
+[Item8]
+Text=	Help
+Icon=	
+Action=	RM\Help.htm
+
+[Item9]
+Text=	Suspend
+Icon=	
+Action=	fun RMApp_Suspend|1
+
+[Item10]
+Text=	Sounds on/off
+Icon=	
+Action=	fun RMApp_ToggleRMSounds
+
+[Item13]
+Text=	General settings
+Icon=	
+Action=	RM\Menu definitions\General settings.txt
+
+[Item16]
+Text=	Check for updates
+Icon=	
+Action=	fun RMApp_CheckForUpdates
+
+[Item17]
+Text=	Versions info
+Icon=	
+Action=	fun RMApp_VersionsInfo
+
+[Item18]
+Text=	About
+Icon=	
+Action=	fun RMApp_AboutRM

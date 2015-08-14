@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="demo_201406171019"></div>
+    <script language="javascript">
+    ;(function(){
+      var check = function(){
+        var ua = navigator.userAgent;
+        var deviceType="";
+
+        //判断设备类型
+        if (ua.indexOf('iPad') > 0) {
+           deviceType = 'isIpad';
+        } else if (ua.indexOf('Android') > 0) {
+           deviceType = 'isAndroid';
+        } else {
+           document.title = ('既不是ipad，也不是安卓！');
+           return;
+        }
+
+         // 判断横竖屏
+         if ('isIpad' == deviceType) {
+           if (Math.abs(window.orientation) == 90) {
+               document.title = ('我是ipad的横屏');
+           } else {
+               document.title = ('我是ipad的竖屏');
+           }
+        } else if ('isAndroid' == deviceType ) {
+           if (Math.abs(window.orientation) != 90) {
+               document.title = ('我是安卓的横屏');
+           } else {
+               document.title = ('我是安卓的竖屏');
+           }
+        }
+      };
+      var supportsOrientationChange = "onorientationchange" in window,
+          orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+      check();
+      // 监听事件
+      window.addEventListener(orientationEvent, function() {
+          check();
+      }, false);
+
+      // 最简单的办法，判断宽高
+      var visibleSize = (function(){
+          var win = window;
+          var doc = document;
+          var body = doc.body;
+          var docEle = doc.documentElement;
+          return function(){
+              return {
+                  width:win.innerWidth || (docEle && docEle.clientWidth) || body.clientWidth,
+                  height:win.innerHeight ||  (docEle && docEle.clientHeight) || body.clientHeight
+              };
+          };
+      })();
+    })();
+
+    </script>
+</body>
+</html>

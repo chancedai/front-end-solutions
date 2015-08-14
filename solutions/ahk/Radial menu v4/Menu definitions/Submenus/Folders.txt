@@ -1,0 +1,33 @@
+﻿[Item1]
+Icon= 		Pictures.png
+Action= 		explore C:\Users\%A_UserName%\Pictures
+
+[Item2]
+Icon= 		Music.png
+Action= 		explore C:\Users\%A_UserName%\Music
+
+[Item3]
+Icon= 		Videos.png
+Action= 		explore C:\Users\%A_UserName%\Videos
+
+[Item4]
+Text= 		Folder4
+[Item5]
+Text= 		Folder5
+[Item6]
+Text= 		etc.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

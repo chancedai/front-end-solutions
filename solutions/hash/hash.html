@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="gb2312">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+	<script type="text/javascript" src="hash.js"></script>
+	<script type="text/javascript">
+		var getHash = function(){
+			return window.location.hash ? window.location.hash.substr(1):'';
+		};
+		var setHash = function(val){
+			window.location.hash = val;
+			return val;
+		};
+
+		document.title = 'sethash:'+setHash(100);
+		setTimeout(function(){
+			document.title = 'sethash:'+setHash(88);
+			document.title = 'gethash:'+getHash();
+		},2e3)
+	</script>
+</body>
+</html>

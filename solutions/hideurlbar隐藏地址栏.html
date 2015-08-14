@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hideurlbar</title>
+</head>
+<body>
+    <div>
+    	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+	<script type="text/javascript">
+	var hideUrlBar = function () {
+		var win = window,
+			doc = win.document;
+
+		// If there's a hash, or addEventListener is undefined, stop here
+		if( !location.hash || !win.addEventListener ){
+
+			//scroll to 1
+			window.scrollTo( 0, 1 );
+			var scrollTop = 1,
+
+			//reset to 0 on bodyready, if needed
+			bodycheck = setInterval(function(){
+				if( doc.body ){
+					clearInterval( bodycheck );
+					scrollTop = 'scrollTop' in doc.body ? doc.body.scrollTop : 1;
+					win.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
+				}
+			}, 15 );
+
+			win.addEventListener( 'load', function(){
+				setTimeout(function(){
+					//reset to hide addr bar at onload
+					win.scrollTo( 0, scrollTop === 1 ? 0 : 1 );
+				}, 0);
+			}, false );
+		}
+	};
+	hideUrlBar();
+	</script>
+</body>
+</html>

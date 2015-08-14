@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>ie7图片链接失效</title>
+	<style type="text/css">
+    .demo-201402141803 span{display:block;width:100px;height:100px;border:1px solid #000;line-height:100px;}
+    /*.demo-201402141803 img{position:relative;z-index:-1;}*/
+	</style>
+</head>
+<body>
+    <a href="http://slide.news.sina.com.cn/z/slide_1_33131_41837.html/d/8#p=1" class="demo-201402141803">
+        <span>
+            <img src="http://s.img.mix.sina.com.cn/auto/resize?img=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F1_img%2F2014_05%2F33131_352050_928293.jpg&size=100_100" alt="">
+        </span>
+    </a>
+    <ol>
+        <li>点击图片，没法跳转</li>
+        <li>点击空白处可以跳转</li>
+        <li>span hasLayout 遮盖住了a标签</li>
+    </ol>
+
+    <ol>
+        <li>去掉 span 的 hasLayout</li>
+        <li>要保留span hasLayout的话，图片加position:relative;z-index:-1;</li>
+        <li>还不行，加一个绝对定位的标签，宽（padding）高(line-height),background:url(#)覆盖在上面，如在a里面放一个i标签，<i>&nbsp;</i></li>
+    </ol>
+</body>
+</html>

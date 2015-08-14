@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>产生1到N的随机数</title>
+    <link rel="stylesheet" type="text/css" href="http://ent.sina.com.cn/470/2014/0410/json.human.css">
+    <script type="text/javascript" src="http://ent.sina.com.cn/470/2014/0410/json.human.js"></script>
+</head>
+<body>
+    <div id="demo_201404101311">
+        <ul>
+            <li>
+                <label>1-5随机数：</label><div></div>
+            </li>
+            <li>
+                <label>1-10随机数:</label><div></div>
+            </li>
+            <li>
+                <label>js代码：</label>
+                <pre class="js">
+// &#x4ea7;&#x751f;1&#x5230;N&#x7684;&#x968f;&#x673a;&#x6570;
+(function(){
+    function getRandomNum(n) {
+        return Math.floor(Math.random() * n + 1)
+    }
+    var node = document.getElementById(&#039;demo_201404101311&#039;);
+    var divs = node.getElementsByTagName(&#039;div&#039;);
+    var html;
+    divs[0].appendChild(JsonHuman.format(getRandomNum(5)));
+    divs[1].appendChild(JsonHuman.format(getRandomNum(10)));
+})();
+                </pre>
+            </li>
+            <li>
+                <label>运行<strong>1亿</strong>次，命名1次数及比例</label>
+                <div>运行中...</div>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        // 产生1到N的随机数
+        (function(){
+            var randomBetween = function(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min);
+            };
+            function getRandomNum(n) {
+                return Math.floor(Math.random() * n + 1)
+            }
+            var node = document.getElementById('demo_201404101311');
+            var divs = node.getElementsByTagName('div');
+            var html;
+            divs[0].appendChild(JsonHuman.format(getRandomNum(5)));
+            divs[1].appendChild(JsonHuman.format(getRandomNum(10)));
+
+            (function(){
+                var num1 = 0;
+                var total = 0;
+                for (var i = 0, len = 1e8; i < len; i++) {
+                    total++;
+                    if(getRandomNum(10)===1){
+                        num1++;
+                    }
+                }
+                divs[2].innerHTML = '执行getRandomNum(10)次数 <strong>'+total+'</strong>，命中1的次数为 <strong>'+num1+'</strong>,占比 <strong>'+(num1*100/total)+'/100</strong>';
+            })();
+
+        })();
+    </script>
+</body>
+</html>

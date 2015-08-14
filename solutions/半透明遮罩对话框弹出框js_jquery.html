@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>半透明遮盖层</title>
+    <style type="text/css">
+        .demo-201403301559{font-size:100px;line-height:200px;}
+        .demo-confirm{width:470px;height:250px;z-index:10001;border-radius:3px;background:#E74C3C;color:#fff;}
+        .demo-confirm .hd{height:50px;line-height:50px;}
+        body,html{padding:0;margin:0;}
+    </style>
+</head>
+<body>
+    <div class="demo-201403301559">
+        <!-- <div class="demo-confirm">
+            <div class="hd">
+                <a href="javascript:;" dialog-type="close">关闭</a>
+            </div>
+            <div class="bd">
+                <p>您的评论内容有违规内容，请修改！</p>
+            </div>
+            <div class="ft">
+                <a href="javascript:;" dialog-type="confirm">继续发布</a>
+                <a href="javascript:;" dialog-type="cancel">去修改</a>
+            </div>
+        </div> -->
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation  <select>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+        </select> ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+         <script language="javascript" type="text/javascript">
+
+
+
+
+
+
+
+         var confirm = '<div class="demo-confirm" dialog-type="wrap">'
+                            +'<div class="hd">'
+                                +'<a href="javascript:;" dialog-type="close">关闭</a>'
+                            +'</div>'
+                            +'<div class="bd">'
+                                +'<p>您的评论内容有违规内容，请修改！</p>'
+                            +'</div>'
+                            +'<div class="ft">'
+                                +'<a href="javascript:;" dialog-type="confirm">继续发布</a>'
+                                +'<a href="javascript:;" dialog-type="cancel">去修改</a>'
+                            +'</div>'
+                        +'</div>';
+         // confirm框
+         Dialog1 = new __Dialog__(confirm,{
+            scroll:false,
+            onConfirm:function(){
+                // alert('直接发布');
+            },
+            onCancel:function(){
+                // alert('去修改');
+            },
+            onClose:function(){
+                // alert('关闭');
+            },
+            onHide:function(){
+                document.title = '隐藏';
+            },
+            afterRender:function(self){
+                if(window.console){
+                    // 渲染完毕，你还可以添加更多事件
+                    console.log(self);
+                }
+
+            }
+         });
+         // 等待滚动条稳定后再定位
+        setTimeout(function(){
+             Dialog1.show();
+        },500);
+    </script>
+</body>
+</html>

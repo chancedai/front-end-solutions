@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<macromedia-extension id="AdobeExchange" name="AdobeExchange" version="1.2.0">
+   <ui-access>
+    <![CDATA[Launch one of the Creative apps and you will find the Adobe Exchange panel under the Window>Extensions menu.]]>
+  </ui-access>
+  <author name="Adobe Systems Incorporated"/>
+  <description><![CDATA[English: The Adobe Exchange panel - Search for, discover and install plug-ins, extensions, and other content for Adobe apps.<br /><br />Deutsch: Das Adobe Exchange-Bedienfeld: Entdecken und installieren Sie Plug-ins, Erweiterungen und andere Inhalte für Adobe-Apps.<br /><br />Français: Panneau Adobe Exchange : recherchez, découvrez et installez des plug-ins, des extensions et d’autres contenus pour les applications Adobe.<br /><br />日本語: Adobe Exchange パネル - アドビアプリケーション用のプラグインや拡張機能、その他のコンテンツを検索、発見してインストールできます。]]></description>
+  <license-agreement/>
+  <products>
+    <product name="Fireworks" primary="true" version="12.0"/>
+    <product familyname="Illustrator" primary="true" version="16.0"/>
+    <product familyname="Photoshop" primary="true" version="13.0"/>
+    <product name="Flash" primary="true" version="12.0"/>
+    <product name="Dreamweaver" primary="true" version="12.0"/>
+    <product name="Prelude" primary="true" version="1.0"/>
+    <product name="InDesign" primary="true" version="8.0" maxversion="8.9"/>
+    <product familyname="InDesign" primary="true" version="9.0" />
+    <product name="InCopy" primary="true" version="8.0" maxversion="8.9"/>
+    <product familyname="InCopy" primary="true" version="9.0"/>
+    <product name="Premiere" primary="true" version="6.0"/>
+  </products>
+  <files>
+  	<file destination="" file-type="CSXS" source="AgoraPanel.zxp"/>
+    <file destination="$userdatafolder/Adobe/Exchange" source="src/assets/ignore.txt"/>
+  </files>
+</macromedia-extension>

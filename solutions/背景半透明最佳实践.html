@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>DEMO: 背景半透明最佳实践</title>
+
+	<style type="text/css">
+	table{border-collapse:collapse;border-spacing:0;position:absolute;}
+	table td{border:1px dotted #b3b3b3;padding:30px;vertical-align:top;}
+	table th{text-align:left;}
+	p{color:#eee;}
+	table p{color:#333}
+	a{color:#080;text-decoration:none;border-bottom:1px dotted #b3b3b3;line-height:60px;}
+
+    .box{padding:10px;width:300px;}
+    .cnt{border:1px solid #aaa;padding:15px;background:#fff;}
+
+
+    /* 一、使用 Opacity + 透明滤镜  */
+    .opacity{
+        background:#000;
+        opacity:0.3;
+        filter: alpha(opacity=30);
+    }
+
+
+    /* 二、使用 rgba + 渐变滤镜 */
+    /*
+     * filter 渐变滤镜详细用法，[参见这里]
+     * StartColorStr 和 EndColorStr:
+     *    #4c000000 是 30% 透明度的 #000000 的意思
+     *    组成: # + 透明度 + 颜色
+     *    算法: Math.floor(0.3 * 255).toString(16)==4c;
+     */
+    .rgba, .contrast{
+        background:rgba(0, 0, 0, 0.3);
+        filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#4c000000', EndColorStr='#4c000000');
+    }
+
+    /* IE9 支持 filter 的对比 */
+    :root .rgba{
+        filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#00000000', EndColorStr='#00000000');
+    }
+
+    .contrast, .contrast-filter{display:none;}
+    :root .contrast, :root .contrast-filter{
+        display: block\9;
+        color:#fff;
+        width:300px;padding:10px;
+    }
+    :root .contrast-filter{
+        background: #000;
+        filter: alpha(opacity=30)
+    }
+
+
+    /* 默认情况 */
+    .normal{background:#000;}
+
+	</style>
+
+</head>
+<body>
+
+<table>
+    <script type="text/javascript">
+
+    //-------------------------------------
+    //十六进制颜色值的正则表达式
+    var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+    /*RGB颜色转换为16进制*/
+    String.prototype.colorHex = function(){
+        var that = this;
+        if(/^(rgb|RGB)/.test(that)){
+            var aColor = that.replace(/(?:\(|\)|rgb|RGB)*/g,"").split(",");
+            var strHex = "#";
+            for(var i=0; i<aColor.length; i++){
+                var hex = Number(aColor[i]).toString(16);
+                if(hex === "0"){
+                    hex += hex;
+                }
+                strHex += hex;
+            }
+            if(strHex.length !== 7){
+                strHex = that;
+            }
+            return strHex;
+        }else if(reg.test(that)){
+            var aNum = that.replace(/#/,"").split("");
+            if(aNum.length === 6){
+                return that;
+            }else if(aNum.length === 3){
+                var numHex = "#";
+                for(var i=0; i<aNum.length; i+=1){
+                    numHex += (aNum[i]+aNum[i]);
+                }
+                return numHex;
+            }
+        }else{
+            return that;
+        }
+    };
+
+    //-------------------------------------------------
+
+    /*16进制颜色转为RGB格式*/
+    String.prototype.colorRgb = function(){
+        var sColor = this.toLowerCase();
+        if(sColor && reg.test(sColor)){
+            if(sColor.length === 4){
+                var sColorNew = "#";
+                for(var i=1; i<4; i+=1){
+                    sColorNew += sColor.slice(i,i+1).concat(sColor.slice(i,i+1));
+                }
+                sColor = sColorNew;
+            }
+            //处理六位的颜色值
+            var sColorChange = [];
+            for(var i=1; i<7; i+=2){
+                sColorChange.push(parseInt("0x"+sColor.slice(i,i+2)));
+            }
+            return "RGB(" + sColorChange.join(",") + ")";
+        }else{
+            return sColor;
+        }
+    };
+    </script>
+    <tr>
+        <td>
+            <h3>一、使用 Opacity + 透明滤镜：</h3>
+            <div class="opacity box">
+                <div class="cnt">平时他喜欢晒晒太阳。说这个世界漂不漂亮在于每个人看这个世界的角度，偶尔会挂着个单反在外面拍拍照，以他的角度去记录他的世界。希望去各种漂亮的地方，走更多的路，阅更多人。</div>
+            </div>
+
+            <div class="contrast-filter">
+                <strong>供 IE9 对比用：</strong> <br />
+                没有去掉 filter 的情况。因为没有与 rgba 的透明。所以透明度还是 30%;
+            </div>
+
+        </td>
+        <td>
+            <h3>二、使用 rgba + 渐变滤镜：</h3>
+            <div class="rgba box">
+                <div class="cnt">平时他喜欢晒晒太阳。说这个世界漂不漂亮在于每个人看这个世界的角度，偶尔会挂着个单反在外面拍拍照，以他的角度去记录他的世界。希望去各种漂亮的地方，走更多的路，阅更多人。</div>
+            </div>
+
+            <div class="contrast">
+                <strong>供 IE9 对比用：</strong> <br />
+                没有去掉 filter 的情况，背景其实是 30% + 30% 透明
+            </div>
+
+        </td>
+        <td>
+            <h3 style="color:#080">三、默认情况：</h3>
+            <div class="normal box">
+                <div class="cnt">平时他喜欢晒晒太阳。说这个世界漂不漂亮在于每个人看这个世界的角度，偶尔会挂着个单反在外面拍拍照，以他的角度去记录他的世界。希望去各种漂亮的地方，走更多的路，阅更多人。</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th colspan="3">
+            返回：<a href="http://sofish.de/1916">背景半透明最佳实践 &raquo;</a>
+        </th>
+    </tr>
+</table>
+
+
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+
+</body>
+</html>

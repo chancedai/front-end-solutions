@@ -1,0 +1,216 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MainMasterPage.master.cs" Inherits="MainMasterPage" %>
+<%@ Register Src="custom_control/SupportOnline.ascx" TagName="SupportOnline" TagPrefix="uc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<script type="text/javascript" src='<%=ResolveUrl("~/js/jquery-1.4.2.min.js") %>'></script>
+<script type="text/javascript" src='<%=ResolveUrl("~/js/urlParams.js")%>'></script>
+<script type="text/javascript" src='<%=ResolveUrl("~/js/MasterJScript.js") %>'></script>
+
+
+<head runat="server">
+    <meta name="keywords" content="蓝牙耳机, 蓝牙驱动, 电脑蓝牙, 蓝牙模块开发, 蓝牙音箱, 蓝牙适配器, 蓝牙4.0, 蓝牙耳机怎么用, 蓝牙鼠标, 千月蓝牙驱动, 蓝牙移动,IVT BlueSoleil,千月蓝牙软件BlueSoleil,IVT蓝牙软件,IVT cPhone" />
+    <meta name="description" content="千月-陪您畅享无线！为您提供最易用蓝牙软件，最专业的蓝牙解决方案，最高性价比的蓝牙适配器，蓝牙耳机，蓝牙音箱，蓝牙键鼠和蓝牙模块等。" />
+    <title>千月(1000Moons)---为您提供最好用的蓝牙驱动和蓝牙软件(IVT BlueSoleil)，最高品质的蓝牙产品，最贴心的技术服务！</title>
+    <meta http-equiv="x-ua-compatible" content="ie=7" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
+    <link href="css/jquery.tmailsilder.v2.css" rel="stylesheet" type="text/css" />
+    <asp:contentplaceholder id="ContentPlaceHolder_HeaderContent" runat="server"></asp:contentplaceholder>
+</head>
+<body>
+ <uc1:SupportOnline ID="SupportOnline1" runat="server" />   
+        <div class="big_content">   
+             <!--横条广告-->
+<%--            <div><a href='http://i1000moons.taobao.com/p/zengsong.htm?spm=a1z10.1.w6965601-6256380482.1.ndPQSt' target='_blank'><img src="images/banner_s.jpg" /></a></div>
+--%>                   
+            <!--welcome-->
+            <div class="welcome">
+                <div class="welcome_main">
+                    <p>
+                        您好，<asp:Label ID="Label_WelcomeUser" CssClass="ren_name" runat="server" Visible="false"></asp:Label>欢迎来到千月[1000Moons]！</p>
+                    <p>
+                        <asp:HyperLink ID="HyperLink_RegisterOrMyBlueSoleil" CssClass="denglu" runat="server" /></p>
+                    <p>
+                        <asp:HyperLink ID="HyperLink_LoginOrLogout" CssClass="denglu" runat="server" /></p>
+                    <p style="margin-left: 50px;">
+                        关注我们:</p>
+                    <p class="sina">
+                        <a href="http://t.qq.com/bluesoleil-1000moons" target="_blank"></a>
+                    </p>
+                    <p class="qq">
+                        <a href="http://weibo.com/qy1000moons" target="_blank"></a>
+                    </p>
+                    <p class="weixin">
+                       <a href="http://www.1000moons.com/information/500.html" target="_blank"></a>
+                    </p>
+                    <%--
+                    <p class="amazon">
+                       <a href="http://www.amazon.cn/b?me=AP9JRL8B1J3RB&ie=UTF8&qid=1396340418" target="_blank"><img src='<%=ResolveUrl("~/images/amazon.jpg") %>' alt=""/></a>
+                    </p>
+                    <p class="ebay">
+                       <a href="http://www.ebay.com.hk/sch/bluesoleil_1000moons/m.html" target="_blank"><img src='<%=ResolveUrl("~/images/ebay.jpg") %>' alt=""/></a>
+                    </p>
+                    --%>
+                    <p class="alibaba">
+                       <a href="http://1000moons.1688.com" target="_blank"><img src='<%=ResolveUrl("~/images/alibaba.jpg") %>' alt=""/></a>
+                    </p>
+                    <p class="tao">
+                       <a href="http://i1000moons.taobao.com" target="_blank"></a>
+                    </p>
+                    <p class="english">
+                       <a href="http://www.bluesoleil.com/Default.aspx" target="_blank"></a>
+                    </p>
+                  
+                </div>
+            </div>
+            
+            <!--logo_search-->
+            <div class="logo_search">
+                <div class="logo_search_main">                    
+                    <a class="logo" href='<%=ResolveUrl("~/index.html") %>'></a>
+                    <div class="search_content">
+                        <div class="search_main">
+                            <div class="searchselect">
+                                <span id="type" typename="song" class="hand">产品</span><a class="searchselectbtn" href="javascript:;" onfocus="this.blur()"><span></span></a>
+                                <ul id="selectTypeList">                                   
+                                   <li typename="product"><a class="current" href="javascript:;">产品</a></li>
+                                    <li typename="news"><a href="javascript:;">资讯</a> </li>
+                                    <li typename="software"><a href="javascript:;">软件</a> </li>
+                                    <li typename="game"><a href="javascript:;">游戏</a> </li>
+                                    <li typename="theme"><a href="javascript:;">主题</a> </li>
+                                </ul>
+                            </div>                            
+                            <p>
+                                <input id="key" type="text" class="search_text" /></p>
+                            <p>
+                                <a href="#" class="search_btt" id="searchbtn" onfocus="this.blur()"></a>
+                            </p>
+                        </div> 
+                        <form id="form1" runat="server">                     
+                        <div class="hot_search">
+                             <p><a id="A2" href="~/shop/hardwarelist-0-3-0-sell-desc-1.html" target="_blank"  runat="server">蓝牙耳机</a>
+                             <a id="A3" href="~/shop/hardwarelist-0-1-0-sell-desc-1.html" target="_blank" runat="server">蓝牙适配器</a>
+                             <a id="A4" href="~/shop/hardwarelist-0-8-0-sell-desc-1.html" target="_blank" runat="server">蓝牙音箱</a>
+                             <a id="A1" href="~/qianyue/index.html" target="_blank" runat="server">千月蓝牙软件</a>
+                             <a id="A8" href="~/cphone/index.html" target="_blank" runat="server">千月手机助手</a>
+                             <a id="A9" href="~/qianyue/bs_andriod.html" target="_blank" runat="server">千月安卓版</a>
+                             <a id="A10" href="~/qianyue/bs_teachvs.html" target="_blank" runat="server">千月教学版</a>
+                         </p>                     
+                        </div>
+                    </div>
+                    <a class="logo2"></a>
+                </div>
+            </div>
+            <%--<div class="clearfix">
+            </div>--%>
+            <!--nav-->
+            <div class="nav_content">
+                <div class="nav_main" id="nav_main">
+                    <div class="nav">
+                        <ul>
+                            <li id="nav_home"><a href='<%=ResolveUrl("~/index.html") %>'>首页</a></li>
+                            <li id="nav_store"><a href='<%=ResolveUrl("~/shop/index.html")%>'>千月商城</a></li>
+                            <li id="nav_information"><a href='<%=ResolveUrl("~/information/index.html")%>'>千月资讯</a></li>
+                            <li id="nav_bluesoleil"><a href='<%=ResolveUrl("~/qianyue/index.html")%>'>千月蓝牙软件</a></li>
+                            <li id="nav_cphone"><a href='<%=ResolveUrl("~/cphone/index.html")%>'>千月手机助手</a></li>
+                            <li id="nav_taobao"><a href="http://i1000moons.taobao.com" target="_blank">千月淘宝</a></li>
+                            <li id="nav_company"><a href='<%=ResolveUrl("~/company/index.html")%>'>公司.合作</a></li>
+                            <li id="nav_help"><a href='<%=ResolveUrl("~/support/index.html")%>'>支持.帮助</a></li>
+                        </ul>
+                        <!-- Nav START -->
+                        <div class="nav_cart">
+                            <div id="Z_TMAIL_SIDER_V2" class="sw_categorys_nav">
+                                <div class="allcategorys">
+                                    <h3 class="title-item-hd">
+                                        <span class="cart_icon"></span>
+                                           <a href="javascript:void(0);" onfocus="this.blur()" onmouseover="gotoShopping();">去购物车结算
+                                        <s class="icon"></s></a>
+                                    </h3>
+                                    <div class="sublist">
+                                        <div id="gouwuche">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script type="text/javascript" src='<%=ResolveUrl("js/jquery.tmailsilder.v2.js")%>'></script>
+
+                        <script type="text/javascript">
+                       $('#Z_TMAIL_SIDER_V2').Z_TMAIL_SIDER_V2();
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+            <%--<div class="main_content">--%>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <%-- </div>--%>
+            <!--footer-->
+            <div class="footer">
+                <div class="footer_content">
+                    <p style="margin-top: 10px;">
+                       <a id="A5" href="~/company/Intro_company_desc.html" runat="server" target="_blank">关于我们 |</a> 
+                       <a id="A6" href="~/company/Intro_cooperation.html" runat="server" target="_blank">合作伙伴 |</a> 
+                       <a id="A7" href="~/company/Intro_contact_us.html" runat="server" target="_blank">联系我们 |</a>
+                       <a id="A12" href="~/support/Intro_Terms_of_use.html" runat="server" target="_blank">使用条款 |</a> 
+                       <a id="A13" href="~/support/Intro_privacy_policy.html" runat="server" target="_blank">隐私策略 |</a> 
+                       <a id="A14" href="~/support/Intro_copyright.html" runat="server" target="_blank">版权声明 |</a> 
+                       <a id="A15" href="~/sitemap.html" runat="server"    target="_blank">网站地图 </a>
+                    </p>
+                    <p style="font-size:12px;">
+                        Copyright 2010-2014 IVT Corporation. 版权所有&nbsp;
+                        <a href="http://icp.alexa.cn/infolist.php?code=b1ed1M9JVrZVO1zqx97jaXHPWtSR%2BebuqBpK03%2FYJedLPZPFXw&q=1000moons.com" target="_blank">京ICP备13018806号</a>&nbsp;
+                        <script type="text/javascript">
+                            var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+                            document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Faa48c2b8b34151e0cdb56e7997a81e60' type='text/javascript'%3E%3C/script%3E"));
+                        </script>
+                        <script src="http://s13.cnzz.com/stat.php?id=4523525&web_id=4523525&show=pic" type="text/javascript"></script>
+                        <script type="text/javascript" src="http://tajs.qq.com/stats?sId=22973296" charset="UTF-8"></script>
+                    </p>
+                </div>
+            </div>
+           </form> 
+        </div>     
+    <a style="cursor:pointer" href="javascript:void(0);"><div id="scrollTop" style="visibility: hidden;" class="scrollTop" onmouseover="topMouseover()" onmouseout="topMouseout()" title="Back To Top"></div></a>
+    <script type="text/javascript">
+    function topMouseover()
+    {
+        document.getElementById("scrollTop").className="Tophover";
+    }
+    function topMouseout()
+    {
+        document.getElementById("scrollTop").className="scrollTop";
+    }    
+    </script>
+    
+    <!--[if IE 6]>
+<script type="text/javascript">
+function correctPNG()
+{
+for(var i=0; i<document.images.length; i++)
+{
+var img = document.images[i]
+var imgName = img.src.toUpperCase()
+if (imgName.substring(imgName.length-3, imgName.length) == "PNG")
+{
+var imgID = (img.id) ? "id='" + img.id + "' " : ""
+var imgClass = (img.className) ? "class='" + img.className + "' " : ""
+var imgTitle = (img.title) ? "title='" + img.title + "' " : "title='" + img.alt + "' "
+var imgStyle = "display:inline-block;" + img.style.cssText
+if (img.align == "left") imgStyle = "float:left;" + imgStyle
+if (img.align == "right") imgStyle = "float:right;" + imgStyle
+if (img.parentElement.href) imgStyle = "cursor:hand;" + imgStyle
+var strNewHTML = "<span "+ imgID + imgClass + imgTitle + " style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle + ";" + "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader" + "(src='" + img.src + "', sizingMethod='scale');\"></span>"
+img.outerHTML = strNewHTML
+i = i-1
+}
+}
+}
+correctPNG();
+</script>
+<![endif]-->
+</body>
+</html>

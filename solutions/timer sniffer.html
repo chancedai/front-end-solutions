@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正计时</title>
+</head>
+<body>
+    <h1 id="demo_201405031517"></h1>
+    <script type="text/javascript">
+        (function(){
+            var getStack = (function(){
+                var old = Error.prepareStackTrace;
+                var pretty = function(callSites){
+                    return (callSites + '\n')
+                        .replace(/^[\s\S]+?\s+at\s+/, ' at ') // remove message
+                        .replace(/^\s+(at eval )?at\s+/gm, '') // remove 'at' and indentation
+                        .replace(/^([^\(]+?)([\n$])/gm, '{anonymous}() ($1)$2')
+                        .replace(/^Object.<anonymous>\s*\(([^\)]+)\)/gm, '{anonymous}() ($1)')
+                        .replace(/^(.+) \((.+)\)$/gm, '$1@$2')
+                        .split('\n')
+                        .slice(0, -1);
+                };
+                return function(){
+                    Error.prepareStackTrace = function (error, stack) {
+                        return stack;
+                    };
+                    var err = new Error();
+                    Error.captureStackTrace(err, arguments.callee);
+                    Error.prepareStackTrace = old;
+                    console.log(err.stack);
+                    return pretty(err.stack);
+                };
+            })();
+            var originalSetInterval = window.setInterval;
+            window.setInterval = function(fn, time) {
+                var id = originalSetInterval(fn, time);
+                console.log(id);
+                console.log(getStack());
+            };
+            var node = document.getElementById('demo_201405031517');
+
+
+
+            var timerId = setInterval(function(){
+                node.innerHTML = (new Date()).getTime();
+            },1e3);
+
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>返回顶部</title>
+	<style type="text/css">
+	/*demo样式*/
+	body,p{padding: 0;margin: 0}
+	.main{width:1000px;margin: 0 auto;background: #eee;}
+	.main p{font: 40px/85px Arial;color:#333;margin: 20px 5px;}
+	/*返回顶部css 1000 margin-left:505px; 950宽 margin-left:485px;*/
+	html,* html body{background-image:url(about:blank);background-attachment:fixed}
+	.side-btns-wrap{width:50px;left: 50%; margin-left:505px;position: fixed;bottom: 60px; _position:absolute;_top:expression(documentElement.scrollTop + documentElement.clientHeight-120);z-index:100;visibility: hidden;overflow: hidden;}
+	.side-btns-top{width:50px;}
+	.side-btns-top a{display: block; text-indent:-999em; cursor:pointer;}
+	.side-btns-top-btn { height: 50px; width: 50px;background:url(http://i0.sinaimg.cn/dy/deco/2012/1227/news_zxh_content_btn_bg.png) no-repeat 0 -110px;  filter:Alpha(Opacity=35); opacity:.35; overflow:hidden;}
+	.side-btns-top-btn:hover {filter:Alpha(Opacity=50); opacity:.5;}
+	.side-btns-top-close{width: 50px;height: 18px;margin-top:1px;background: url(http://www.sinaimg.cn/dy/deco/2013/0913/close2.png) no-repeat;}
+	.side-btns-wrap-resize{display: none !important;}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+	</div>
+	<script type="text/javascript">
+	// 返回顶部js
+	(function(aClz,maxSize,co) {
+	var doc = document,
+		side = (function() {
+			var body = doc.body,
+				firstChild = body.firstChild,
+				wrap = doc.createElement('div');
+			wrap.className = 'side-btns-wrap';
+			wrap.innerHTML = '<div class="side-btns-top"><a class="side-btns-top-btn" href="javascript:;" title="返回顶部" hidefocus>返回顶部</a><a class="side-btns-top-close" href="javascript:;" title="关闭" hidefocus>关闭</a></div>';
+			firstChild ? firstChild.parentNode.insertBefore(wrap, firstChild) : body.appendChild(wrap);
+			return wrap;
+		})(),
+		clz = side.className,
+		nClz = clz + ' ' + aClz,
+		cookieName = co.name || 'TOPDIS',
+		domain = co.domain || 'news.sina.com.cn',
+		path = co.path || '/',
+		lnks = side.getElementsByTagName('a'),
+		btn = lnks[0],
+		close = lnks[1],
+		addEvent = function(o, s, fn) {
+			if (o.attachEvent) {
+				o.attachEvent('on' + s, fn);
+			} else {
+				o.addEventListener(s, fn, false);
+			}
+			return o;
+		}, toggle = function() {
+			var top = doc.documentElement.scrollTop || doc.body.scrollTop,
+				visible = (top > 0 ? 'visible' : 'hidden');
+			side.style.visibility = visible;
+		}, sideToggle = function(dis) {
+			side.style.display = dis;
+		}, resize = function() {
+			var body = doc.documentElement || doc.body;
+			if (!body) {
+				return;
+			}
+			var width = body.offsetWidth;
+			if (width < maxSize) {
+				side.className = nClz;
+			} else {
+				side.className = clz;
+			}
+		}, toTop = function() {
+			doc.documentElement.scrollTop = 0;
+			doc.body.scrollTop = 0;
+		};
+	var cookie = (function() {
+		var co = {};
+		co.getCookie = function(name) {
+			name = name.replace(/([\.\[\]\$])/g, '\\\$1');
+			var rep = new RegExp(name + '=([^;]*)?;', 'i');
+			var co = document.cookie + ';';
+			var res = co.match(rep);
+			if (res) {
+				return unescape(res[1]) || "";
+			} else {
+				return "";
+			}
+		};
+		co.setCookie = function(name, value, expire, path, domain, secure) {
+			var cstr = [];
+			cstr.push(name + '=' + escape(value));
+			if (expire) {
+				var dd = new Date();
+				var expires = dd.getTime() + expire * 3600000;
+				dd.setTime(expires);
+				cstr.push('expires=' + dd.toGMTString());
+			}
+			if (path) {
+				cstr.push('path=' + path);
+			}
+			if (domain) {
+				cstr.push('domain=' + domain);
+			}
+			if (secure) {
+				cstr.push(secure);
+			}
+			document.cookie = cstr.join(';');
+		};
+		co.deleteCookie = function(name) {
+			document.cookie = name + '=;' + 'expires=Fri, 31 Dec 1999 23:59:59 GMT;';
+		};
+		return co;
+	})();
+	var display = cookie.getCookie(cookieName);
+	if (display != '') {
+		sideToggle('none');
+		return;
+	}
+	sideToggle('block');
+	resize();
+	addEvent(window, 'resize', resize);
+	addEvent(close, 'click', function(e) {
+		sideToggle('none');
+		cookie.setCookie(cookieName, '1', 15 * 24, path, domain);
+		if (window.event) {
+			window.event.returnValue = false;
+		} else {
+			e.preventDefault();
+		}
+	});
+	addEvent(window, 'scroll', toggle);
+	addEvent(btn, 'click', toTop);
+})('side-btns-wrap-resize', 1110, {
+		name: 'SPORTS_TOPDIS', //cookie名
+		domain: 'dc.sina.com.cn' //domain 根据频道不同
+	});
+	</script>
+</body>
+</html>

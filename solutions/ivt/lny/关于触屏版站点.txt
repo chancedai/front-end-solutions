@@ -1,0 +1,5 @@
+1.新建子域名：m.1000moons.com
+2.设计触屏版各页面，如首页，关于我们，联系我们，资讯页面等
+3.前端编写各页面的demo页面及js
+4.后端套页面，出对应的接口，如新闻内容的接口http://1000moons.com/information/GetNewsDetail.ashx?action=GetNewsDetail&ID=687&time=1432711659468
+5.注意现有的接口只支持ajax方式请求，m.1000moons.com无法提求到1000moons的数据

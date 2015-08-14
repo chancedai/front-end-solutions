@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+	<h1>BFC</h1>
+	<a href="http://blog.csdn.net/borishuai/article/details/8127758" target="_blank">http://blog.csdn.net/borishuai/article/details/8127758</a>
+	<span style="width:100px;height:100px;margin:10px;background:red;float:left;">float的值不为none</span>
+	<span style="width:100px;height:100px;margin:10px;background:red;position:absolute;">position的值不为relative和static</span>
+	<span style="width:100px;height:100px;margin:10px;background:red;display:table-cell;">display的值为table-cell, table-caption, inline-block中的任何一个</span>
+	<h2>BFC作用</h2>
+	<h3>图文型</h3>
+	<style type="text/css">
+		.demo-20150422105340{width:200px;border:1px solid #ddd;}
+		.demo-20150422105340 .left{width:100px;height:110px;margin:5px;background: #ccc;float: left;}
+	</style>
+	<div class="demo-20150422105340">
+		<div class="left">我有BFC</div>
+		<div class="right">我没有BFC Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+	</div>
+	<style type="text/css">
+		.demo-20150422105341{width:200px;border:1px solid #ddd;}
+		.demo-20150422105341 .left{width:100px;height:110px;margin:5px;background: #ccc;float: left;}
+		.demo-20150422105341 .right{overflow: hidden;}
+	</style>
+	<div class="demo-20150422105341">
+		<div class="left">我有BFC</div>
+		<div class="right">我加了overflow:hidden;也有BFC Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+	</div>
+</body>
+</html>

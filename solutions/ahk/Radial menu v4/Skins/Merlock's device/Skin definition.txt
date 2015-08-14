@@ -1,0 +1,53 @@
+﻿SkinName = 		Merlock's device
+
+ItemSize = 		68
+RadiusSizeFactor = 	0.85
+AutoSubmenuMarking = 	0.94
+
+ItemGlow =		ItemGlow.png
+
+TextBoxShrink = 		0.95
+TextFont = 		Arial
+TextSize = 		11
+TextColor = 		eeffee
+TextTrans = 		cc
+TextRendering = 		5
+
+TextShadow = 		1
+TextShadowColor = 	000000
+TextShadowTrans = 	ff
+TextShadowOffset = 	1
+
+IconShrink = 		0.74
+IconTrans = 		0.9
+
+ItemBack = 		ItemBack.png
+ItemBackShrink = 		1
+ItemBackTrans = 		1
+
+ItemFore = 		
+ItemForeShrink = 		
+ItemForeTrans = 		
+
+ItemShadow = 		
+ItemShadowShrink = 	
+ItemShadowTrans = 	
+
+MenuBack = 		MenuBack.png
+MenuBackSize = 		add+40
+MenuBackTrans = 		1
+
+MenuBackOuterRim = 	MenuOuterRim.png
+MenuBackOuterRimWidth = 4
+MenuBackOuterRimTrans = 	1
+
+MenuFore = 		
+MenuForeSize = 		
+MenuForeTrans = 		
+
+
+
+
+
+
+

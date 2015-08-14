@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>WebP</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/qunitjs/qunit/qunit.css">
+    <style type="text/css">
+	#qunit-tests .pass .test-name{word-wrap:break-word;word-break:break-all;}
+    </style>
+</head>
+<body>
+	<div id="demo_20150731004021">
+		<div><a target="_blank" href="#url"><img alt="" src="http://k1.sinaimg.cn/i1/home/2015/0730/U8567P30DT20150730053504.jpg_.webp"><p>以上图片是否显示：http://k1.sinaimg.cn/i1/home/2015/0730/U8567P30DT20150730053504.jpg_.webp</p></a></div>
+	</div>
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+	<script type="text/javascript" src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+	<!--<script type="text/javascript" src="node_modules/qunitjs/qunit/qunit.js"></script>-->
+	<script type="text/javascript" src="webp.js"></script>
+	<script type="text/javascript">
+		var srcs = [
+			'http://i1.sinaimg.cn/home/2015/0730/U8567P30DT20150730053504.jpg',
+			'http://i2.sinaimg.cn/home/2015/0730/U12814P30DT20150730082901.jpg',
+			'http://i3.sinaimg.cn/home/2015/0730/U12814P30DT20150730083433.jpg',
+			'http://www.sinaimg.cn/home/2015/0730/U12814P30DT20150730083433.jpg'
+		];
+		var wrap = document.getElementById('demo_20150731004021');
+	    for (var i = 0, len = srcs.length; i < len; i++) {
+	    	var item = srcs[i];
+	    	(function(item){
+	    		WebP.isSupport(function(isSupport){
+	    			var src = WebP.get(item);
+	    			var div = document.createElement('div');
+	    			div.innerHTML = '<a href="#url" target="_blank"><img src="'+src+'" alt="" /><p>'+src+'</p></a>';
+	    			wrap.appendChild(div);
+	    		})
+	    	})(item);
+	    }
+	</script>
+</body>
+</html>

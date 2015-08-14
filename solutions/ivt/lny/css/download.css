@@ -1,0 +1,149 @@
+﻿
+/*reset*/
+html {
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%
+}
+body {
+	line-height: 1.6;
+	font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif;
+	color: #000;
+	font-size: 14px
+}
+input, textarea {
+	outline: 0
+}
+body, h1, h2, h3, h4, p, ul, ol, dl, dd, fieldset, textarea {
+	margin: 0
+}
+fieldset, legend, textarea, input {
+	padding: 0
+}
+textarea, input {
+	color: #666
+}
+textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {
+	color: #a3a3a3
+}
+textarea:-moz-placeholder, input:-moz-placeholder {
+	color: #a3a3a3
+}
+textarea::-moz-placeholder, input::-moz-placeholder {
+	color: #a3a3a3
+}
+textarea:-ms-input-placeholder, input:-ms-input-placeholder {
+	color: #a3a3a3
+}
+textarea {
+	resize: none;
+	overflow-y: scroll
+}
+ul, ol {
+	padding-left: 0;
+	list-style-type: none
+}
+a img, fieldset {
+	border: 0
+}
+a {
+	color: #2470d8;
+	text-decoration: none;
+	outline: 0
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+	display: block
+}
+audio, canvas, video {
+	display: inline-block
+}
+audio:not([controls]) {
+	display: none;
+	height: 0
+}
+[hidden] {
+	display: none
+}
+button, input, select, textarea {
+	font-family: inherit;
+	font-size: 100%;
+	margin: 0;
+	*font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif
+}
+button, select {
+	text-transform: none
+}
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+	cursor: pointer;
+	-webkit-appearance: button
+}
+button[disabled], html input[disabled] {
+	cursor: default
+}
+input[type="checkbox"], input[type="radio"] {
+	box-sizing: border-box;
+	padding: 0
+}
+input[type="search"] {
+	box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-webkit-appearance: textfield;
+	-webkit-box-sizing: content-box
+}
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none
+}
+button::-moz-focus-inner, input::-moz-focus-inner {
+	border: 0;
+	padding: 0
+}
+textarea {
+	vertical-align: top
+}
+
+
+
+.post{margin:20px;}
+/*文章*/
+.post{color:#333;}
+.post h2{border-bottom:1px solid #e7e7eb;padding:10px 0;margin-bottom: 5px;font-size:20px;color:#333;}
+.post .info{padding: 5px 0;position: relative;}
+.post .info em{font-style: normal;}
+.post .content img{width:100%;}
+.post .content p{line-height: 200%;}
+.post .tip{color:#f00;}
+/*功能*/
+.post .tools{
+}
+.post .tools .tools-report{
+   float: right;
+}
+.post .tools em{font-style: normal;}
+/*用户信息*/
+.profile_container{position:absolute;top:100%;left:0;font-size:14px;*margin-top:10px}
+.profile_inner{position:relative;padding:30px 22px 36px 22px;background-color:#fff;border:1px solid #d9dadc;*zoom:1}
+.profile_arrow_wrp{position:absolute;left:22px;top:-8px}
+.profile_arrow{display:inline-block;width:0;height:0;border-width:8px;border-style:dashed;border-color:transparent;border-top-width:0;border-bottom-color:#d9dadc;border-bottom-style:solid;position:absolute;top:0}
+.profile_arrow.arrow_in{margin-top:1px;border-bottom-color:#fff}
+.profile_avatar{width:100px;height:100px!important;display: block;margin-left: -7px;}
+.profile_nickname{font-size:16px;font-weight:400}
+.profile_meta{margin-top:5px;overflow:hidden;*zoom:1}
+.profile_meta_label{float:left;width:4em;margin-right:1em}
+.profile_meta_value{display:block;overflow:hidden;*zoom:1;color:#adadad}
+
+.qr-code {
+	position: fixed;
+	right: 20px;
+	top: 20px;
+	padding: 16px;
+	border: 1px solid #d9dadc;
+	background-color: #fff;
+}
+.qr-code p {
+	font-size: 14px;
+	line-height: 20px
+}
+.qr-code img {
+	display: block;
+	width: 102px;
+	height: 102px
+}

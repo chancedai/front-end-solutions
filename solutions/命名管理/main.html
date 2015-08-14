@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+    <style type="text/css">
+		#suggest_20150304 {
+		    position: absolute;
+		    background-color: #fff;
+		    border: 1px solid #CCCCFF;
+		    font-size: 90%;
+		    width: 200px;
+		}
+		#suggest_20150304 div {
+		    overflow: hidden;
+		    white-space: nowrap;
+		    padding: 5px;
+		}
+		#suggest_20150304 div.select{
+		    color: #fff;
+		    background-color: #3366FF;
+		}
+		#suggest_20150304 div.over,#suggest_20150304 div:hover{
+		    background-color: #99CCFF;
+		}
+    </style>
+</head>
+<body>
+	<h1>命名</h1>
+	<h2>人工命名</h2>
+	<div>
+		    <input id="text_20150304" type="text" name="pattern" value="" autocomplete="off" size="10" style="display: block">
+		    <div id="suggest_20150304" style="display:none;"></div>
+	</div>
+	<h2>自动命名</h2>
+	<script type="text/javascript">
+
+		(function(){
+
+			var names = [{en: 'header', zh: '头部', attr:''}, {en: 'footer', zh: '底部', attr:''}, {en: 'navigation,nav', zh: '导航', attr:''}, {en: 'content,cont', zh: '内容', attr:''}, {en: 'sidebar,side', zh: '侧栏', attr:''}, {en: 'column,col', zh: '栏目', attr:''}, {en: 'wrap,wrapper', zh: '外围,包装', attr:''}, {en: 'login', zh: '登录', attr:''}, {en: 'main,body', zh: '主体', attr:''}, {en: 'menu', zh: '菜单', attr:''}, {en: 'banner', zh: '横幅', attr:''}, {en: 'tab', zh: '标签，选项卡', attr:''}, {en: 'list', zh: '列表', attr:''}, {en: 'copyright', zh: '版权', attr:''}, {en: 'regsiter', zh: '注册', attr:''}, {en: 'joinus', zh: '加入', attr:''}, {en: 'title', zh: '标题', attr:''}, {en: 'tips,tip', zh: '提示,技巧', attr:''}, {en: 'message,msg', zh: '信息', attr:''}, {en: 'left', zh: '左', attr:''}, {en: 'right', zh: '右', attr:''}, {en: 'center', zh: '中', attr:''}, {en: 'summary', zh: '摘要，简介', attr:''}, {en: 'logo', zh: '标志', attr:''}, {en: 'button,btn', zh: '按钮', attr:''}, {en: 'link,lnk', zh: '链接', attr:''}, {en: 'current', zh: '当前', attr:''}, {en: 'selected', zh: '选中', attr:''}, {en: 'partner', zh: '合作伙伴', attr:''}, {en: 'icon,ico', zh: '图标', attr:''}, {en: 'hot', zh: '热点', attr:''}, {en: 'container', zh: '容器', attr:''}, {en: 'dialog', zh: '对话框', attr:''}, {en: 'gradient', zh: '渐变', attr:''}, {en: 'fixed', zh: '固定', attr:''}, {en: 'grid', zh: '网格', attr:''}, {en: 'placeholder', zh: '占位', attr:''}, {en: 'name', zh: '名字', attr:''}, {en: 'user', zh: '用户名', attr:''}, {en: 'password,pwd', zh: '密码', attr:''}, {en: 'error', zh: '错误', attr:''}, {en: 'success', zh: '成功', attr:''}, {en: 'label', zh: '标签', attr:''}, {en: 'hidden', zh: '隐藏', attr:''}, {en: 'email,mail', zh: '邮件', attr:''}, {en: 'warn', zh: '警告', attr:''}, {en: 'number,num', zh: '数字', attr:''}, {en: 'required', zh: '必需', attr:''}, {en: 'create', zh: '创建', attr:''}, {en: 'reset', zh: '重置', attr:''}, {en: 'clear', zh: '清空', attr:''}, {en: 'submit', zh: '提交', attr:''}, {en: 'empty', zh: '空', attr:''}, {en: 'full', zh: '满', attr:''}, {en: 'finish', zh: '完成', attr:''}, {en: 'done', zh: '完成', attr:''}, {en: 'complete', zh: '完成', attr:''}, {en: 'search', zh: '查找,搜索', attr:''}, {en: 'edit', zh: '编辑', attr:''}, {en: 'pagelet', zh: '自定义控件', attr:''}, {en: 'bookmark', zh: '书签', attr:''}, {en: 'group', zh: '组', attr:''}, {en: 'home', zh: '主页', attr:''}, {en: 'item', zh: '选项,项', attr:''}, {en: 'toggler', zh: '切换,开关', attr:''}, {en: 'profile', zh: '资料,概况', attr:''}, {en: 'badge', zh: '徽章,证章,标记', attr:''}, {en: 'close', zh: '关闭', attr:''}, {en: 'delete', zh: '删除', attr:''}, {en: 'add', zh: '添加', attr:''}, {en: 'open', zh: '打开', attr:''}, {en: 'unit', zh: '单元', attr:''}, {en: 'dashboard', zh: '面板', attr:''}, {en: 'fiter', zh: '过滤', attr:''}, {en: 'calendar', zh: '日历', attr:''}, {en: 'image,img', zh: '图片', attr:''}, {en: 'picture,pic', zh: '图片,照片', attr:''}, {en: 'audio', zh: '音频', attr:''}, {en: 'video', zh: '视频', attr:''}, {en: 'input', zh: '输入', attr:''}, {en: 'text,txt', zh: '文本', attr:''}, {en: 'photo', zh: '照片', attr:''}, {en: 'timeline', zh: '时间轴', attr:''}, {en: 'extra', zh: '其它', attr:''}, {en: 'other', zh: '其它', attr:''}, {en: 'goods', zh: '商品', attr:''}, {en: 'section', zh: '区域,部分', attr:''}, {en: 'top', zh: '顶部', attr:''}, {en: 'bottom', zh: '底部', attr:''}, {en: 'middle', zh: '中部', attr:''}, {en: 'hd', zh: '上部', attr:''}, {en: 'bd', zh: '中部', attr:''}, {en: 'ft', zh: '底部', attr:''}, {en: 'module,mod', zh: '模块', attr:''}, {en: 'dock', zh: '停靠', attr:''}, {en: 'information,info', zh: '信息', attr:''}, {en: 'scroll', zh: '滚动', attr:''}, {en: 'fold', zh: '收起', attr:''}, {en: 'unfold', zh: '展开', attr:''}
+			];
+
+			function levenshtein(a, b) {
+				var al = a.length + 1;
+				var bl = b.length + 1;
+				var result = [];
+				var temp = 0;
+				// 创建一个二维数组
+				for (var i = 0; i < al; result[i] = [i++]) {}
+				for (var i = 0; i < bl; result[0][i] = i++) {}
+
+				for (i = 1; i < al; i++) {
+					for (var j = 1; j < bl; j++) {
+						// 判断最上方和最左方数字是否相等
+						temp = a[i - 1] == b[j - 1] ? 0 : 1;
+						// result[i - 1][j] + 1 左方数字
+						// result[i][j - 1] + 1 上方数字
+						// result[i - 1][j - 1] + temp 左上方数字
+						result[i][j] = Math.min(result[i - 1][j] + 1, result[i][j - 1] + 1, result[i - 1][j - 1] + temp);
+					}
+				}
+
+				return result[i - 1][j - 1];
+
+			}
+			var show = function(){
+				var html = [];
+				var searchStr = input.value;
+				var tempArr = [];
+				var result = [];
+				var resultStr = '';
+
+				for (var i = 0; i < names.length; i++) {
+					var item = names[i];
+					item.distance = levenshtein(searchStr, item.zh);
+					tempArr.push(item);
+				}
+				result = tempArr.sort(function(a, b) {
+					return a.distance - b.distance;
+				});
+				result = result.slice(0,5);
+				if(result.length === 0||searchStr === ''){
+					suggest.style.display = 'none';
+					return;
+				}
+				for (var i = 0, len = result.length; i < len; i++) {
+					var item = result[i];
+					html.push('<div>'+item.zh+':'+item.en+'</div>');
+				}
+				console.log(suggest,html);
+				suggest.innerHTML = html.join('');
+				suggest.style.display = '';
+
+			};
+
+
+
+			var byId = function(id){
+				return document.getElementById(id);
+			};
+			var input = byId('text_20150304');
+			var suggest = byId('suggest_20150304');
+			input.onkeyup = show;
+			input.onmouseup = show;
+
+		})();
+	</script>
+</body>
+</html>

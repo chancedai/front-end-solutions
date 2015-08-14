@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AutoResponder LastSave="2015-07-09T17:39:06.951053+08:00" FiddlerVersion="4.5.1.0">
+  <State Enabled="false" Fallthrough="true" UseLatency="false">
+    <ResponseRule Match="http://shaoqi.data.mix.sina.com.cn/upload.html" Action="http://dc.sina.com.cn/Sina/task/0902_PhotoCommunity/%E5%9B%BE%E7%89%87%E7%A4%BE%E5%8C%BA%E4%B8%8A%E4%BC%A0_%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0.html" Enabled="true" />
+    <ResponseRule Match="http://tech.sina.com.cn/js/717/2013/0614/article.recommender.min.js" Action="http://dc.sina.com.cn/Sina/ui/product/recommender/trunk/build/article.recommender.js" Enabled="true" />
+    <ResponseRule Match="http://www.sina.com.cn/js/index/96/shm.js" Action="http://dc.sina.com.cn/Sina/ui/project/homepage/trunk/build/shm.min.js" Enabled="false" />
+    <ResponseRule Match="http://ent.sina.com.cn/js/470/2013/0317/shm_guess.js" Action="http://dc.sina.com.cn/Sina/ui/project/homepage/trunk/build/shm_guess.js" Enabled="false" />
+    <ResponseRule Match="http://ent.sina.com.cn/js/470/2013/0328/shm_guess_v2.js" Action="http://dc.sina.com.cn/Sina/ui/project/homepage/trunk/build/shm_guess.js" Enabled="false" />
+    <ResponseRule Match="http://news.sina.com.cn/js/694/2012/0830/realtime.js" Action="http://dc.sina.com.cn/Sina/task/0829_%E5%AE%9E%E6%97%B6%E5%BC%B9%E7%AA%97/realtime.min.js" Enabled="false" />
+    <ResponseRule Match="http://match.sports.sina.com.cn/livecast/1/iframe/render.js" Action="http://dc.sina.com.cn/Sina/task/0408_%E5%9B%BE%E6%96%87%E7%9B%B4%E6%92%AD%E6%8E%A5%E5%8F%A3%E4%BF%AE%E6%94%B9/%E8%B6%B3%E7%90%83%E4%BA%BA%E5%B7%A5%E5%BD%95%E5%85%A5%E7%9B%B4%E6%92%AD/render.js" Enabled="false" />
+    <ResponseRule Match="http://match.sports.sina.com.cn/livecast/1/iframe/show_live.php" Action="http://dc.sina.com.cn/Sina/task/0408_图文直播接口修改/足球人工录入直播/show_live.html" Enabled="false" />
+    <ResponseRule Match="http://slide.gd.sina.com.cn/js/epidiascope_20130819.js" Action="http://dc.sina.com.cn/Temp/epidiascope_20130819.js" Enabled="false" />
+    <ResponseRule Match="http://ent.sina.com.cn/js/470/2013/0609/bbs-comment.min.js" Action="http://dc.sina.com.cn/Sina/ui/project/comment/trunk/build/bbs-comment.js" Enabled="false" />
+    <ResponseRule Match="http://ent.sina.com.cn/js/470/20130123/comment.js" Action="http://dc.sina.com.cn/Sina/ui/project/comment/trunk/build/comment.js" Enabled="false" />
+    <ResponseRule Match="http://ent.sina.com.cn/js/470/20130205/sab.js" Action="http://dc.sina.com.cn/Sina/ui/project/comment/trunk/build/article-comment.js" Enabled="false" />
+    <ResponseRule Match="http://sports.sina.com.cn/nba/live_v2/js/b_live_render_2.js" Action="http://dc.sina.com.cn/Sina/task/0924_NBA%E6%8E%A5%E5%8F%A3%E4%BF%AE%E6%94%B9/js_new/b_live_render_2.js" Enabled="false" />
+    <ResponseRule Match="regex:(?insx).+\.jpg$ #Match strings ending with JPG" Action="200_FiddlerGif.dat" Enabled="false" />
+    <ResponseRule Match="http://auto.sina.com.cn/683/2014/0623/feed_main_1.js" Action="http://dc.sina.com.cn/Sina/task/0603_%E6%B1%BD%E8%BD%A6%E9%A6%96%E9%A1%B5/js/main.js" Enabled="false" />
+    <ResponseRule Match="EXACT:https://ss1.bdstatic.com/5eN1bjq8AAUYm2zgoY3K/r/www/cache/static/protocol/https/jquery/jquery-1.10.2.min_f2fb5194.js" Action="" Enabled="false" />
+  </State>
+</AutoResponder>

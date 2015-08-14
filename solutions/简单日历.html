@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>简单日历</title>
+    <style type="text/css">
+    .demo-201404091710 p{ text-indent:2em; margin:10px 0; }
+    .demo-201404091710 pre{ border-left:1px solid #888;padding:5px 5px 0; margin: 15px 0 0 30px;}
+    .demo-201404091710 #calendar{ background:#000; color:#FFF; font-size:0.8em; }
+    .demo-201404091710 #tittle{ font-size:1.4em; padding:4px 0.55em; }
+    .demo-201404091710 #days th { font-weight:bold; text-align:center; padding:4px 0.55em; }
+    .demo-201404091710 #calendar td{ text-align:center; padding:4px 0.55em; }
+    .demo-201404091710 #today{ color:#F00; font-weight:bold; }
+        </style>
+    <script type="text/javascript">
+        var calendar = {
+            dayTable: null, //初始化TABLE
+            year: null, //初始化年
+            month: null, //初始化月份
+
+            getFirstDay: function(year, month) { //获取每个月第一天再星期几
+                var firstDay = new Date(year, month, 1);
+                return firstDay.getDay(); //getDay()方法来获取
+            },
+            getMonthLen: function(year, month) { //获取当月总共有多少天
+                var nextMonth = new Date(year, month + 1, 1); //获取下个月的第一天
+                nextMonth.setHours(nextMonth.getHours() - 3); //由于获取的天是0时,所以减去3小时则可以得出该月的天数
+                return nextMonth.getDate(); //返回当天日期
+            },
+            createCalendar: function(form, date) { //创建日历方法
+                calendar.year = date.getFullYear(); //获得当时的年份,并赋值到calendar属性year中,以便别的方法的调用
+                calendar.month = date.getMonth(); //跟上面获取年份的目的一样
+                form.getElementsByTagName('th')[1].innerHTML = calendar.year + '年 ' + (calendar.month + 1) + '月'; //插入年份和月份
+                calendar.clearCalendar(form); //清空TABLE
+                var monthLen = calendar.getMonthLen(calendar.year, calendar.month); //获取月份长度
+                var firstDay = calendar.getFirstDay(calendar.year, calendar.month); //获取月份首天为星期几
+                for (var i = 1; i <= monthLen; i++) { //循环写入每天的值进入TABLE中
+                    calendar.dayTable[i + firstDay - 1].innerHTML = i; //i为循环值,加上第一天的星期值刚可以对应TABLE位置,但由于数组从0开始算,所以需要减去1
+                    if ((i + firstDay - 2) == new Date().getDate() && calendar.month == new Date().getMonth() && calendar.year == new Date().getFullYear()) { //判断是否是当天
+                        calendar.dayTable[i + firstDay - 1].id = 'today';
+                    }
+                }
+            },
+            clearCalendar: function(form) { //清空TABLE方法
+                this.dayTable = form.getElementsByTagName('td');
+                for (var i = 0; i < this.dayTable.length; i++) {
+                    this.dayTable[i].innerHTML = ' ';
+                    this.dayTable[i].id = '';
+                }
+            },
+            init: function(form) { //主方法
+                this.dayTable = form.getElementsByTagName('td');
+                this.createCalendar(form, new Date());
+                var preMon = form.getElementsByTagName('th')[0];
+                var nextMon = form.getElementsByTagName('th')[2];
+                preMon.onclick = function() { //当点击左按钮时,减去一个月,并重绘TABLE
+                    calendar.createCalendar(form, new Date(calendar.year, calendar.month - 1, 1));
+                }
+                nextMon.onclick = function() { //当点击右按钮时,加上一个月,并重绘TABLE
+                    calendar.createCalendar(form, new Date(calendar.year, calendar.month + 1, 1));
+                }
+            }
+
+        };
+        window.onload = function() {
+            var calendars = document.getElementById('calendar');
+
+            calendar.init(calendars);
+        };
+        </script></head>
+<body>
+
+
+            <div class="demo-201404091710">
+                <table id="calendar" cellspacing="0">
+                    <tr>
+                        <th style="cursor:pointer;cursor:hand;">&lt;&lt;</th>
+                        <th id="tittle" colspan="5"></th>
+                        <th style="cursor:pointer;cursor:hand;">&gt;&gt;</th>
+                    </tr>
+                    <tr id="days">
+                        <th>日</th>
+                        <th>一</th>
+                        <th>二</th>
+                        <th>三</th>
+                        <th>四</th>
+                        <th>五</th>
+                        <th>六</th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+                <h3>[程序说明]</h3>
+                <p>主要为calendar类,里面的方法说明有:</p>
+                <ul>
+                    <li>getFirstDay:获取每个月第一天再星期几</li>
+                    <li>getMonthLen:获取当月总共有多少天</li>
+                    <li>createCalendar:创建日历方法</li>
+                    <li>clearCalendar:清空TABLE方法</li>
+                    <li>init:运行方法</li>
+                </ul>
+
+                <h3>[方法介绍]</h3>
+                <p>getFirstDay中主要用了new Date()的getDay()方法,该方法是用于获取日期所在星期几.</p>
+                <p>但有一个特别需要注意的地方,就是getDay()方法所获取的星期数如下:</p>
+                <p>星期日为0,星期一为1,星期二为2,星期三为3,星期四为4,星期五为5,星期六为6</p>
+
+                <p>getMonthLen方法用于获取当月的天数,也就是目标为获取当月最后一天的日期即可.</p>
+                <p>所以思维是获取下个月第一天的0时,然后减去3个小时就可以得到当月天数.</p>
+                <p>nextMonth.setHours(nextMonth.getHours() - 3);</p>
+                <p>
+                    减去3小时的原因参考
+                    &lt;&lt;DHTML Cookbook&gt;&gt;是这样说的:三个小时的修正用于处理在月份中包含了夏季时间到冬季时间的转换时发生的日期计算的异常现象.</p>
+                    <p>但这解释我也不太理解,所以就直接按照巨人的做法做了,若果有人知道该异常现象是怎么回事,可以告诉我.</p>
+                    <p>而该方法主要用了Date的setHours()和getDate()方法,分别用于获得小时数和天数.</p>
+
+                    <p>
+                        createCalendar创建日历的方法,由于我自身本来写好了HTML代码,所以不直接用DOM来生成,这里主要是写入日期数.
+                    </p>
+                    <p>写入日期的主要过程为:</p>
+                    <pre lang="js">
+for (var i = 1; i <= monthLen; i++) {
+    calendar.dayTable[i + firstDay - 1].innerHTML = i;
+}
+                </pre>
+                    <p>monthLen为getMonthLen()方法所获取的当月长度,循环过程不应该超过该长度.</p>
+                    <p>
+                        firstDay则由getFirstDay()方法获得第一天的星期值,只要i+firstDay就可以得到开始第一天所在日历单元格的位置,但由于数组从0开始,所以另外减去1.
+                    </p>
+                    <p>在for循环插入值的过程中并判断今天的日期,并为今天加入一个特别的id="today",代码如下:</p>
+                    <pre lang="js">
+if ((i + firstDay - 2) == new Date().getDate() && calendar.month == new Date().getMonth() && calendar.year == new Date().getFullYear()) {
+    calendar.dayTable[i + firstDay - 1].id = 'today';
+}
+                </pre>
+
+                    <p>clearCalendar方法则用来每次换月的过程中,清空日历,主要由for循环执行,过程比较简单,所以不多详细介绍.</p>
+
+                    <p>另外特别说明2个单击事件,都是换月作用,其中为向前一个月和向后一个月:</p>
+                    <pre lang="js">
+preMon.onclick = function() {
+    calendar.createCalendar(form, new Date(calendar.year, calendar.month - 1, 1));
+}
+nextMon.onclick = function() {
+    calendar.createCalendar(form, new Date(calendar.year, calendar.month + 1, 1));
+}
+                </pre>
+                    <p>由于把整体的year和month设置为calendar的属性,所以只需在过程中对其月份进行加减即可.</p>
+                    <p>
+                        其中由于在onclick事件中,所以this分别指向preMon和nextMon,所以在内部不使用this,直接使用calendar.在createCalendar不使用this也是这个原因.
+                    </p>
+
+                    <h3>[使用说明]</h3>
+                    <p>
+                        HTML和CSS样式可以自行修改,但是整体不做太大改变的情况下.直接待用calendar类,并且使用init方法,把日历HTML的id调入即可,如下:
+                    </p>
+                    <p>calendar.init(calendars);</p>
+
+                    <p>
+                        在整个过程中,需要注意的就是getFirstDay()和getMonthLen()方法的思维,只要了解了主要的部分.输入日期的方法可以有很多.
+                    </p>
+                    <p>
+                        改程序还有许多需要改进的地方,希望大家给点意见尤其是在代码里面,有哪些地方需要注意的,本人写的代码不太多,所以希望各位给与批评,然后我能发现错误进行改正.
+                    </p>
+                </div>
+</body>
+    </html>

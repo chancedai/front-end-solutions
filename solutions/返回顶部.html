@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>返回顶部</title>
+    <style type="text/css">
+        #demo_201404101311 .txt{font-size:50px;line-height:80px;}
+        #demo_201404101311 a{display:block;width:50px;height:50px;line-height:50px; text-align:center;font-size:14px;background:#333;position:fixed;bottom:30px;right:30px;color:#000;text-decoration:none;color:#fff;display:none;}
+        #demo_201404101311 a:hover{background:#000;text-decoration:none;}
+    </style>
+</head>
+<body>
+    <div id="demo_201404101311">
+        <ul>
+            <li>
+                <label>js代码：</label>
+                <pre class="js">
+// &#x8fd4;&#x56de;&#x9876;&#x90e8;
+(function(){
+    function backTop(btn) {
+        var d = document.documentElement;
+        var b = document.body;
+        window.onscroll = toggle;
+        btn.style.display = &#039;none&#039;;
+        btn.onclick = function() {
+            btn.style.display = &#039;none&#039;;
+            window.onscroll = null;
+            this.timer = setInterval(function() {
+                    d.scrollTop -= Math.ceil((d.scrollTop + b.scrollTop) * 0.1);
+                    b.scrollTop -= Math.ceil((d.scrollTop + b.scrollTop) * 0.1);
+                    if ((d.scrollTop + b.scrollTop) === 0){
+                        window.onscroll = toggle;
+                        clearInterval(btn.timer);
+                    }
+                }, 10);
+        };
+
+        function toggle() {
+            btn.style.display = (d.scrollTop + b.scrollTop &gt; 100) ? &#039;block&#039; : &#039;none&#039;
+        }
+    };
+    backTop(document.getElementById(&#039;demo_201404101311&#039;).getElementsByTagName(&#039;a&#039;)[0]);
+})();
+                </pre>
+            </li>
+        </ul>
+        <a href="javascript:;">顶部</a>
+        <div class="txt">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        // 返回顶部
+        (function(){
+            function backTop(btn) {
+                var d = document.documentElement;
+                var b = document.body;
+                window.onscroll = toggle;
+                btn.style.display = 'none';
+                btn.onclick = function() {
+                    btn.style.display = 'none';
+                    window.onscroll = null;
+                    this.timer = setInterval(function() {
+                            d.scrollTop -= Math.ceil((d.scrollTop + b.scrollTop) * 0.1);
+                            b.scrollTop -= Math.ceil((d.scrollTop + b.scrollTop) * 0.1);
+                            if ((d.scrollTop + b.scrollTop) === 0){
+                                window.onscroll = toggle;
+                                clearInterval(btn.timer);
+                            }
+                        }, 10);
+                };
+
+                function toggle() {
+                    btn.style.display = (d.scrollTop + b.scrollTop > 100) ? 'block' : 'none'
+                }
+            };
+            backTop(document.getElementById('demo_201404101311').getElementsByTagName('a')[0]);
+        })();
+    </script>
+</body>
+</html>

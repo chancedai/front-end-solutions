@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组分割成几个小数组</title>
+</head>
+<body>
+    <script type="text/javascript">
+
+    var data = [{
+            "url": "http://tech.sina.com.cn/i/2014-06-11/18089431115.shtml",
+            "title": "互联网理财收益率破四：客户回归银行"
+        }, {
+            "url": "http://tech.sina.com.cn/mobile/n/2014-06-10/08139427964.shtml",
+            "title": "奢侈品手机Vertu Signature Touch外媒评测"
+        }, {
+            "url": "http://news.sina.com.cn/c/2014-06-11/163030340390.shtml",
+            "title": "滨州男子京东购三星电池无防伪码 在线投诉被删除"
+        }, {
+            "url": "http://news.sina.com.cn/c/2014-06-10/063030327465.shtml",
+            "title": "夫妻生了10个娃 称不懂避孕"
+        }, {
+            "url": "http://news.sina.com.cn/c/2014-06-10/160030331947.shtml",
+            "title": "老外拍片模仿台湾人口头禅笑翻网友"
+        }, {
+            "url": "http://mil.news.sina.com.cn/2014-06-11/0851784059.html",
+            "title": "我军新装备：捕捉大气波导将军舰雷达测距提三倍"
+        }, {
+            "url": "http://tech.sina.com.cn/i/2014-06-12/11169433203.shtml",
+            "title": "猎豹3000万美元收购香港Zoom Interactive"
+        }, {
+            "url": "http://news.sina.com.cn/w/2014-06-10/092930329460.shtml",
+            "title": "皮筏水滑梯应有尽有 世界首家狗狗游泳池开张迎客[1]- 中国日报网"
+        }, {
+            "url": "http://video.sina.com.cn/p/news/s/v/2014-06-10/101664017573.html",
+            "title": "视频：俄奥斯卡II级核潜艇救援落难小艇"
+        }, {
+            "url": "http://tech.sina.com.cn/i/2014-06-10/07529427926.shtml",
+            "title": "6月10日互联网理财产品收益播报"
+        }, {
+            "url": "http://tech.sina.com.cn/mobile/n/2014-06-11/08579430534.shtml",
+            "title": "三星Galaxy Note 4配置曝光：1600万像素镜头"
+        }, {
+            "url": "http://tech.sina.com.cn/i/2014-06-10/17169428557.shtml",
+            "title": "百度上线pk二级域名 本月将发布新品"
+        }, {
+            "url": "http://tech.sina.com.cn/mobile/n/2014-06-12/08459432954.shtml",
+            "title": "心意大于礼物 父亲节送礼手机推荐"
+        }, {
+            "url": "http://tech.sina.com.cn/i/2014-06-10/14599428434.shtml",
+            "title": "阿里集团推出码上淘平台：以云+端为核心战略"
+        }, {
+            "url": "http://tech.sina.com.cn/i/2014-06-10/03309426870.shtml",
+            "title": "谷歌或推临近交互功能"
+        }, {
+            "url": "http://tech.sina.com.cn/i/2014-06-11/07109430047.shtml",
+            "title": "运营商“抢位”互联网理财"
+        }, {
+            "url": "http://tech.sina.com.cn/i/2014-06-11/01249429007.shtml",
+            "title": "天猫“6·18”大战获中华酷联力挺"
+        }, {
+            "url": "http://tech.sina.com.cn/i/2014-06-11/02399429638.shtml",
+            "title": "联通、百度、富国联手推定制理财产品"
+        }, {
+            "url": "http://tech.sina.com.cn/i/2014-06-10/15029428441.shtml",
+            "title": "微博新版发布：上线游戏+点评+微博支付"
+        }, {
+            "url": "http://tech.sina.com.cn/i/2014-06-10/19459428683.shtml",
+            "title": "Blockchain技术总监加盟OKCoin"
+        }, {
+            "url": "http://ent.sina.com.cn/s/m/w/2014-06-12/11494157410.shtml",
+            "title": "年度最强补刀!黄奕前夫称最开心是闪离"
+        }, {
+            "url": "http://slide.ent.sina.com.cn/star/w/slide_4_704_82978.html",
+            "title": "80后美女大学生高原出家"
+        }, {
+            "url": "http://ent.sina.com.cn/s/m/w/2014-06-11/23074157022.shtml",
+            "title": "黄奕密会富商 老公再开骂称早知其出轨"
+        }, {
+            "url": "http://ent.sina.com.cn/s/m/2014-06-12/00184157041.shtml",
+            "title": "郑爽:整容后想复原 张翰曾陪我取假体"
+        }, {
+            "url": "http://ent.sina.com.cn/s/h/2014-06-12/01294157057.shtml",
+            "title": "林志玲代言内衣秀蜜桃胸 惨变人肉布景"
+        }, {
+            "url": "http://ent.sina.com.cn/s/h/2014-06-12/01104157055.shtml",
+            "title": "甄子丹夫妇买豪车被骗 上诉求偿110万"
+        }, {
+            "url": "http://ent.sina.com.cn/s/m/2014-06-12/09514157255.shtml",
+            "title": "网友曝光凯丽老公照片 两人年龄差距大"
+        }, {
+            "url": "http://slide.ent.sina.com.cn/star/slide_4_704_82977.html",
+            "title": "林志玲大展风骚谷蜜桃胸"
+        }, {
+            "url": "http://slide.ent.sina.com.cn/star/slide_4_704_82906.html",
+            "title": "小S裙带意外下滑露美胸"
+        }, {
+            "url": "http://slide.ent.sina.com.cn/star/slide_4_704_82987.html",
+            "title": "马伊琍独自逛街略显憔悴"
+        }, {
+            "url": "http://ent.sina.com.cn/s/h/2014-06-12/08094157178.shtml",
+            "title": "李嘉欣曝丈夫被同行勾引 有自信无惧小三"
+        }, {
+            "url": "http://ent.sina.com.cn/s/m/w/2014-06-12/11374157394.shtml",
+            "title": "经纪人否认黄奕出轨密会富商:只是谈合作"
+        }, {
+            "url": "http://ent.sina.com.cn/s/m/w/2014-06-12/12394157449.shtml",
+            "title": "谢娜怀孕了？张杰经纪人回应工作仍满档"
+        }, {
+            "url": "http://ent.sina.com.cn/s/m/w/2014-06-12/10354157328.shtml",
+            "title": "将婚见家长？周迅带男友高圣远回老家 "
+        }, {
+            "url": "http://slide.ent.sina.com.cn/star/slide_4_704_82936.html",
+            "title": "周诗雅足球宝贝秀身材"
+        }];
+
+        var arraySlice = function(data,listNum,pageNum){
+            var len = data.length, index = 0,to,i,pages = [];
+            pageNum = pageNum||Infinity;
+            listNum = listNum||len;
+            for (i = 0; i < pageNum; i++) {
+                to = index + listNum;
+                if(to>len){
+                    break;
+                }
+                pages.push(data.slice(index, to));
+                index += listNum;
+            }
+            return pages;
+        };
+        var pages = arraySlice(data,7,5);
+    </script>
+</body>
+</html>

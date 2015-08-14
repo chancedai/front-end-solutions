@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>根据元素的值移除数组元素中的值</title>
+    <link rel="stylesheet" type="text/css" href="http://ent.sina.com.cn/470/2014/0410/json.human.css">
+    <script type="text/javascript" src="http://ent.sina.com.cn/470/2014/0410/json.human.js"></script>
+</head>
+<body>
+    <div id="demo_201404101311">
+        <ul>
+            <li>
+                <label>删除前：</label><div></div>
+            </li>
+            <li>
+                <label>删除tue后：</label><div></div>
+            </li>
+            <li>
+                <label>js代码：</label>
+                <pre class="js">
+// &#x6839;&#x636e;&#x5143;&#x7d20;&#x7684;&#x503c;&#x79fb;&#x9664;&#x6570;&#x7ec4;&#x5143;&#x7d20;&#x4e2d;&#x7684;&#x503c;
+(function(){
+  function removeByValue(arr, val) {
+      for(var i=0; i&lt;arr.length; i++) {
+          if(arr[i] == val) {
+              arr.splice(i, 1);
+              break;
+          }
+      }
+  }
+  var node = document.getElementById(&#039;demo_201404101311&#039;);
+  var divs = node.getElementsByTagName(&#039;div&#039;);
+  var html;
+  var somearray = [&#039;mon&#039;, &#039;tue&#039;, &#039;wed&#039;, &#039;thur&#039;];
+  html = JsonHuman.format(somearray);
+  divs[0].appendChild(html);
+  removeByValue(somearray, &#039;tue&#039;);
+  html = JsonHuman.format(somearray);
+  divs[1].appendChild(html);
+})();
+                </pre>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        // 根据元素的值移除数组元素中的值
+        (function(){
+            function removeByValue(arr, val) {
+                for(var i=0; i<arr.length; i++) {
+                    if(arr[i] == val) {
+                        arr.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+            var node = document.getElementById('demo_201404101311');
+            var divs = node.getElementsByTagName('div');
+            var html;
+            var somearray = ['mon', 'tue', 'wed', 'thur'];
+            html = JsonHuman.format(somearray);
+            divs[0].appendChild(html);
+            removeByValue(somearray, 'tue');
+            html = JsonHuman.format(somearray);
+            divs[1].appendChild(html);
+        })();
+    </script>
+</body>
+</html>

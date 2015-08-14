@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>隐藏tab下的interval及timeout</title>
+</head>
+<body>
+    <div id="demo_201404111016">
+        <p></p>
+    </div>
+    <script type="text/javascript">
+        // 隐藏tab下的interval及timeout
+        (function(){
+            var startTime = new Date();
+            var wrap = document.getElementById('demo_201404111016');
+            var ps = wrap.getElementsByTagName('p');
+            var tipNode = ps[0];
+            var time = 0;
+            var gap = 0;
+            var color = 'green';
+            var timerId = setInterval(function(){
+                // 10秒
+                if(time===500){
+                    clearInterval(timerId);
+                    return;
+                }
+                time++;
+                gap = ((new Date).getTime() - startTime)/1000;
+                if(gap>11){
+                   color = 'red';
+                }
+                gap = '<span style="font-size:20px;font-weight:bold;color:'+color+';">'+gap+'</span>'
+                tipNode.innerHTML = '20ms,500次,大概10秒,总耗时：'+gap;
+            },20);
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+    #demo_20150409151940{font-size:100px;line-height:2em;}
+    </style>
+
+</head>
+<body>
+
+    <div id="demo_20150409151940">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p  id="demo_20150409151942"><img src="http://i1.sinaimg.cn/home/main/blk/d.gif" data-src="http://n.sinaimg.cn/default/20150408/IHva-avxeafs4837902.jpg" width="198" height="132"></p>
+
+    </div>
+    <script type="text/javascript">
+    var wrap = document.getElementById('demo_20150409151942');
+    var html = wrap.innerHTML;
+    setTimeout(function(){
+        wrap.innerHTML = '';
+        var span = document.createElement('span');
+        span.innerHTML = html;
+        wrap.appendChild(span);
+    },2e3);
+
+
+
+    var isIE6 = navigator.appVersion.indexOf("MSIE 6") != -1 ? true: false;
+        ~ function() {
+            var d = document,
+                w = this,
+                b = document.body,
+                h = document.documentElement,
+                // 图片列表
+                p = [],
+                eventFunc = function() {
+                    scrollLoader.scroll()
+                },
+                bH = -1,
+                timer, bT, bVH, iTotal = d.images.length;
+            var sina = {
+                addEvent: function(obj, eventType, func) {
+                    if (obj.attachEvent) {
+                        obj.attachEvent("on" + eventType, func)
+                    } else {
+                        obj.addEventListener(eventType, func, false)
+                    }
+                },
+                removeEvent: function(obj, eventType, func) {
+                    if (obj.detachEvent) {
+                        obj.detachEvent("on" + eventType, func)
+                    } else {
+                        obj.removeEventListener(eventType, func, false)
+                    }
+                },
+                absPosition: function(obj, parentObj) {
+                    var left = obj.offsetLeft;
+                    var top = obj.offsetTop;
+                    var tempObj = obj.offsetParent;
+                    try {
+                        while (tempObj != b && tempObj != d.documentElement && tempObj != parentObj && tempObj != null) {
+                            left += tempObj.offsetLeft;
+                            top += tempObj.offsetTop;
+                            tempObj = tempObj.offsetParent
+                        }
+                    } catch (e) {};
+                    return {
+                        left: left,
+                        top: top
+                    }
+                }
+            };
+            var scrollLoader = {
+                version: '1.1.0',
+                status: "complete",
+                mult: 2,
+                init: function(ele) {
+                    var that = this,
+                        imgs, num = 0;
+                    if (ele && ele.getElementsByTagName) {
+                        imgs = ele.getElementsByTagName('img')
+                    } else {
+                        imgs = d.images
+                    };
+                    for (var i = 0; i < imgs.length; i++) {
+                        if (imgs[i].getAttribute("data-src") && !imgs[i].__isSL) {
+                            if (imgs[i].offsetWidth == 0 && imgs[i].offsetHeight == 0) {
+                                imgs[i].__pObj = imgs[i].parentNode;
+                                while (imgs[i].__pObj.offsetWidth == 0 && imgs[i].__pObj.offsetHeight == 0) {
+                                    imgs[i].__pObj = imgs[i].__pObj.parentNode
+                                }
+                            };
+                            imgs[i].__isSL = true;
+                            p.push(imgs[i]);
+                            num++
+                        }
+                    };
+                    if (num > 0) {
+                        if (this.status != 'scrolling') {
+                            sina.addEvent(w, "scroll", eventFunc);
+                            this.status = "scrolling";
+                            timer = setInterval(function() {
+                                that.timer()
+                            }, 200)
+                        };
+                        this.scroll();
+                    }
+                },
+                timer: function() {
+                    if (iTotal !== d.images.length) {
+                        iTotal = d.images.length;
+                        this.init()
+                    };
+                    var vh = Math.min(h.clientHeight, b.clientHeight);
+                    var vt = (w.pageYOffset || b.scrollTop || h.scrollTop) - Math.round(vh * (this.mult - 1) / 2);
+                    var vb = vt + Math.round(vh * ((this.mult - 1) / 2 + 1));
+                    if (bT !== vt || vb !== bVH) {
+                        this.scroll()
+                    }
+                },
+                showImg: function(img) {
+                    if (img.getAttribute("data-src")) {
+                        img.__pObj = null;
+                        img.__isSL = null;
+                        img.src = img.getAttribute("data-src");
+                        img.removeAttribute("data-top");
+                        img.removeAttribute("data-src");
+                        if (isIE6) {
+                            return false;
+                        }
+                    }
+                },
+                scroll: function() {
+                    if (this.status != "scrolling") {
+                        return
+                    };
+                    var cache = 0;
+                    if (bH == d.body.scrollHeight) {
+                        cache = 1
+                    } else {
+                        bH = d.body.scrollHeight
+                    };
+                    var vh = Math.min(h.clientHeight, b.clientHeight);
+                    var vt = (w.pageYOffset || b.scrollTop || h.scrollTop) - Math.round(vh * (this.mult - 1) / 2);
+                    var vb = vt + Math.round(vh * ((this.mult - 1) / 2 + 1));
+                    bT = vt;
+                    bVH = vb;
+                    var s = 0,
+                        posTop, obj;
+                    for (var i = 0; i < p.length; i++) {
+                        if (!p[i].getAttribute("data-src")) {
+                            continue
+                        };
+                        s++;
+                        if (!cache) {
+                            if (p[i].offsetWidth == 0 && p[i].offsetHeight == 0) {
+                                p[i].__pObj = p[i].parentNode;
+                                if (!p[i].__pObj) {
+                                    this.showImg(p[i]);
+                                    continue
+                                };
+                                while (!!p[i].__pObj && p[i].__pObj.offsetWidth == 0 && p[i].__pObj.offsetHeight == 0) {
+                                    p[i].__pObj = p[i].__pObj.parentNode
+                                }
+                            };
+                            obj = p[i].__pObj || p[i];
+                            posTop = sina.absPosition(obj, b).top;
+                            p[i].setAttribute("data-top", posTop)
+                        } else {
+                            posTop = p[i].getAttribute("data-top")
+                        }
+
+                        if (posTop >= vt && posTop <= vb) {
+                            this.showImg(p[i])
+                        }
+                        if(!posTop){
+                            console.log('posTop',posTop);
+                            this.showImg[p[i]];
+                        }
+                    };
+                    if (s == 0) {
+                        this.status = "complete";
+                        sina.removeEvent(w, "scroll", eventFunc);
+                        clearInterval(timer);
+                        console.log('complete');
+                    }
+                }
+            };
+            this.scrollLoader = scrollLoader
+        }();
+        scrollLoader.init();
+    </script>
+</body>
+</html>

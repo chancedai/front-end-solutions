@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>返回代理</title>
+</head>
+<body>
+    <ol>
+        <li>
+            打开httpd-vhost.conf编辑,然后在httpd.conf中include(Include conf/extra/httpd-vhosts.conf)进来或者直接在httpd.conf编辑，如 H:\wamp\bin\apache\apache2.2.22\conf\extra\httpd-vhosts.conf file:///H:/wamp/bin/apache/apache2.2.22/conf/httpd.conf
+        </li>
+        <li>
+			编辑内容：
+			<pre>
+<VirtualHost *:80>
+  ServerName m.node.com
+  ProxyPreserveHost On
+  ProxyRequests Off
+  ProxyPass / http://localhost:3000/ #其它服务器站点
+  ProxyPassReverse / http://localhost:3000/
+</VirtualHost>
+			</pre>
+        </li>
+        <li>注意：以上使用了代理，需要在httpd.conf中开启相应的模块
+        	<pre>
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+        	</pre></li>
+        <li>
+        	hosts配置 127.0.0.1 m.node.com
+        </li>
+        <li>访问m.node.com即可指向127.0.0.1:3000</li>
+        <li>
+        	以上，就可以实现不同服务器用不同域名共用80端口，其中Apache做代理服务
+        </li>
+    </ol>
+</body>
+</html>

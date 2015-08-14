@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>cookie操作</title>
+</head>
+<body>
+    <script type="text/javascript">
+        /*!
+         * JavaScript preload() function – http://mths.be/preload
+         * Preload images, CSS and JavaScript files without executing them
+         * Script by Stoyan Stefanov – http://www.phpied.com/preload-cssjavascript-without-execution/
+         * Slightly rewritten by Mathias Bynens – http://mathiasbynens.be/
+         */
+
+        function preload(arr) {
+            var l = arr.length,
+                d = window.document,
+                b = d.body,
+                isIE = /*@cc_on!@*/0,
+                o;
+            while (l--) {
+                if (isIE) {
+                    new Image().src = arr[l];
+                    continue;
+                }
+                o = d.createElement('object');
+                o.data = arr[l];
+                o.width = o.height = 0;
+                b.appendChild(o);
+            }
+        }
+
+        // Example:
+
+        preload([
+            // 'http://news.sina.com.cn/css/87/20140926/comment.3.css',
+            'http://i.sso.sina.com.cn/js/outlogin_layer.js',
+            'http://news.sina.com.cn/js/87/20140926/comment.3.min.js'
+        ]);
+    </script>
+    <script src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://news.sina.com.cn/css/87/20140926/comment.3.css">
+<div class="sina-comment-wrap" id="SI_FormList1">
+    <button>显示评论</button>
+</div>
+<script>
+
+    $(function(){
+        var cmnt = function(){
+                var $ = window.___sinacMNT___;
+                // 保持和页面编码一致，gbk或utf-8
+                $.cmnt.config.encoding = 'utf-8';
+                FormList1 = new $.cmnt.FormList('SI_FormList1',{
+                    // 频道编号
+                    channel:'yl',
+                    // 新闻id
+                    newsid:'28-3-4188538',
+                    // 默认为空
+                    parent:''
+                },{
+                    channel: 'yl',
+                    // 新闻id
+                    newsid:'28-3-4188538',
+                    // 默认为0，多条新闻（图片）集合的评论为1
+                    group: 0,
+                    // 开始页数，默认为1
+                    page: 1,
+                    // 每页评论条数
+                    pageSize: 20,
+                    // 最大楼层
+                    maxFloor:1,
+                     // 隐藏评论列表，只显示评论框
+                    hideList:0
+                    // // 最新评论默认显示条数
+                    // hotPageNum:5,
+                    // // 最新评论默认显示条数
+                    // firstPageNum:5,
+                    // // 可点击最新评论正文“更多评论”按钮次数,达到该次数后，显示“查看更多评论”链接，再点击则跳转
+                    // clickMoreTimes:3
+                },{});
+
+        };
+        $('#SI_FormList1 button').on('click',function(){
+            $.ajax({
+                url:'http://i.sso.sina.com.cn/js/outlogin_layer.js',
+                dataType:'script',
+                cache:true,
+                success:function(){
+                    $.ajax({
+                        url:'http://news.sina.com.cn/js/87/20140926/comment.3.min.js',
+                        dataType:'script',
+                        cache:true,
+                        success:function(){
+                            cmnt();
+                        }
+                    });
+                }
+            });
+            // $.getScript('http://i.sso.sina.com.cn/js/outlogin_layer.js',function(){
+            //     $.getScript('http://news.sina.com.cn/js/87/20140926/comment.3.min.js',function(){
+            //         cmnt();
+            //     });
+            // });
+
+        });
+    });
+</script>
+
+</body>
+</html>

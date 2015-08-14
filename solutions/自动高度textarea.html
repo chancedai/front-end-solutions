@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自动高度textarea</title>
+	<style type="text/css">
+	textarea{font-size:100px;}
+	</style>
+	<script type="text/javascript">
+	(function(){
+		var throttle = function(method, context,time) {
+			clearTimeout(method.__tId__);
+			method.__tId__ = setTimeout(function() {
+				method.call(context);
+			}, time||100);
+		};
+		var extend = function(target, source) {
+			if(typeof source === 'undefined'){
+				return target;
+			}
+			for (var property in source) {
+				target[property] = source[property];
+			}
+			return target;
+		};
+		var isEmptyObj = function(obj) {
+			var hack = function() {};
+			for (var key in obj) {
+				hack(key);
+				return false;
+			}
+			return true;
+		};
+		var getStyle = function(elem, style) {
+			if ('getComputedStyle' in window) {
+				return getComputedStyle(elem, null)[style];
+			} else {
+				style = style.replace(/\-(\w)/g, function($, $1) {
+					return $1.toUpperCase();
+				});
+
+				var val = elem.currentStyle[style];
+
+				if ((val === 'auto' || val == '100%') && (style === 'width' || style === 'height')) {
+					var rect = elem.getBoundingClientRect();
+					if (style === 'width') {
+						return rect.right - rect.left + 'px';
+					} else {
+						return rect.bottom - rect.top + 'px';
+					}
+				}
+				return val;
+			}
+		};
+
+		var setStyle = function(elem, prop) {
+			if (!elem) {
+				return;
+			}
+			for (var i in prop) {
+				elem.style[i] = prop[i];
+			}
+		};
+
+		var times = function(string, number) {
+			for (var i = 0, r = ''; i < number; i++) r += string;
+			return r;
+		};
+		var getVal = function(textarea) {
+			var val = textarea.value.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;')
+				.replace(/&/g, '&amp;')
+				.replace(/\n$/, '<br/>&nbsp;')
+				.replace(/\n/g, '<br/>')
+				.replace(/ {2,}/g, function(space) {
+					return times('&nbsp;', space.length - 1) + ' '
+				});
+			return val;
+		};
+		var addEvent = function(ele, evType, func, useCapture) {
+			if (ele.addEventListener) {
+				ele.addEventListener(evType, func, useCapture||false);
+				return true;
+			} else if (ele.attachEvent) {
+				ele.attachEvent('on' + evType, func);
+				return true;
+			} else {
+				ele['on' + evType] = func;
+			}
+		};
+		var Autogrow = function(textarea,config){
+			var self = this;
+			var defaults = {
+				// clone容器class前缀
+				clzPrefix:'autogrow-textarea-',
+				// 最小高度，默认为textarea的初始高度
+				minHeight:'auto',
+				// 最大高度，默认为无限
+				maxHeight:Infinity,
+				// clone的父容器
+				context:textarea.parentNode,
+				// 手动设置clone样式，默认采用textarea的样式
+				styles:{},
+				// 实时检测textarea的样式，并且同步到隐藏的div中
+				realTime:false,
+				// 检测速度（毫秒）
+				speed:200
+			};
+			config = extend(defaults,config);
+			if(config.minHeight === 'auto'){
+				// 如果没设置最小高度，则取加载进来时的高度为最小高度
+				config.minHeight = getStyle(textarea,'height').replace('px','');
+			}
+			if(!textarea){
+				return;
+			}
+			self.stop = false;
+			self.config = config;
+			self.textarea = textarea;
+			self._bindEvent();
+			self.setCloneStyle();
+			self.grow();
+		};
+		Autogrow.prototype = {
+			constructor:Autogrow,
+			_bindEvent:function(){
+				var self = this;
+				var textarea = self.textarea;
+
+				addEvent(textarea, 'keyup', function(e) {
+					self.throttleGrow();
+				});
+				addEvent(textarea, 'focus', function(e) {
+					self.throttleGrow();
+				});
+				addEvent(window, 'resize', function(e) {
+					self.throttleGrow();
+				});
+			},
+			setCloneStyle:function(){
+				var self = this;
+				var config = self.config;
+				var textarea = self.textarea;
+				if(!self.clone){
+					self.clone = document.createElement('div');
+					self.clone.className = config.clzPrefix+'clone';
+					config.context.appendChild(self.clone);
+				}
+				var clone = self.clone;
+				var defaultStyles = {
+					position: 'absolute',
+					wordWrap: 'break-word',
+					top: 0,
+					left: '-9999px'
+				};
+				var styles = {};
+				if(!isEmptyObj(config.styles)){
+					styles = extend(defaultStyles,config.styles);
+				}else{
+					styles = extend(defaultStyles,{
+						width: getStyle(textarea,'width'),
+						fontSize: getStyle(textarea,'fontSize'),
+						fontFamily: getStyle(textarea,'fontFamily'),
+						lineHeight: getStyle(textarea,'lineHeight')
+					});
+				}
+				setStyle(clone,styles);
+			},
+			throttleGrow:function(){
+				var self = this;
+				if(self.stop){
+					return;
+				}
+				throttle(self.grow,self,self.config.speed);
+			},
+			grow:function(){
+				var self = this;
+				var config = self.config;
+				if(config.realTime){
+					// 每次都检查textarea的样式并同步
+					self.setCloneStyle();
+				}
+				self.clone.innerHTML = getVal(self.textarea);
+
+				var height = getStyle(self.clone,'height').replace('px','');
+				var overflow = 'hidden';
+				height = Math.max(height,config.minHeight);
+				if(height>config.maxHeight){
+					height = config.maxHeight;
+					overflow = 'auto';
+				}
+				height = Math.min(height,config.maxHeight);
+				setStyle(self.textarea,{
+					'height':height + 'px',
+					'overflow':overflow
+				});
+			},
+			revive:function(){
+				var self = this;
+				self.stop = false;
+			},
+			destroy:function(){
+				var self = this;
+				self.stop = true;
+			}
+		}
+		window.Autogrow = Autogrow;
+	})();
+
+
+	</script>
+</head>
+<body>
+	<div id="demo_20140812113224">
+		<textarea id="demo_20140812113225"></textarea>
+	</div>
+	<script type="text/javascript">
+	// $('#demo_20140812113224').autogrow();
+	A1 = new Autogrow(document.getElementById('demo_20140812113225'),{
+		context:document.body,
+		maxHeight:600,
+		realTime:true,
+		speed:100
+	});
+	</script>
+</body>
+</html>

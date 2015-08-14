@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+	<ol>
+		<li>如果长度有限制，应该是整个URI的长度限制，而不仅仅是参数的长度。</li>
+		<li>HTTP协议从未规定GET/POST的请求长度限制是多少。
+		<blockquote>
+			The HTTP protocol does not place any a priori limit on the length of a URI. Servers MUST be able to handle the URI of any resource they serve, and SHOULD be able to handle URIs of unbounded length if they provide GET-based forms that could generate such URIs. A server SHOULD return 414 (Request-URI Too Long) status if a URI is longer than the server can handle (see section 10.4.15).
+		</blockquote>
+		<blockquote>
+			 Note: Servers ought to be cautious about depending on URI lengths above 255 bytes, because some older client or proxy implementations might not properly support these lengths.
+		</blockquote>
+		</li>
+		<li>所谓的请求长度限制是由浏览器和Web服务器决定和设置的，各种浏览器和web服务器的设定均不一样，这依赖各个浏览器厂家的规定或者可能根据web服务器的处理能力来设定。
+		<blockquote>
+			The limit is in MSIE and Safari about 2KB, in Opera about 4KB and in Firefox about 8KB, (255 bytes if we count very old browsers) . We may thus assume that 8KB is the maximum possible length and that 2KB is a more affordable length to rely on at the server side and that 255 bytes is the safest length to assume that the entire URL will come in.
+		</blockquote>
+		<blockquote>
+			If the limit is exceeded in either the browser or the server, most will just truncate the characters outside the limit without any warning. Some servers however may send a HTTP 414 error. If you need to send large data, then better use POST instead of GET. Its limit is much higher, but more dependent on the server used than the client. Usually up to around 2GB is allowed by the average webserver. This is also configureable somewhere in the server settings. The average server will display a server-specific error/exception when the POST limit is exceeded, usually as HTTP 500 error.
+		</blockquote>
+		<blockquote>
+			HTTP 1.1 defines Status Code 414 Request-URI Too Long for the cases where a server-defined limit is reached. You can see further details on RFC 2616. For the case of client-defined limits, there is no sense on the server returning something, because the server won't receive the request at all.
+		</blockquote>
+		<blockquote>
+			The server is refusing to service the request because the Request-URI is longer than the server is willing to interpret. This rare condition is only likely to occur when a client has improperly converted a POST request to a GET request with long query information, when the client has descended into a URI "black hole" of redirection (e.g., a redirected URI prefix that points to a suffix of itself), or when the server is under attack by a client attempting to exploit security holes present in some servers using fixed-length buffers for reading or manipulating the Request-URI.
+		</blockquote>
+		</li>
+	</ol>
+	<h2>
+		GET VS POST
+	</h2>
+	<ol>
+		<li>
+			多数浏览器对于POST采用两阶段发送数据的，先发送请求头，再发送请求体，即使参数再少再短，也会被分成两个步骤来发送（相对于GET），也就是第一步发送header数据，第二步再发送body部分。HTTP是应用层的协议，而在传输层有些情况TCP会出现两次连结的过程，HTTP协议本身不保存状态信息，一次请求一次响应。对于TCP而言，通信次数越多反而靠性越低，能在一次连结中传输完需要的消息是最可靠的，尽量使用GET请求来减少网络耗时。如果通信时间增加，这段时间客户端与服务器端一直保持连接状态，在服务器侧负载可能会增加，可靠性会下降。  <a href="http://segmentfault.com/a/1190000000353790" target="_blank">http://segmentfault.com/a/1190000000353790</a> <a href="http://developer.yahoo.com/performance/rules.html" target="_blank">http://developer.yahoo.com/performance/rules.html</a> <a href="http://blogread.cn/it/article/6100?f=wb" target="_blank">http://blogread.cn/it/article/6100?f=wb</a>
+		</li>
+		<li>
+			GET请求能够被cache，GET请求能够被保存在浏览器的浏览历史里面（密码等重要数据GET提交，别人查看历史记录，就可以直接看到这些私密数据）POST不进行缓存。
+		</li>
+		<li>
+			GET参数是带在URL后面，传统IE中URL的最大可用长度为2048字符，其他浏览器对URL长度限制实现上有所不同。POST请求无长度限制（目前理论上是这样的）。
+		</li>
+		<li>
+			GET提交的数据大小，不同浏览器的限制不同，一般在2k-8K之间，POST提交数据比较大，大小靠服务器的设定值限制，而且某些数据只能用 POST 方法「携带」，比如 file。
+		</li>
+		<li>
+			全部用POST不是十分合理，最好先把请求按功能和场景分下类，对数据请求频繁，数据不敏感且数据量在普通浏览器最小限定的2k范围内，这样的情况使用GET。其他地方使用POST。
+		</li>
+		<li>
+			GET 的本质是「得」，而 POST 的本质是「给」。而且，GET 是「幂等」的，在这一点上，GET 被认为是「安全的」。但实际上 server 端也可以用作资源更新，但是这种用法违反了约定，容易造成 CSRF（跨站请求伪造）。
+		</li>
+	</ol>
+	<h2>
+		REF
+	</h2>
+
+	<li><a href="http://stackoverflow.com/questions/2659952/maximum-length-of-http-get-request" target="_blank">maximum length of HTTP GET request?</a> </li>
+	<li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.15" target="_blank">Request-URI Too Long</a> </li>
+	<li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.2.1" target="_blank">General Syntax</a> </li>
+	<li><a href="http://www.cnblogs.com/xiaotaomaomao/articles/986070.html" target="_blank">get,post数据长度的限制</a> </li>
+	<li><a href="http://www.cnblogs.com/TankXiao/archive/2012/02/13/2342672.html" target="_blank">HTTP协议详解</a> </li>
+	<li><a href="http://segment" target="_blank">post方式相比get安全,携带数据更大，我准备所有数据都用post方式获取，这样好吗？</a> ault.com/q/1010000000213082  </li>
+	<li><a href="http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html" target="_blank">浅谈CSRF攻击方式</a> </li>
+</body>
+</html>

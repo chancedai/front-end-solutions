@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="gb2312">
+    <title>上传图片</title>
+    <script type="text/javascript" src="plupload/js/plupload.full.js"></script>
+</head>
+<body>
+    <div class="note">
+        <ol>
+            <li>修改upload.php图片目录</li>
+            <li>修改js引用地址</li>
+            <li>修改upload.php地址</li>
+            <li>修改配置里的flash_swf_url，silverlight_xap_url地址</li>
+            <li>路径不能带中文</li>
+        </ol>
+    </div>
+    <div id="SI_Wrap">
+        <div id="SI_PicList">No runtime found.</div>
+        <br />
+        <a id="SI_Pick" href="javascript:;">添加图片</a>
+        <a id="SI_Upload" href="javascript:;">上传图片</a>
+    </div>
+
+    <script type="text/javascript">
+    // Custom example logic
+    function $(id) {
+        return document.getElementById(id);
+    }
+    var picWrap = $('SI_PicList');
+    var Uploader1 = new plupload.Uploader({
+        runtimes : 'gears,html5,flash,silverlight,browserplus',
+        browse_button : 'SI_Pick',
+        container: 'SI_Wrap',
+        max_file_size : '10mb',
+        url : 'plupload/examples/upload.php',
+        resize : {width : 320, height : 240, quality : 90},
+        flash_swf_url : 'plupload/js/plupload.flash.swf',
+        silverlight_xap_url : 'plupload/js/plupload.silverlight.xap',
+        filters : [
+            {title : "Image files", extensions : "jpg,gif,png"},
+            {title : "Zip files", extensions : "zip"}
+        ]
+    });
+    // 初始化事件
+    Uploader1.bind('Init', function(up, params) {
+        picWrap.innerHTML = '';
+    });
+    // 初始化
+    Uploader1.init();
+    // 添加图片事件
+    Uploader1.bind('FilesAdded', function(up, files) {
+        for (var i in files) {
+            picWrap.innerHTML += '<div id="' + files[i].id + '">' + files[i].name + ' (' + plupload.formatSize(files[i].size) + ') <b></b></div>';
+        }
+        Uploader1.start();
+    });
+    // 上传进程事件
+    Uploader1.bind('UploadProgress', function(up, file) {
+        $(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+    });
+    // 开始上传
+    $('SI_Upload').onclick = function() {
+        Uploader1.start();
+        return false;
+    };
+    </script>
+</body>
+</html>

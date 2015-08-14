@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>builder</title>
+</head>
+<body>
+    <script type="text/javascript" src="http://i0.sinaimg.cn/dy/js/jquery/jquery-1.7.2.min.js"></script>
+    <h1 id="demo_201402111612" node-type="tt0"></h1>
+    <div id="dome_20141111163800">
+           <p class="loading">loading</p>
+           <p class="result"></p>
+    </div>
+    <pre>
+        var getNodes = function(wrap,attr) {
+            attr = attr||'node-type';
+            wrap = $(wrap);
+            var nodes = $("[" + attr + "]", wrap);
+            var nodesObj = {};
+            nodesObj.wrap = wrap;
+            nodes.each(function(i) {
+                var item = $(this);
+                nodesObj[item.attr(attr)] = item;
+            });
+            return nodesObj;
+        };
+    </pre>
+    <script type="text/javascript">
+
+            var getNodes = function(wrap,attr) {
+                attr = attr||'node-type';
+                wrap = $(wrap);
+                var nodes = $("[" + attr + "]", wrap);
+                var nodesObj = {};
+                nodesObj.wrap = wrap;
+                nodes.each(function(i) {
+                    var item = $(this);
+                    nodesObj[item.attr(attr)] = item;
+                });
+                return nodesObj;
+            };
+           var dom = getNodes('#dome_20141111163800','class');
+           console.log(dom);
+    </script>
+</body>
+</html>

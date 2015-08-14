@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li>
+			1.安装wamp
+		</li>
+		<li>
+			2.找到数据库所在路径，随便在vhost.conf配置一个域名(如：phpmyadmin)指向它即可,并配置Host 127.0.0.1 phpmyadmin,访问 http://phpmyadmin/ 即可访问数据库中，并创建一个数据库如bq69blog
+		</li>
+		<li>
+			3.下载wordpress解压到一个文件夹，像2一样配置一个域名(如：b.bq69.com)指向它即可,访问 http://b.bq69.com即开始创建worpress
+		</li>
+		<li>
+			4.配置时数据库即填 bq69blog 用户名一般为root 密码为空，如果不对可以phpmyadmin用户区查询，主机地址一般为localhost
+		</li>
+		<li>
+			5.把旧的主题、插件、上传文件复制过来，如wp-content下的themes,plugins,uploads并启用
+		</li>
+		<li>6.在旧博客导出数据库，并压缩成zip文件，然后导入到新的数据库中.</li>
+		<li>7.最好目录域名和线上一一对应，否则上线很麻烦。</li>
+		<li>8.对照旧博客，在小工具里配置sidebar，删除不必要模块功能；导航等也要一一对应设置。</li>
+	</ul>
+</body>
+</html>

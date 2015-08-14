@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>cookie操作</title>
+    <style type="text/css">
+    .demo-201405161137 p{background:#eee;}
+    </style>
+</head>
+<body class="demo-201405161137">
+    <pre lang="js">
+var getParam = function(key) {
+    var params = location.search;
+    if (params) {
+        var arr = params.substr(1).split('&');
+        for (var i = 0; i < arr.length; i++) {
+            data = arr[i].split('=');
+            if (data[0] == key) {
+                return data[1];
+            }
+        }
+    }
+};
+    </pre>
+    <script type="text/javascript">
+    (function(){
+        var getParam = function(key) {
+            var params = location.search;
+            if (params) {
+                var arr = params.substr(1).split('&');
+                for (var i = 0; i < arr.length; i++) {
+                    data = arr[i].split('=');
+                    if (data[0] == key) {
+                        return data[1];
+                    }
+                }
+            }
+        };
+        var id = getParam('testId');
+        var p = document.createElement('p');
+        if(id){
+            p.innerHTML = 'testId:'+id;
+            document.body.appendChild(p);
+        }else{
+            location = location+'?testId=88';
+        }
+    })();
+    </script>
+</body>
+</html>

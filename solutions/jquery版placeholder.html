@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>placeholder</title>
+    <style type="text/css">
+    #demo_201405161204 input{width:150px;}
+    #demo_201405161204 .gray{color:#777;}
+    </style>
+</head>
+<body>
+    <div id="demo_201405161204">
+        <p><input type="text" name="" id="" placeholder="普通文本框"></p>
+        <p><input type="password" name="" id="" placeholder="密码输入框"></p>
+    </div>
+    <script src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+    var placeholder = (function(){
+        var supportPlaceholder = 'placeholder' in document.createElement('input');
+        var toggleTip = function(input,text){
+            defaultValue = input.defaultValue;
+            $(input).addClass('gray');
+            input.value = text;
+            input.onfocus = function(){
+                if(input.value === defaultValue || input.value === text){
+                    this.value = '';
+                    $(input).removeClass('gray');
+                }
+            }
+            input.onblur = function(){
+                if(input.value === ''){
+                    this.value = text;
+                    $(input).addClass('gray');
+                }
+            }
+        };
+        var simulateTip = function(input,text){
+            var pwdPlaceholder = document.createElement('input');
+            pwdPlaceholder.type='text';
+            pwdPlaceholder.className = 'pwd_placeholder gray '+input.className;
+            pwdPlaceholder.value=text;
+            pwdPlaceholder.autocomplete = 'off';
+            input.style.display='none';
+            input.parentNode.appendChild(pwdPlaceholder);
+            pwdPlaceholder.onfocus = function(){
+                pwdPlaceholder.style.display = 'none';
+                input.style.display = '';
+                input.focus();
+            }
+            input.onblur = function(){
+                if(input.value === ''){
+                    pwdPlaceholder.style.display='';
+                    input.style.display='none';
+                }
+            }
+        };
+        var placeholder = function(input){
+            //如果input不存在或者支持placeholder,返回
+            if(!input||supportPlaceholder){
+                return;
+            }
+            //已经初始化，hasPlaceholder为1
+            var hasPlaceholder = input.getAttribute('hasPlaceholder')||0;
+            if(hasPlaceholder=='1'){
+                return;
+            }
+
+            //如果没有placeholder或者没有placeholder值，返回
+            var text = input.getAttribute('placeholder');
+
+            if(!text){
+                //ie10 下的ie7 无法用input.getAttribute('placeholder')取到placeholder值，奇怪！
+                if(input.attributes&&input.attributes.placeholder){
+                    text=input.attributes.placeholder.value;
+                }
+            }
+            var tagName = input.tagName;
+            if(tagName=='INPUT'){
+                var inputType = input.type;
+                if(inputType == 'password'&&text){
+                    simulateTip(input,text);
+                }else if(inputType=='text'&&text){
+                    toggleTip(input,text);
+                }
+            }else if(tagName=='TEXTAREA'){
+                toggleTip(input,text);
+            }
+            input.setAttribute('hasPlaceholder','1');
+        };
+        return function(inputs){
+                for (var i = inputs.length - 1; i >= 0; i--) {
+                    var input = inputs[i]
+                    placeholder(input);
+                };
+            };
+    })();
+    var inputs = document.getElementById('demo_201405161204').getElementsByTagName('input');
+    placeholder(inputs);
+    </script>
+    <pre>
+var placeholder = (function(){
+    var supportPlaceholder = 'placeholder' in document.createElement('input');
+    var toggleTip = function(input,text){
+        defaultValue = input.defaultValue;
+        $(input).addClass('gray');
+        input.value = text;
+        input.onfocus = function(){
+            if(input.value === defaultValue || input.value === text){
+                this.value = '';
+                $(input).removeClass('gray');
+            }
+        }
+        input.onblur = function(){
+            if(input.value === ''){
+                this.value = text;
+                $(input).addClass('gray');
+            }
+        }
+    };
+    var simulateTip = function(input,text){
+        var pwdPlaceholder = document.createElement('input');
+        pwdPlaceholder.type='text';
+        pwdPlaceholder.className = 'pwd_placeholder gray '+input.className;
+        pwdPlaceholder.value=text;
+        pwdPlaceholder.autocomplete = 'off';
+        input.style.display='none';
+        input.parentNode.appendChild(pwdPlaceholder);
+        pwdPlaceholder.onfocus = function(){
+            pwdPlaceholder.style.display = 'none';
+            input.style.display = '';
+            input.focus();
+        }
+        input.onblur = function(){
+            if(input.value === ''){
+                pwdPlaceholder.style.display='';
+                input.style.display='none';
+            }
+        }
+    };
+    var placeholder = function(input){
+        //如果input不存在或者支持placeholder,返回
+        if(!input||supportPlaceholder){
+            return;
+        }
+        //已经初始化，hasPlaceholder为1
+        var hasPlaceholder = input.getAttribute('hasPlaceholder')||0;
+        if(hasPlaceholder=='1'){
+            return;
+        }
+
+        //如果没有placeholder或者没有placeholder值，返回
+        var text = input.getAttribute('placeholder');
+
+        if(!text){
+            //ie10 下的ie7 无法用input.getAttribute('placeholder')取到placeholder值，奇怪！
+            if(input.attributes&&input.attributes.placeholder){
+                text=input.attributes.placeholder.value;
+            }
+        }
+        var tagName = input.tagName;
+        if(tagName=='INPUT'){
+            var inputType = input.type;
+            if(inputType == 'password'&&text){
+                simulateTip(input,text);
+            }else if(inputType=='text'&&text){
+                toggleTip(input,text);
+            }
+        }else if(tagName=='TEXTAREA'){
+            toggleTip(input,text);
+        }
+        input.setAttribute('hasPlaceholder','1');
+    };
+    return function(inputs){
+            for (var i = inputs.length - 1; i >= 0; i--) {
+                var input = inputs[i]
+                placeholder(input);
+            };
+        };
+})();
+    </pre>
+
+</body>
+</html>

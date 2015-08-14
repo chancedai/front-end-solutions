@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>computeAngle</title>
+</head>
+<body class="demo-201405161144">
+    <script type="text/javascript">
+    (function(){
+        var computeAngle = function(start,end){
+            //斜边长度
+            var length = Math.sqrt(Math.pow((start[0] - end[0]), 2) + Math.pow((start[1] - end[1]), 2));
+            //对边比斜边 sin
+            var hudu = Math.asin(Math.abs(start[1] - end[1])/length);
+            if(isNaN(hudu)){
+                hudu = 0;
+            }
+            var ag = hudu*180/Math.PI;
+            // TODO 有小数点？
+            ag = Math.round(ag);
+            //第一象限90-
+            if ((end[0] - start[0]) >= 0 && (end[1] - start[1]) >= 0){
+                ag = 90 - ag;
+            }
+            //第二象限90+
+            else if ((end[0] - start[0]) <= 0 && (end[1] - start[1]) <= 0){
+                ag = ag + 90;
+            }
+            //第三象限270-
+            else if ((end[0] - start[0]) <= 0 && (end[1] - start[1]) <= 0){
+                ag = 270 - ag;
+            }
+            //第四象限270+
+            else if ((end[0] - start[0]) >= 0 && (end[1] - start[1]) >= 0){
+                ag = ag + 270;
+            }
+            return ag;
+        };
+        console.log(computeAngle([100,100],[160,160]), computeAngle([160,160],[100,100]));
+    })();
+    </script>
+</body>
+</html>

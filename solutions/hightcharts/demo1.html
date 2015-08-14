@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>海拔高度</title>
+</head>
+<body>
+	<script src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="Highcharts-4.0.3/js/highcharts.js"></script>
+	<div id="flight-profile-altitude-graph" style="width: 800px; height: 400px; margin: 0 auto;background:#000;"></div>
+	<div id="flight-profile-batteries-graph" style="width: 800px; height: 200px; margin: 0 auto;background:#000;"></div>
+	<script type="text/javascript">
+		$(function () {
+			var altitude = [];
+			for (i = 144; i > 0; i--) {
+			    altitude.push(100*i);
+			}
+		    $('#flight-profile-altitude-graph').highcharts({
+		        colors: ["#ffbf3b"],
+		        title: {
+		            text: '',
+		            style: {
+		                display: 'none'
+		            }
+		        },
+		        subtitle: {
+		            text: '',
+		            style: {
+		                display: 'none'
+		            }
+		        },
+		        chart: {
+		            type: 'column',
+		            backgroundColor: 'transparent'
+		        },
+		        xAxis: {
+		            min: 0,
+		            title: {
+		                text: false
+		            },
+		            lineColor: '#555',
+		            gridLineColor: 'transparent',
+		            minorTickLength: 0,
+		            tickLength: 0,
+		            labels: {
+		                enabled: false
+		            }
+		        },
+		        yAxis: {
+		            title: {
+		                text: false
+		            },
+		            gridLineColor: 'transparent',
+		            labels: {
+		                style: { color: '#ffbf3b' }
+		            }
+		        },
+		        exporting: {
+		            enabled: false
+		        },
+		        plotOptions: {
+		            column: {
+		                pointPadding: 0.2,
+		                borderWidth: 0
+		            }
+		        },
+		        credits: {
+		            enabled: false
+		        },
+		        series: [{
+		            showInLegend: false,
+		            name: '',
+		            data: altitude
+		        }]
+		    });
+		});
+$(function () {
+	var batteries = [];
+	var batteries_color = [];
+	for (i = 144; i > 0; i--) {
+	    batteries.push(i/2);
+	    if (i/2 < 20)
+	        batteries_color.push('#ff0000');
+	    else
+	        batteries_color.push('#fff');
+
+	}
+    $('#flight-profile-batteries-graph').highcharts({
+        plotOptions: {
+            column: {
+                colorByPoint: true,
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        colors: batteries_color,
+        title: {
+            text: '',
+            style: {
+                display: 'none'
+            }
+        },
+        subtitle: {
+            text: '',
+            style: {
+                display: 'none'
+            }
+        },
+        chart: {
+            type: 'column',
+            backgroundColor: 'transparent'
+        },
+        xAxis: {
+            min: 0,
+            title: {
+                text: false
+            },
+            lineColor: '#555',
+            gridLineColor: 'transparent',
+            minorTickLength: 0,
+            tickLength: 0,
+            labels: {
+                enabled: false
+            }
+        },
+        yAxis: {
+            min: 0, max: 100,
+            title: {
+                text: false
+            },
+            gridLineColor: 'transparent',
+            labels: {
+                style: { color: '#fff' }
+            }
+        },
+        exporting: {
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            showInLegend: false,
+            name: '',
+            data: batteries
+        }]
+
+    });
+});
+	</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+
+/*---------------------------------- 以下为JS控制样式，勿删 ----------------------------------*/
+
+/*JS 列表相关，列表加载中，通过在容器上添加或删除.sina-comment-list-{type}-loading的类来控制对应的加载提示的显示*/
+.sina-comment-list-all-loading .all-loading, .sina-comment-list-hot-loading .hot-loading, .sina-comment-list-latest-loading .latest-loading{display: block;}
+.sina-comment-list-all-loading .more{display: none;}
+/* .sina-comment-list, */
+.hot-wrap,.sina-comment-list .latest-wrap
+	display: none;
+.sina-comment-list-has-all,.sina-comment-list-has-hot .hot-wrap,.sina-comment-list-has-latest .latest-wrap{display: block;}
+
+/*JS 回复 模拟回复成功 隐藏回复内容的对应的“支持”，“回复”和“分享”按钮*/
+.sina-comment-list .item-hack .action .btns
+	display: none;
+	.item-hack .floor .action .btns
+		display: inline;
+	.floor-hack
+		border-top:1px dashed #F3DDB3;margin-top:10px;padding-top:5px;
+	.floor-hack .lnk,.sina-comment-list .list .floor-hack .action .btns
+		display: none;
+
+/*JS 登录相关,sina登录和weibo登录，在body上添加sinacMNT_前缀的类，控制显示隐藏对应内容*/
+.sina-comment-form .login{display: none;}
+.sinacMNT_logout .sina-comment-form .login{display: block;_display:inline;}
+.sina-comment-form .user{display: none;}
+.sinacMNT_login .sina-comment-form .user,.sinacMNT_weibo_login .sina-comment-form .user{display: block;_display:inline;}
+/*预登录*/
+.sinacMNT_pre_login .sina-comment-form .user{display: block;_display:inline;}
+/*未登录时显示默认头像*/
+.sina-comment-form .bd .user-default{display: none;}
+.sinacMNT_logout .sina-comment-form .user-default{display: block;}
+
+
+/*JS 实名验证，不通过实名验证的用户，不显示“分享功能”*/
+.sina-comment-form .ft .weibo,.sina-comment-list .item .share{display:none;}
+.sinacMNT_weibo_login_security .sina-comment-list .item .share{display:inline-block;}
+.sinacMNT_weibo_login_security .sina-comment-form .ft .weibo{display: block;_display:inline;}
+
+/*不支持圆角*/
+.sinacMNT-no-border-radius .sina-comment-list .list .item .num{width:31px;height:25px;top:19px;line-height: 25px;}
+

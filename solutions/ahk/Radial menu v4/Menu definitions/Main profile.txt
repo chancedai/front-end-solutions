@@ -1,0 +1,68 @@
+﻿;==================================================================
+[Item1]
+Text= 		Apps
+Submenu=	Applications
+Tooltip=		Applications
+
+[Item2]
+Icon=		Ahk.png
+Submenu=	Scripts
+Tooltip=		AHK scripts
+
+[Item3]
+Text= 		Menu control
+Action= 		explore RM\
+Submenu=	Menu control
+
+[Item4]
+Icon=		Windows explorer.png
+Action= 		%A_WinDir%\explorer.exe
+Submenu=	Folders
+
+[Item5]
+Text= 		Comp control
+Submenu=	Comp control
+
+[Item6]
+Icon=		Files.png
+Submenu=	Files
+
+[Item8]
+Text= 		item
+[Item9]
+Text= 		item
+[Item10]
+Text= 		item
+[Item11]
+Text= 		item
+[Item12]
+Text= 		item
+
+[Item14]
+Text= 		item
+[Item15]
+Text= 		item
+[Item16]
+Text= 		item
+[Item17]
+Text= 		item
+[Item18]
+Text= 		item
+
+
+
+;==================================================================
+[General]
+SpecMenuBack=		
+SpecMenuFore=		
+OneRingerAtt=		
+CentralText=		RM4
+CentralImage=		
+CentralImageSizeFactor=	
+
+
+;==================================================================
+[Navigator]
+Name = Example navigator
+
+

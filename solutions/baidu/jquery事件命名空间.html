@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+    <script type="text/javascript" src="http://n.sinaimg.cn/news/content2014/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+	<h1>jquery事件命名空间</h1>
+	<button id="demo_20150131173630">绑定了a,b两个点击事件</button>
+	<button id="demo_20150131173631">取消绑定了a点击事件</button>
+	<pre>
+(function(){
+	$('#demo_20150131173630').on('click.a',function(){
+		alert('a');
+	});
+	$('#demo_20150131173630').on('click.b',function(){
+		alert('b');
+	});
+	$('#demo_20150131173631').on('click.a',function(){
+		$('#demo_20150131173630').off('click.a');
+		alert('取消绑定了a点击事件');
+	});
+	$('#demo_20150131173630').trigger('click.b');
+})();
+	</pre>
+	<ol>
+		<li>很多时候绑定事件时，回调都是匿名函数，不方便取消绑定</li>
+		<li>在事件后加.命名空间，方便在取消时，取消绑定特定的事件</li>
+		<li>在trigger时，也可以触发特定的事件</li>
+	</ol>
+	<script type="text/javascript">
+		(function(){
+			$('#demo_20150131173630').on('click.a',function(){
+				alert('a');
+			});
+			$('#demo_20150131173630').on('click.b',function(){
+				alert('b');
+			});
+			$('#demo_20150131173631').on('click.a',function(){
+				$('#demo_20150131173630').off('click.a');
+				alert('取消绑定了a点击事件');
+			});
+			$('#demo_20150131173630').trigger('click.b');
+		})();
+	</script>
+</body>
+</html>

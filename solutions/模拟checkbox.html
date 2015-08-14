@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>模拟checkbox</title>
+	<style type="text/css">
+    .simulate-checkbox-demo label.checkbox{display:inline-block; width:50px; height:50px;background:#ccc;border-radius:25px; position:relative;}
+    .simulate-checkbox-demo label.checkbox input{position:absolute;left:-9999em;}
+    .simulate-checkbox-demo label.checked{background:red;}
+	</style>
+
+</head>
+<body>
+    <div class="simulate-checkbox-demo">
+        <label class="checkbox" id="ID_Checkbox" ><input type="checkbox"></label>
+    </div>
+    <script type="text/javascript">
+        ;(function(){
+            var checkbox = document.getElementById('ID_Checkbox');
+            var simCheckbox = function(wrap, cb) {
+                this.init(wrap, cb);
+            };
+            simCheckbox.prototype = {
+                init: function(wrap, cb) {
+                    var self = this;
+                    var id = 'checkbox_' + Math.abs((new Date()).getTime()) + '_' + Math.round(Math.random() * 1e8);
+                    self.wrap = wrap;
+                    self.cb = cb || function() {};
+                    self.checkbox = wrap.getElementsByTagName('input')[0];
+                    self.checkbox.id = id;
+                    self.wrap.htmlFor = id;
+                    self.clz = wrap.className;
+                    self.checked = false;
+                    self.toggle().bind();
+                },
+                toggle: function() {
+                    var self = this;
+                    var checked = self.checkbox.checked;
+                    var newClz = checked ? self.clz + ' checked' : self.clz;
+                    self.wrap.className = newClz;
+                    self.checked = checked;
+                    typeof self.cb == 'function' && self.cb(checked);
+                    return self;
+                },
+                bind: function() {
+                    var self = this;
+                    self.wrap.onclick = function() {
+                        self.toggle();
+                    };
+                    return self;
+                }
+            };
+            TTT = new simCheckbox(checkbox,function(checked){
+                document.title = checked;
+            });
+        })();
+    </script>
+</body>
+</html>

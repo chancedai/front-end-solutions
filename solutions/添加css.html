@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>添加css</title>
+    <style type="text/css">
+    #___demo-201403011626___{width:100px;height:50px;background:#333;}
+    </style>
+</head>
+<body>
+    <div class="demo-201403011625"></div>
+    <div id="___demo-201403011626___"></div>
+    <script type="text/javascript">
+    var setCSS = (function(){
+        var doc = document;
+        var head = doc.getElementsByTagName('head')[0];
+        return function(s,id){
+            var dom = doc.getElementById(id);
+            if(dom){
+                dom.parentNode.removeChild(dom);
+            }
+            dom = doc.createElement('style');
+            dom.id = id;
+            dom.type = 'text/css';
+            dom.styleSheet ? (dom.styleSheet.cssText = s) : dom.appendChild(doc.createTextNode(s));
+            head.appendChild(dom);
+            return dom;
+        };
+    })();
+    setCSS('.demo-201403011625{width:100px;height:50px;background:#ccc;}','demo_201403011627');
+    </script>
+    <pre lang="css">
+    	var setCSS = (function(){
+    	    var doc = document;
+    	    var head = doc.getElementsByTagName('head')[0];
+    	    return function(s,id){
+    	        var dom = doc.getElementById(id);
+    	        if(dom){
+    	            dom.parentNode.removeChild(dom);
+    	        }
+    	        dom = doc.createElement('style');
+    	        dom.id = id;
+    	        dom.type = 'text/css';
+    	        dom.styleSheet ? (dom.styleSheet.cssText = s) : dom.appendChild(doc.createTextNode(s));
+    	        head.appendChild(dom);
+    	        return dom;
+    	    };
+    	})();
+    </pre>
+</body>
+</html>

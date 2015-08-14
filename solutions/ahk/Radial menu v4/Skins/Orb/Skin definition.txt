@@ -1,0 +1,71 @@
+﻿SkinName = 		Orb
+
+ItemSize = 		64
+RadiusSizeFactor = 	0.9
+AutoSubmenuMarking = 	0.86
+AutoSubmenuMark =	¨
+
+ItemGlow =		ItemGlow.png
+
+TextBoxShrink = 		0.96
+TextFont = 		Arial
+TextSize = 		11
+TextColor = 		ffffff
+TextTrans = 		dd
+TextRendering = 		5
+
+TextShadow = 		1
+TextShadowColor = 	000000
+TextShadowTrans = 	ff
+TextShadowOffset = 	1
+
+IconShrink = 		0.73
+IconTrans = 		1
+
+ItemBack = 		
+ItemBackShrink = 		
+ItemBackTrans = 		
+
+ItemFore = 		
+ItemForeShrink = 		
+ItemForeTrans = 		
+
+ItemShadow = 		
+ItemShadowShrink = 	
+ItemShadowTrans = 	
+
+MenuBack = 		MenuBack.png
+MenuBackSize = 		add+20
+MenuBackTrans = 		1
+
+MenuBackOuterRim = 	MenuOuterRim.png
+MenuBackOuterRimWidth = 8
+MenuBackOuterRimTrans = 	1
+
+MenuFore = 		MenuFore.png
+MenuForeSize = 		add-2
+MenuForeTrans = 	1
+
+MenuShadowWidth =	4
+MenuShadowInnerColor =	60000000
+MenuShadowOuterColor =	00000000
+
+MenuBackHatchStyle = 
+MenuBackHatchFrontColor = 
+MenuBackHatchBackColor = 
+MenuBackHatchShrink = 
+
+MenuBackOuterRimHatchStyle = 
+MenuBackOuterRimHatchFrontColor = 
+MenuBackOuterRimHatchBackColor = 
+MenuBackOuterRimHatchShrink = 
+
+ItemBackHatchStyle = 
+ItemBackHatchFrontColor = 
+ItemBackHatchBackColor = 
+ItemBackHatchShrink = 
+
+MenuBackCenter = 
+MenuBackCenterShrink = 
+
+

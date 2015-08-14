@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>进度条</title>
+    <style type="text/css">
+        #demo-20150306162319{width:300px;}
+        .progressbar-a{background:#ddd;border-radius:6px;}
+        .progressbar-a p{margin:1px 0;padding:0;background:#34C2E3;height:12px;overflow:hidden;width:0;border-radius:6px;font-size:10px;color:#fff;text-align:right;line-height:12px;}
+    </style>
+</head>
+<body>
+    <script type="text/javascript" src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+    <div id="demo-20150306162319">
+
+    </div>
+    <script type="text/javascript">
+    ;(function(){
+        var Progressbar = (function(){
+            var time = 10e3;
+            var bar = null;
+            var startTime;
+            var intervalId = null;
+            var set = function(per){
+                bar.width(per);
+                if(per==='100%'){
+                    clearInterval(intervalId);
+                }
+                bar.html(parseInt(per,10)+'%&nbsp;');
+            };
+            var easeBothStrong = function(p) {
+               if ((p /= 0.5) < 1) return 1 / 2 * p * p * p * p;
+               return -1 / 2 * ((p -= 2) * p * p * p - 2);
+           };
+            var start = function(wrap,time,clz){
+                clearInterval(intervalId);
+                wrap.empty();
+                time = time;
+                startTime = new Date();
+                wrap.html('<div class="'+(clz||'progressbar')+'"><p></p></div>');
+                bar = wrap.find('p');
+                intervalId = intervalId = setInterval(function(){
+                    var per = Math.min(((new Date()) - startTime)/time,1);
+                    per = easeBothStrong(per);
+                    set(per*100+'%');
+                },50);
+                wrap.data('intervalId',intervalId);
+            };
+            var stop = function(wrap){
+                clearInterval(wrap.data('intervalId'));
+            };
+            return {
+                start:start,
+                stop:stop,
+                set:set
+            };
+        })();
+        Progressbar.start($('#demo-20150306162319'),10e3,'progressbar-a');
+        window.Progressbar = Progressbar;
+    })();
+    </script>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=gb2312" />
+<title>网页标题_栏目名称_频道名称_新浪网</title>
+<meta name="keywords" content="," />
+<meta name="description" content="此页面的说明" />
+<link href="http://news.sina.com.cn/css/87/20131212/zjk.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+  .pagebox{overflow:hidden; zoom:1; font-size:12px; font-family:"宋体",sans-serif; padding:35px 0}
+  .pagebox span{float:left; margin-right:6px; overflow:hidden; text-align:center; background:#fff;}
+  .pagebox span a{display:block; overflow:hidden; zoom:1; _float:left;}
+  .pagebox span.current.prev{border:1px #e6e6e6 solid; width:60px; height:30px; line-height:30px; text-align:center; color:#999; cursor:default;}
+  .pagebox span.prev{color:#3568b9; height:32px;}
+  .pagebox span.prev a,.pagebox span.prev a:visited,.pagebox span.next a,.pagebox span.next a:visited{border:1px #e6e6e6 solid; color:#505050; text-decoration:none; text-align:center; width:60px; cursor:pointer; height:30px; line-height:30px;}
+  .pagebox span.prev a:hover,.pagebox span.prev a:active,.pagebox span.next a:hover,.pagebox span.next a:active{color:#fff; border:1px #4d79d0 solid; background:#4d79d0}
+  .pagebox span.current{ width:32px;height:32px; text-align:center; line-height:32px; color:#fff; cursor:default; background:#4d79d0; font-weight:bold;}
+  .pagebox span{color:#3568b9; height:32px;}
+  .pagebox span a,.pagebox span a:visited{border:1px #e6e6e6 solid; color:#505050; text-decoration:none;cursor:pointer; height:30px; width:30px; text-align:center; line-height:30px;}
+  .pagebox span a:hover,.pagebox span a:active{border:1px #4d79d0 solid;color:#fff; background:#4d79d0}
+  .pagebox span.current.next{border:1px #e6e6e6 solid; width:60px; height:30px; line-height:30px; text-align:center; color:#999; cursor:default;}
+</style>
+</head>
+<body>
+<div class="topWrap">
+	<div class="wrap clearfix">
+    	<h1 class="yahei">新闻中心专家库</h1>
+        <div class="search">
+        	<form>
+            	<div class="sc">
+                	<input id="SI_INP" type="text" name="key" value="搜人/搜领域/搜机构" class="keyword" onFocus="if(this.value=='搜人/搜领域/搜机构')this.value=''" onBlur="if(this.value=='')this.value='搜人/搜领域/搜机构'">
+                    <input id="SI_Sub" type="submit" value="" class="submit_btn">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="wrap">
+   <div class="main" style="display:none;" id="SI_Result">
+   	  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tb_01">
+  <tr>
+    <th scope="col">&nbsp;</th>
+    <th scope="col">姓名</th>
+    <th scope="col">任职机构/职务</th>
+    <th scope="col">联系方式</th>
+    <th scope="col">领域</th>
+  </tr>
+  <tr class="line">
+    <td class="w1"><span class="head">A</span></td>
+    <td class="w2">某某某</td>
+    <td class="w3">职务职务职务职务职务职务职务职务职务</td>
+    <td class="w4">123456789<br>010-12345678<br>12345678</td>
+    <td class="w5">经济</td>
+  </tr>
+</table>
+   </div>
+<!-- 分页 begin -->
+<table cellspacing="0" style="margin:0 auto;"><tr><td>
+<div class="pagebox" id="SI_Pager">
+</div>
+</td></tr></table>
+<!-- 分页 end -->
+<!-- 新闻中心二级页 footer begin -->
+<div class="footer">
+	<p><a href="http://news.sina.com.cn/guest.html" target="_blank">新闻中心意见反馈留言板</a>　电话：010-82612286　　<a href="http://tech.sina.com.cn/sinahelp/2003-10-28/113/314.html" target="_blank">新浪网产品客户服务联系电话</a>　　欢迎批评指正</p>
+	<p> </p>
+	<p><a href="http://corp.sina.com.cn/chn/">新浪简介</a> | <a href="http://corp.sina.com.cn/eng/">About Sina</a> | <a href="http://emarketing.sina.com.cn/">广告服务</a> | <a href="http://www.sina.com.cn/contactus.html">联系我们</a> | <a href="http://corp.sina.com.cn/chn/sina_job.html">招聘信息</a> | <a href="http://www.sina.com.cn/intro/lawfirm.shtml">网站律师</a> | <a href="http://english.sina.com">SINA English</a> | <a href="https://login.sina.com.cn/signup/signup.php">通行证注册</a> | <a href="http://tech.sina.com.cn/focus/sinahelp.shtml">产品答疑</a></p>
+
+	<p> </p>
+	<p>Copyright &copy; 1996-2013 SINA Corporation, All Rights Reserved</p>
+	<p> </p>
+	<p>新浪公司 <a href="http://www.sina.com.cn/intro/copyright.shtml">版权所有</a></p>
+</div>
+<!-- 新闻中心二级页 footer end -->
+</div>
+<script type="text/javascript" src="http://i0.sinaimg.cn/dy/js/jquery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="jquery.pagination.js"></script>
+<script type="text/javascript" src="Fuse-master/fuse.js"></script>
+<script type="text/javascript">
+  $(function(){
+    $.getJSON('experts.json',function(data){
+       var books = data;
+       var authors = [];
+
+       $.each(books, function(index, book) {
+        authors.push(book.author);
+       });
+
+       var options = {
+          keys: ['author', 'title'],
+          caseSensitive: false
+        };
+
+      var Fuse1 = new Fuse(books, options);
+
+      $('#SI_INP').on('keyup',function(){
+
+          var text = $(this).val();
+
+          console.log('Searched for '+ text);
+          console.log(Fuse1.search(text));
+
+          var result = Fuse1.search(text);
+          var trs = (function(){
+            var trs = [];
+            var getTr = function(item){
+                var tr = [];
+                console.log(item);
+              html.push('<tr class="line">');
+                html.push('<td class="w1"><span class="head">'+item.author+'</span></td>');
+                html.push('<td class="w2">'+item.title+'</td>');
+                html.push('<td class="w3">职务职务职务职务职务职务职务职务职务</td>');
+                html.push('<td class="w4">123456789<br>010-12345678<br>12345678</td>');
+                html.push('<td class="w5">经济</td>');
+              html.push('</tr>');
+              return html.join('');
+            };
+            for (var i = 0, len = result.length; i < len; i++) {
+                var item = result[i];
+                trs.push(getTr(item));
+            }
+            return trs.join('');
+          })();
+          $('#SI_Result').html(trs);
+          $('#SI_Pager').pagination(100,{
+              items_per_page:10,
+              num_display_entries:8,
+              current_page:0,
+              num_edge_entries:2,
+              link_to:"javascript:;",
+              prev_text:"上一页",
+              next_text:"下一页",
+              ellipse_text:"...",
+              prevpager_show_always:true,
+              next_show_always:true,
+              callback:function(current){
+                  // self.set('opts.page',current+1);
+                  // self.getData.call(self)
+              }
+          });
+
+        });
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="gb2312">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+	<style type="text/css">
+	@-webkit-keyframes spin {
+	  from {
+	    -webkit-transform: rotate(0deg); }
+
+	  to {
+	    -webkit-transform: rotate(360deg); } }
+	@-moz-keyframes spin {
+	  from {
+	    -moz-transform: rotate(0deg); }
+
+	  to {
+	    -moz-transform: rotate(360deg); } }
+	@keyframes spin {
+	  from {
+	    -webkit-transform: rotate(0deg);
+	    -moz-transform: rotate(0deg);
+	    -ms-transform: rotate(0deg);
+	    -o-transform: rotate(0deg);
+	    transform: rotate(0deg); }
+
+	  to {
+	    -webkit-transform: rotate(360deg);
+	    -moz-transform: rotate(360deg);
+	    -ms-transform: rotate(360deg);
+	    -o-transform: rotate(360deg);
+	    transform: rotate(360deg); } }
+	.loader-quart{width:50px;height:50px;display:inline-block;border-radius:50px;border:6px solid #333;position:relative;}
+	.loader-quart:after{content:'';position:absolute;left:-6px;top:-6px;right:-6px;bottom:-6px;border-radius:50px;border:6px solid transparent;border-top-color:#fff;-webkit-animation: spin 1s linear infinite; -moz-animation: spin 1s linear infinite; animation: spin 1s linear infinite;}
+	</style>
+	<span class="loader-quart"></span>
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿SkinName = 		Cell
+
+ItemSize = 		76
+RadiusSizeFactor = 	0.76
+AutoSubmenuMarking = 	0.94
+
+ItemGlow =		ItemGlow.png
+
+TextBoxShrink = 		0.90
+TextFont = 		Arial
+TextSize = 		11
+TextColor = 		111111
+TextTrans = 		cc
+TextRendering = 		5
+
+TextShadow = 		1
+TextShadowColor = 	ffffff
+TextShadowTrans = 	ff
+TextShadowOffset = 	1
+
+IconShrink = 		0.70
+IconTrans = 		0.9
+ItemBack = 		ItemBack.png
+ItemBackShrink = 		1
+ItemBackTrans = 		1
+
+ItemFore = 		
+ItemForeShrink = 		
+ItemForeTrans = 		
+
+ItemShadow = 		
+ItemShadowShrink = 	
+ItemShadowTrans = 	
+
+MenuBack = 		MenuBack.png
+MenuBackSize = 		add-40
+MenuBackTrans = 		1
+
+MenuBackOuterRim = 	MenuOuterRim.png
+MenuBackOuterRimWidth = 1
+MenuBackOuterRimTrans = 	1
+
+MenuFore = 		MenuFore.png
+MenuForeSize = 		add+70
+MenuForeTrans = 	0.50	
+
+
+
+
+
+
+

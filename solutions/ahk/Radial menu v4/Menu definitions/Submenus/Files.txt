@@ -1,0 +1,21 @@
+﻿[Item1]
+Text= 		File1
+[Item2]
+Text= 		File2
+[Item3]
+Text= 		File3
+[Item4]
+Text= 		File4
+[Item5]
+Text= 		File5
+[Item6]
+Text= 		etc.
+
+
+
+
+
+
+
+
+

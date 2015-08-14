@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+
+    <style type="text/css">
+		.wrap{width:1000px;margin:0 auto;}
+		.top,.main,.btm{border:1px solid #333;margin:20px 0;text-align: center;font-size: 100px;background: #eee;}
+		.top{height:200px;line-height: 200px;}
+		.main{height:800px;line-height: 800px;overflow: auto;}
+		.btm{height:200px;line-height: 200px;}
+		.side{width:50px;left: 50%; margin-left:505px;position: fixed;bottom: 60px; _position:absolute;_top:expression(documentElement.scrollTop + documentElement.clientHeight-200);z-index:100;overflow: hidden;width:50px;height:170px;overflow: hidden;}
+		.side a{display: block;width:50px;height:50px;line-height: 50px;text-align: center;font-size: 12px;margin-bottom: 10px;background: #eee;}
+    </style>
+</head>
+<body>
+		<div class="wrap">
+			<div class="top" id="demo_20141114100808_top">Top</div>
+			<div class="main" id="demo_20141114100808_main">Main <br>Main. <br> Main..</div>
+			<div class="btm" id="demo_20141114100808_btm">Btm</div>
+			<div class="side" id="demo_20141114100808_side">
+				<a href="javascript:;">Top</a>
+				<a href="javascript:;">Main</a>
+				<a href="javascript:;">Btm</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="animated-scrollto-master/animatedScrollTo.js"></script>
+		<script type="text/javascript">
+		var byId = function(id) {
+			return document.getElementById(id);
+		};
+		var addEvent = function(el, type, fn, useCapture) {
+			if (typeof useCapture == 'undefined') {
+				useCapture = false;
+			}
+			if (el.addEventListener) {
+				el.addEventListener(type, fn, useCapture);
+				return true;
+			} else if (el.attachEvent) {
+				var r = el.attachEvent('on' + type, fn);
+				return true;
+			} else {
+				el['on' + type] = fn;
+			}
+		};
+		var prefix = 'demo_20141114100808_';
+		addEvent(byId(prefix + 'side'), 'click', function(e) {
+			e = window.event || e;
+			var target = e.target || e.srcElement;
+			var type = target.innerHTML.toLowerCase();
+			var ele = byId(prefix + type);
+			animatedScrollTo(document.documentElement||document.body, ele.offsetTop, 1e3, function() {});
+		});
+
+		</script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+	<div id="corporate-map" style="width:1000px;height:800px;margin:0 auto;"></div>
+	<script type="text/javascript" src="maps_api.js"></script>
+	<script>
+
+	    var done = false;
+
+	    google.maps.event.addDomListener(window, 'load', init);
+	    function init() {
+	        var mapOptions = {
+	            zoom: 3,
+	            disableDefaultUI: true,
+	            scrollwheel: false,
+
+
+	            center: new google.maps.LatLng(19.8967662,-155.58278180000002), // New York
+	            styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#000000"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#000000"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#000000"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"lightness":17},{"weight":1.2}]}]
+	        };
+
+	        var mapElement = document.getElementById('corporate-map');
+	        var map = new google.maps.Map(mapElement, mapOptions);
+	        var marker, i;
+
+	        var locations = [
+	            ['Oman', 21.512583,55.923254999999926, 4],
+	            ['Ahmedabad', 23.022505, 72.57136209999999, 3],
+	            ['Varanasi', 25.3176452,82.97391440000001, 2],
+	            ['Mandalay', 21.975,96.08333300000004, 1],
+	            ['Chongqing', 29.56301,106.551557, 1],
+	            ['Nanjing', 32.060255,118.796877, 1],
+	            ['Hawaii', 17.8967662,-155.58278180000002, 1],
+	            ['Las Vegas', 36.1699412,-115.13982959999998, 1],
+	            ['New York', 40.7127837,-74.00594130000002, 1],
+	            ['Alger', 36.752887,3.0420480000000225, 1]
+	        ];
+
+
+	        var flightPlanCoordinates = [
+	            new google.maps.LatLng(24.466667,54.36666700000001),
+	            new google.maps.LatLng(21.512583,55.923254999999926),
+	            new google.maps.LatLng(23.022505, 72.57136209999999),
+	            new google.maps.LatLng(25.3176452,82.97391440000001),
+	            new google.maps.LatLng(21.975,96.08333300000004),
+	            new google.maps.LatLng(29.56301,106.551557),
+	            new google.maps.LatLng(32.060255,118.796877),
+	            new google.maps.LatLng(17.8967662,-155.58278180000002),
+	            new google.maps.LatLng(29.3967662,-130.58278180000002)
+	        ];
+
+
+	        var compensationIcon = 1;
+	        for (i = 0; i < locations.length; i++) {
+	            marker = new google.maps.Marker({
+	                position: new google.maps.LatLng(locations[i][1]-compensationIcon, locations[i][2]),
+	                map: map,
+	                icon: 'http://www.lasourisverte.ch/David/rtw-widgets-embeded/rtw_wrapup_map_icon.png'
+	            })
+
+	            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+	                return function() {
+	                    infowindow.setContent(locations[i][0]);
+	                    infowindow.open(map, marker);
+	                }
+	            })(marker, i));
+	        }
+
+	        marker = new google.maps.Marker({
+	            position: new google.maps.LatLng(26.7967662,-130.58278180000002),
+	            map: map,
+	            icon: 'http://www.lasourisverte.ch/David/rtw-widgets-embeded/rtw_wrapup_map_position.png'
+	        });
+
+	        var flightPath = new google.maps.Polyline({
+	            path: flightPlanCoordinates,
+	            geodesic: false,
+	            strokeColor: '#f7c13d',
+	            strokeOpacity: 1.0,
+	            strokeWeight: 2
+	        });
+
+	        flightPath.setMap(map);
+	    }
+	</script>
+</body>
+</html>

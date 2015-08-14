@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>水平排列</title>
+    <style type="text/css">
+    .demo-20150520145631 .clearfix:after{content:'.';display:block;height:0;clear:both;visibility: hidden;}
+    .demo-20150520145631 .clearfix{*zoom:1;}
+    .demo-20150520145631 li{list-style: none;padding:5px 10px;margin:3px;background: #ccc;}
+
+    .demo-20150520145631 .s1 li{float: left;}
+
+    .demo-20150520145631 .s2 li{display: inline-block;}
+
+    .demo-20150520145631 .s3 ul{
+        display:-moz-box; /* Firefox */
+        display:-webkit-box; /* Safari and Chrome */
+        display:box;
+    }
+    .demo-20150520145631 .s3 li{
+        -moz-box-flex:2.0; /* Firefox */
+        -webkit-box-flex:2.0; /* Safari 和 Chrome */
+        box-flex:2.0;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="demo-20150520145631">
+        <h2>一、默认显示</h2>
+        <div class="s0">
+            <ul>
+                <li>item1</li>
+                <li>item2</li>
+                <li>item3</li>
+                <li>item4</li>
+                <li>item5</li>
+            </ul>
+        </div>
+        <h2>
+            二、float:left;
+        </h2>
+        <p>缺点：父级不加clearfix,高度为0;</p>
+        <div class="s1">
+            <ul class="clearfix">
+                <li>item1</li>
+                <li>item2</li>
+                <li>item3</li>
+                <li>item4</li>
+                <li>item5</li>
+            </ul>
+        </div>
+        <h2>
+            三、display:inline-block;
+        </h2>
+        <p>缺点：各项之间不能有空隙，空隙会在各项之间显示。</p>
+        <div class="s2">
+            <ul>
+                <li>item1</li><li>item2</li><li>item3</li><li>item4</li><li>item5</li>
+            </ul>
+        </div>
+        <h2>
+            四、display:box;+box-flex;
+        </h2>
+        <p>缺点：低版本浏览器不兼容，但移动设备几乎都支持。</p>
+        <p>优点：可按父级百分比分配宽度。</p>
+        <div class="s3">
+            <ul>
+                <li>item1</li><li>item2</li><li>item3</li><li>item4</li><li>item5</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+﻿
+/*reset*/
+html {-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100% } body {line-height: 1.6; font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif; color: #000; font-size: 14px } input, textarea {outline: 0 } body, h1, h2, h3, h4, p, ul, ol, dl, dd, fieldset, textarea {margin: 0 } fieldset, legend, textarea, input {padding: 0 } textarea, input {color: #666 } textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {color: #a3a3a3 } textarea:-moz-placeholder, input:-moz-placeholder {color: #a3a3a3 } textarea::-moz-placeholder, input::-moz-placeholder {color: #a3a3a3 } textarea:-ms-input-placeholder, input:-ms-input-placeholder {color: #a3a3a3 } textarea {resize: none; overflow-y: scroll } ul, ol {padding-left: 0; list-style-type: none } a img, fieldset {border: 0 } a {color: #2470d8; text-decoration: none; outline: 0 } article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {display: block } audio, canvas, video {display: inline-block } audio:not([controls]) {display: none; height: 0 } [hidden] {display: none } button, input, select, textarea {font-family: inherit; font-size: 100%; margin: 0; *font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif } button, select {text-transform: none } button, html input[type="button"], input[type="reset"], input[type="submit"] {cursor: pointer; -webkit-appearance: button } button[disabled], html input[disabled] {cursor: default } input[type="checkbox"], input[type="radio"] {box-sizing: border-box; padding: 0 } input[type="search"] {box-sizing: content-box; -moz-box-sizing: content-box; -webkit-appearance: textfield; -webkit-box-sizing: content-box } input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {-webkit-appearance: none } button::-moz-focus-inner, input::-moz-focus-inner {border: 0; padding: 0 } textarea {vertical-align: top }
+
+/*头部*/
+.page-profile .header{height: 48px;line-height: 48px;padding:0 20px;background: #1878BF;color:#fff;text-align: center;}
+.page-profile .header .back{float: left;}
+.page-profile .header .back:link,.page-profile .header .back:visited, .page-profile .header .back:hover,.page-profile .header .back:active{color:#fff;text-decoration: none;}
+.page-profile .body{padding: 20px;}
+.page-profile .tip{color:green;padding:10px 0;margin:0 0 10px;border-bottom:1px solid #ccc;}
+.page-profile .body em{float:left;width:80px;text-align: right;font-style: normal;}
+.page-profile .body .txt-input{padding-left:80px;box-sizing:border-box;}
+.page-profile .body .txt-input input{width:100%;box-sizing:border-box;padding:5px;}
+.page-profile .body li{padding:5px;}
+.page-profile .body .ft{padding:20px 0 0 0;text-align: center;}
+/*文章*/
+
+/*底部*/
+.footer{text-align: center;padding:30px 0;}

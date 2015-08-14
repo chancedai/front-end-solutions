@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+    <style type="text/css">
+	@font-face{
+	    font-family: 'heart';
+	    src: url('heart-webfont.eot');
+	    src: url('heart-webfont.eot?#iefix') format('embedded-opentype'),
+	         url('heart-webfont.woff2') format('woff2'),
+	         url('heart-webfont.woff') format('woff'),
+	         url('heart-webfont.ttf') format('truetype'),
+	         url('heart-webfont.svg#heart') format('svg');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	.demo-20141224141031{font-family:heart;display: inline-block;font-size: 30px;color:red;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width：0.2px;}
+	.demo-20141224141436{font-family:heart;display: inline-block;width:50px;height:50px;font-size: 30px;line-height: 50px;text-align: center; color:red;font-style: normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width：0.2px;}
+	.demo-20141224141436:before{content:'\0048'}
+	.demo-20141224141031:hover,.demo-20141224141436:hover{font-size: 40px;cursor: pointer;}
+    </style>
+</head>
+<body>
+	<a href="http://www.qianduan.net/css3-icon-font-guide.html" target="_blank">CSS3 icon font完全指南</a>
+	<ul>
+		<li>psd完成矢量图标生成eps格式，在ai中打开复制到font lab</li>
+		<li>font lab:新建字体，保存为vfb,修改完成后生成字体ttf;双击某个字符可编辑，alt+enter可显示unicode编码</li>
+		<li>用ttf在 <a href="http://www.fontsquirrel.com/tools/webfont-generator" target="_blank">http://www.fontsquirrel.com/tools/webfont-generator</a> 转换各种字体格式，甚至连css都生成好了。</li>
+		<li>移动设备可在css中使用伪元素，如</li>
+		<li><span class="demo-20141224141031">H</span></li>
+		<li>
+			<i class="demo-20141224141436"></i>
+		</li>
+		<li>抗锯齿：-webkit-font-smoothing:antialiased;-webkit-text-stroke-width：0.2px;</li>
+		<li><a href="http://www.iconfont.cn/" target="_blank">http://www.iconfont.cn/</a></li>
+	</ul>
+
+</body>
+</html>

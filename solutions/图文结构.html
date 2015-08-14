@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>图文结构</title>
+    <style type="text/css">
+    .img-txt-a{width:300px;height:200px;position:relative;}
+    .img-txt-a img{border:0;display:block;}
+    .img-txt-a span{position:absolute;left:0;bottom:0; width:300px;height:40px;line-height:40px;text-align:center;font-size:14px;cursor:pointer;overflow:hidden;text-overflow:ellipsis;overflow: hidden;white-space:nowrap;}
+    .img-txt-a span{background:rgba(0,0,0, 0.8); filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#cc000000', EndColorStr='#cc000000');*zoom:1;} :root .img-txt-a span{filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#00000000', EndColorStr='#00000000'); }
+    .img-txt-a a:hover span{background:rgba(0,151,224, 0.8); filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#cc0097E0', EndColorStr='#cc0097E0');*zoom:1;} :root .img-txt-a a:hover span{filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#000097E0', EndColorStr='#000097E0'); }
+    .img-txt-a .img:link,.img-txt-a .img:visited{color:#fff;text-decoration:none;}
+    .img-txt-a .img:hover,.img-txt-a .img:active{color:#eee;text-decoration:none;}
+    /*加视频按钮*/
+    .img-txt-a i{position:absolute;left:50%;top:50%;width:61px;height:61px;display:block;overflow:hidden;margin:-50px 0 0 -30px;background:url(ico_play.png) no-repeat; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale, src='ico_play.png');_background:none;}
+    .img-txt-a a:hover i{background:url(ico_play_h.png) no-repeat; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale, src='ico_play_h.png');_background:none;}
+    </style>
+</head>
+<body>
+    <h2>图文</h2>
+    <div class="img-txt-a">
+        <a href="http://sina.com.cn/" class="img" title="car">
+            <img src="img1.png" width="300" height="200" alt="car">
+            <span>使命召唤 奢华改装防弹车</span>
+        </a>
+    </div>
+    <h2>图文，文字超长</h2>
+    <div class="img-txt-a">
+        <a href="http://sina.com.cn/" class="img" title="car">
+            <img src="img1.png" width="300" height="200" alt="car">
+            <span>使命召唤 奢华改装防弹车 奢华改装防弹车 奢华改装防弹车</span>
+        </a>
+    </div>
+    <h2>图文，带视频按钮</h2>
+    <div class="img-txt-a">
+        <a href="http://sina.com.cn/" class="img" title="car">
+            <img src="img1.png" width="300" height="200" alt="car">
+            <span>使命召唤 奢华改装防弹车</span>
+            <i></i>
+        </a>
+    </div>
+</body>
+</html>

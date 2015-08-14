@@ -1,0 +1,45 @@
+﻿[Item1]
+Text= 		Screen clipping
+Action= 		RM\Utilities\Screen clipping.ahk
+
+[Item2]	
+Text= 		Script2
+[Item3]		
+Text= 		Script3
+[Item4]
+Text= 		Script4
+[Item5]		
+Text= 		Script5
+[Item6]
+Text= 		etc.
+
+[Item7]
+Text= 		function Demo1
+Action=		fun Demo1
+
+[Item8]
+Text= 		function Demo2
+Action=		fun Demo2|param1|param2|param3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>添加开机启动</title>
+    <style type="text/css">
+    #demo_201403271258{text-align:center;}
+	#demo_201403271258 a{display:block;width:60px;height:30px;border-radius:5px;line-height:30px;border:1px solid #000;background:#eee;}
+	#demo_201403271258 a:link,#demo_201403271258 a:visited{color:#333;text-decoration:none;}
+	#demo_201403271258 a:hover,#demo_201403271258 a:active{color:#333;text-decoration:none;}
+	#demo_201403271258 div{width:300px;height:500px;line-height:500;margin-top:10px;border:1px solid #000;background:#eee;}
+    </style>
+</head>
+<body>
+    <div id="demo_201403271258">
+    	<a href="javascript:;" node-type="trigger">触发</a>
+    	<div node-type="layer" style="display:none;">内容层</div>
+    </div>
+    <script src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+    ;(function(){
+    	var NODEATTR = 'node-type';
+    	var getNodes = function(wrap) {
+    	    var attr = NODEATTR||'node-type';
+    	    var wrap = $('#' + wrap);
+    	    var nodes = $("[" + attr + "]", wrap);
+    	    var nodesObj = {};
+    	    nodesObj.wrap = wrap;
+    	    nodes.each(function(i) {
+    	        var item = $(this);
+    	        nodesObj[item.attr(attr)] = item;
+    	    });
+    	    return nodesObj;
+    	};
+    	var show = function(){
+    		dom.layer.show();
+    		display = true;
+    	};
+    	var hide = function(){
+    		dom.layer.hide();
+    		display = false;
+    	};
+    	var display = false;
+    	var dom = getNodes('demo_201403271258');
+    	// 打开收起
+    	dom.wrap.on('click','['+NODEATTR+'=trigger]',function(e){
+    		if(display){
+    			hide();
+    		}else{
+    			show();
+    		}
+    		e.stopPropagation();
+    	});
+    	// 全局关闭
+    	$('body').on('click',function(e){
+    		var el = $(this);
+    		if(!display){
+    			return;
+    		}
+    		// if($.contains(dom.layer,el)){
+    		// 	return;
+    		// }
+    		hide();
+    	});
+    	dom.layer.on('click',function(e){
+    		e.stopPropagation();
+    	});
+    })();
+    </script>
+</body>
+</html>

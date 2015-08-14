@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>保证inerval执行到底</title>
+    <style type="text/css">
+        #demo_201404111109{overflow:hidden;border:1px solid #ccc;width:700px;height:140px;position:relative;}
+        #demo_201404111109 span{display:block;width:50px;height:50px;background:#000;margin:10px 0;position:absolute;left:0;top:0;}
+        #demo_201404111109 .demo2{top:60px;}
+    </style>
+</head>
+<body>
+    <p><a href="http://www.cnblogs.com/jkisjk/archive/2011/06/06/wagang_anim_byStep.html" target="_blank">http://www.cnblogs.com/jkisjk/archive/2011/06/06/wagang_anim_byStep.html</a></p>
+    <div id="demo_201404111109">
+        <span class="demo1"></span>
+        <span class="demo2"></span>
+    </div>
+    <script type="text/javascript">
+        // 保证inerval执行到底
+        (function(){
+            var wrap = document.getElementById('demo_201404111109');
+            var spans = document.getElementsByTagName('span');
+            var demo1 = spans[0];
+            var demo2 = spans[1];
+            var interval = (1000 / 20); //20fps
+            // 修正后的interval
+            (function(){
+                var leftValue = 0;
+                var before = new Date();
+                setInterval(function() {
+                    now = new Date();
+                    var elapsedTime = (now.getTime() - before.getTime());
+
+                    if (elapsedTime > interval) {
+                        // 恢复在非激活状态丢失的帧
+                        leftValue += Math.floor(elapsedTime / interval);
+                    } else {
+                        leftValue++;
+                    }
+                    demo1.style.left = leftValue*10+'px';
+                    before = new Date();
+                }, interval);
+            })();
+            // 普通interval
+            (function(){
+                var leftValue = 0;
+                setInterval(function() {
+                    leftValue++;
+                    demo2.style.left = leftValue*10+'px';
+                }, interval);
+            })();
+
+        })();
+    </script>
+</body>
+</html>

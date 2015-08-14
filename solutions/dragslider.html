@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <title>滑动回弹</title>
+        <!--[if lt IE 9]>      <![endif]-->
+        <noscript></noscript>
+        <style type="text/css">
+            #wrap{position: relative;width:1000px;height:200px; margin:50px auto;overflow: hidden;  background-color: #fff;cursor: pointer !important;background-color:#333;line-height: 2.0; font-family: 'Microsoft YaHei';}
+                #barWrap{position: absolute; left: 0;bottom:0; height: 10px; width: 100%;visibility: hidden;}
+                    #barInner{position: absolute; left:0; height: 100%;  background-color: #aaa;}
+                #cont{position: absolute;left:0px;background-color: #ddd;}
+                #cont .item{width:96px;height:200px;border:1px solid #000;margin:0 1px;float:left;display:inline;}
+        </style>
+    </head>
+    <body>
+        <div id="contain">
+            <div id="wrap">
+                <div id="cont"></div>
+                <div id="barWrap">
+                    <div id="barInner"></div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+        var hasTouch = (typeof(window.ontouchstart) !== "undefined");
+        var Event = function () {
+            // "use strict";
+            this.attach = function (evtName, element, listener,data, capture) {
+                var evt         = '',
+                    useCapture  = (capture === undefined) ? true : capture,
+                    handler     = null;
+
+                if (window.addEventListener === undefined) {
+                    evt = 'on' + evtName;
+                    handler = function (evt, listener) {
+                        element.attachEvent(evt, listener);
+                        return listener;
+                    };
+                } else {
+                    evt = evtName;
+                    handler = function (evt, listener, useCapture) {
+                        element.addEventListener(evt, listener, useCapture);
+                        return listener;
+                    };
+                }
+                var extend = function(destination, source) {
+                    for (var property in source) {
+                        destination[property] = source[property];
+                    }
+                    return destination;
+                };
+                return handler.apply(element, [evt, function (ev) {
+                    var e   = ev || event,
+                        src = e.srcElement || e.target;
+                        e.data = data;
+                        e.target = src;
+
+                        /* IE8及ie8以下使用attachEvent绑定事件处理函数时，不能直接向event 对象添加数据属性。可以用属性复制的方法，包装新的event对象,但会导致e的其它方法不起作用，如e.preventDefault() 。*/
+                        if(window.addEventListener === undefined){
+                            e = extend({}, e);
+                            if (data && e) {
+                                e['data'] = data;
+                            }
+                        }
+
+                        if ( e.pageX == null && e.clientX != null ) {
+                            var doc = document.documentElement, body = document.body;
+                            e.pageX = e.clientX + (doc && doc.scrollLeft || body && body.scrollLeft || 0) - (doc && doc.clientLeft || body && body.clientLeft || 0);
+                            e.pageY = e.clientY + (doc && doc.scrollTop  || body && body.scrollTop  || 0) - (doc && doc.clientTop  || body && body.clientTop  || 0);
+                        }else{
+                            e.pageX = null;
+                            e.pageY = null;
+                        }
+
+                    listener(e, src, data);
+                }, useCapture]);
+            };
+
+            this.detach = function (evtName, element, listener, capture) {
+                var evt         = '',
+                    useCapture  = (capture === undefined) ? true : capture;
+                if (window.removeEventListener === undefined) {
+                    evt = 'on' + evtName;
+                    element.detachEvent(evt, listener);
+                } else {
+                    evt = evtName;
+                    element.removeEventListener(evt, listener, useCapture);
+                }
+            };
+
+            this.stop = function (evt) {
+                evt.cancelBubble = true;
+
+                if (evt.stopPropagation) {
+                    evt.stopPropagation();
+                }
+            };
+
+            this.prevent = function (evt) {
+                if (evt.preventDefault) {
+                    evt.preventDefault();
+                } else {
+                    evt.returnValue = false;
+                }
+            };
+        };
+        var evt = new Event();
+        /* DRAG SLIDER
+        ================================================== */
+        var trace = (function(){
+            var temp = document.createElement('div');
+            temp.style.width='300px';
+            temp.style.height='50px';
+            temp.style.overflow='auto';
+            temp.style.position='fixed';
+            temp.style.bottom='0';
+            temp.style.right='0';
+            temp.style.border='1px solid #000';
+            document.getElementsByTagName('body')[0].appendChild(temp);
+            return function(str){
+                temp.innerHTML = '<p>'+str+'</p>';
+            };
+        })();
+        var animate = (function() {
+            var win = window;
+            var requestFrame = (function() {
+                return win.requestAnimationFrame || win.webkitRequestAnimationFrame || win.mozRequestAnimationFrame || win.oRequestAnimationFrame || function(callback) {
+                    return win.setTimeout(callback, 1000 / 60);
+                };
+            })();
+            var cancelFrame = (function() {
+                return win.cancelAnimationFrame || win.webkitCancelAnimationFrame || win.mozCancelAnimationFrame || win.oCancelAnimationFrame || function(id) {
+                    win.clearTimeout(id);
+                };
+            })();
+            return function(obj,duration, start, move, stop) {
+                duration = duration || 800;
+                var startTime = new Date;
+                var go = function() {
+                    var progress = new Date() - startTime;
+                    if (progress >= duration) {
+                        stop();
+                        cancelFrame(obj.requestAnimationFrameId);
+                        return;
+                    }
+                    move(progress / duration);
+                    obj.requestAnimationFrameId = requestFrame(go);
+                };
+                start();
+                obj.requestAnimationFrameId = requestFrame(go);
+            };
+        })();
+        var animateLeft = function(elem, time, ease,left){
+            ease = ease || function(p) {
+                if ((p /= 0.5) < 1){
+                    return 1 / 2 * p * p;
+                };
+                return -1 / 2 * ((--p) * (p - 2) - 1);
+            };
+            var start = parseInt(elem.style.left.replace('px','')||0,10);
+            var gap = left - start;
+            animate(elem,time,function(){
+                // elem.style.left = elem.style.left;
+            },function(per){
+                elem.style.left = Math.round(start+gap*per) + 'px';
+            },function(){
+                elem.style.left = left+'px';
+            });
+        };
+        var animateStop = function(requestId){
+            if(typeof requestId === 'undefined'){
+                return;
+            }
+            var win = window;
+            var cancelFrame = (function() {
+                return win.cancelAnimationFrame || win.webkitCancelAnimationFrame || win.mozCancelAnimationFrame || win.oCancelAnimationFrame || function(id) {
+                    win.clearTimeout(id);
+                };
+            })();
+            cancelFrame(requestId);
+        };
+        var fireEvent = function(){};
+        var DragSlider = function() {
+                var drag = {
+                    element:        "",
+                    element_move:   "",
+                    constraint:     "",
+                    sliding:        false,
+                    pagex: {
+                        start:      0,
+                        end:        0
+                    },
+                    pagey: {
+                        start:      0,
+                        end:        0
+                    },
+                    left: {
+                        start:      0,
+                        end:        0
+                    },
+                    time: {
+                        start:      0,
+                        end:        0
+                    },
+                    touch:          false,
+                    // ease:           "easeOutExpo"
+                    ease: function(pos) {
+                        return (pos===1) ? 1 : -Math.pow(2, -10 * pos) + 1;
+                    }
+
+
+                },
+                dragevent = {
+                    down:       "mousedown",
+                    up:         "mouseup",
+                    leave:      "mouseleave",
+                    move:       "mousemove"
+                },
+                mousedrag = {
+                    down:       "mousedown",
+                    up:         "mouseup",
+                    leave:      "mouseleave",
+                    move:       "mousemove"
+                },
+                touchdrag = {
+                    down:       "touchstart",
+                    up:         "touchend",
+                    leave:      "mouseleave",
+                    move:       "touchmove"
+                },
+                dragslider      = this,
+                is_sticky       = false;
+
+                var onDragMoveHandler = null;
+
+                /* PUBLIC FUNCTIONS
+                ================================================== */
+                this.createPanel = function(drag_object, move_object, constraint, touch, sticky) {
+                    drag.element        = drag_object;
+                    drag.element_move   = move_object;
+                    //dragslider            = drag_object;
+                    if ( sticky != null && sticky != "") {
+                        is_sticky = sticky;
+                    }
+                    if ( constraint != null && constraint != "") {
+                        drag.constraint = constraint;
+                    } else {
+                        drag.constraint = false;
+                    }
+                    if ( touch) {
+                        drag.touch = touch;
+                    } else {
+                        drag.touch = false;
+                    }
+                    trace("TOUCH" + drag.touch);
+                    if (drag.touch) {
+                        dragevent = touchdrag;
+                    } else {
+                        dragevent = mousedrag;
+                    }
+
+                    makeDraggable(drag.element, drag.element_move);
+                }
+
+                this.updateConstraint = function(constraint) {
+                    trace("updateConstraint");
+                    drag.constraint = constraint;
+                }
+
+                this.cancelSlide = function(e) {
+                    evt.detach(dragevent.move,drag.element, onDragMoveHandler);
+                    return true;
+                }
+
+                /* PRIVATE FUNCTIONS
+                ================================================== */
+                function makeDraggable(drag_object, move_object) {
+                    evt.attach(dragevent.down,drag_object, onDragStart,  {
+                        element: move_object,
+                        delement: drag_object
+                    });
+                    evt.attach(dragevent.up,drag_object, onDragEnd,  {
+                        element: move_object,
+                        delement: drag_object
+                    });
+                    evt.attach(dragevent.leave,drag_object, onDragLeave,  {
+                        element: move_object,
+                        delement: drag_object
+                    });
+
+                }
+
+                function onDragLeave(e) {
+                    evt.detach(dragevent.move,e.data.delement, onDragMoveHandler);
+                    if (!drag.touch) {
+                        evt.prevent(e);
+                    }
+                    evt.stop(e);
+                    if (drag.sliding) {
+                        drag.sliding = false;
+                        dragEnd(e.data.element, e.data.delement, e);
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+
+                function onDragStart(e) {
+                    dragStart(e.data.element, e.data.delement, e);
+                    if (!drag.touch) {
+                        evt.prevent(e);
+                    }
+                    //evt.stop(e);
+                    return true;
+                }
+
+                function onDragEnd(e) {
+                    if (!drag.touch) {
+                        evt.prevent(e);
+                    }
+                    //evt.stop(e);
+                    if (drag.sliding) {
+                        drag.sliding = false;
+                        // 解除事件，并带惯性
+                        dragEnd(e.data.element, e.data.delement, e);
+                        return false;
+                    } else {
+                        // TODO 只解除事件
+                        evt.detach(dragevent.move,e.data.delement, onDragMoveHandler);
+                        return true;
+                    }
+                }
+
+                function onDragMove(e) {
+                    dragMove(e.data.element, e);
+                }
+
+                function dragStart(elem, delem, e) {
+                    if (drag.touch) {
+                        trace("TOUCH START");
+                        // elem.style['-webkit-transition-duration'] = 0;
+                        // Lib.css(elem, '-webkit-transition-duration', '0');
+                        /*drag.pagex.start = e.originalEvent.touches[0].screenX;
+                        drag.pagey.start = e.originalEvent.touches[0].screenY;*/
+                        drag.pagex.start = e.touches[0].screenX;
+                        drag.pagey.start = e.touches[0].screenY;
+                    } else {
+                        drag.pagex.start = e.pageX;
+                        drag.pagey.start = e.pageY;
+                    }
+                    drag.left.start = getLeft(elem);
+                    drag.time.start = new Date().getTime();
+                    animateStop(elem.requestAnimationFrameId);
+                    // Lib.stop(elem);
+                    onDragMoveHandler = evt.attach(dragevent.move,delem, onDragMove,  {element: elem});
+
+                }
+
+                function dragEnd(elem, delem, e) {
+                    evt.detach(dragevent.move,delem, onDragMoveHandler);
+                    dragMomentum(elem, e);
+                }
+
+                function dragMove(elem, e) {
+                    var drag_to, drag_to_y;
+                    drag.sliding = true;
+                    if (drag.touch) {
+                        trace("TOUCH MOVE");
+                        /*drag.pagex.end = e.originalEvent.touches[0].screenX;
+                        drag.pagey.end = e.originalEvent.touches[0].screenY;*/
+                        drag.pagex.end = e.touches[0].screenX;
+                        drag.pagey.end = e.touches[0].screenY;
+                    } else {
+                        drag.pagex.end = e.pageX;
+                        drag.pagey.end = e.pageY;
+                    }
+
+                    drag.left.end   = getLeft(elem);
+                    drag_to         = -(drag.pagex.start - drag.pagex.end - drag.left.start);
+
+
+                    if (Math.abs(drag.pagey.start) - Math.abs(drag.pagey.end) > 10) {
+                        trace("SCROLLING Y")
+                        trace(Math.abs(drag.pagey.start) - Math.abs(drag.pagey.end));
+                    }
+                    if (Math.abs(drag_to - drag.left.start) > 10) {
+                        elem.style.left = drag_to + 'px';
+                        // Lib.css(elem, 'left', drag_to);
+                        evt.prevent(e);
+                        evt.stop(e);
+                    }
+                }
+                // 拖拽惯性
+                function dragMomentum(elem, e) {
+                    var drag_info = {
+                            left:           drag.left.end,
+                            left_adjust:    0,
+                            change: {
+                                x:          0
+                            },
+                            time:           (new Date().getTime() - drag.time.start) * 10,
+                            time_adjust:    (new Date().getTime() - drag.time.start) * 10
+                        },
+                        multiplier = 3000;
+
+                    if (drag.touch) {
+                        multiplier = 6000;
+                    }
+
+                    drag_info.change.x = multiplier * (Math.abs(drag.pagex.end) - Math.abs(drag.pagex.start));
+
+                    drag_info.left_adjust = Math.round(drag_info.change.x / drag_info.time);
+
+                    drag_info.left = Math.min(drag_info.left + drag_info.left_adjust);
+
+                    if (drag.constraint) {
+                        if (drag_info.left > drag.constraint.left) {
+                            drag_info.left = drag.constraint.left;
+                            if (drag_info.time > 5000) {
+                                drag_info.time = 5000;
+                            }
+                        } else if (drag_info.left < drag.constraint.right) {
+                            drag_info.left = drag.constraint.right;
+                            if (drag_info.time > 5000) {
+                                drag_info.time = 5000;
+                            }
+                        }
+                    }
+
+                    fireEvent(dragslider, "DRAGUPDATE", [drag_info]);
+
+                    if (!is_sticky) {
+                        if (drag_info.time > 0) {
+                            if (drag.touch) {
+                               elem.requestAnimationFrameId = animateLeft(elem, drag_info.time, function(pos){
+                                  return Math.sqrt(1 - Math.pow((pos-1), 2));
+                               }, drag_info.left);
+                                // Lib.animate(elem, drag_info.time, "easeOutCirc", {"left": drag_info.left});
+                            } else {
+                                elem.requestAnimationFrameId = animateLeft(elem, drag_info.time, drag.ease, drag_info.left);
+                                // Lib.animate(elem, drag_info.time, drag.ease, {"left": drag_info.left});
+                            }
+                        }
+                    }
+                }
+
+                function getLeft(elem) {
+                    return parseInt(elem.style.left.replace('px','')||0,10);
+                    // return parseInt(Lib.css(elem, 'left').substring(0, Lib.css(elem, 'left').length - 2), 10);
+                }
+
+            }
+        window.onload = function() {
+            var hasTouch = (typeof(window.ontouchstart) !== "undefined");
+            var byId = function(id){
+                return document.getElementById(id);
+            };
+            /*测试数据*/
+            var insert = '';
+            for (var i = 0; i < 20; i++) {
+                insert += '<div class="item">'+i+'</div>';
+            }
+            byId('cont').innerHTML = insert;
+            cont.style.width = 20*100 + 'px';
+            var Dragslide = new DragSlider();
+            var contWidth = cont.offsetWidth;
+            var constraint = {
+                left:0,
+                right:-(contWidth-wrap.offsetWidth)
+            };
+            Dragslide.createPanel(wrap,cont , constraint, hasTouch, false);
+
+        }
+        </script>
+    </body>
+</html>

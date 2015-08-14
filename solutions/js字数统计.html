@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js字数统计</title>
+</head>
+<body>
+<pre>
+	var wordCount = function(str){
+		return str.replace(/[^\x00-\xff]/g,"**").length;
+	};
+</pre>
+<script type="text/javascript">
+
+	var ellipsis = function(string, length, ending) {
+		var postString = ending ? ending : '...';
+		var newString = string.substr(0, length) + postString;
+		return newString;
+	};
+</script>
+</body>
+</html>

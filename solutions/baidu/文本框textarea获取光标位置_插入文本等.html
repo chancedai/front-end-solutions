@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+	<h1>文本框textarea获取光标位置_插入文本等</h1>
+	<a href="https://msdn.microsoft.com/en-us/library/ie/ms535869(v=vs.85).aspx" target="_blank">selection object</a>
+	<textarea style="width:300px;height:200px;" id="demo_20150202183252">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </textarea>
+	<button id="demo_20150202183253">点击</button>
+		<script type="text/javascript">
+			var textareaUtil = (function(){
+				return {
+					// 获取光标所在位置
+					getCursorPosition:function(wrap){
+						var cursurPosition = -1;
+						var range;
+						//非IE浏览器
+						if (wrap.selectionStart) {
+							cursurPosition = wrap.selectionStart;
+						} else if(document.selection) {
+							range = document.selection.createRange();
+							range.moveStart('character', -wrap.value.length);
+							cursurPosition = range.text.length;
+						}
+						return cursurPosition;
+					},
+					// 设置光标所在位置
+					setCursorPosition:function(wrap,position){
+						var range,textRange;
+						wrap.focus();
+						if (wrap.selectionStart) {
+							// wrap.selectionStart = position;
+							wrap.setSelectionRange(position, position);
+						} else if(document.selection) {
+							range = document.selection.createRange();
+							textRange = wrap.createTextRange();
+							textRange.collapse(true);
+							textRange.moveStart('character', position);
+							// textRange.moveEnd('character', 0);
+							textRange.select();
+						}
+					},
+					// 在指定位置插入文字
+					insertText:function(){
+
+					},
+					// 获取选中的文本
+					getSelectedText:function(){
+
+					},
+					// 选中文本
+					selectText:function(wrap,start,end){
+						var textRange;
+						wrap.focus();
+						if (document.selection) {
+							textRange = wrap.createTextRange();
+							textRange.collapse(true);
+							textRange.moveStart('character', start);
+							textRange.moveEnd('character', end - start);
+							textRange.select();
+						}else{
+							wrap.setSelectionRange(start, end);
+						}
+					}
+				};
+			})();
+			var wrap = document.getElementById('demo_20150202183252');
+			var getWrapCurPos = function(){
+				var curPos = textareaUtil.getCursorPosition(wrap);
+				console.log(curPos);
+			};
+			document.getElementById('demo_20150202183253').onclick = function(){
+				textareaUtil.setCursorPosition(wrap,10);
+				getWrapCurPos();
+			};
+			textareaUtil.setCursorPosition(wrap,10);
+			getWrapCurPos();
+			wrap.onkeyup = function(){
+				getWrapCurPos();
+			};
+			wrap.onmouseup = function(){
+				getWrapCurPos();
+			};
+		</script>
+</body>
+</html>

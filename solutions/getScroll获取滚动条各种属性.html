@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+    html,body{padding:0;margin:0;background:url(http://i3.sinaimg.cn/book/2011/1220/U5024P112DT20111220100606.jpg);}
+    #demo_20140827155252{filter:alpha(opacity=80);opacity:0.8;color:#fff;font-size:50px;text-align:center;background:#000;}
+    </style>
+</head>
+<body>
+    <div id="demo_20140827155252"></div>
+    <script language="javascript">
+        (function(){
+            function getScroll() {
+                var t, l, w, h;
+                if (document.documentElement && document.documentElement.scrollTop) {
+                    t = document.documentElement.scrollTop;
+                    l = document.documentElement.scrollLeft;
+                    w = document.documentElement.scrollWidth;
+                    h = document.documentElement.scrollHeight;
+                } else if (document.body) {
+                    t = document.body.scrollTop;
+                    l = document.body.scrollLeft;
+                    w = document.body.scrollWidth;
+                    h = document.body.scrollHeight;
+                }
+                return {
+                    top: t,
+                    left: l,
+                    width: w,
+                    height: h
+                };
+            };
+            // 可如下直接获取scrolltop
+            var top = document.body.scrollTop | document.documentElement.scrollTop;
+            var wrap = document.getElementById('demo_20140827155252');
+            var scrollInfo = getScroll();
+            wrap.innerHTML = (function(){
+
+            })();
+        })();
+    </script>
+</body>
+</html>

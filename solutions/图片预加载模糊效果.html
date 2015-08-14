@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS图片预加载</title>
+    <style type="text/css">
+    body{background:#000; color:#FFFFFF;  }
+    .big-img{height: 390px; text-align:center;  }
+    ol,ul{list-style:none}
+    ul{width: 632px; height: 56px; margin:10px auto;  }
+    li{float:left;  width: 200px; height: 53px; margin-right:10px; }
+    ul li img{ cursor:pointer}
+    </style>
+</head>
+<body>
+    <div class="big-img">
+        <img id="showImg" width="500" height="375" src="http://www.newxing.com/img/800/1.jpg"></div>
+    <ul id="imgList">
+        <li>
+            <img src="http://www.newxing.com/img/120/1.gif"></li>
+        <li>
+            <img src="http://www.newxing.com/img/120/2.gif"></li>
+        <li>
+            <img src="http://www.newxing.com/img/120/3.gif"></li>
+    </ul>
+    <script type="text/javascript">
+        var imgL=document.getElementById('imgList').getElementsByTagName('img');
+        var imgURL='http://www.newxing.com/img/800/';
+        var bigImg=['1.jpg','2.jpg','3.jpg'];
+        var imgshow=new Image();
+        for (var i = 0; i < imgL.length; i++) {
+            (function(_i) {
+                imgL[_i].onclick = function() {
+                    document.getElementById('showImg').src = this.src;
+                    imgshow.src = imgURL + bigImg[_i];
+                    console.log(imgURL + bigImg[_i]);
+                    imgshow.onload = function() {
+                        // document.getElementById('showImg').src = this.src;
+                    }
+                }
+            })(i)
+        }
+    </script></body>
+</html>

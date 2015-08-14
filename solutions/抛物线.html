@@ -1,0 +1,63 @@
+<html>
+<head>
+    <script type="text/javascript" src="http://n.sinaimg.cn/news/content2014/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        var index = 0;
+        //起点和终点坐标
+        var startX = 400;
+        var startY = 400;
+        var endY = 100;
+        var distance = 0;
+        var time = 40;
+        //当前坐标
+        var x,y;
+        //x,y方向的增量
+        var addX = 100;
+        var addY = 100;
+        //定时器
+        var inter;
+        //抛物线方程系数
+        var p, a;
+
+        var p2 = function(x) {
+            return x*x;
+        }
+        var display = function() {
+            //设置内容
+            $("#ball").html("up" + index);
+            //计算移动的x值
+            x = startX - distance / time * index++;
+            //计算抛物线系数p,a
+            p = p2 ( (Math.sqrt(startY) + Math.sqrt(endY)) / startX );
+            a = Math.sqrt(endY / p);
+            //已知x，根据抛物线方程计算出y
+            y = p * p2(x - a);
+            //加上偏移量后更改坐标
+            $("#ball").css({
+                top: y + addY,
+                left: x + addX
+            });
+            //到终点时停止定时任务
+            if (index == 41) {
+                window.clearInterval(inter);
+            }
+        }
+        $(document).ready(function () {
+            //设置初始内容及坐标
+            $("#ball").html("ball");
+            $("#ball").css({
+                position: 'absolute',
+                left: startX,
+                top: startY
+            });
+            //计算起始点与终点之间x轴的平行距离，便于做x轴的平行移动
+            distance = startX;
+            //设置定时任务，每隔25毫秒移动一次
+            inter = setInterval("display();",25);
+        });
+    </script>
+</head>
+<body>
+    <div id='ball'></div>
+</body>
+</html>

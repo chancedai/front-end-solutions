@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    /*清除点击时的背景颜色*/
+    .demo-20141224150844{-webkit-tap-highlight-color:rgba(255,255,255,0);}
+	.demo-20141224150844{
+		position:relative;
+		display:inline-block;
+		margin:0;
+		border:none;
+		padding:0;
+		width:19px;
+		height:19px;
+		vertical-align:bottom;
+		-webkit-appearance:none;
+	}
+	.demo-20141224150844::before{
+		content:' ';
+		position:absolute;
+		top:0;
+		left:0;
+		width:18px;
+		height:18px;
+		background:#fff;
+		border:#ccc solid 1px ;
+		vertical-align:middle;
+	}
+
+	.demo-20141224150844:checked::after{
+		content:' ';
+		position:absolute;
+		top:2px;
+		left:7px;
+		border:#29c944 solid 1px;
+		border-left:none;
+		border-top:none;
+		width:6px;
+		height:12px;
+		-webkit-transform:rotateZ(45deg);
+		transform:rotateZ(45deg);
+	}
+    </style>
+</head>
+<body>
+		<div> <input type="checkbox" name="" id="" class="demo-20141224150843"> </div>
+		<div> 自定义checkbox边框及选中样式<input type="checkbox" name="" id="" class="demo-20141224150844"> </div>
+</body>
+</html>

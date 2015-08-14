@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+    <style type="text/css">
+	  #cont {
+	  position: relative;
+	  height: 100px;
+	  }
+	img {
+	      position: absolute;
+	      width: 100px;
+	      height: 100px;
+	      z-index: 1;
+	    }
+	img:first-child,
+	img:target {
+		right:0;
+	      z-index: 2;
+	    }
+    </style>
+</head>
+<body>
+
+	  <div id="cont">
+	      <img id="img1" src="http://i1.sinaimg.cn/dy/deco/2013/0329/logo/LOGO_1x.png">
+	      <img id="img2" src="http://www.baidu.com/img/bdlogo.png">
+	    </div>
+	    <div>
+	      <a href="#img1">one</a>
+	      <a href="#img2">two</a>
+	    </div>
+</body>
+</html>

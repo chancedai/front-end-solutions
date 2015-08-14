@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>条件编译</title>
+</head>
+<body>
+    <p>20140515更新。</p>
+    <pre lang="js">
+(function(root){
+    var node = document.getElementById('demo_20150515170602');
+    var link = 'https://msdn.microsoft.com/zh-cn/library/121hztk3(v=vs.94).aspx';
+    var html = '<a href="'+link+'" target="_blank">此浏览器不支持IE的@cc_on条件编译!</a>';
+    /*@cc_on
+    var tips = {
+        defaults:'Internet Explorer 11 之前的所有版本的 Internet Explorer 都支持条件编译。 从 Internet Explorer 11 标准模式开始，Windows 应用商店应用不支持条件编译。',
+        statement:'可通过使用 @cc_on 语句或者使用 @if 或 @set 语句来激活条件编译。 条件编译的一些典型用途包括在 JavaScript 中使用新功能、将调试支持嵌入到脚本中以及跟踪代码执行',
+        vars:'以下预定义变量可用于条件编译。 如果变量不为 true，则该变量是未定义的，并且在被访问时其行为与 NaN 相同。'
+
+    };
+    var vars = [{
+        name: '@_win32',
+        desc: '如果在 Win32 系统上运行，则为 true。'
+    }, {
+        name: '@_win16',
+        desc: '如果在 Win16 系统上运行，则为 true。'
+    }, {
+        name: '@_mac',
+        desc: '如果在 Apple Macintosh 系统上运行，则为 true。'
+    }, {
+        name: '@_alpha',
+        desc: '如果在 DEC Alpha 处理器上运行，则为 true。'
+    }, {
+        name: '@_x86',
+        desc: '如果在 Intel 处理器上运行，则为 true。'
+    }, {
+        name: '@_mc680x0',
+        desc: '如果在 Motorola 680x0 处理器上运行，则为 true。'
+    }, {
+        name: '@_PowerPC',
+        desc: '如果在 Motorola PowerPC 处理器上运行，则为 true。'
+    }, {
+        name: '@_jscript',
+        desc: '始终为 true。'
+    }, {
+        name: '@_jscript_build',
+        desc: '包含 JavaScript 脚本引擎的生成号。'
+    }, {
+        name: '@_jscript_version',
+        desc: '包含 major.minor 格式的 JavaScript 版本号。'
+    }];
+    var varsHtml = (function(){
+        var html = [];
+        for (var i = vars.length - 1; i >= 0; i--) {
+            var item = vars[i];
+            html.push('<em>'+item.name+'</em>('+eval(item.name)+'):'+item.desc+'<br />');
+        };
+        return '<p>'+html.join('')+'</p>';
+    })();
+    html = [
+        '<h4><a href="'+link+'" target="_blank">条件编译</a></h4>',
+        '<p>'+tips.defaults+'</p>',
+        '<h5>语句</h5>',
+        '<p>'+tips.statement+'</p>',
+        '<h5>变量</h5>',
+        '<p>'+tips.vars+'</p>',
+        '<p>注意：以下变量并不是window的属性，如 window["@_jscript_version"] 并不能取到值，但 @_jscript_version 可以。</p>',
+        varsHtml
+    ].join('');
+    @*/
+    node.innerHTML = html;
+
+})(window);
+    </pre>
+    <div id="demo_20150515170602"></div>
+    <script type="text/javascript">
+            (function(root){
+                var node = document.getElementById('demo_20150515170602');
+                var link = 'https://msdn.microsoft.com/zh-cn/library/121hztk3(v=vs.94).aspx';
+                var html = '<a href="'+link+'" target="_blank">此浏览器不支持IE的@cc_on条件编译!</a>';
+                /*@cc_on
+                var tips = {
+                    defaults:'Internet Explorer 11 之前的所有版本的 Internet Explorer 都支持条件编译。 从 Internet Explorer 11 标准模式开始，Windows 应用商店应用不支持条件编译。',
+                    statement:'可通过使用 @cc_on 语句或者使用 @if 或 @set 语句来激活条件编译。 条件编译的一些典型用途包括在 JavaScript 中使用新功能、将调试支持嵌入到脚本中以及跟踪代码执行',
+                    vars:'以下预定义变量可用于条件编译。 如果变量不为 true，则该变量是未定义的，并且在被访问时其行为与 NaN 相同。'
+
+                };
+                var vars = [{
+                    name: '@_win32',
+                    desc: '如果在 Win32 系统上运行，则为 true。'
+                }, {
+                    name: '@_win16',
+                    desc: '如果在 Win16 系统上运行，则为 true。'
+                }, {
+                    name: '@_mac',
+                    desc: '如果在 Apple Macintosh 系统上运行，则为 true。'
+                }, {
+                    name: '@_alpha',
+                    desc: '如果在 DEC Alpha 处理器上运行，则为 true。'
+                }, {
+                    name: '@_x86',
+                    desc: '如果在 Intel 处理器上运行，则为 true。'
+                }, {
+                    name: '@_mc680x0',
+                    desc: '如果在 Motorola 680x0 处理器上运行，则为 true。'
+                }, {
+                    name: '@_PowerPC',
+                    desc: '如果在 Motorola PowerPC 处理器上运行，则为 true。'
+                }, {
+                    name: '@_jscript',
+                    desc: '始终为 true。'
+                }, {
+                    name: '@_jscript_build',
+                    desc: '包含 JavaScript 脚本引擎的生成号。'
+                }, {
+                    name: '@_jscript_version',
+                    desc: '包含 major.minor 格式的 JavaScript 版本号。'
+                }];
+                var varsHtml = (function(){
+                    var html = [];
+                    for (var i = vars.length - 1; i >= 0; i--) {
+                        var item = vars[i];
+                        html.push('<em>'+item.name+'</em>('+eval(item.name)+'):'+item.desc+'<br />');
+                    };
+                    return '<p>'+html.join('')+'</p>';
+                })();
+                html = [
+                    '<h4><a href="'+link+'" target="_blank">条件编译</a></h4>',
+                    '<p>'+tips.defaults+'</p>',
+                    '<h5>语句</h5>',
+                    '<p>'+tips.statement+'</p>',
+                    '<h5>变量</h5>',
+                    '<p>'+tips.vars+'</p>',
+                    '<p>注意：以下变量并不是window的属性，如 window["@_jscript_version"] 并不能取到值，但 @_jscript_version 可以。</p>',
+                    varsHtml
+                ].join('');
+                @*/
+                node.innerHTML = html;
+
+            })(window);
+
+    </script>
+</body>
+</html>

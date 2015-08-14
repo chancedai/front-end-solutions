@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css3翘起效果</title>
+	<style type="text/css">
+		.item {
+			list-style-type: none;
+			margin:20px 10px;
+			padding: 0;
+			width: 300px;
+			height: 220px;
+			border: 2px solid #efefef;
+			position: relative;
+			float: left;
+			background: #ffffff; /* old browsers */
+			line-height:220px;
+			font-size:32px;
+			text-align:center;
+
+
+			-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.1) inset;
+			-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.1) inset;
+			-o-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.1) inset;
+			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.1) inset;
+
+			behavior: url(ie_css3.htc);
+		}
+
+		.item:before {
+			z-index: -2;
+			position: absolute;
+			background: transparent;
+			width: 89%;
+			height: 80%;
+			content: '';
+			left: 20px;
+			bottom:8px;
+
+			-webkit-transform: skew(-12deg) rotate(-4deg);
+			-moz-transform:skew(-12deg) rotate(-4deg);
+			-o-transform: skew(-12deg) rotate(-4deg);
+			-ms-transform: skew(-12deg) rotate(-4deg);
+
+			-webkit-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+			-moz-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+			-o-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+
+			behavior: url(ie_css3.htc);
+		}
+
+
+
+		.item:after {
+			z-index: -1;
+			position: absolute;
+			background: transparent;
+			width: 89%;
+			height: 80%;
+			content: '';
+			right:20px;
+			bottom:8px;
+
+			-webkit-transform: skew(12deg) rotate(4deg);
+			-moz-transform:skew(12deg) rotate(4deg);
+			-o-transform: skew(12deg) rotate(4deg);
+			-ms-transform: skew(12deg) rotate(4deg);
+
+			-webkit-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+			-moz-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+			-o-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+
+			behavior: url(ie_css3.htc);
+
+		}
+
+		.item img{
+			width:290px;
+			height:210px;
+			padding:5px;
+		}
+	</style>
+</head>
+<body>
+	<div class="item"><img src="http://i0.sinaimg.cn/dy/slidenews/61_img/2014_33/40602_1069756_614880.jpg" /></div>
+</body>
+</html>

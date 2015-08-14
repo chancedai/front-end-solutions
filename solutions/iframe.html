@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script language="javascript" type="text/javascript">
+    (function(exports){
+    	try {
+    		document.domain = "sina.com.cn";
+    	} catch (e) {}
+    	var frameElement = exports.frameElement;
+    	var minHeight = 100;
+    	var minWidth = 100;
+    	var setHeight = function(){
+	    	var body = document.body;
+	    	if(!document.body){
+	    		return;
+	    	}
+    		frameElement.height = body.scrollHeight < minHeight ? minHeight : body.scrollHeight;
+    		frameElement.width = body.scrollWidth < minWidth ? minWidth : body.scrollWidth;
+    	};
+    	frameElement.height = minHeight;
+    	frameElement.height = minWidth;
+    	var timerId = setInterval(setHeight, 50);
+    	exports.onload = function() {
+    		clearInterval(timerId);
+    		setHeight();
+    	}
+    })(window);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

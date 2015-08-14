@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>截字</title>
+</head>
+<body>
+    <pre lang="js">
+    	var strSplit = (function(){
+            var byteLen = function(str){
+                if(typeof str == "undefined"){
+                    return 0;
+                }
+                var aMatch = str.match(/[^\x00-\x80]/g);
+                return (str.length + (!aMatch ? 0 : aMatch.length));
+            };
+            return function(str,len){
+                var s = str.replace(/\*/g, " ").replace(/[^\x00-\xff]/g, "**");
+                str = str.slice(0, s.slice(0, len).replace(/\*\*/g, " ").replace(/\*/g, "").length);
+                if(byteLen(str) > len) str = str.slice(0,str.length -1);
+                return str;
+            };
+        })();
+        var strSplit2 = function (s, n) {
+            var ELLIPSIS = '...';
+            var s2 = s.slice(0, n),
+                i = s2.replace(/[^\x00-\xff]/g, "**").length,
+                j = s.length,
+                k = s2.length;
+            if(i<n){
+                return s2;
+            }else if(i==n){
+                if(n==j||k==j){
+                    return s2;
+                }else{
+                    return s.slice(0,n-2)+ELLIPSIS;
+                }
+            }
+            i -= s2.length;
+            switch (i) {
+                case 0: return s2;
+                case n:
+                    var s4;
+                    if(n==j){
+                        s4 = s.slice(0, (n>>1)-1);
+                        return s4+ELLIPSIS;
+                    }else{
+                        s4 = s.slice(0, n>>1);
+                        return s4;
+                    }
+                default:
+                    var k = n - i,
+                        s3 = s.slice(k, n),
+                        j = s3.replace(/[\x00-\xff]/g, "").length;
+                    return j ? s.slice(0, k) + arguments.callee(s3, j) : s.slice(0, k);
+            }
+        };
+    </pre>
+
+    <script type="text/javascript">
+        // 带html标签的截字
+        // cmnt.truncate = (function() {
+        //     var trailing_whitespace = false;
+
+        //     var htmlEntities = function(str) {
+        //         return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        //     };
+
+        //     var recursivelyTruncate = function(node, maxLength) {
+        //         return (node.nodeType == 3) ? truncateText(node, maxLength) : truncateNode(node, maxLength);
+        //     };
+
+        //     var truncateNode = function(node, maxLength) {
+        //         var new_node = node.cloneNode(true);
+        //         new_node.setAttribute('comment-type', '');
+        //         if (new_node.innerHTML) {
+        //             new_node.innerHTML = '';
+        //         }
+        //         var fragment = document.createDocumentFragment();
+        //         fragment.innerHTML = '';
+        //         var truncatedChild;
+        //         var childNodes = node.childNodes;
+
+        //         for (var i = 0, len = childNodes.length; i < len; i++) {
+        //             var item = childNodes[i];
+        //             var remaining_length = maxLength - getText(new_node).length;
+        //             if (remaining_length === 0) {
+        //                 return new_node;
+        //             }
+        //             truncatedChild = recursivelyTruncate(item, remaining_length);
+        //             if (truncatedChild) {
+        //                 if (typeof truncatedChild == 'string') {
+        //                     truncatedChild = document.createTextNode(truncatedChild);
+        //                 }
+        //                 new_node.appendChild(truncatedChild);
+        //             }
+        //         }
+        //         return new_node;
+        //     };
+
+        //     var truncateText = function(node, maxLength) {
+        //         var text = squeeze(node.data);
+        //         if (trailing_whitespace) {
+        //             text = text.replace(/^ /, '');
+        //         }
+        //         trailing_whitespace = !!text.match(/ $/);
+        //         text = text.slice(0, maxLength);
+        //         return htmlEntities(text);
+        //     };
+
+        //     var getText = function(e) {
+        //         if (e.innerText) {
+        //             return e.innerText;
+        //         }
+        //         var str = '';
+        //         //如果传入的是元素，获取它的子元素,否则，当它是一个数组
+        //         e = e.childNodes || e;
+        //         for (var i = 0; i < e.length; i++) {
+        //             //如果是text就获取它的文本，否则，遍历它的子元素
+        //             str += e[i].nodeType != 1 ? e[i].nodeValue : getText(e[i].childNodes);
+        //         }
+        //         return str;
+        //     };
+        //     var trim = function(str) {
+        //         return str.replace(/(^[\s\u3000]*)|([\s\u3000]*$)/g, '');
+        //     };
+        //     var appendLnk = function(node, txt, clz, type) {
+        //         var lnk = document.createElement('a');
+        //         lnk.href = 'javascript:;';
+        //         lnk.className = clz;
+        //         lnk.setAttribute('action-type', 'txt-toggle');
+        //         lnk.setAttribute('action-data', 'type=' + type);
+        //         lnk.innerHTML = txt;
+        //         node.appendChild(lnk);
+        //     };
+
+        //     var squeeze = function(string) {
+        //         return string.replace(/\s+/g, ' ');
+        //     };
+        //     return {
+        //         handle: function(wrap, maxLenth) {
+        //             var contentLength = trim(squeeze(getText(wrap))).length;
+        //             if (contentLength <= maxLenth || wrap.__truncated__) {
+        //                 return;
+        //             }
+        //             wrap.__truncated__ = true;
+        //             // 实际最大长度
+        //             var actualMaxLength = maxLenth - 5;
+        //             actualMaxLength = Math.max(actualMaxLength, 0);
+        //             var truncated_node = recursivelyTruncate(wrap, actualMaxLength);
+        //             wrap.style.display = 'none';
+        //             $.insertAfter(truncated_node, wrap);
+        //             appendLnk(wrap, '[收起]&uarr;', 'txt-less txt-toggle', 'less');
+        //             appendLnk(truncated_node, '[展开]&darr;', 'txt-more txt-toggle', 'more');
+        //         },
+        //         toggle: function(trigger, type) {
+        //             var txts = $.byClass('txt', trigger.parentNode.parentNode);
+        //             if (type == 'more') {
+        //                 txts[1].style.display = 'none';
+        //                 txts[0].style.display = '';
+        //             } else {
+        //                 txts[1].style.display = '';
+        //                 txts[0].style.display = 'none';
+        //             }
+
+        //         }
+        //     };
+        // })();
+    </script>
+</body>
+</html>

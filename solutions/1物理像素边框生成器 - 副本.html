@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>二维码生成器</title>
+    <script type="text/javascript" src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <style>
+        #demo_20150513174201{width:300px;margin:0 auto;}
+        #demo_20150513174201 .code{width:100%;height:100px;resize:vertical;}
+        #demo_20150513174201 .normal{border-style: solid;}
+        #demo_20150513174201 .normal,#demo_20150513174201 .preview{width:300px;height:100px;margin:20px 0;background: #ddd;}
+    </style>
+    <div id="demo_20150513174201">
+        <div class="input">
+            <p><label>Css Class:<input type="text" node-type="clz" value=".border-1px"></label></p>
+            <p><label>Color:<input type="text" node-type="color" value="black"></label></p>
+            <p>
+                <label>Top:<input type="checkbox" node-type="top" checked></label>
+                <label>Right:<input type="checkbox" node-type="right" checked></label>
+                <label>Bottom:<input type="checkbox" node-type="bottom" checked></label>
+                <label>Left:<input type="checkbox" node-type="left" checked></label>
+                </p>
+        </div>
+        <canvas node-type="canvas" style=""></canvas>
+        <div node-type="normal" class="normal"></div>
+        <div node-type="preview" class="preview">
+        </div>
+        <textarea node-type="code" class="code"></textarea>
+    </div>
+    <script type="text/javascript">
+        (function(){
+            var appendStyle = function(css,id) {
+                var head = document.getElementsByTagName('head')[0];
+                var old = document.getElementById(id);
+                if(old){
+                    head.removeChild(old);
+                }
+                var style = document.createElement('style');
+                style.type = 'text/css';
+                style.id = id;
+                try {
+                    style.appendChild(document.createTextNode(css));
+                } catch (e) {
+                    if (style.styleSheet) {
+                        try {
+                            oldCss = style.styleSheet.cssText;
+                        } catch( e) {
+                            oldCss = '';
+                        }
+                        style.styleSheet.cssText = oldCss + css;
+                    } else {}
+                }
+                head.appendChild(style);
+            };
+            var getNodes = function(wrap,attr) {
+                attr = attr||'node-type';
+                wrap = $(wrap);
+                var nodes = $("[" + attr + "]", wrap);
+                var nodesObj = {};
+                nodesObj.wrap = wrap;
+                nodes.each(function(i) {
+                    var item = $(this);
+                    nodesObj[item.attr(attr)] = item;
+                });
+                return nodesObj;
+            };
+            var id = '#demo_20150513174201';
+            var dom = getNodes(id);
+            var canvas = dom.canvas[0];
+            var preview = dom.preview[0];
+
+            dom.wrap.on('change keyup', function(){
+                onChange(dom.color.val());
+            });
+            function onChange(color){
+                // css 类
+                var clz = dom.clz.val()||'.border-1px';
+                // 边框 上 右 下 左
+                var borderWidth = [
+                    dom.top[0].checked?'1px':'0',
+                    dom.right[0].checked?'1px':'0',
+                    dom.bottom[0].checked?'1px':'0',
+                    dom.left[0].checked?'1px':'0'
+                ].join(' ');
+                if (canvas.getContext) {
+                    // canvas.width = '1';
+                    // canvas.height = '4';
+                    canvas.width = '1';
+                    canvas.height = '4';
+                    var ctx = canvas.getContext('2d');
+                    ctx.fillStyle = color;
+                    ctx.fillRect(0, 0, 1, 1);
+                    ctx.fillRect(0, 3, 1, 4);
+                    var src = canvas.toDataURL('image/png');
+                    var previewCss = ' {\r\n    border-width:'+borderWidth+';\r\n    border-image:url("' + src + '") 2 0 stretch;\r\n}';
+                    dom.code[0].value = clz+previewCss;
+                    var normalCss = id+' .normal {\r\n    border-width:'+borderWidth+';\r\n    border-color:'+color+'\r\n}';
+                    appendStyle(normalCss+id+' .preview'+previewCss,id);
+                }
+            }
+            onChange('black');
+        })();
+    </script>
+</body>
+</html>

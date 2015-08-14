@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+	<div id="demo_20141105162924">
+	</div>
+	<div id="demo_20141105164658">
+	</div>
+	<div><a href="javascript:;" onclick="play('demo_20141105162924','99555836');">播放</a><a href="javascript:;" onclick="play('demo_20141105164658','99555836');">播放</a></div>
+	<script src="http://video.sina.com.cn/js/sinaFlashLoad.js" charset="utf-8" type="text/javascript"></script>
+	<script type="text/javascript">
+		var play = function(wid,vid){
+			var sinaBokePlayerConfig_o = {
+				container: wid, //Div容器的id
+				playerWidth: 544, //宽
+				playerHeight: 436, //高
+				autoLoad: 1, //自动加载
+				autoPlay: 1, //自动播放
+				pid: 28,
+				as: 0, //广告
+				tjAD: 0, //显示擎天柱广告
+				tj: 1, //片尾推荐
+				continuePlayer: 1, //连续播放
+				casualPlay: 1, //任意拖动视频
+				head: 0, //播放片头动画
+				logo: 0 //显示logo
+			};
+			var player = sinaVideoPlayer(sinaBokePlayerConfig_o);
+	        player.on('flashInitCompleted',function(){
+	          player.playVideo(vid,'0',0);
+	        });
+	        player.on('playCompleted',function(){
+	          player.playVideo(vid,'0',0);
+	        });
+	        player.init();
+		};
+	</script>
+
+</body>
+</html>

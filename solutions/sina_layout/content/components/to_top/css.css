@@ -1,0 +1,4 @@
+﻿
+html,* html body{background-attachment:fixed}
+.side-btns-top-btn{left: 50%; margin-left:505px;position: fixed;bottom: 60px; _position:absolute;_top:expression(documentElement.scrollTop + documentElement.clientHeight-120);z-index:100;visibility: hidden;height: 50px; width: 50px;background:url(http://i0.sinaimg.cn/dy/deco/2012/1227/news_zxh_content_btn_bg.png) no-repeat 0 -110px;  filter:Alpha(Opacity=35); opacity:.35; overflow:hidden;text-indent: -999px;}
+.side-btns-top-btn:hover {filter:Alpha(Opacity=50); opacity:.5;}

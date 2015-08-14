@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>WebP</title>
+    <link rel="stylesheet" type="text/css" href="node_modules/qunitjs/qunit/qunit.css">
+    <style type="text/css">
+	#qunit-tests .pass .test-name{word-wrap:break-word;word-break:break-all;}
+    </style>
+</head>
+<body>
+	<div id="demo_20150730114631">
+		<img src="http://k3.sinaimg.cn/i3/home/2015/0730/U12814P30DT20150730083433.jpg_.webp" alt="">
+	</div>
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+	<script type="text/javascript" src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="node_modules/qunitjs/qunit/qunit.js"></script>
+	<script type="text/javascript">
+		// var getNodes = function(wrap,attr) {attr = attr||'node-type'; wrap = $(wrap); var nodes = $("[" + attr + "]", wrap); var nodesObj = {}; nodesObj.wrap = wrap; nodes.each(function(i) {var item = $(this); nodesObj[item.attr(attr)] = item; }); return nodesObj; };
+
+		var srcs = [
+			'http://i1.sinaimg.cn/home/2015/0730/U8567P30DT20150730053504.jpg',
+			'http://i2.sinaimg.cn/home/2015/0730/U12814P30DT20150730082901.jpg',
+			'http://i3.sinaimg.cn/home/2015/0730/U12814P30DT20150730083433.jpg',
+			'http://www.sinaimg.cn/home/2015/0730/U12814P30DT20150730083433.jpg'
+		];
+		var hasSupportWebPByLoadImg = function(fn){
+			var img = new Image();
+			var hasSupport = false;
+			img.onload = img.onerror= function() {
+			  fn(img.height === 1);
+			};
+			// 1x1 px
+			img.src = 'http://k1.sinaimg.cn/i1/home/main/blk/d.gif_.webp';
+		};
+
+		var hasSupportWebPByLoadDataUrl = function(fn){
+			var img = new Image();
+			img.onload = img.onerror = function() {
+			  fn(img.height === 2);
+			};
+			// 2x2 px
+			img.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+		};
+
+		var hasSupportWebPByCanvas = function(){
+			var mime = 'image/webp';
+			var canvas = document.createElement('canvas');
+			if(canvas && canvas.toDataURL){
+				canvas.width = canvas.height = 1;
+			    var uri = canvas.toDataURL(mime);
+			    return (uri.match(mime) !== null);
+			}else{
+				return false;
+			}
+		};
+
+		var getWebP = (function(){
+			var supportWebP = (function(){
+				var mime = 'image/webp';
+				var canvas = document.createElement('canvas');
+				if(canvas && canvas.toDataURL){
+					canvas.width = canvas.height = 1;
+				    var uri = canvas.toDataURL(mime);
+				    return (uri.match(mime) !== null);
+				}else{
+					return false;
+				}
+			})();
+
+			if(supportWebP){
+				return function(src){
+					// http://i1.sinaimg.cn/home/main/blk/d.gif >> http://k1.sinaimg.cn/i1/home/main/blk/d.gif_.webp
+					// in >> kn
+					// nn >> nn
+					var hasWebP = false;
+					if(!/_\.webp$/i.test(src)){
+						var reg = /^http:\/\/(\w{1})(\d{1})\.sinaimg\.cn/i;
+						src = src.replace(reg, function(m, p1, p2) {
+							console.log(m,p1,p2);
+							hasWebP = true;
+						  	return 'http://k'+ p2 +'.sinaimg.cn/'+p1+p2;
+						});
+						if(hasWebP){
+							src += '_.webp';
+						}
+					}
+					return src;
+				};
+			}else{
+				return function(src){
+					return src;
+				};
+			}
+		})();
+
+		// TEST
+		// 一、判断
+
+		QUnit.module( "三种方法判断是否支持webP是否一致" );
+		QUnit.test('', function( assert ) {
+		  var done = assert.async();
+		  var msg = '通过加载WebP格式图片判断，异步;通过加载WebP格式的 Data URL 图片判断，异步;通过canvas来判断，同步';
+		  hasSupportWebPByLoadImg(function(hasSupport){
+		  	hasSupportWebPByLoadDataUrl(function(hasSupport2){
+		  		var hasSupport3 = hasSupportWebPByCanvas()
+		  		assert.ok((hasSupport===hasSupport2&&hasSupport2===hasSupport3),msg+'('+hasSupport+';'+hasSupport2+';'+hasSupport3+')');
+		  	  	done();
+		  	});
+		  });
+		});
+
+
+		// 二、sina getWebP
+		QUnit.module("获取webP图片");
+		for (var i = 0, len = srcs.length; i < len; i++) {
+		  var src = srcs[i];
+		  src = getWebP(src);
+		  (function(src) {
+		    var img = new Image();
+		    QUnit.test(src, function(assert) {
+		      var done = assert.async();
+		      img.onload = img.onerror = function() {
+		        var result = (img.height > 0);
+		        assert.equal(result, true,src);
+		        done();
+		      };
+		      img.src = src;
+		    });
+		  })(src);
+		}
+
+
+
+function c(a) {
+  var b,
+    c = new Image;
+    c.onload = c.onerror = function() {
+    b || (b = !0, a(2 === c.width && 2 === c.height))
+  },
+  setTimeout(function() {
+    b || (b = !0, a(!1))
+  }, 16),
+  c.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA"
+}
+	</script>
+</body>
+</html>

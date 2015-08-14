@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery版ijax</title>
+</head>
+<body>
+    <div id="demo_201403311336">
+    </div>
+    <script src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+    var obj = {};;
+    $(obj).on('myEvent:1', function (event, message1, message2) {
+      console.log(1,message1 + ' ' + message2);
+    });
+    $(obj).on('myEvent:2', function (event, message1, message2) {
+          console.log(2,message1 + ' ' + message2);
+        });
+    $(obj).trigger('myEvent:1', ['Hello','World!']);
+    </script>
+</body>
+</html>

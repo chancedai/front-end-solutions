@@ -1,0 +1,33 @@
+{
+  "name": "test",
+  "dependencies": {
+    "bootstrap-sass": "~3.3.5",
+    "modernizr": "~2.8.3"
+  },
+  "overrides": {
+    "bootstrap-sass": {
+      "main": [
+        "assets/stylesheets/_bootstrap.scss",
+        "assets/fonts/bootstrap/*",
+        "assets/javascripts/bootstrap.js"
+      ]
+    }
+  },
+  "version": "1.0.0",
+  "authors": [
+    "chancedai <340433246@qq.com>"
+  ],
+  "description": "yeoman test",
+  "main": "app/scripts/main.js",
+  "keywords": [
+    "yeoman"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

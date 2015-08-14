@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>数字千分位</title>
+</head>
+<body>
+    <pre lang="js">
+    	var numSplit = function(num){
+            num = num + "";
+            var re = /(-?\d+)(\d{3})/
+            while (re.test(num)) {
+                num = num.replace(re, "$1,$2")
+            }
+            return num;
+        };
+    </pre>
+</body>
+</html>

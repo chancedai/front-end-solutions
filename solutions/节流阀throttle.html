@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>节流阀throttle</title>
+	<style type="text/css">
+        #demo_201401031522{width:1000px;margin:0 auto;}
+        #demo_201401031522 a{float:left;display:inline;width:50px;height:50px;margin:10px;background:#ccc;border-radius:25px;}
+        #demo_201401031522 span{display:inline-block;margin:30px;padding:10px;background:#000;color:#fff;cursor:pointer;}
+	</style>
+
+</head>
+<body>
+    <div class="demo">
+        <div id="demo_201401031522">
+            <p><span>开始崩溃</span><span>节流</span><span>排队</span></p>
+        </div>
+        <script type="text/javascript">
+        ;(function(){
+            var throttle = function(method, context,interval) {
+                clearTimeout(method.__tId__);
+                method.__tId__ = setTimeout(function() {
+                    method.call(context);
+                }, interval||100);
+            };
+            var thrunk = function(items, process, context, callback) {
+                var todo = [];
+                var timeId;
+                var processer = {};
+                var start = function() {
+                        todo = items.concat();
+                        if(todo.length > 0) {
+                            (function() {
+                                var start = +new Date();
+                                do {
+                                    var item = todo.shift();
+                                    process.call(context, item);
+                                } while (todo.length > 0 && (+new Date() - start < 50));
+                                if(todo.length > 0) {
+                                    timeId = setTimeout(arguments.callee, 25);
+                                } else {
+                                    callback && callback.call(context, items);
+                                }
+                            })();
+                        } else {
+                            callback && callback.call(context, items);
+                        }
+                    };
+                processer.stop = function() {
+                    if(timeId) {
+                        clearTimeout(timeId);
+                        todo = [];
+                    }
+                };
+                processer.start = start;
+                return processer;
+            };
+            var str = '<a href="javascript:;"></a>';
+            var wrap = document.getElementById('demo_201401031522');
+            var triggers = wrap.getElementsByTagName('span');
+            var obj = {
+                append:function(){
+                    var item = document.createElement('p');
+                    item.innerHTML = str;
+                    wrap.appendChild(item);
+                }
+            };
+            triggers[0].onclick = function(){
+                for (var i = 0, len = 9e3; i < len; i++) {
+                    obj.append();
+                }
+
+            };
+            triggers[1].onclick = function(){
+                for (var i = 0, len = 9e3; i < len; i++) {
+                    throttle(obj.append,obj,20);
+                }
+            };
+            triggers[2].onclick = function(){
+                var arr = [];
+                arr.length = 9e3;
+                var Thrunk1 = thrunk(arr,obj.append,obj,function(items){
+                    // alert('排队完成');
+                });
+                Thrunk1.start();
+            };
+        })();
+        </script>
+    </div>
+</body>
+</html>

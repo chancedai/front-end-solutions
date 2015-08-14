@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正计时</title>
+</head>
+<body>
+    <h2>nginx.conf</h2>
+    <pre>
+        http {
+          server {
+            #1.侦听80端口
+            listen  80;
+            location / {
+                # 2. 默认主页目录在nginx安装目录的html子目录。
+                root   html;
+                index  index.html index.htm;
+                # 3. 没有索引页时，罗列文件和子目录
+                autoindex on;
+                autoindex_exact_size on;
+                autoindex_localtime on;
+            }
+            # 4.指定虚拟目录
+            location /tshirt {
+            alias D:\programs\Apache2\htdocs\tshirt;
+            index index.html index.htm;
+            }
+          }
+          # 5.虚拟主机www.emb.info配置
+          server {
+            listen          80;
+            server_name     www.emb.info;
+            access_log emb.info/logs/access.log;
+            location / {
+              index index.html;
+              root  emb.info/htdocs;
+            }
+          }
+        }
+    </pre>
+    <h2>命令(在安装目录下)</h2>
+    <ul>
+        <li>启动start nginx</li>
+        <li>停止nginx -s stop</li>
+        <li>重新载入nginx -s reload</li>
+    </ul>
+
+</body>
+</html>

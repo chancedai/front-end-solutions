@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+	<h1>数组去重</h1>
+	<pre>
+
+	</pre>
+	<script type="text/javascript">
+		(function(){
+			var indexOf = function(ele, arr) {
+				if (arr.indexOf) {
+					return arr.indexOf(ele);
+				}
+				for (var i = 0, len = arr.length; i < len; i++) {
+					var item = arr[i];
+					if(item === ele){
+						return i;
+					}
+				}
+				return -1;
+			};
+			var unique = function(arr){
+				var nArr = [];
+				for (var i = 0, len = arr.length; i < len; i++) {
+					var item = arr[i];
+					if(indexOf(item,nArr)===-1){
+						nArr.push(item);
+					}
+				}
+				return nArr;
+			};
+			var arr1 = [1,1,2,2,3,4,4,4,4,5];
+			console.log(unique(arr1));
+		})();
+	</script>
+</body>
+</html>

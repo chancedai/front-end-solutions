@@ -1,0 +1,15 @@
+a:hover{color:#f00;text-decoration:underline;}
+a:visited{color:#323232;text-decoration:none;}
+a{color:#323232;text-decoration:none;}
+body{margin:0;}
+html,body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,th,img{margin:0;padding:0;border:0;}
+img{border:0;}
+select,input{vertical-align:middle;font-size:12px;}
+textarea {resize: none;}
+ul,lo{list-style:none;}
+.clearfix:after{content:'.';display:block;height:0;clear:both;visibility: hidden;}
+.clearfix{*zoom:1;}
+.clearit{clear:both;font-size:0;line-height:0;height:0;}
+
+.main-cont{width:1000px;margin:0 auto;border:1px dashed #000;}
+.main-extra{font:12px/20px "Microsoft Yahei","Î¢ÈíÑÅºÚ","SimSun","ËÎÌå","Arial Narrow",serif;position: fixed;left:0;bottom:0;width:100%;height:200px;background: #ccc;}

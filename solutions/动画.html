@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画</title>
+	<style type="text/css">
+	.demo-201404061558 li{position:relative;height:100px;min-height:100px;}
+	.demo-201404061558 .item{position:absolute;top:30px;left:0;width:60px;border-radius:30px; line-height:60px; height:60px;background:#ddd;color:#000;text-align:center;cursor:pointer;}
+	</style>
+</head>
+<body>
+	<ol class="demo-201404061558">
+		<li>
+			<div id="dmoe_201404061534" class="item">Click</div>
+			<p>丢帧保时动画</p>
+			<script>
+			// 动画间隔默认为13ms
+			(function(){
+				var timerId, startTime, frameTime = 13,
+					dur = 0.2e3,node = document.getElementById('dmoe_201404061534'); 
+				function animate() {
+					var per = Math.min(1, (new Date() - startTime) / dur);    
+					if (per === 1) {        
+						clearTimeout(timerId);    
+					} else {
+						node.style.left = Math.round(500 * per) + 'px';    
+					}
+				} 
+				function start() {    
+					startTime = new Date();    
+					timerId = setInterval(function(){
+						animate();
+					}, frameTime);
+				}
+				node.onclick = function(){
+					start();
+				};
+			})();
+			</script>
+		</li>
+		<li>
+			<div id="dmoe_201404061554" class="item">Click</div>
+			<p>加入算子，如bounceOut</p>
+			<script>
+			// 动画间隔默认为13ms
+			(function(){
+				var timerId, startTime, frameTime = 13,
+					dur = 2e3,node = document.getElementById('dmoe_201404061554'),easeType;
+				var Easing = {
+					// easeNone（匀速）
+			       easeNone: function(p) {
+			           return p;
+			       },
+			       // easeIn（加速）
+			       easeIn: function(p) {
+			           return p * p;
+			       },
+			       // easeOut（减速）
+			       easeOut: function(p) {
+			           return p * (2 - p);
+			       },
+			       // easeBoth（加速开始减速结束）
+			       easeBoth: function(p) {
+			           if ((p /= 0.5) < 1) return 1 / 2 * p * p;
+			           return -1 / 2 * ((--p) * (p - 2) - 1);
+			       },
+			       // easeInStrong（加速·强化）
+			       easeInStrong: function(p) {
+			           return p * p * p * p;
+			       },
+			       // easeOutStrong（减速·强化）
+			       easeOutStrong: function(p) {
+			           return -((p -= 1) * p * p * p - 1);
+			       },
+			       // easeBothStrong（加速开始减速结束·强化）
+			       easeBothStrong: function(p) {
+			           if ((p /= 0.5) < 1) return 1 / 2 * p * p * p * p;
+			           return -1 / 2 * ((p -= 2) * p * p * p - 2);
+			       },
+			       // elasticIn（弹性开始）
+			       elasticIn: function(p) {
+			           if (p == 0) return 0;
+			           if (p == 1) return 1;
+			           var x = 0.3,
+			               //y = 1,
+			               z = x / 4;
+			           return -(Math.pow(2, 10 * (p -= 1)) * Math.sin((p - z) * (2 * Math.PI) / x));
+			       },
+			       // elasticOut（弹性结束）
+			       elasticOut: function(p) {
+			           if (p == 0) return 0;
+			           if (p == 1) return 1;
+			           var x = 0.3,
+			               //y = 1,
+			               z = x / 4;
+			           return Math.pow(2, -10 * p) * Math.sin((p - z) * (2 * Math.PI) / x) + 1;
+			       },
+			       // elasticBoth（弹性开始弹性结束）
+			       elasticBoth: function(p) {
+			           if (p == 0) return 0;
+			           if ((p /= 0.5) == 2) return 1;
+			           var x = 0.3 * 1.5,
+			               //y = 1,
+			               z = x / 4;
+			           if (p < 1) return -0.5 * (Math.pow(2, 10 * (p -= 1)) * Math.sin((p - z) * (2 * Math.PI) / x));
+			           return Math.pow(2, -10 * (p -= 1)) * Math.sin((p - z) * (2 * Math.PI) / x) * 0.5 + 1;
+			       },
+			       // backIn（退后开始）
+			       backIn: function(p) {
+			           var s = 1.70158;
+			           return p * p * ((s + 1) * p - s);
+			       },
+			       // backOut（越界结束）
+			       backOut: function(p) {
+			           var s = 1.70158;
+			           return ((p = p - 1) * p * ((s + 1) * p + s) + 1);
+			       },
+			       // backBoth（退后开始越界结束）
+			       backBoth: function(p) {
+			           var s = 1.70158;
+			           if ((p /= 0.5) < 1) return 1 / 2 * (p * p * (((s *= (1.525)) + 1) * p - s));
+			           return 1 / 2 * ((p -= 2) * p * (((s *= (1.525)) + 1) * p + s) + 2);
+			       },
+			       // bounceIn（跳动开始）
+			       bounceIn: function(p) {
+			           return 1 - Easing.bounceOut(1 - p);
+			       },
+			       // bounceOut（跳动结束）
+			       bounceOut: function(p) {
+			           if (p < (1 / 2.75)) {
+			               return (7.5625 * p * p);
+			           } else if (p < (2 / 2.75)) {
+			               return (7.5625 * (p -= (1.5 / 2.75)) * p + 0.75);
+			           } else if (p < (2.5 / 2.75)) {
+			               return (7.5625 * (p -= (2.25 / 2.75)) * p + 0.9375);
+			           }
+			           return (7.5625 * (p -= (2.625 / 2.75)) * p + 0.984375);
+			       },
+			       // bounceBoth（跳动开始跳动结束）
+			       bounceBoth: function(p) {
+			           if (p < 0.5) return Easing.bounceIn(p * 2) * 0.5;
+			           return Easing.bounceOut(p * 2 - 1) * 0.5 + 0.5;
+			       },
+			       // 更多
+			       easeInQuad: function(pos) {
+			         return Math.pow(pos, 2);
+			       },
+
+			       easeOutQuad: function(pos) {
+			         return -(Math.pow((pos-1), 2) -1);
+			       },
+
+			       easeInOutQuad: function(pos) {
+			         if ((pos/=0.5) < 1) return 0.5*Math.pow(pos,2);
+			         return -0.5 * ((pos-=2)*pos - 2);
+			       },
+
+			       easeInCubic: function(pos) {
+			         return Math.pow(pos, 3);
+			       },
+
+			       easeOutCubic: function(pos) {
+			         return (Math.pow((pos-1), 3) +1);
+			       },
+
+			       easeInOutCubic: function(pos) {
+			         if ((pos/=0.5) < 1) return 0.5*Math.pow(pos,3);
+			         return 0.5 * (Math.pow((pos-2),3) + 2);
+			       },
+
+			       easeInQuart: function(pos) {
+			         return Math.pow(pos, 4);
+			       },
+
+			       easeOutQuart: function(pos) {
+			         return -(Math.pow((pos-1), 4) -1);
+			       },
+
+			       easeInOutQuart: function(pos) {
+			         if ((pos/=0.5) < 1) return 0.5*Math.pow(pos,4);
+			         return -0.5 * ((pos-=2)*Math.pow(pos,3) - 2);
+			       },
+
+			       easeInQuint: function(pos) {
+			         return Math.pow(pos, 5);
+			       },
+
+			       easeOutQuint: function(pos) {
+			         return (Math.pow((pos-1), 5) +1);
+			       },
+
+			       easeInOutQuint: function(pos) {
+			         if ((pos/=0.5) < 1) return 0.5*Math.pow(pos,5);
+			         return 0.5 * (Math.pow((pos-2),5) + 2);
+			       },
+
+			       easeInSine: function(pos) {
+			         return -Math.cos(pos * (Math.PI/2)) + 1;
+			       },
+
+			       easeOutSine: function(pos) {
+			         return Math.sin(pos * (Math.PI/2));
+			       },
+
+			       easeInOutSine: function(pos) {
+			         return (-0.5 * (Math.cos(Math.PI*pos) -1));
+			       },
+
+			       easeInExpo: function(pos) {
+			         return (pos===0) ? 0 : Math.pow(2, 10 * (pos - 1));
+			       },
+
+			       easeOutExpo: function(pos) {
+			         return (pos===1) ? 1 : -Math.pow(2, -10 * pos) + 1;
+			       },
+
+			       easeInOutExpo: function(pos) {
+			         if(pos===0) return 0;
+			         if(pos===1) return 1;
+			         if((pos/=0.5) < 1) return 0.5 * Math.pow(2,10 * (pos-1));
+			         return 0.5 * (-Math.pow(2, -10 * --pos) + 2);
+			       },
+
+			       easeInCirc: function(pos) {
+			         return -(Math.sqrt(1 - (pos*pos)) - 1);
+			       },
+
+			       easeOutCirc: function(pos) {
+			         return Math.sqrt(1 - Math.pow((pos-1), 2));
+			       },
+
+			       easeInOutCirc: function(pos) {
+			         if((pos/=0.5) < 1) return -0.5 * (Math.sqrt(1 - pos*pos) - 1);
+			         return 0.5 * (Math.sqrt(1 - (pos-=2)*pos) + 1);
+			       },
+
+			       easeOutBounce: function(pos) {
+			         if ((pos) < (1/2.75)) {
+			           return (7.5625*pos*pos);
+			         } else if (pos < (2/2.75)) {
+			           return (7.5625*(pos-=(1.5/2.75))*pos + 0.75);
+			         } else if (pos < (2.5/2.75)) {
+			           return (7.5625*(pos-=(2.25/2.75))*pos + 0.9375);
+			         } else {
+			           return (7.5625*(pos-=(2.625/2.75))*pos + 0.984375);
+			         }
+			       },
+
+			       easeInBack: function(pos) {
+			         var s = 1.70158;
+			         return (pos)*pos*((s+1)*pos - s);
+			       },
+
+			       easeOutBack: function(pos) {
+			         var s = 1.70158;
+			         return (pos=pos-1)*pos*((s+1)*pos + s) + 1;
+			       },
+
+			       easeInOutBack: function(pos) {
+			         var s = 1.70158;
+			         if((pos/=0.5) < 1) return 0.5*(pos*pos*(((s*=(1.525))+1)*pos -s));
+			         return 0.5*((pos-=2)*pos*(((s*=(1.525))+1)*pos +s) +2);
+			       },
+
+			       elastic: function(pos) {
+			         return -1 * Math.pow(4,-8*pos) * Math.sin((pos*6-1)*(2*Math.PI)/2) + 1;
+			       },
+
+			       swingFromTo: function(pos) {
+			         var s = 1.70158;
+			         return ((pos/=0.5) < 1) ? 0.5*(pos*pos*(((s*=(1.525))+1)*pos - s)) :
+			         0.5*((pos-=2)*pos*(((s*=(1.525))+1)*pos + s) + 2);
+			       },
+
+			       swingFrom: function(pos) {
+			         var s = 1.70158;
+			         return pos*pos*((s+1)*pos - s);
+			       },
+
+			       swingTo: function(pos) {
+			         var s = 1.70158;
+			         return (pos-=1)*pos*((s+1)*pos + s) + 1;
+			       },
+
+			       bounce: function(pos) {
+			         if (pos < (1/2.75)) {
+			           return (7.5625*pos*pos);
+			         } else if (pos < (2/2.75)) {
+			           return (7.5625*(pos-=(1.5/2.75))*pos + 0.75);
+			         } else if (pos < (2.5/2.75)) {
+			           return (7.5625*(pos-=(2.25/2.75))*pos + 0.9375);
+			         } else {
+			           return (7.5625*(pos-=(2.625/2.75))*pos + 0.984375);
+			         }
+			       },
+
+			       bouncePast: function(pos) {
+			         if (pos < (1/2.75)) {
+			           return (7.5625*pos*pos);
+			         } else if (pos < (2/2.75)) {
+			           return 2 - (7.5625*(pos-=(1.5/2.75))*pos + 0.75);
+			         } else if (pos < (2.5/2.75)) {
+			           return 2 - (7.5625*(pos-=(2.25/2.75))*pos + 0.9375);
+			         } else {
+			           return 2 - (7.5625*(pos-=(2.625/2.75))*pos + 0.984375);
+			         }
+			       },
+
+			       easeFromTo: function(pos) {
+			         if ((pos/=0.5) < 1) return 0.5*Math.pow(pos,4);
+			         return -0.5 * ((pos-=2)*Math.pow(pos,3) - 2);
+			       },
+
+			       easeFrom: function(pos) {
+			         return Math.pow(pos,4);
+			       },
+
+			       easeTo: function(pos) {
+			         return Math.pow(pos,0.25);
+			       }
+			   	};
+
+				function animate(easeType) {
+					var per = Math.min(1, (new Date() - startTime) / dur);
+					if (per === 1) {
+						clearTimeout(timerId);
+					} else {
+						node.style.left = Math.round(500 * Easing[easeType](per)) + 'px';
+					}
+				}
+				function start(easeType) {    
+					startTime = new Date();    
+					timerId = setInterval(function(){
+						animate(easeType);
+					}, frameTime);
+					node.innerHTML = easeType;
+				}
+				node.onclick = function(){
+					var time = -3e3;
+					for(var i in Easing){
+						time = time+3e3;
+						(function(i){
+							setTimeout(function(){
+								start(i);
+							},time);
+						})(i);
+
+					}
+				};
+			})();
+
+			</script>
+		</li>
+	</ol>
+</body>
+</html>

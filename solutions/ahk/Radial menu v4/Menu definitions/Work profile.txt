@@ -1,0 +1,23 @@
+﻿;==================================================================
+[Item1]
+Text= 		Menu control
+Submenu=	Menu control
+
+[Item3]
+Text= 		Work
+[Item4]
+Text= 		profile
+[Item5]
+Text= 		test
+
+
+;==================================================================
+[General]
+CentralText=		RM4
+
+
+
+
+
+
+

@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Demo: CSS3 Buttons</title>
+<style type="text/css">
+</style>
+</head>
+
+<body>
+	<h2>
+		Sublime Text 2
+	</h2>
+	<h3>lisence</h3>
+	<pre>
+Andrew Weber
+Single User License
+EA7E-855605
+813A03DD 5E4AD9E6 6C0EEB94 BC99798F
+942194A6 02396E98 E62C9979 4BB979FE
+91424C9D A45400BF F6747D88 2FB88078
+90F5CC94 1CDC92DC 8457107A F151657B
+1D22E383 A997F016 42397640 33F41CFC
+E1D0AE85 A0BBD039 0E9C8D55 E1B89D5D
+5CDB7036 E56DE1C0 EFCC0840 650CD3A6
+B98FC99C 8FAC73EE D2B95564 DF450523
+	</pre>
+	<h3>
+		配置
+	</h3>
+	<pre>
+{
+	"color_scheme": "Packages/Color Scheme - Default/Chance.tmTheme",
+	"detect_slow_plugins": false,
+	"font_size": 10.0,
+	"font_face": "Yahei Consolas hybrid",
+	"font_options":
+	[
+		"subpixel_antialias"
+	],
+	"bold_folder_labels": true,
+	"highlight_line": true,
+	"word_separators": "./\\()\"':,.;<>~!@#$%^&*|+=[]{}`~?",
+	"caret_style": "solid",
+	"wide_caret": true,
+	"word_wrap": true,
+	"fold_buttons": true,
+	"fade_fold_buttons": false,
+	"highlight_modified_tabs": true,
+	"show_tab_close_buttons": false,
+	"trim_trailing_white_space_on_save": true,
+	"line_padding_bottom": 2,
+	"line_padding_top": 0,
+	"margin": 10,
+}
+	</pre>
+	<h3>
+		插件
+	</h3>
+	<div>
+		ActionScript, Alignment, AndyJS2, AppleScript, ASP, AutoFileName, AutoHotkey, Autoprefixer, Batch File, BracketHighlighter, bz2, C#, C++, Clojure, Color Scheme - Default, ConvertToUTF8, Cross, CSS, csscomb, CssFormat, CSSLint, CursorRuler, D, DaichangCompletions, DaichangSnippets, Default, Diff, DocBlockr, Emmet, Erlang, FileDiffs, FindKeyConflicts, GBK Encoding Support, Gist, Git, Go, Graphviz, Groovy, Haskell, Hex-to-RGBA, HostAdmin, HTML, Java, JavaScript, JavaScript & NodeJS Snippets, JsFormat, Jshtml, JSLint, Language - English, LaTeX, Lisp, LiveStyle, Lua, Makefile, Markdown, MarkdownEditing, Matlab, Minifier, Nodejs, Objective-C, OCaml, Open-Include, Package Control, Perl, PersistentRegexHighlight, PHP, PhpBeautifier, phpfmt, Prefixr, Python, PyV8, R, Rails, Regular Expressions, RestructuredText, Ruby, Scala, select-windows, SFTP, ShellScript, SideBarEnhancements, SQL, ssl-windows, StringEncode, sublime-gbk, sublime-jslint, SublimeCodeIntel, SublimeCSSTidy, SublimeLinter, SVN, Tag, TCL, Terminal, TernJS, Text, Textile, Theme - Default, Theme - Soda, User, Vintage, XML, YAML, YUI Compressor</div>
+	<h3>
+		无法设置st3为默认打开方式
+	</h3>
+	<div>
+		To correct it manually, open regedit and navigate to Computer\HKEY_CLASSES_ROOT\Applications\, find the sublime_text.exe entry, and delete it. You should now be able to set Sublime Text 3 as the default editor for anything you want.
+	</div>
+	<h3>修改主题</h3>
+	<ol>
+		<li>用插件PackageResourceViewer:open resource来打开主题源文件来编辑</li>
+	</ol>
+	<h3>设置打开文件所有文件夹快捷键</h3>
+	<pre>
+{
+"keys": ["ctrl+k","ctrl+f"],
+"command": "open_dir",
+"args": {
+	"dir": "$file_path",
+	"file": "$file_name"
+}
+	</pre>
+	<h3>修改jsformat</h3>
+	<pre lang="python">
+#js_formatter.py 修改如下
+def is_visible(self):
+    # return jsf_activation.is_js_buffer(self.view)
+    return True
+	</pre>
+</body>
+</html>

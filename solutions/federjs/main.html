@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>federjs</title>
+    <p>参考： <a href="http://alloyteam.github.io/Nuclear/" target="_blank">http://alloyteam.github.io/Nuclear/</a></p>
+
+</head>
+<body>
+	<script type="text/javascript" src="http://i0.sinaimg.cn/dy/js/jquery/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="mustache.min.js"></script>
+	<script type="text/javascript" src="feder.js"></script>
+	<style>
+		.demo_20150605182128{width:900px;margin:0 auto;}
+		.demo_20150605182128 h2{border-bottom:1px solid #000;padding:10px 0;margin:10px 0;}
+	</style>
+	<div class="demo_20150605182128">
+		<h2>Hellow</h2>
+		<div id="hello_20150605175358" class="item"></div>
+		<script type="text/javascript">
+		var HelloMessage = Feder.create({
+			render:function(){
+				return '<div>Hello , {{name}} !</div>';
+			}
+		});
+		new HelloMessage({
+			wrap:'#hello_20150605175358',
+			data:{
+				name:'Feder'
+			},
+		});
+		</script>
+
+
+
+		<h2>Hellow</h2>
+		<div id="timer_20150605175358" class="item"></div>
+		<script type="text/javascript">
+
+		var Timer = Feder.create({
+			install: function() {
+				var self = this;
+				this.interval = setInterval(function(){
+					self.tick.call(self);
+				}, 1000);
+			},
+			uninstall: function() {
+				clearInterval(this.interval);
+			},
+			tick: function() {
+				this.setOpts('opts.data.secondsElapsed',this.opts.data.secondsElapsed++);
+			},
+			render: function() {
+				return ' <div>Seconds Elapsed: {{secondsElapsed}}</div>';
+			}
+		});
+
+		ttt = new Timer({
+			wrap: "#timer_20150605175358",
+			data: {
+				secondsElapsed: 5
+			}
+		});
+		ttt.on('click',function(){
+			console.log(this);
+			console('不错');
+		});
+		</script>
+	</div>
+</body>
+</html>

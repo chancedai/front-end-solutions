@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>title</title>
+</head>
+<body>
+
+	<ul>
+		<li>
+			1.创建svg symbol代码，可放在页面内，亦可放在一个单独文件，如svgdefs.svg:
+			<pre lang="xml">
+<svg display="none" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<symbol id="icon-home" viewBox="0 0 1024 1024">
+	<title>home</title>
+	<path class="path1" d="M512 32l-512 512 96 96 96-96v416h256v-192h128v192h256v-416l96 96 96-96-512-512zM512 448c-35.346 0-64-28.654-64-64s28.654-64 64-64c35.346 0 64 28.654 64 64s-28.654 64-64 64z"></path>
+</symbol>
+<symbol id="icon-edit" viewBox="0 0 1024 1024">
+	<title>edit</title>
+	<path class="path1" d="M864 0c88.364 0 160 71.634 160 160 0 36.020-11.91 69.258-32 96l-64 64-224-224 64-64c26.742-20.090 59.978-32 96-32zM64 736l-64 288 288-64 592-592-224-224-592 592zM715.578 363.578l-448 448-55.156-55.156 448-448 55.156 55.156z"></path>
+</symbol>
+<symbol id="icon-tag" viewBox="0 0 1024 1024">
+	<title>tag</title>
+	<path class="path1" d="M976 0h-384c-26.4 0-63.274 15.274-81.942 33.942l-476.116 476.116c-18.668 18.668-18.668 49.214 0 67.882l412.118 412.118c18.668 18.668 49.214 18.668 67.882 0l476.118-476.118c18.666-18.666 33.94-55.54 33.94-81.94v-384c0-26.4-21.6-48-48-48zM736 384c-53.020 0-96-42.98-96-96s42.98-96 96-96 96 42.98 96 96-42.98 96-96 96z"></path>
+</symbol>
+</defs>
+</svg>
+		</pre>
+		</li>
+		<li>
+			2.页面上可如下引用，如：
+			<pre lang="html">
+<!-- 内嵌在html页面时，href直接填写#id即可 -->
+<svg class="icon icon-tag"><use xlink:href="#icon-tag"></use></svg>
+<!-- 从单独文件外引时，href需要加上文件路径 -->
+<svg class="icon icon-tag"><use xlink:href="img/ico/svgdefs.svg#icon-tag"></use></svg>
+		</pre>
+		</li>
+		<li>
+			3.可以svg标签上的class添加样式，如：
+			<pre lang="css">
+.icon {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	fill: currentColor;
+	font-size: 14px;
+	color: #828282;
+}
+		</pre>
+		</li>
+		<li>4.注意ie8及以下是不兼容的，无法显示.</li>
+	</ul>
+
+	 <div class="demo-20150514174123"> <svg display="none" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <defs> <symbol id="icon-edit" viewBox="0 0 1024 1024"> <title>edit</title> <path class="path1" d="M864 0c88.364 0 160 71.634 160 160 0 36.020-11.91 69.258-32 96l-64 64-224-224 64-64c26.742-20.090 59.978-32 96-32zM64 736l-64 288 288-64 592-592-224-224-592 592zM715.578 363.578l-448 448-55.156-55.156 448-448 55.156 55.156z"></path> </symbol> </defs> </svg> <svg class="icon icon-edit"> <use xlink:href="#icon-edit"></use> </svg> </div>
+	<h4 class="reference-title">参考链接</h4>
+	<div class="reference-link"> <ol> <li> <a class="external" href="https://icomoon.io/" target="_blank">icomoon.io</a> </li> <li> <a class="external" href="https://css-tricks.com/svg-sprites-use-better-icon-fonts/" target="_blank">Icon System with SVG Sprites</a> </li> </ol>
+	</div>
+	<style type="text/css">
+		.demo-20150514174123 .icon {
+			display: inline-block;
+			width: 1em;
+			height: 1em;
+			fill: currentColor;
+			font-size: 64px;
+			color: #828282;
+		}
+	</style>
+</body>
+</html>

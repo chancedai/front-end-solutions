@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="demo_201406171019">
+		<ol>
+			<li>fiddler暂停： file>capture traffic 或 f12</li>
+			<li>不捕捉https： tools>fiddler options > https</li>
+			<li>允许其它设备访问：tools>fiddler options > connetions >allow remote;在其它设备上设置代理ip及端口号即可访问</li>
+			<li>模拟低网速：rules>performance>simulate modem speeds;如果要调整这个速度，可以rules>customize rules>搜索m_SimulateModem</li>
+			<li>在会话列表中，添加ip栏:rules>customize rules 在 <code>static function Main()</code>中添加一行 <code>FiddlerObject.UI.lvSessions.AddBoundColumn("ServerIP", 120, "X-HostIP");</code></li>
+		</ol>
+
+    </div>
+
+</body>
+</html>

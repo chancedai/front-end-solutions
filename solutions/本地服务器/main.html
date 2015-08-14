@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+    <style type="text/css">
+		.demo_20150519110622{width:1000px;margin:0 auto;color:#333;padding:10px;border:1px solid #333;color:#333;font:14px/20px "Microsoft Yahei","\5FAE\8F6F\96C5\9ED1","SimSun","\5B8B\4F53","Arial Narrow",serif;}
+		.demo_20150519110622 img{border:1px solid #ddd;border-radius: 3px;}
+    </style>
+</head>
+<body>
+	<div class="demo_20150519110622">
+			<h2>一、配置本地服务器及工作目录</h2>
+			<ol>
+				<li>安装wamp并启动，如果不能启动，很可能默认的80端口被占用。</li>
+				<li>打开vhost文件（如：H:\wamp\bin\apache\apache2.2.22\conf\extra\httpd-vhosts.conf），配置一个域名指向你的开发目录，如：
+				<pre>
+		# lny.1000moons.com就是你的域名，G:盘就是你的工作目录
+		&lt;VirtualHost *:80&gt;
+		  ServerName dc.bq69.com
+		  DocumentRoot G:
+		  &lt;Directory &quot;G:&quot;&gt;
+		      Options Indexes FollowSymLinks Includes ExecCGI
+		      AllowOverride All
+		      Order allow,deny
+		      Allow from all
+		  &lt;/Directory&gt;&lt;/VirtualHost&gt;
+				</pre>
+				</li>
+				<li>配置hosts文件（如：C:\Windows\System32\drivers\etc\hosts）,如：
+		<pre>
+		127.0.0.1 lny.1000moons.com
+		</pre>
+				</li>
+				<li>重置wamp所有服务，如果不能启动，可能vhosts.conf编辑时有语法错误。</li>
+			</ol>
+			<h2>二、配置代理，方便各设备访问</h2>
+			<ol>
+				<li>
+					电脑安装fiddler并启动，并设置Tools-Fiddler OPtions-Connections:Allow remote computers to connect打上勾,端口号默认为8888。
+					<p>
+						<img src="img/fiddler.png" height="373" width="558">
+					</p>
+				</li>
+				<li>
+					电脑上运行-cmd-ipconfig，找到ip地址。
+				</li>
+				<li>
+					手机长按wifi名-修改网络-显示高级选项：填电脑ip地址，及fillder的代理端口号8888，保存（华为荣耀6手机）。
+					<p>
+						<img src="img/proxy.jpg" width="540" alt="">
+					</p>
+				</li>
+				<li>
+					手机上现在浏览器访问lny.1000moons.com 就可以访问你的工作目录了。
+				</li>
+				<li>
+					如果还不能访问，有可能fiddler在电脑自动设置的代理没生效，可通过 chrome://net-internals/#proxy 地址刷新代理（chrome浏览器）。
+					<p>
+						<img src="img/chrome_proxy.png" height="382" width="596">
+					</p>
+				</li>
+				<li>
+					注意：
+					<ul>
+						<li>不使用时，电脑上的fiddler需要通过File-exit来正常退出，才能清理电脑上的代理文件，否则电脑可能无法上网。</li>
+						<li>手机的代理不使用时，也需要把代理由手动改自动。</li>
+					</ul>
+				</li>
+				<li>
+					<a href="http://www.telerik.com/support" target="_blank">更多fiddler使用技巧</a>
+				</li>
+			</ol>
+	</div>
+</body>
+</html>

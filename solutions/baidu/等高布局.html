@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>等高布局</title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+
+    <h2>利用margin-bottom: -9999px;padding-bottom: 9999px</h2>
+    <ul>
+    	<li>背景等高，其实高度不变</li>
+    	<li>由于父级元素overflow:hidden,无法显示底边框</li>
+    </ul>
+    <style>
+		.demo-20150421140808{width:1000px;overflow: hidden;}
+		.demo-20150421140808 .item{margin-bottom: -9999px;padding-bottom: 9999px;float:left;width:498px;border:1px solid #000;}
+		.demo-20150421140808 .item-1{background: #ddd;}
+		.demo-20150421140808 .item-2{background: #ccc;}
+    </style>
+    <div class="demo-20150421140808">
+    	<div class="item item-1">
+    		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    	</div>
+    	<div class="item item-2">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+    	</div>
+    </div>
+    <h2>利用图片背景</h2>
+        <h2>利用div背景色</h2>
+        <ul>
+        	<li>背景等高，其实高度不变</li>
+        	<li>无法显示底边框</li>
+        </ul>
+        <style>
+    		.demo-20150421140809{width:900px;overflow:hidden;}
+    		.demo-20150421140809 .left-bg,.demo-20150421140809 .center-bg,.demo-20150421140809 .right-bg{position: relative;float: left;}
+    		.demo-20150421140809 .left-bg{background: #ccc;}
+    		.demo-20150421140809 .center-bg{background: #ddd;right:-300px;}
+    		.demo-20150421140809 .right-bg{background: #eee;right:-300px;}
+    		.demo-20150421140809 .left,.demo-20150421140809 .center,.demo-20150421140809 .right{width:300px;position:relative;float: left;}
+    		.demo-20150421140809 .left{right:600px;}
+    		.demo-20150421140809 .center{right:600px;}
+    		.demo-20150421140809 .right{right:600px;}
+        </style>
+        <div class="demo-20150421140809">
+        	<div class="left-bg">
+        		<div class="center-bg">
+        			<div class="right-bg">
+        				<div class="left">left</div>
+        				<div class="center">center:Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        				<div class="right">right</div>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+
+        <h2>利用css3</h2>
+        <ul>
+        	<li>背景等高，其实高度不变</li>
+        	<li>由于父级元素overflow:hidden,无法显示底边框</li>
+        </ul>
+        <style>
+    		.demo-20150421140810{width:1000px;display: -moz-box;display: -webkit-box;display: box;}
+    		.demo-20150421140810 .item{margin-bottom:5px;border:1px solid #000;}
+    		.demo-20150421140810 .item-1{background: #ddd;-moz-box-flex:1;-webkit-box-flex:1;box-flex:1;}
+    		.demo-20150421140810 .item-2{background: #ccc;-moz-box-flex:2;-webkit-box-flex:2;box-flex:2;}
+    		.demo-20150421140810 .item-3{background: #eee;-moz-box-flex:1;-webkit-box-flex:1;box-flex:1;}
+        </style>
+        <div class="demo-20150421140810">
+
+        	<div class="item item-1">
+        		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        	</div>
+        	<div class="item item-2">
+    			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+        	</div>
+        	<div class="item item-3">3</div>
+        </div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="gb2312">
+    <title>上传图片</title>
+    <style type="text/css">
+
+        /*reset*/
+        html {-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100% } body {line-height: 1.6; font-family: "Helvetica Neue","Hiragino Sans GB","Microsoft YaHei"; color: #000; font-size: 14px } input, textarea {outline: 0 } body, h1, h2, h3, h4, p, ul, ol, dl, dd, fieldset, textarea {margin: 0 } fieldset, legend, textarea, input {padding: 0 } textarea, input {color: #666 } textarea::-webkit-input-placeholder, input::-webkit-input-placeholder {color: #a3a3a3 } textarea:-moz-placeholder, input:-moz-placeholder {color: #a3a3a3 } textarea::-moz-placeholder, input::-moz-placeholder {color: #a3a3a3 } textarea:-ms-input-placeholder, input:-ms-input-placeholder {color: #a3a3a3 } textarea {resize: none; overflow-y: scroll } ul, ol {padding-left: 0; list-style-type: none } a img, fieldset {border: 0 } a {color: #2470d8; text-decoration: none; outline: 0 } article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {display: block } audio, canvas, video {display: inline-block } audio:not([controls]) {display: none; height: 0 } [hidden] {display: none } button, input, select, textarea {font-family: inherit; font-size: 100%; margin: 0; *font-family: "Helvetica Neue", Helvetica, Arial, Tahoma, sans-serif } button, select {text-transform: none } button, html input[type="button"], input[type="reset"], input[type="submit"] {cursor: pointer; -webkit-appearance: button } button[disabled], html input[disabled] {cursor: default } input[type="checkbox"], input[type="radio"] {box-sizing: border-box; padding: 0 } input[type="search"] {box-sizing: content-box; -moz-box-sizing: content-box; -webkit-appearance: textfield; -webkit-box-sizing: content-box } input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {-webkit-appearance: none } button::-moz-focus-inner, input::-moz-focus-inner {border: 0; padding: 0 } textarea {vertical-align: top }
+
+        /*头部*/
+        .header{height:60px;background: url(http://1000moons.com/images/logo_bg.jpg);margin:0 0 20px;padding:0 20px;}
+        .logo{float: left; display: block; margin-top: 10px; width: 85px; height: 33px; background: url(../img/logo.png); background-size: 100% 100%;}
+        /*面包屑*/
+        .breadcrumb,.body{margin:5px 20px;}
+        /*多客服*/
+        .mod-control{padding: 10px 0;text-align: right;}
+        .btn,.btn:visited{padding:0 20px;background: #44B549;color:#fff;height:30px;line-height:30px;display: inline-block;border-radius: 5px;border:1px solid #44B549;}
+        .btn:hover{background: #2F9833;color:#fff;}
+        .btn-gray,.btn-gray:visited{border-color:#eee;background: #fff;color:#333;}
+        .btn-gray:hover{background: #fff;color:#333;}
+        .mod-list table{width:100%;font-size: 14px;border:1px solid #e7e7eb;border-collapse:collapse;border-spacing: 0;line-height: 1.6;}
+        .mod-list table thead{background: #F4F5F9;}
+        .mod-list table td,.mod-list table th{
+            vertical-align: top;
+          padding: 8px 14px;
+          border-bottom: 1px solid #E7E7EB;
+        }
+        .mod-list table .edit,.mod-list table .delete{width:40px;text-align: center;}
+        .mod-list .pic{width:45px;height:45px;float: left;margin:0 10px 0 0;}
+        .mod-list .info{color:#555;}
+        /*底部*/
+        .footer{text-align: center;padding:30px 0;}
+
+        /*弹窗*/
+        .dialog{width:750px;}
+        .dialog h3{font-weight: normal;float: left;}
+        .dialog .close{float: right;}
+        .dialog .hd,.dialog .ft{background: #F4F5F9;}
+        .dialog .hd{height:50px;line-height: 50px; padding:0 20px;}
+        .dialog .ft{padding:20px 0 ;text-align: center;}
+        .dialog .ft .btn{width:60px;margin:0 5px;}
+        .dialog .bd{background: #fff;padding:20px;}
+
+        .dialog .post-wrap{padding:0 0 0 100px;}
+        .dialog .post-item{padding:10px 0;}
+        .dialog .post-item label{display: inline-block;width:70px;}
+        .dialog .post-item input{padding:5px;width:330px;border:1px solid #888;}
+        .dialog .post-txt,.dialog .post-tip{padding:5px 0 0 70px;}
+        .dialog .post-tip{color:#aaa;}
+        .dialog .post-head{height:80px;}
+        .dialog .post-head label,.dialog .post-img{float: left;}
+        .dialog .post-head .post-tip{padding-top: 25px;}
+        .dialog .post-img{margin:0 10px 0 0;}
+
+    </style>
+    <script type="text/javascript" src="plupload/js/plupload.full.js"></script>
+</head>
+<body>
+    <div class="note">
+        <ol>
+            <li>修改upload.php图片目录</li>
+            <li>修改js引用地址</li>
+            <li>修改upload.php地址</li>
+            <li>修改配置里的flash_swf_url，silverlight_xap_url地址</li>
+            <li>路径不能带中文</li>
+        </ol>
+    </div>
+
+    <div class="box-clz" style="">
+        <div class="dialog dialog-add" dialog-type="wrap">
+            <div class="hd">
+                <h3>添加客服号</h3>
+                <a href="javascript:;" dialog-type="close" class="close">关闭</a>
+            </div>
+            <div class="bd">
+                <ul class="post-wrap">
+                    <li class="post-item post-head" id="uploadWrap">
+                        <label>头像</label>
+                        <div class="post-img">
+                            <img src="http://static.segmentfault.com/global/img/user-64.png" id="head" dialog-type="kf_headimgurl" width="45" height="45" alt=""></div>
+                        <p class="post-tip">
+                            <a href="javascript:;" id="upload" dialog-type="upload">上传头像 </a><strong id="progress"></strong>
+                            (jpg格式，建议大小：640*640)
+                        </p>
+                        <input type="hidden" name="id" dialog-type="kf_id">
+                    </li>
+                </ul>
+            </div>
+            <div class="ft">
+                <a href="javascript:;" dialog-type="confirm" class="btn confirm">确认添加</a>
+                <a href="javascript:;" dialog-type="cancel" class="btn btn-gray cancel">取消</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="SI_Wrap">
+        <div id="SI_PicList"></div>
+        <br />
+        <a id="SI_Pick" href="javascript:;">添加图片</a>
+        <a id="SI_Upload" href="javascript:;">上传图片</a>
+    </div>
+
+    <script type="text/javascript">
+
+    // Custom example logic
+    function $(id) {
+        return document.getElementById(id);
+    }
+    var Uploader1 = new plupload.Uploader({
+        runtimes : 'gears,html5,flash,silverlight,browserplus',
+        browse_button : 'upload',
+        container: 'uploadWrap',
+        max_file_size : '10mb',
+        url : 'plupload/examples/upload.php',
+        resize : {width : 320, height : 240, quality : 90},
+        flash_swf_url : 'plupload/js/plupload.flash.swf',
+        silverlight_xap_url : 'plupload/js/plupload.silverlight.xap',
+        multi_selection:false,
+        filters : [
+            {title : "Image files", extensions : "jpg,gif,png"},
+            {title : "Zip files", extensions : "zip"}
+        ]
+    });
+    // 初始化事件
+    Uploader1.bind('Init', function(up, params) {
+    });
+    // 初始化
+    Uploader1.init();
+    // 添加图片事件
+    Uploader1.bind('FilesAdded', function(up, files) {
+        // console.log(files);
+        $('progress').innerHTML='上传中...';
+        Uploader1.start();
+    });
+    // 上传进程事件
+    Uploader1.bind('UploadProgress', function(up, file) {
+        $('progress').innerHTML='';
+    });
+    // 上传完成
+    Uploader1.bind('FileUploaded', function(up, file,msg) {
+        var response = eval('(' + (msg.response.replace(/\\/g,'/')) + ')');
+        $('head').src = 'plupload/examples/'+response.result;
+    });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<pre lang="js">
+<!-- 是否有效地址 -->
+function validUrl(strUrl){
+    strUrl = strUrl.match(/http:\/\/.+/);
+    if(strUrl==null){
+        return false;
+    }else{
+	        return true;
+    }
+}
+<!-- 是否图片地址 -->
+function valiImgType(str){
+    if(!/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(str))
+         return false;
+}
+<!-- 文件扩展名 -->
+function getFileUploadExtension(obj) {
+    if (obj !== null) {
+        var value = obj.value.trim();
+        if (value.length > 0) {
+            var index = value.lastIndexOf(".") + 1;
+            var ext = value.substring(index).toLowerCase();
+            return ext;
+        }
+    }
+    return "";
+}
+	</pre>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "webp",
+  "version": "1.0.0",
+  "description": "webp test",
+  "main": "webp.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "webp",
+    "sina"
+  ],
+  "author": "chancedai",
+  "license": "ISC",
+  "devDependencies": {
+    "qunitjs": "^1.18.0"
+  }
+}

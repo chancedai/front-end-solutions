@@ -1,0 +1,8 @@
+﻿Sounds are downloaded from http://www.freesound.org and
+licensed under a Creative Commons Sampling Plus 1.0 License which is included in "Legal" folder. 
+
+Authors (Thank you!):
+- patchen
+- SpeedY
+
+All sounds are slightly modified.

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	#demo_20140821161431{width:1000px;margin:0 auto;}
+	#demo_20140821161431 .item{height:1px;overflow:hidden;}
+	</style>
+</head>
+<body>
+	<div id="demo_20140821161431">
+	</div>
+	<script type="text/javascript">
+
+	 	var gradient = (function(){
+	 		var color2rgb = function(color) {
+	 			var r = parseInt(color.substr(1, 2), 16);
+	 			var g = parseInt(color.substr(3, 2), 16);
+	 			var b = parseInt(color.substr(5, 2), 16);
+	 			return new Array(r, g, b);
+	 		};
+
+	 		var rgb2color = function(rgb) {
+	 			var s = '#';
+	 			for (var i = 0; i < 3; i++) {
+	 				var c = Math.round(rgb[i]).toString(16);
+	 				if (c.length == 1) c = '0' + c;
+	 				s += c;
+	 			}
+	 			return s.toUpperCase();
+	 		};
+	 		return function(star,end,step,fn) {
+		 		start = color2rgb(star);
+		 		end = color2rgb(end);
+		 		if(typeof fn !== 'function'){
+		 			fn = function(){};
+		 		}
+		 		var gradientColors = [];
+		 		var gradientColor = [];
+		 		for (var i = 0; i <= step; i++) {
+	 				for (var j = 0; j < 3; j++){
+		 				gradientColor[j] = start[j] + (end[j] - start[j]) / step * i;
+		 			}
+		 			fn(i,rgb2color(gradientColor));
+		 			gradientColors.push(gradientColor);
+		 		}
+		 		return gradientColors;
+		 	};
+	 	})();
+
+ 		var wrap = document.getElementById('demo_20140821161431');
+ 	 	var start = '#cc0000';
+ 	 	var end = '#00ff00';
+	 	var step = 1000;
+	 	var html = [];
+	 	var gradientColors = gradient(start,end,step,function(index,color){
+	 		html.push('<div class="item" style="background:' + color + '"></div>');
+	 	});
+	 	wrap.innerHTML = html.join('');
+
+	</script>
+</body>
+</html>

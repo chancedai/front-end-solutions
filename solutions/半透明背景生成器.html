@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>半透明背景生成器</title>
+	<style type="text/css">
+    body{color:#000;background:url(http://img.t.sinajs.cn/t5/skin/public/profile_cover/056.jpg) repeat;}
+    .demo{width:800px;margin:auto;}
+    .rgba_20131129{padding:15px;}
+    .code{width:770px;word-wrap:break-word;word-break:break-all;padding:15px;background:#fff;}
+	</style>
+
+</head>
+<body>
+    <div class="demo">
+        <div id="ID_Control" class="control">
+            <p><label>背景色</label><input type="text" id="ID_Bgcolor" value="#000000"></p>
+            <p><label>透明度</label><input type="number" id="ID_Per" value="30" min="0" max="100">(如：30%)</p>
+        </div>
+        <div id="ID_Preview" class="rgba_20131129">
+            <div class="cnt">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </div>
+        </div>
+        <div id="ID_Code" class="code">
+        </div>
+        <script type="text/javascript">
+        ;(function(){
+            /*
+             * StartColorStr 和 EndColorStr:
+             *    #4c000000 是 30% 透明度的 #000000
+             *    组成: # + 透明度 + 颜色
+             *    透明度算法: Math.floor(0.3 * 255).toString(16)==4c;
+             */
+            /*.rgba_20131129{
+                background:rgba(0, 0, 0, 0.3);
+                filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#4c000000', EndColorStr='#4c000000');
+            }
+            :root .rgba_20131129{
+                filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#00000000', EndColorStr='#00000000');
+            }*/
+            var byId = function(id){
+                return document.getElementById(id);
+            };
+            var dom = function(){
+
+            };
+            var bgcolor = byId('ID_Bgcolor');
+            var per = byId('ID_Per');
+            var sub = byId('ID_Sub');
+            var preview = byId('ID_Preview');
+            var code = byId('ID_Code');
+            var toColorRgb = function(str){
+                var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+                var sColor = str.toLowerCase();
+                if(sColor && reg.test(sColor)){
+                    if(sColor.length === 4){
+                        var sColorNew = "#";
+                        for(var i=1; i<4; i+=1){
+                            sColorNew += sColor.slice(i,i+1).concat(sColor.slice(i,i+1));
+                        }
+                        sColor = sColorNew;
+                    }
+                    //处理六位的颜色值
+                    var sColorChange = [];
+                    for(var i=1; i<7; i+=2){
+                        sColorChange.push(parseInt("0x"+sColor.slice(i,i+2)));
+                    }
+                    return sColorChange.join(",");
+                }else{
+                    return sColor;
+                }
+            };
+            var getStyle = function(bgcolor,per){
+                per = per/100;
+                var _bgcolor = bgcolor.replace('#','');
+                var ffbg = toColorRgb(bgcolor);
+                var iebg = Math.floor(per * 255).toString(16)+_bgcolor;
+                var css = ".rgba_20131129{background:rgba("+ffbg+", "+per+"); filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#"+iebg+"', EndColorStr='#"+iebg+"');*zoom:1;} :root .rgba_20131129{filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#00"+_bgcolor+"', EndColorStr='#00"+_bgcolor+"'); }";
+                return css;
+            };
+            var appendStyle = function(css,id) {
+                var head = document.getElementsByTagName('head')[0];
+                var old = byId(id);
+                if(old){
+                    head.removeChild(old);
+                }
+                var style = document.createElement('style');
+                style.type = 'text/css';
+                style.id = id;
+                try {
+                    style.appendChild(document.createTextNode(css));
+                } catch (e) {
+                    if (style.styleSheet) {
+                        try {
+                            oldCss = style.styleSheet.cssText;
+                        } catch( e) {
+                            oldCss = '';
+                        }
+                        style.styleSheet.cssText = oldCss + css;
+                    } else {}
+                }
+                head.appendChild(style);
+            };
+            var show = function(){
+                var perVal = per.value;
+                perVal = Math.max(0,perVal);
+                perVal = Math.min(100,perVal);
+                var style = getStyle(bgcolor.value,perVal);
+                var styleCode = style.replace(/.rgba_20131129/g,'.your-css-clz');
+                appendStyle(style,'rgbastyle');
+                code.innerHTML = '<pr'+'e>'+styleCode+'</p'+'re>';
+            };
+            show();
+            bgcolor.onchange = function(){
+                show();
+            };
+            per.onchange = function(){
+                show();
+            };
+        })();
+        </script>
+    </div>
+</body>
+</html>

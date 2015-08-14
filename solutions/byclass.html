@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>byclass</title>
+</head>
+<body>
+	<div class="demo-20140718170008">
+		<span class="inner" style="border:1px solid #000;padding:0 10px;line-height:30px;"></span>
+	</div>
+	<script type="text/javascript">
+	(function(){
+		var byClz = (function() {
+		    var by;
+		    var doc = document;
+		    if ('function' === typeof doc.getElementsByClassName) {
+		        by = function(clz, wrap) {
+		            if (wrap) {
+		                return wrap.getElementsByClassName(clz);
+		            } else {
+		                return doc.getElementsByClassName(clz);
+		            }
+		        };
+		    } else {
+		        by = function(clz, wrap) {
+		            for (var i = -1, results = [], finder = new RegExp('(?:^|\\s)' + clz + '(?:\\s|$)'), a = wrap && wrap.getElementsByTagName && wrap.getElementsByTagName('*') || doc.all || doc.getElementsByTagName('*'), l = a.length; ++i < l; finder.test(a[i].className) && results.push(a[i]));
+		            a = null;
+		            return results;
+		        };
+		    }
+		    return by;
+		})();
+		var wrap = byClz('demo-20140718170008')[0];
+		var inner = byClz('inner',wrap)[0];
+		inner.innerHTML = (new Date()).getTime();
+	})();
+	(function(){})();
+	</script>
+</body>
+</html>

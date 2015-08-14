@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>推荐列表</title>
+    <style type="text/css">
+        a:link{color:#000;text-decoration: none;}
+        a:visited{color:#999;text-decoration: none;}
+        a:hover, a:active{color:#f00;text-decoration: none;}
+        a{color:#000;text-decoration:none;}
+        body,.wrap{margin:0;}
+        body{color:#000;background:#fff;font:12px/20px "SimSun","宋体","Arial Narrow",serif;}
+        html,body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,th,img{margin:0;padding:0;border:0;}
+        img{border:0;}
+        select,input{vertical-align:middle;font-size:12px;}
+        textarea {resize: none;}
+        textarea,td,div,input,p{font-size:12px;}
+        ul,ol{list-style:none;}
+        em{font-style: normal;}
+        .clearfix:after{content:"\0020";display:block;height:0;clear:both;}
+        .clearfix{zoom:1;}
+        #demo_20150306162147 table{border-collapse: collapse;line-height: 35px;text-align: left;margin:0 auto;width:100%;}
+        #demo_20150306162147 th{background-color: #F5F5F5;background-color: #efefef; background: -webkit-linear-gradient(top,#F9F9F9 0,#efefef 100%); background: -moz-linear-gradient(top,#F9F9F9 0,#efefef 100%); background: -o-linear-gradient(top,#F9F9F9 0,#efefef 100%); background: linear-gradient(to bottom,#F9F9F9 0,#efefef 100%); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#F9F9F9,endColorstr=#efefef,GradientType=0);font-weight: normal;white-space:nowrap}
+        #demo_20150306162147 th,#demo_20150306162147 td{border:1px dotted #ccc;padding: 0 20px 0 5px;}
+        /*表格容器固定需要的高度，及设置overflow-y:auto*/
+        #demo_20150306162147 .table-wrap{width:1000px;margin:30px auto; height:492px;overflow-x:hidden;overflow-y: auto;border:1px solid #95B8E7;}
+        /*不固定宽度用定位固定表头时，宽度会不对应*/
+        #demo_20150306162147 table{width:1000px;}
+    </style>
+</head>
+<body>
+    <div id="demo_20150306162147">
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th style="width:230px">新闻</th>
+                        <th>频道</th>
+                        <th>栏目</th>
+                        <th style="width:450px">推荐原因</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>1</th>
+                        <td>
+                            <a target="_blank" href="http://ent.sina.com.cn/s/m/w/2014-03-31/03474119693.shtml">文章声明揽出轨之责 网友劝分好友盼和</a>
+                        </td>
+                        <td>
+                            <span class="channel">
+                                <em>明星</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="category">
+                                <em>娱乐</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="keyword">
+                                <em>婚姻</em>
+                                :0.677
+                            </span>
+                            <span class="keyword">
+                                <em>婚外情</em>
+                                :0.701
+                            </span>
+                            <span class="keyword">
+                                <em>出轨</em>
+                                :0.7
+                            </span>
+                            <span class="keyword">
+                                <em>微博</em>
+                                :1.341
+                            </span>
+                            <span class="keyword">
+                                <em>马伊琍</em>
+                                :3.247
+                            </span>
+                            <span class="keyword">
+                                <em>姚笛</em>
+                                :3.681
+                            </span>
+                            <span class="keyword">
+                                <em>网友</em>
+                                :3.537
+                            </span>
+                            <span class="keyword">
+                                <em>声音</em>
+                                :0.936
+                            </span>
+                            <span class="keyword">
+                                <em>曝光</em>
+                                :0.734
+                            </span>
+                            <span class="keyword">
+                                <em>渣男</em>
+                                :0.748
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <td>
+                            <a target="_blank" href="http://ent.sina.com.cn/s/m/2014-03-29/20564119368.shtml">文章曾称最爱马伊琍 马被曝早知其出轨</a>
+                        </td>
+                        <td>
+                            <span class="channel">
+                                <em>明星</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="category">
+                                <em>娱乐</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="keyword">
+                                <em>出轨</em>
+                                :1.006
+                            </span>
+                            <span class="keyword">
+                                <em>照片</em>
+                                :0.544
+                            </span>
+                            <span class="keyword">
+                                <em>婚姻</em>
+                                :0.648
+                            </span>
+                            <span class="keyword">
+                                <em>马伊琍</em>
+                                :4.668
+                            </span>
+                            <span class="keyword">
+                                <em>姚笛</em>
+                                :1.96
+                            </span>
+                            <span class="keyword">
+                                <em>网友</em>
+                                :0.589
+                            </span>
+                            <span class="keyword">
+                                <em>微博</em>
+                                :0.642
+                            </span>
+                            <span class="keyword">
+                                <em>曝光</em>
+                                :0.563
+                            </span>
+                            <span class="keyword">
+                                <em>香港</em>
+                                :0.933
+                            </span>
+                            <span class="keyword">
+                                <em>最爱</em>
+                                :1.041
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>3</th>
+                        <td>
+                            <a target="_blank" href="http://ent.sina.com.cn/s/2014-03-30/11464119495.shtml">[茶娱饭后]马伊琍被曝早就知道文章出轨</a>
+                        </td>
+                        <td>
+                            <span class="channel">
+                                <em>明星</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="category">
+                                <em>娱乐</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="keyword">
+                                <em>海天盛筵</em>
+                                :2.756
+                            </span>
+                            <span class="keyword">
+                                <em>美女</em>
+                                :0.988
+                            </span>
+                            <span class="keyword">
+                                <em>出轨</em>
+                                :1.463
+                            </span>
+                            <span class="keyword">
+                                <em>黄晓明</em>
+                                :3.086
+                            </span>
+                            <span class="keyword">
+                                <em>马伊琍</em>
+                                :4.668
+                            </span>
+                            <span class="keyword">
+                                <em>姚笛</em>
+                                :2.138
+                            </span>
+                            <span class="keyword">
+                                <em>网友</em>
+                                :0.965
+                            </span>
+                            <span class="keyword">
+                                <em>游艇</em>
+                                :1.018
+                            </span>
+                            <span class="keyword">
+                                <em>日本</em>
+                                :1.076
+                            </span>
+                            <span class="keyword">
+                                <em>香港</em>
+                                :1.018
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>4</th>
+                        <td>
+                            <a target="_blank" href="http://news.sina.com.cn/o/2014-03-31/052929828466.shtml">
+                                “周一见”变“提前见”
+                                <br>文章姚笛拥抱照曝光</a>
+                        </td>
+                        <td>
+                            <span class="channel">
+                                <em>综合</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="category">
+                                <em>新闻中心</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="keyword">
+                                <em>留言</em>
+                                :1.517
+                            </span>
+                            <span class="keyword">
+                                <em>南都娱乐周刊</em>
+                                :1.305
+                            </span>
+                            <span class="keyword">
+                                <em>微博</em>
+                                :2.492
+                            </span>
+                            <span class="keyword">
+                                <em>爱秀</em>
+                                :0.687
+                            </span>
+                            <span class="keyword">
+                                <em>曝光</em>
+                                :2.871
+                            </span>
+                            <span class="keyword">
+                                <em>姚笛</em>
+                                :4.76
+                            </span>
+                            <span class="keyword">
+                                <em>网友</em>
+                                :1.115
+                            </span>
+                            <span class="keyword">
+                                <em>汪峰</em>
+                                :0.684
+                            </span>
+                            <span class="keyword">
+                                <em>铁证</em>
+                                :1.117
+                            </span>
+                            <span class="keyword">
+                                <em>马伊琍</em>
+                                :2.961
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>5</th>
+                        <td>
+                            <a target="_blank" href="http://eladies.sina.com.cn/qg/2014/0331/07061241662.shtml">文章承认出轨 专家：小男人为何易出轨</a>
+                        </td>
+                        <td>
+                            <span class="channel">
+                                <em>情感</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="category">
+                                <em>女性</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="keyword">
+                                <em>婚姻</em>
+                                :0.941
+                            </span>
+                            <span class="keyword">
+                                <em>男人</em>
+                                :0.921
+                            </span>
+                            <span class="keyword">
+                                <em>出轨</em>
+                                :3.125
+                            </span>
+                            <span class="keyword">
+                                <em>微博</em>
+                                :2.224
+                            </span>
+                            <span class="keyword">
+                                <em>网友</em>
+                                :0.783
+                            </span>
+                            <span class="keyword">
+                                <em>曝光</em>
+                                :1.166
+                            </span>
+                            <span class="keyword">
+                                <em>姚笛</em>
+                                :4.247
+                            </span>
+                            <span class="keyword">
+                                <em>专家</em>
+                                :0.869
+                            </span>
+                            <span class="keyword">
+                                <em>马伊琍</em>
+                                :2.022
+                            </span>
+                            <span class="keyword">
+                                <em>心理</em>
+                                :1.167
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>6</th>
+                        <td>
+                            <a target="_blank" href="http://ent.sina.com.cn/s/m/2014-03-30/11074119490.shtml">文章出轨风波大有文章 不排除为新片炒作</a>
+                        </td>
+                        <td>
+                            <span class="channel">
+                                <em>明星</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="category">
+                                <em>娱乐</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="keyword">
+                                <em>留言</em>
+                                :1.14
+                            </span>
+                            <span class="keyword">
+                                <em>二胎</em>
+                                :1.428
+                            </span>
+                            <span class="keyword">
+                                <em>出轨</em>
+                                :4.023
+                            </span>
+                            <span class="keyword">
+                                <em>马伊琍</em>
+                                :3.268
+                            </span>
+                            <span class="keyword">
+                                <em>姚笛</em>
+                                :4.703
+                            </span>
+                            <span class="keyword">
+                                <em>新片</em>
+                                :1.574
+                            </span>
+                            <span class="keyword">
+                                <em>网友</em>
+                                :1.768
+                            </span>
+                            <span class="keyword">
+                                <em>男星</em>
+                                :1.135
+                            </span>
+                            <span class="keyword">
+                                <em>离婚</em>
+                                :1.763
+                            </span>
+                            <span class="keyword">
+                                <em>经纪人</em>
+                                :1.218
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>7</th>
+                        <td>
+                            <a target="_blank" href="http://ent.sina.com.cn/s/m/w/2014-03-31/00594119620.shtml">独家解读文章夫妇微博声明：道歉求弥补</a>
+                        </td>
+                        <td>
+                            <span class="channel">
+                                <em>明星</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="category">
+                                <em>娱乐</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="keyword">
+                                <em>丈夫</em>
+                                :2.211
+                            </span>
+                            <span class="keyword">
+                                <em>孩子</em>
+                                :1.869
+                            </span>
+                            <span class="keyword">
+                                <em>出轨</em>
+                                :2.514
+                            </span>
+                            <span class="keyword">
+                                <em>婚姻</em>
+                                :2.432
+                            </span>
+                            <span class="keyword">
+                                <em>马伊琍</em>
+                                :4.668
+                            </span>
+                            <span class="keyword">
+                                <em>姚笛</em>
+                                :2.352
+                            </span>
+                            <span class="keyword">
+                                <em>网友</em>
+                                :2.211
+                            </span>
+                            <span class="keyword">
+                                <em>太太</em>
+                                :1.429
+                            </span>
+                            <span class="keyword">
+                                <em>道歉</em>
+                                :2.028
+                            </span>
+                            <span class="keyword">
+                                <em>微博</em>
+                                :1.927
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>8</th>
+                        <td>
+                            <a target="_blank" href="http://news.sina.com.cn/c/2014-03-30/070029823846.shtml">文章“偷情”姚笛马伊琍知道吗</a>
+                        </td>
+                        <td>
+                            <span class="channel">
+                                <em>国内</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="category">
+                                <em>新闻中心</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="keyword">
+                                <em>电视剧</em>
+                                :1.118
+                            </span>
+                            <span class="keyword">
+                                <em>剧照</em>
+                                :0.84
+                            </span>
+                            <span class="keyword">
+                                <em>照片</em>
+                                :0.938
+                            </span>
+                            <span class="keyword">
+                                <em>游香港</em>
+                                :1.159
+                            </span>
+                            <span class="keyword">
+                                <em>马伊琍</em>
+                                :3.109
+                            </span>
+                            <span class="keyword">
+                                <em>姚笛</em>
+                                :4.76
+                            </span>
+                            <span class="keyword">
+                                <em>裸婚时代</em>
+                                :1.125
+                            </span>
+                            <span class="keyword">
+                                <em>夫妻</em>
+                                :1.104
+                            </span>
+                            <span class="keyword">
+                                <em>曝光</em>
+                                :1.005
+                            </span>
+                            <span class="keyword">
+                                <em>新闻</em>
+                                :0.838
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>9</th>
+                        <td>
+                            <a target="_blank" href="http://news.sina.com.cn/c/2014-03-31/015029827479.shtml">时评：“周一见”，无关爱的信仰</a>
+                        </td>
+                        <td>
+                            <span class="channel">
+                                <em>国内</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="category">
+                                <em>新闻中心</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="keyword">
+                                <em>时评</em>
+                                :1.834
+                            </span>
+                            <span class="keyword">
+                                <em>凡事</em>
+                                :3.049
+                            </span>
+                            <span class="keyword">
+                                <em>道德</em>
+                                :3.126
+                            </span>
+                            <span class="keyword">
+                                <em>信仰</em>
+                                :3.24
+                            </span>
+                            <span class="keyword">
+                                <em>马伊琍</em>
+                                :1.658
+                            </span>
+                            <span class="keyword">
+                                <em>姚笛</em>
+                                :1.904
+                            </span>
+                            <span class="keyword">
+                                <em>绯闻</em>
+                                :1.499
+                            </span>
+                            <span class="keyword">
+                                <em>明星</em>
+                                :3.819
+                            </span>
+                            <span class="keyword">
+                                <em>爱情</em>
+                                :3.311
+                            </span>
+                            <span class="keyword">
+                                <em>人性</em>
+                                :2.06
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>10</th>
+                        <td>
+                            <a target="_blank" href="http://ent.sina.com.cn/s/m/2014-03-31/09494119790.shtml">文章承认出轨并致歉 马伊琍：且行且珍惜</a>
+                        </td>
+                        <td>
+                            <span class="channel">
+                                <em>明星</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="category">
+                                <em>娱乐</em>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="keyword">
+                                <em>丈夫</em>
+                                :1.415
+                            </span>
+                            <span class="keyword">
+                                <em>致歉</em>
+                                :1.677
+                            </span>
+                            <span class="keyword">
+                                <em>孩子</em>
+                                :1.495
+                            </span>
+                            <span class="keyword">
+                                <em>出轨</em>
+                                :1.609
+                            </span>
+                            <span class="keyword">
+                                <em>照片</em>
+                                :1.305
+                            </span>
+                            <span class="keyword">
+                                <em>马伊琍</em>
+                                :4.668
+                            </span>
+                            <span class="keyword">
+                                <em>姚笛</em>
+                                :2.352
+                            </span>
+                            <span class="keyword">
+                                <em>家庭</em>
+                                :1.332
+                            </span>
+                            <span class="keyword">
+                                <em>生活</em>
+                                :1.508
+                            </span>
+                            <span class="keyword">
+                                <em>离婚</em>
+                                :1.322
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+    (function(){
+        var theadFix = function(table){
+            wrap = table.parent();
+            wrap.css({
+                position:'relative'
+            });
+            var tableClone = table.clone();
+
+            var fragment = $('<div class="fixed-thead-wrap"></div>') ;
+            fragment.css({
+                position:'absolute',
+                top:0,
+                left:0,
+                display:'block',
+                height:table.find('thead').height(),
+                overflow:'hidden'
+            });
+            fragment.append(tableClone);
+            wrap.prepend(fragment);
+            wrap.on('scroll',function(){
+                fragment.css({
+                    top:$(this).scrollTop()
+                });
+            });
+        };
+
+        theadFix($('#demo_20150306162147 table'));
+    })();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>模拟滚动条</title>
+	<style type="text/css">
+    .ds_list{width:200px; height:200px;overflow:hidden;position:relative;border:1px solid #ddd;}
+    .season-select-bar{width:20px;height:200px;position:absolute;top:0;right:0;background:#ccc;}
+    .season-select-trigger{width:20px;height:50px;background: #000;position:absolute;}
+	</style>
+
+</head>
+<body>
+    <div class="ds_list" id="SI_Season_Scroll_Wrap">
+        <div class="dsl_cont" id="SI_Season_Scroll_Cont" scroll-type="cont">
+            <div class="dsl_first">
+                <p class="">按季节</p>
+            </div>
+            <p class="">2014 春夏男装</p>
+            <p class="">2014 春夏女装</p>
+            <p class="">2014 度假系列</p>
+            <p class="">2013 春夏高级定制</p>
+            <p class="">2013 春夏男装</p>
+            <p class="">2013 春夏女装</p>
+            <p class="">2013 秋冬高级定制</p>
+            <p class="">2013 秋冬男装</p>
+            <p class="">2013 秋冬女装</p>
+            <p class="">2013 早秋系列</p>
+            <p class="selected">2013 度假系列</p>
+            <p class="">2012 春夏高级定制</p>
+            <p class="">2012 春夏女装</p>
+            <p class="">2012 秋冬高级定制</p>
+            <p class="">2012 秋冬男装</p>
+            <p class="">2012 秋冬女装</p>
+            <p>2012 早秋系列</p>
+            <p>2012 高级定制系列</p>
+            <p>2012 度假系列</p>
+            <p>2011 春夏高级定制</p>
+            <p>2011 春夏女装</p>
+            <p>2011 秋冬高级定制</p>
+            <p>2011 秋冬女装</p>
+        </div>
+        <div class="season-select-bar" id="SI_Season_Scroll_Bar" scroll-type="bar">
+            <div class="season-select-trigger" id="SI_Season_Scroll_Trigger" scroll-type="trigger"></div>
+        </div>
+    </div>
+    <!--<script type="text/javascript" src="scrollbar.js"></script>-->
+    <script type="text/javascript" src="scrollbar_a.js"></script>
+    <script type="text/javascript">
+    var byId = function(id){
+        return document.getElementById(id);
+    }
+    var prefix = 'SI_Season_Scroll_';
+    // var SBar = ScrollBar({
+    //     contentOuter: byId(prefix+'Wrap'),
+    //     contentInner: byId(prefix+'Cont'),
+    //     dragOuter: byId(prefix+'Bar'),
+    //     dragInner: byId(prefix+'Trigger')
+    // });
+    var SBar = new ScrollBarT(byId(prefix+'Wrap'));
+    </script>
+</body>
+</html>

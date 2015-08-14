@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+    #demo_20150116171958{color:red;font-size:30px;font-family:Arial;text-align:center;}
+    </style>
+</head>
+<body>
+    <p id="demo_20150116171958">0</p>
+    <script type="text/javascript">
+        (function(){
+            var isUndefined = function(o){
+                return typeof o === 'undefined';
+            };
+            var isFn = function(o){
+                return typeof o === 'function';
+            };
+            window.Jumper = function(opt){
+                this.opt = opt;
+            };
+            Jumper.prototype = {
+                start:function(){
+                    var self = this;
+                    var wrap = self.wrap;
+                    var opt = self.opt;
+                    var times = opt.times || 5;
+                    var endNum = opt.endNum || 100;
+                    var intervalTime = opt.intervalTime || 300;
+                    var startNum = opt.startNum||0;
+                    var difference = (endNum - startNum)/times;
+                    var startTimes = 0;
+                    self.timer = setInterval(function(){
+                        var num = startNum+difference*startTimes;
+                        if(startTimes === times){
+                            num = endNum;
+                            clearInterval(self.timer);
+                        }
+                        if(opt.computed){
+                            opt.computed(num);
+                        }
+                        startTimes++;
+                    },intervalTime);
+                }
+            };
+        })();
+        var wrap = document.getElementById('demo_20150116171958');
+        var splitNum = function(num) {
+            num = num + "";
+            var re = /(-?\d+)(\d{3})/
+            while (re.test(num)) {
+                num = num.replace(re, "$1,$2")
+            }
+            return num;
+        };
+        var Jumper1 = new Jumper({
+            endNum:47219,
+            startNum:12485,
+            times:30,
+            intervalTime:30,
+            computed:function(num){
+                wrap.innerHTML = splitNum(Math.round(num));
+            }
+        });
+        Jumper1.start();
+    </script>
+</body>
+</html>

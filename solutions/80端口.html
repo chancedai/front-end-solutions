@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>80端口</title>
+</head>
+<body>
+    <p>netstat -n -a -o | findstr "0.0.0.0:80"</p>
+    <p>tasklist /svc /FI "PID eq 进程号"</p>
+    <p>如：</p>
+    <pre>
+Microsoft Windows [版本 6.1.7601]
+版权所有 (c) 2009 Microsoft Corporation。保留所有权利。
+
+C:\Users\CHANCE>netstat -n -a -o | findstr "0.0.0.0:80"
+  TCP    0.0.0.0:80             0.0.0.0:0              LISTENING       9256
+  TCP    0.0.0.0:8082           0.0.0.0:0              LISTENING       4820
+
+C:\Users\CHANCE>tasklist /svc /FI "PID eq 9256"
+
+映像名称                       PID 服务
+========================= ======== ============================================
+node.exe                      9256 暂缺
+
+C:\Users\CHANCE>
+    </pre>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mouseenter mouseleave</title>
+    <style type="text/css">
+    ul{
+        width:200px;
+        margin:0;
+        padding:10px 0;
+        background:#2883DE;
+        list-style:none;
+        line-height:30px;
+        text-align:center;
+        color:#FFF;
+    }
+    li{
+        margin:10px;
+        padding:0;
+        background:#3728DE;
+    }
+    </style>
+</head>
+<body>
+   <a href="http://www.cnblogs.com/_franky/archive/2010/05/01/1725624.html" target="_blank">跨浏览器的 mouseenter mouseleave 以及 compareDocumentPosition</a>
+   <a href="http://julabs.com/blog/not-ie-mouseenter-mouseleave/" target="_blank">在非IE中实现mouseenter和mouseleave和的功能</a>
+   <a href="http://xiebiji.com/2010/02/js_mouseenter_mouseleave/" target="_blank">Js中自定义Mouseenter、Mouseleave的写法</a>
+   <ul id="my_id">
+   <li>1</li>
+   <li>2</li>
+   <li>3</li>
+   </ul>
+   <script type="text/javascript">
+
+   //ele为目标元素，type为事件类型不用'on'，func为事件响应函数
+   // var addEvent=function(ele,type,func){
+   //  if(window.document.all)
+   //      ele.attachEvent('on'+type,func);//ie系列直接添加执行
+   //  else{//ff
+   //      if(type==='mouseenter')
+   //          ele.addEventListener('mouseover',this.withoutChildFunction(func),false);
+   //      else if(type==='mouseleave')
+   //          ele.addEventListener('mouseout',this.withoutChildFunction(func),false);
+   //      else
+   //          ele.addEventListener(type,func,false);
+   //  }
+   // }
+   // var withoutChildFunction=function(func){
+   //  return function(e){
+   //      var parent=e.relatedTarget;//上一响应mouseover/mouseout事件的元素
+   //      while(parent!=this&&parent){//假如存在这个元素并且这个元素不等于目标元素（被赋予mouseenter事件的元素）
+   //          try{
+   //              parent=parent.parentNode;}//上一响应的元素开始往上寻找目标元素
+   //          catch(e){
+   //              break;
+   //          }
+
+   //      }
+   //      if(parent!=this)//以mouseenter为例，假如找不到，表明当前事件触发点不在目标元素内
+   //      func(e);//运行目标方法，否则不运行
+   //  }
+   // }
+
+    /**
+     * 只在非IE中使用
+     * 模拟 IE 中 mouseenter 和 mouseleave 的效果
+     * @param {Event} e 发生的事件
+     * @param {Function} fun 触发的行为
+     */
+    var hover = function(e,fun){
+        /**
+         * 因为这个函数只在非IE的浏览器中使用
+         * 所以可以使用 e.relatedTarget
+         * 来获得与事件的目标节点相关的节点
+         */
+        var t = e.relatedTarget,
+
+        // 获得触发此事件的节点
+        t2 = e.target;
+
+        /**
+         * 如果当前的节点与触发此事件的节点为同一节点
+         * 并且事件的目标节点不是当前节点的子节点
+         * 则触发行为
+         */
+        if(this == t2 && t && !(this.compareDocumentPosition(t) == 20)){
+            fun.call(this);
+        }
+        t = t2 = null;
+    }
+    window.onload = function(){
+        var my_id = document.getElementById('my_id');
+        var li = my_id.getElementsByTagName('li')[0];
+
+        var ul_enter = function(){
+            li.innerHTML = '鼠标进入UL';
+        }
+
+        var ul_leave = function(){
+            li.innerHTML = '鼠标离开UL';
+        }
+
+        /**
+         * 用 my_id.onmouseenter!==undefined 来判断
+         * 浏览器支不支持 mouseenter 和 mouseleave 的方法
+         * 注意一定要用 “!==”来判断，而不能用“!=”
+         * 在非 IE 中，my_id.onmouseenter 为 undefined
+         * 在 IE 中，my_id.onmouseenter 为 null 或者为一个 function
+         * Opera 也支持 attachEvent 方法
+         * 但是 Opera 没有 mouseenter 和 mouseleave 的功能
+         */
+        if(my_id.attachEvent&&my_id.onmouseenter!==undefined){
+            my_id.attachEvent('onmouseenter',ul_enter);
+
+            my_id.attachEvent('onmouseleave',ul_leave);
+        }else{
+            my_id.addEventListener('mouseover',function(e){
+                //ul_enter();
+                hover.call(this,e,ul_enter);
+            },false);
+
+            my_id.addEventListener('mouseout',function(e){
+                //ul_leave();
+                hover.call(this,e,ul_leave);
+            },false);
+        }
+
+    };
+   </script>
+</body>
+</html>

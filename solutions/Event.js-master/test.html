@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo_20140710145546">
+        <textarea node-type="text" style="width:500px;height:200px;"></textarea>
+        <button node-type="add">test</button>
+        <button node-type="remove">解除test</button>
+    </div>
+    <script type="text/javascript" src="Event_data.js"></script>
+    <script type="text/javascript">
+    var doc = document;
+    var byAttr = function(node, attname, attvalue) {
+        var match = [];
+        var item;
+        var args = [];
+        for (var i = 0, len = node.childNodes.length; i < len; i++) {
+            item = node.childNodes[i];
+            if (item.nodeType === 1) {
+                if (attvalue !== '*') {
+                    if (item.getAttribute(attname) === attvalue) {
+                        match.push(item);
+                    }
+                } else {
+                    if (item.getAttribute(attname) !== '') {
+                        match.push(item);
+                    }
+                } if (item.childNodes.length > 0) {
+                    args = Array.apply(null, arguments);
+                    args[0] = item;
+                    match = match.concat(arguments.callee.apply(null, args));
+                }
+            }
+        }
+        return match;
+    };
+    var getDom = function(wrap, type) {
+        var nodes, dom;
+        nodes = byAttr(wrap, type, '*');
+        dom = {
+            __wrap__: wrap
+        };
+        for (var i = 0, len = nodes.length; i < len; i++) {
+            var j = nodes[i].getAttribute(type);
+            if (j) {
+                dom[j] || (dom[j] = nodes[i]);
+            }
+        }
+        return dom;
+    };
+    var dom = getDom(document.getElementById('demo_20140710145546'), 'node-type');
+    var evt = new Event();
+    var test = function(e, src, data) {
+        dom.text.value = dom.text.value + ' '+ data.name||'';
+    };
+    var noeventHandler = evt.attach('click', dom.add, test,{
+        name:'daichang',
+        sex:'male'
+    });
+    evt.attach('click', dom.remove, function() {
+        evt.detach('click', dom.add, noeventHandler);
+    });
+    </script>
+</body>
+</html>

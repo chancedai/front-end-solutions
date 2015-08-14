@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>winSize</title>
+    <style type="text/css">
+    .demo-201405161144 p{background:#eee;position:fixed;bottom:0;right:10px;padding:10px;border:1px solid #000;}
+    </style>
+</head>
+<body class="demo-201405161144">
+    <pre lang="js">
+var doBeforeBind = function(cb,bind){
+    cb();
+    bind(cb);
+};
+    </pre>
+    <script type="text/javascript">
+    (function(){
+        var cb = function(){
+            console.log('6');
+        };
+        var doBeforeBind = function(cb,bind){
+            cb();
+            bind(cb);
+        };
+        doBeforeBind(cb,function(cb){
+            window.onresize(cb);
+        });
+    })();
+    </script>
+</body>
+</html>

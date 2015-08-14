@@ -1,0 +1,53 @@
+﻿SkinName = 		Metal plate
+
+ItemSize = 		68
+RadiusSizeFactor = 	0.85
+AutoSubmenuMarking = 	0.94
+
+ItemGlow =		ItemGlow.png
+
+TextBoxShrink = 		0.95
+TextFont = 		Arial
+TextSize = 		11
+TextColor = 		000000
+TextTrans = 		ee
+TextRendering = 		5
+
+TextShadow = 		1
+TextShadowColor = 	ddffdd
+TextShadowTrans = 	aa
+TextShadowOffset = 	1
+
+IconShrink = 		0.74
+IconTrans = 		0.299,0.299,0.299,0,0,0.587,0.587,0.587,0,0,0.114,0.114,0.114,0,0,0.1,0.1,0.1,0.85,0,0,0,0,0,1
+
+ItemBack = 		ItemBack.png
+ItemBackShrink = 		1
+ItemBackTrans = 		1
+
+ItemFore = 		
+ItemForeShrink = 		
+ItemForeTrans = 		
+
+ItemShadow = 		
+ItemShadowShrink = 	
+ItemShadowTrans = 	
+
+MenuBack = 		MenuBack.png
+MenuBackSize = 		fac+0.3
+MenuBackTrans = 		1
+
+MenuBackOuterRim = 	MenuOuterRim.png
+MenuBackOuterRimWidth = 6
+MenuBackOuterRimTrans = 	1
+
+MenuFore = 		
+MenuForeSize = 		
+MenuForeTrans = 		
+
+
+
+
+
+
+

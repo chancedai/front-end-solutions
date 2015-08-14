@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正计时</title>
+</head>
+<body>
+    <h1 id="demo_201405061502"></h1>
+    <script type="text/javascript">
+        var ScrollPage = (function(){
+            var noop = function(){};
+            // 滚动多少次显示分页
+            var times;
+            // 每次加载多少个
+            var smallPageNum;
+            // 分页时每页多少个
+            var pageNum;
+            // 现在每几页
+            var smallPageIndex = 1;
+            // 总个数
+            var totalNum = 0;
+            var pageCallback = noop;
+            var hasPage = false;
+            return {
+                init:function(opt){
+                    times = opt.times||3;
+                    smallPageNum = opt.smallPageNum||20;
+                    pageNum = times*smallPageNum;
+                    pageCallback = opt.pageCallback||noop;
+                },
+                scroll:function(total){
+                    if(hasPage){
+                        return;
+                    }
+                    totalNum = total;
+                    var self = this;
+                    smallPageNum(self,smallPageIndex);
+                    times++;
+                    if((times-1)===3){
+                        pageCallback(self,total,pageNum);
+                        hasPage = true;
+                    }else{
+                        smallPageIndex++;
+                        hasPage = false;
+                    }
+                },
+                setSmallPage : function(index){
+                    smallPageIndex = index;
+                },
+                getSmallPage :function(){
+                    return smallPageIndex;
+                },
+                hasPage:function(){
+                    return hasPage;
+                }
+            };
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>根据索引移除数组中的某个元素</title>
+    <link rel="stylesheet" type="text/css" href="http://ent.sina.com.cn/470/2014/0410/json.human.css">
+    <script type="text/javascript" src="http://ent.sina.com.cn/470/2014/0410/json.human.js"></script>
+</head>
+<body>
+    <div id="demo_201404101311">
+        <ul>
+            <li>
+                <label>删除前：</label><div></div>
+            </li>
+            <li>
+                <label>删除第三个元素后：</label><div></div>
+            </li>
+            <li>
+                <label>js代码：</label>
+                <pre class="js">
+// &#x6839;&#x636e;&#x7d22;&#x5f15;&#x79fb;&#x9664;&#x6570;&#x7ec4;&#x4e2d;&#x7684;&#x67d0;&#x4e2a;&#x5143;&#x7d20;
+(function(){
+    function removeByIndex(arr, index) {
+        arr.splice(index, 1);
+    }
+    var node = document.getElementById(&#039;demo_201404101311&#039;);
+    var divs = node.getElementsByTagName(&#039;div&#039;);
+    var html;
+    var somearray = [&#039;mon&#039;, &#039;tue&#039;, &#039;wed&#039;, &#039;thur&#039;];
+    html = JsonHuman.format(somearray);
+    divs[0].appendChild(html);
+    removeByIndex(somearray, 2);
+    html = JsonHuman.format(somearray);
+    divs[1].appendChild(html);
+})();
+                </pre>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        // 根据索引移除数组中的某个元素
+        (function(){
+            function removeByIndex(arr, index) {
+                arr.splice(index, 1);
+            }
+            var node = document.getElementById('demo_201404101311');
+            var divs = node.getElementsByTagName('div');
+            var html;
+            var somearray = ['mon', 'tue', 'wed', 'thur'];
+            html = JsonHuman.format(somearray);
+            divs[0].appendChild(html);
+            removeByIndex(somearray, 2);
+            html = JsonHuman.format(somearray);
+            divs[1].appendChild(html);
+        })();
+    </script>
+</body>
+</html>

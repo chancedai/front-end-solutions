@@ -1,0 +1,7 @@
+
+all-opacity()
+	/*TypeError: expected rgba or hsla, but got unit:80*/
+	@css {
+		filter:alpha(opacity=arguments*100);
+  		opacity:arguments;
+	}

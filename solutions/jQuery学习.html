@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery学习</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.js"></script>
+</head>
+<body>
+    <h1 id="demo_201402111612"></h1>
+    <script type="text/javascript">
+        ;(function(exports){
+            var sinacMNT = function(){
+                return new sinacMNT.fn.init();
+            };
+            sinacMNT.fn = sinacMNT.prototype = {
+                version:'1.0.0',
+                constructor:sinacMNT,
+                init:function(){
+                    // var len = arguments.length;
+                    // if ( !len) {
+                    //     return this;
+                    // }
+                    return this;
+                }
+            };
+            sinacMNT.fn.init.prototype = sinacMNT.fn;
+            sinacMNT.extend = sinacMNT.fn.extend = function(obj){
+                var target = this;
+                var src,copy;
+                for(var name in obj){
+                    src = target[name];
+                    copy = obj[name];
+                    if(src !== undefined){
+                        throw new Error(name + ':: has extended');
+                    }
+                    if ( copy !== undefined ) {
+                        target[name] = copy;
+                    }
+                }
+                return target;
+            };
+            sinacMNT.extend({
+                byId : function(id) {
+                    if (typeof id === 'string') {
+                        return document.getElementById(id);
+                    }
+                    console.log(id);
+                    return id;
+                },
+                byAttr : function(node, attname, attvalue) {
+                    if (typeof node == 'string') {
+                        node = byId(node);
+                    }
+                    var nodes = [];
+                    a,tvalue = attvalue || '';
+                    var getAttr = function(node) {
+                        return node.getAttribute(attname);
+                    };
+                    for (var i = 0, l = node.childNodes.length; i < l; i++) {
+                        if (node.childNodes[i].nodeType == 1) {
+                            var fit = false;
+                            if (attvalue) {
+                                fit = (getAttr(node.childNodes[i]) == attvalue);
+                            } else {
+                                fit = !! getAttr(node.childNodes[i]);
+                            }
+                            if (fit) {
+                                nodes.push(node.childNodes[i]);
+                            }
+                            if (node.childNodes[i].childNodes.length > 0) {
+                                nodes = nodes.concat(arguments.callee.call(null, node.childNodes[i], attname, attvalue));
+                            }
+                        }
+                    }
+                    return nodes;
+                },
+                hasClass : function(ele, cls) {
+                    if (!ele) {
+                        return false;
+                    }
+                    return ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+                },
+                addClass : function(ele, cls) {
+                    if (!hasClass(ele, cls)) {
+                        ele.className = ele.className.replace(/(^\s*)|(\s*$)/g, '') + ' ' + cls;
+                    }
+
+                },
+                removeClass : function(ele, cls) {
+                    if (hasClass(ele, cls)) {
+                        var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+                        ele.className = ele.className.replace(reg, ' ');
+                    }
+                },
+                toggleClass : function(ele, cls) {
+                    if (hasClass(ele, cls)) {
+                        removeClass(ele, cls);
+                    } else {
+                        addClass(ele, cls);
+                    }
+                }
+            });
+            sinacMNT.extend({
+                byIds:function(){
+                    console.log(55);
+                }
+            });
+            var EXPORTS_NAME = 'sinacMNT';
+            var UGLIFY_NAME = '___'+EXPORTS_NAME+'___';
+            exports[UGLIFY_NAME] = sinacMNT;
+            if(exports[EXPORTS_NAME]){
+                throw '个性化推荐全局变量名"'+EXPORTS_NAME+'"已经被占用，可使用'+UGLIFY_NAME;
+            }else{
+                exports[EXPORTS_NAME] = sinacMNT;
+            }
+        })(window);
+    </script>
+</body>
+</html>

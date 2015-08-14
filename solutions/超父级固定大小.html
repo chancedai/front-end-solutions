@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>超父级固定大小</title>
+    <style type="text/css">
+        /*.demo-201401021103 .item:hover{_zoom:1;}解决ie6划过不显示，使用left值来控制是否显示，避免使用display控制时，划走不隐藏*/
+        .demo-201401021103 .item{display:block; width:100px;height:100px;background:#f00;position:relative;margin: 200px auto;}
+        .demo-201401021103 .big{position:absolute;top:-50px;left:-99999px; width:200px;height:200px;background:#000;filter:alpha(opacity=10);opacity:.1;}
+        .demo-201401021103 .item:hover{_zoom:1;}
+        .demo-201401021103 .item:hover .big{left:-50px;}
+
+        .demo-201401021103 .item .big2{left:-50px;}
+
+        /*.demo-201401021103 .item{padding: 5px 0 5px 10px; background:rgba(66,63,59, 0.7); -ms-filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#b2423F3B', EndColorStr='#b2423F3B');*zoom:1;} :root .demo-201401021103 .item{-ms-filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#00423F3B', EndColorStr='#00423F3B'); }*/
+    </style>
+</head>
+<body>
+    <p>注意父级有滤镜，ie会无法超出父级容器</p>
+    <div class="demo-201401021103">
+        <a href="javascript:;" class="item">
+            <div class="big"></div>
+        </a>
+        <a href="javascript:;" class="item">
+            <div class="big big2"></div>
+        </a>
+    </div>
+</body>
+</html>

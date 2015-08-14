@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>常用网址</title>
+</head>
+<body>
+     <div id="demo_20150522100713"></div>
+     <script type="text/javascript" src="http://i0.sinaimg.cn/dy/js/jquery/jquery-1.7.2.min.js"></script>
+     <script type="text/javascript">
+        (function(){
+            var bookmarks = {
+               defaults:[
+                {
+                    title:'Code Canyon',
+                    desc:'代码交易平台',
+                    link:'http://codecanyon.net/'
+                },
+                {
+                    title:'IcoMoon',
+                    desc:'自定义图标，包括字体图标，svg图标等',
+                    link:'https://icomoon.io/'
+                },
+                {
+                    title:'Preloaders',
+                    desc:'等待loading图标生成',
+                    link:'http://preloaders.net/'
+                },
+                {
+                    title:'善用佳软',
+                    desc:'开源实用软件推荐',
+                    link:'http://xbeta.info/'
+                },
+                {
+                    title:'slideshare',
+                    desc:'幻灯片PPT分享',
+                    link:'http://www.slideshare.net/'
+                },
+                {
+                    title:'CSS3生成器',
+                    desc:'CSS3代码生成器',
+                    link:'http://css3generator.com/'
+                },
+                {
+                    title:'代码演示',
+                    desc:'代码测试，代码演示，前端demo',
+                    link:'http://jsfiddle.net/'
+                },
+                {
+                    title:'Package Control',
+                    desc:'Sublime Text插件管理工具及相关插件',
+                    link:'https://packagecontrol.io/'
+                },
+                {
+                    title:'Adsense',
+                    desc:'Google广告管理',
+                    link:'https://www.google.com/adsense/app'
+                },
+                {
+                    title:'百度EFE',
+                    desc:'百度EFE（Excellent FrontEnd）技术体系',
+                    link:'http://efe.baidu.com/'
+                },
+                {
+                    title:'百度FEX',
+                    desc:'百度前端研发部',
+                    link:'http://fex.baidu.com/'
+                },
+                {
+                    title:'Taobao UED',
+                    desc:'Taobao UED',
+                    link:'http://ued.taobao.org/blog/'
+                },
+                {
+                    title:'AlloyTeam',
+                    desc:'腾讯全端 AlloyTeam 团队 Blog',
+                    link:'http://www.alloyteam.com/'
+                },
+                {
+                    title:'学区房',
+                    desc:'学区房',
+                    link:'http://mall.fang.com/mall/201404/llxqf.html'
+                },
+                {
+                    title:'从零开始nodejs系列文章',
+                    desc:'从零开始nodejs系列文章',
+                    link:'http://blog.fens.me/series-nodejs/'
+                },
+                {
+                    title:'node.js中文资料导航',
+                    desc:'node.js中文资料导航',
+                    link:'http://segmentfault.com/a/1190000000348772'
+                },
+                {
+                    title:'聊聊移动端跨平台开发的各种技术',
+                    desc:'聊聊移动端跨平台开发的各种技术',
+                    link:'http://fex.baidu.com/blog/2015/05/cross-mobile/'
+                },
+                {
+                    title:'Web开发人员的6种赚钱之道',
+                    desc:'Web开发人员的6种赚钱之道',
+                    link:'http://blog.jobbole.com/1246/'
+                }
+               ]
+            };
+            var wrap = document.getElementById('demo_20150522100713');
+            var html = [];
+            for(var clz in bookmarks){
+                var items = bookmarks[clz];
+                for (var i = items.length - 1; i >= 0; i--) {
+                    var item = items[i];
+                    var desc = '';
+                    if(item.title!==item.desc){
+                        desc = '<p>'+item.desc+'</p>';
+                    }
+                    html.push('<li><a class="external" href="'+item.link+'" target="_blank">'+item.title+'</a>'+desc+'</li>');
+                };
+            }
+            html.unshift('<ol>');
+            html.push('</ol>');
+            wrap.innerHTML = html.join('');
+        })();
+     </script>
+
+
+    <ol>
+
+    	<li><a href="http://wiki.intra.weibo.com/" target="_blank">http://wiki.intra.weibo.com/ 微博wiki</a></li>
+    	<li><a href="http://tech.intra.weibo.com/" target="_blank">http://tech.intra.weibo.com/ 微博技术部wiki</a></li>
+    	<li><a href="http://tech.intra.weibo.com/Ria:STK" target="_blank">http://tech.intra.weibo.com/Ria:STK 微博STK地址</a></li>
+        <li><a href="http://tech.intra.weibo.com/Ria:Tools" target="_blank">http://tech.intra.weibo.com/Ria:Tools 微博常用开发工具</a></li>
+    	<li><a href="http://home.intra.sina.com.cn/" target="_blank">http://home.intra.sina.com.cn/ 新浪内网首页</a></li>
+    	<li><a href="http://usejsdoc.org/" target="_blank">js doc 使用方法</a></li>
+        <li><a href="http://hex.youdao.com/zh-cn/tutorial/index.html" target="_blank">http://hex.youdao.com/zh-cn/tutorial/index.html 有道hex</a></li>
+        <li><a href="https://github.com/rogerwang/node-webkit/wiki" target="_blank">https://github.com/rogerwang/node-webkit/wiki node-webkit wiki</a></li>
+    </ol>
+    <ol>
+    	<li><a href="http://www.bjld.gov.cn/csibiz/indinfo/index.jsp" target="_blank">http://www.bjld.gov.cn/csibiz/indinfo/index.jsp 医疗保险查询</a></li>
+    </ol>
+    <dl>
+        <dt>chrome</dt>
+        <dd><a href="https://developer.chrome.com/extensions/overview" target="_blank">https://developer.chrome.com/extensions/overview</a></dd>
+        <dd><a href="https://developer.chrome.com/extensions/devtools" target="_blank">https://developer.chrome.com/extensions/devtools</a></dd>
+        <dd><a href="http://open.chrome.360.cn/extension_dev/overview.html" target="_blank">http://open.chrome.360.cn/extension_dev/overview.html</a></dd>
+        <dd><a href="http://www.ituring.com.cn/article/60223" target="_blank">http://www.ituring.com.cn/article/60223</a></dd>
+        <dd><a href="http://www.ituring.com.cn/article/60223" target="_blank">插件示例：http://developer.chrome.com/extensions/samples</a></dd>
+    </dl>
+    <dl>
+        <dt>css</dt>
+        <dd><a href="http://css-tricks.com/" target="_blank">http://css-tricks.com/</a></dd>
+    </dl>
+
+    <dl>
+        <dt>域名及主机管理</dt>
+        <dd><a href="http://i.wopus.org/idc/host/1954/" target="_blank">wopus主机及域名：http://i.wopus.org/idc/host/1954/</a></dd>
+        <dd><a href="http://dc.www.net.cn/basic/domainDetail" target="_blank">万网域名：http://dc.www.net.cn/basic/domainDetail</a></dd>
+    </dl>
+
+    <dl>
+        <dt>驾照</dt>
+        <dd><a href="https://mybank.icbc.com.cn/icbc/conformity/forwardnr.jsp?f2z_Area_code=0200&url=/creditCardApply_portal/creditCardApply_hello.jsp" target="_blank">牡丹交通卡</a></dd>
+    </dl>
+</body>
+</html>

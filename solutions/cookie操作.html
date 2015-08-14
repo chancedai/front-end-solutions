@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>cookie操作</title>
+</head>
+<body>
+    <pre lang="js">
+    	var cookie = (function() {
+            /**
+             * 读取cookie,注意cookie名字中不得带奇怪的字符，在正则表达式的所有元字符中，目前 .[]$ 是安全的。
+             * @param {Object} cookie的名字
+             * @return {String} cookie的值
+             * @example
+             * var value = co.getCookie(name);
+             */
+            var co = {};
+            co.getCookie = function(name) {
+                var strCookie = document.cookie;
+                var arrCookie = strCookie.split(';');
+                for (var i = 0; i < arrCookie.length; i++) {
+                    var arr = arrCookie[i].split('=');
+                    if (arr[0] == name){
+                        return arr[1];
+                    }
+                }
+                return '';
+            };
+
+            /**
+             * 设置cookie
+             * @param {String} name cookie名
+             * @param {String} value cookie值
+             * @param {Number} expire Cookie有效期，单位：小时
+             * @param {String} path 路径
+             * @param {String} domain 域
+             * @param {Boolean} secure 安全cookie
+             * @example
+             * co.setCookie('name','sina',null,"")
+             */
+            co.setCookie = function(name, value, expire, path, domain, secure) {
+                var cstr = [];
+                cstr.push(name + '=' + escape(value));
+                if (expire) {
+                    var dd = new Date();
+                    var expires = dd.getTime() + expire * 3600000;
+                    dd.setTime(expires);
+                    cstr.push('expires=' + dd.toGMTString());
+                }
+                if (path) {
+                    cstr.push('path=' + path);
+                }
+                if (domain) {
+                    cstr.push('domain=' + domain);
+                }
+                if (secure) {
+                    cstr.push(secure);
+                }
+                document.cookie = cstr.join(';');
+            };
+
+            /**
+             * 删除cookie
+             * @param {String} name cookie名
+             */
+            co.deleteCookie = function(name) {
+                document.cookie = name + '=;' + 'expires=Fri, 31 Dec 1999 23:59:59 GMT;';
+            };
+            return co;
+        })();
+    </pre>
+</body>
+</html>

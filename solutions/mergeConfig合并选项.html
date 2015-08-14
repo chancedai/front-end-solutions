@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>合并选项</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+	var mergeConfig = function(config_main, config_to_merge) {
+		var x;
+		for (x in config_to_merge) {
+			if (Object.prototype.hasOwnProperty.call(config_to_merge, x)) {
+				config_main[x] = config_to_merge[x];
+			}
+		}
+		return config_main;
+	}
+
+	</script>
+</body>
+</html>

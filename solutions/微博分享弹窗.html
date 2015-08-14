@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>微博分享</title>
+</head>
+<body>
+    <a href="javascript:;" onclick="linkShare();">分享</a>
+    <script type="text/javascript">
+    var share = (function(){
+        var api = 'http://service.weibo.com/share/share.php?';
+        var encode = encodeURIComponent;
+        return function(url,title,source,sourceUrl,content,pic,appkey){
+            var params = [
+            'url=',
+            encode(url),
+            '&title=',
+            title,
+            '&source=',
+            encode(source),
+            '&sourceUrl=',
+            encode(sourceUrl),
+            '&content=',
+            content,
+            'gb2312',
+            '&pic=',
+            encode(pic),
+            '&appkey=',
+            appkey].join('');
+            window.open(api+params, 'WeiBo', ['toolbar=0,status=0,resizable=1,width=440,height=430,left=', (screen.width - 440) / 2, ',top=', (screen.height - 430) / 2].join(''));
+        };
+    })();
+    var linkShare = function(){
+        // (url,title,source,sourceUrl,content,pic,appkey)
+        var url = 'http://sina.com.cn/';
+        var title = '分享标题';
+        var source = "分享来源";
+        var sourceUrl = '';
+        var content = "分享内容";
+        var pic = 'http://sinastorage.com/storage.service.mix.sina.com.cn/6e530cd190663ea86bb1516837a9ef6asina';
+        var appkey = '';
+        share(url,title,source,sourceUrl,content,pic,appkey);
+    };
+
+    </script>
+</body>
+</html>

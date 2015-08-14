@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取每月多少天</title>
+    <style type="text/css">
+    #demo_201404091734 span{background:#ccc;margin-left:5px;}
+    </style>
+</head>
+<body>
+    <div id="demo_201404091734">
+        <ul>
+            <li><label>2011.2</label></li>
+            <li><label>2008.1</label></li>
+            <li><label>1893.2</label></li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        (function(){
+            function getDaysInOneMonth(year, month) {
+                month = parseInt(month, 10);
+                var d = new Date(year,month,0);
+                return d.getDate();
+            };
+            var wrap = document.getElementById('demo_201404091734');
+            var lis = wrap.getElementsByTagName('label');
+            for (var i = 0, len = lis.length; i < len; i++) {
+                var item = lis[i];
+                var info = item.innerHTML;
+                var infos = info.split('.');
+                var num = getDaysInOneMonth(infos[0],infos[1]);
+                var temp = document.createElement('span');
+                temp.innerHTML = num;
+                item.parentNode.appendChild(temp);
+            }
+        })();
+    </script>
+</body>
+</html>

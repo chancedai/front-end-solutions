@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>添加开机启动</title>
+</head>
+<body>
+    <h2>安装及连接</h2>
+    <ol>
+        <li>下载安装：http://www.mongodb.org/downloads</li>
+        <li>设置数据文件存放地址，如：G:\nodejs\MongoDB\bin>mongod.exe --dbpath G:nodejs\mongo_data</li>
+        <li>运行：mongod.exe ，提示类似等待连接 waiting for connections on port 27017，说明成功</li>
+        <li>gbk文件需要在Gruntfile.js中设置 grunt.file.defaultEncoding = 'gbk';</li>
+    </ol>
+    <h2>手动创建MongoDB的windows服务</h2>
+    <ol>
+        <li>在G:nodejs\mongo_data下创建log文件夹</li>
+        <li>在G:\nodejs\MongoDB\mongod.cfg这个配置文件下配置logpath和dbpath，
+            <p>
+                logpath=G:\nodejs\mongo_data\log\mongod.log
+            </p>
+            <p>
+                dbpath=G:\nodejs\mongo_data\db
+            </p>
+            可在cmd中运行来生成，如：echo logpath=G:\nodejs\mongo_data\log\mongod.log> "G:\nodejs\MongoDB\mongod.cfg"
+echo dbpath=G:\nodejs\mongo_data\db>> "G:\nodejs\MongoDB\mongod.cfg"
+        </li>
+        <li>创建MongoDB服务：sc.exe create MongoDB binPath= "\"G:\nodejs\MongoDB\bin\mongod.exe\" --service --config=\"G:\nodejs\MongoDB\mongod.cfg\"" DisplayName= "MongoDB" start= "auto",运行后提示：[SC] CreateServer 成功</li>
+        <li>启动MongoDB服务：net start MongoDB</li>
+        <li>如要停止MongoDB服务：net stop MongoDB</li>
+        <li>如要删除MongoDB服务，先停止再执行：sc.exe delete MongoDB</li>
+    </ol>
+
+</body>
+</html>

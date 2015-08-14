@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="default.css">
+  <script src="highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+  <pre><code>
+  #include &lt;iostream&gt;
+  #define IABS(x) ((x) &lt; 0 ? -(x) : (x))
+
+  int main(int argc, char *argv[]) {
+
+    /* An annoying "Hello World" example */
+    for (auto i = 0; i &lt; 0xFFFF; i++)
+      cout &lt;&lt; "Hello, World!" &lt;&lt; endl;
+
+    char c = '\n';
+    unordered_map &lt;string, vector&lt;string&gt; &gt; m;
+    m["key"] = "\\\\"; // this is an error
+
+    return -2e3 + 12l;
+  }
+  </code></pre>
+
+</body>
+</html>

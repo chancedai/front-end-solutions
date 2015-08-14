@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>半透明遮盖层</title>
+    <style type="text/css">
+        .demo-201403301559{font-size:100px;line-height:200px;}
+        body,html{padding:0;margin:0;}
+    </style>
+</head>
+<body>
+    <div class="demo-201403301559">
+        <p><select>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+        </select><select>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+        </select><select>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+        </select>
+    </p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitationullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+         <script language="javascript" type="text/javascript">
+         var __Mask__ = (function(){
+            var doc = document;
+            var mark = null;
+            var timer = null;
+            var isIE = /msie/.test(navigator.userAgent.toLowerCase());
+            var setStyle = function(el,styles){
+                if(!el){
+                    return;
+                }
+                for(var i in styles){
+                    el.style[i] = styles[i];
+                }
+            };
+            var create = function(opacity){
+                if(mark){
+                    return;
+                }
+                if(typeof opacity == 'undefined'){
+                    opacity = 0.3;
+                }
+                var ieOpacity = opacity*100;
+                var iframe;
+                mark = doc.createElement('div');
+                setStyle(mark,{
+                    zIndex:10000,
+                    left:'0px',
+                    top:'0px',
+                    position:"absolute",
+                    backgroundColor:"#000",
+                    filter:'Alpha(Opacity='+ieOpacity+')',
+                    opacity:opacity
+                });
+                if(isIE){
+                    iframe = doc.createElement('iframe');
+                    iframe.frameBorder=0;
+                    iframe.scrolling='no';
+                    setStyle(iframe,{
+                        filter : 'Alpha(Opacity=0)',
+                        width : '100%',
+                        height : '100%'
+                    });
+                    setStyle(mark,{
+                        filter:'Alpha(Opacity='+ieOpacity+')'
+                    });
+                    mark.appendChild(iframe);
+                }
+                doc.body.appendChild(mark);
+            };
+            var resize = function(){
+                var px = 'px';
+                var width = doc.body.clientWidth + px;
+                var height;
+                if(doc.body.offsetHeight < doc.documentElement.clientHeight){
+                    height = doc.documentElement.clientHeight + px;
+                }else{
+                    height = doc.body.clientHeight + px;
+                }
+                setStyle(mark,{
+                    width:width,
+                    height:height
+                });
+            };
+            return {
+                on:function(opacity){
+                    create(opacity);
+                    resize();
+                    clearInterval(timer);
+                    timer = setInterval(resize,50);
+                    setStyle(mark,{
+                        display:'block'
+                    });
+                },
+                off:function(){
+                    clearInterval(timer);
+                    setStyle(mark,{
+                        display:'none'
+                    });
+                }
+            };
+         })();
+         __Mask__.on(0.3);
+         setTimeout(function(){
+            // __Mask__.off();
+         },5e3);
+    </script>
+</body>
+</html>

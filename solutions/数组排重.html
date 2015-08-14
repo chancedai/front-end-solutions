@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div id="demo_201406171019"></div>
+    <script language="javascript">
+        var data = [12,23,45,12,45,66,77,54,68,34,56,77,99,100];
+
+        var indexOf = [].indexOf ?
+            function(arr, item) {
+                return arr.indexOf(item)
+            } :
+            function indexOf(arr, item) {
+                for (var i = 0; i < arr.length; i++) {
+                    if (arr[i] === item) {
+                        return i
+                    }
+                }
+                return -1
+            }
+        function unique(arr) {
+            var ret = []
+
+            for (var i = 0; i < arr.length; i++) {
+                var item = arr[i]
+                if (indexOf(ret, item) === -1) {
+                    ret.push(item)
+                }
+            }
+            return ret;
+        }
+
+        var uniqueData = unique(data);
+        document.getElementById('demo_201406171019').innerHTML = '原数据：'+data.join(',') +'<br/>排重后：'+ uniqueData.join(',');
+    </script>
+</body>
+</html>

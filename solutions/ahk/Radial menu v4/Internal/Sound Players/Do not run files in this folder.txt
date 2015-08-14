@@ -1,0 +1,23 @@
+﻿
+Do not run files in this folder!
+If you accidentally ran them, here is the code which will close all of them peacefully;
+
+
+CODE
+;============================================================================
+PostMessage("RMSoundOnShow",3)
+PostMessage("RMSoundOnSubShow",3)
+PostMessage("RMSoundOnSubHide",3)
+PostMessage("RMSoundOnHover",3)
+ExitApp
+
+PostMessage(Receiver,Message) {
+	oldTMM := A_TitleMatchMode, oldDHW := A_DetectHiddenWindows   
+	SetTitleMatchMode, 3
+	DetectHiddenWindows, on
+	PostMessage, 0x1001,%Message%,,,%Receiver% ahk_class AutoHotkeyGUI
+	SetTitleMatchMode, %oldTMM%
+	DetectHiddenWindows, %oldDHW%
+}  
+;============================================================================
+

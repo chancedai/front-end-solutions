@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+    html,body{padding:0;margin:0;background:url(http://i3.sinaimg.cn/book/2011/1220/U5024P112DT20111220100606.jpg);}
+    #demo_20140827145439{filter:alpha(opacity=80);opacity:0.8;color:#fff;font-size:50px;text-align:center;background:#000;}
+    </style>
+</head>
+<body>
+    <div id="demo_20140827145439"></div>
+    <script language="javascript">
+        (function(){
+            var getWinSize = function(_target){
+                var w, h ,target;
+                if (_target) {
+                    target = _target.document;
+                }
+                else {
+                    target = document;
+                }
+
+                if(target.compatMode === 'CSS1Compat') {
+                    w = target.documentElement.clientWidth;
+                    h = target.documentElement.clientHeight;
+                }else if (window.innerHeight) { // all except Explorer
+                    if (_target) {
+                        target = _target.self;
+                    }
+                    else {
+                        target = window;
+                    }
+                    w = target.innerWidth;
+                    h = target.innerHeight;
+
+                }else if (target.documentElement && target.documentElement.clientHeight) { // Explorer 6 Strict Mode
+                    w = target.documentElement.clientWidth;
+                    h = target.documentElement.clientHeight;
+
+                }else if (target.body) { // other Explorers
+                    w = target.body.clientWidth;
+                    h = target.body.clientHeight;
+                }
+                if (navigator.userAgent.match(/iPad;.*CPU.*OS 7_\d/i) && !window.navigator.standalone&&w>h) {
+                    h = 672;
+                }
+                return {
+                    width: w,
+                    height: h
+                };
+            };
+            var wrap = document.getElementById('demo_20140827145439');
+            var winSize = getWinSize();
+            wrap.style.width = winSize.width+'px';
+            wrap.style.height = winSize.height+'px';
+            wrap.style.lineHeight = winSize.height+'px';
+            wrap.innerHTML = winSize.width+'X'+winSize.height;
+        })();
+    </script>
+</body>
+</html>

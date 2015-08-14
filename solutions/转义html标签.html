@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>html转义</title>
+</head>
+<body>
+    <div id="demo_201404101311">
+        <ul>
+            <li>
+                <label>转义后：</label><div></div>
+            </li>
+            <li>
+                <label>js代码：</label>
+                <pre class="js">
+// html&#x8f6c;&#x4e49;
+(function(){
+    function HtmlEncode(text) {
+        return text.replace(/&amp;/g, &#039;&amp;amp&#039;).replace(/\&quot;/g, &#039;&amp;quot;&#039;).replace(/&lt;/g, &#039;&amp;lt;&#039;).replace(/&gt;/g, &#039;&amp;gt;&#039;)
+    }
+    function HtmlDecode(text) {
+        return text.replace(/&amp;amp;/g, &#039;&amp;&#039;).replace(/&amp;quot;/g, &#039;\&quot;&#039;).replace(/&amp;lt;/g, &#039;&lt;&#039;).replace(/&amp;gt;/g, &#039;&gt;&#039;)
+    }
+    var node = document.getElementById(&#039;demo_201404101311&#039;);
+    var divs = node.getElementsByTagName(&#039;div&#039;);
+    var html = &#039;&lt;div id=&quot;demo_201404101311&quot;&gt; &lt;ul&gt; &lt;li&gt; &lt;label&gt;&#x5220;&#x9664;&#x524d;&#xff1a;&lt;/label&gt;&lt;div&gt;&lt;/div&gt; &lt;/li&gt; &lt;li&gt; &lt;label&gt;&#x5220;&#x9664;&#x7b2c;&#x4e09;&#x4e2a;&#x5143;&#x7d20;&#x540e;&#xff1a;&lt;/label&gt;&lt;div&gt;&lt;/div&gt; &lt;/li&gt; &lt;li&gt; &lt;label&gt;js&#x4ee3;&#x7801;&#xff1a;&lt;/label&gt; &lt;pre class=&quot;js&quot;&gt; &lt;/pre&gt; &lt;/li&gt; &lt;/ul&gt; &lt;/div&gt;&#039;;
+    divs[0].innerHTML = HtmlEncode(html);
+})();
+                </pre>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        // html转义
+        (function(){
+            function HtmlEncode(text) {
+                return text.replace(/&/g, '&amp').replace(/\"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            }
+            function HtmlDecode(text) {
+                return text.replace(/&amp;/g, '&').replace(/&quot;/g, '\"').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+            }
+            var node = document.getElementById('demo_201404101311');
+            var divs = node.getElementsByTagName('div');
+            var html = '<div id="demo_201404101311"> <ul> <li> <label>删除前：</label><div></div> </li> <li> <label>删除第三个元素后：</label><div></div> </li> <li> <label>js代码：</label> <pre class="js"> </pre> </li> </ul> </div>';
+            divs[0].innerHTML = HtmlEncode(html);
+        })();
+    </script>
+</body>
+</html>

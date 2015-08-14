@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var getNow = function(){
+            var win = window;
+            if(win.performance&&win.performance.now){
+                return win.performance.now();
+            }else if(Date.now){
+                return Date.now();
+            }else{
+                return (new Date()).getTime();
+            }
+        };
+        document.title = getNow();
+    </script>
+</body>
+</html>

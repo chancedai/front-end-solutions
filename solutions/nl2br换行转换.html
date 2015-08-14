@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>nl2br</title>
+    <style type="text/css">
+    #demo_20140721112157 div,#demo_20140721112157 textarea{font-size:12px;line-height:20px;}
+    #demo_20140721112157 div{margin-top:30px;}
+    </style>
+</head>
+<body>
+    <div id="demo_20140721112157" style="width:95%;margin:0 auto;">
+    	<textarea style="width:100%;height:100px;"></textarea>
+        <div></div>
+    </div>
+	<script type="text/javascript">
+	var nl2br = function(str, isXhtml) {
+        var breakTag = '<br />';
+        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+    };
+    var wrap = document.getElementById('demo_20140721112157');
+    var textarea = wrap.getElementsByTagName('textarea')[0];
+    var div = wrap.getElementsByTagName('div')[0];
+    textarea.onkeyup = function(){
+        div.innerHTML = nl2br(textarea.value);
+    };
+	nl2br();
+	</script>
+</body>
+</html>

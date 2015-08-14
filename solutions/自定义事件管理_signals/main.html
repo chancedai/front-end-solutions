@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+    <script type="text/javascript" src="js-signals/dist/signals.min.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		//store local reference for brevity
+		  var Signal = signals.Signal;
+
+		  //custom object that dispatch signals
+		  var myObject = {
+		    started : new Signal(), //past tense is the recommended signal naming convention
+		    stopped : new Signal()
+		  };
+	</script>
+</body>
+</html>

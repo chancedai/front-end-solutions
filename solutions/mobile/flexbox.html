@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    /*display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: box;
+    display: flexbox;
+    display: flex;
+    -webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;*/
+	.demo-20141223171421{display:flex;flex-flow:row;}
+	.demo-20141223171421 .left,.demo-20141223171421 .cont,.demo-20141223171421 .right{width:100%;}
+	.demo-20141223171421 .left,.demo-20141223171421 .cont,.demo-20141223171421 .right{border:1px solid #000;text-align:center;}
+
+	.demo-20141223172910{display:flex;flex-flow:row;}
+	.demo-20141223172910 .cont{width:500px;}
+	.demo-20141223172910 .left{flex:1;}
+	.demo-20141223172910 .right{flex:2;}
+	.demo-20141223172910 .left,.demo-20141223172910 .cont,.demo-20141223172910 .right{border:1px solid #000;text-align:center;}
+
+	.demo-20141223172347{display:flex;flex-flow:row wrap;}
+	.demo-20141223172347 .item{border:1px solid #000;text-align:center;}
+    </style>
+</head>
+<body>
+	<div class="flexbox-20141223171314">
+		<div class="demo-20141223171421">
+			<div class="left">
+				left Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</div>
+			<div class="cont">
+				cont
+			</div>
+			<div class="right">
+				right
+			</div>
+		</div>
+		<div class="demo-20141223172910">
+			<div class="left">
+				flex: 1;
+			</div>
+			<div class="cont">
+				cont 固定宽度500px
+			</div>
+			<div class="right">
+				flex: 2;
+			</div>
+		</div>
+		<div class="demo-20141223172347">
+			<div class="item">wrap,当伸缩项目在伸缩容器中无法在一行中显示的时候会另起一行排列.</div>
+			<div class="item">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+			<div class="item">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+			<div class="item">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+			<div class="item">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+	<h1>第一个必须是字母，后面可以是字母、数字、下划线，总长度为5-20</h1>
+	<pre>
+(function(){
+
+	var checkName = function(str){
+		var reg = /^[a-zA-Z]{1}\w{4,19}/;
+		return reg.test(str);
+	};
+	// var result = [false,false,false,false,true,true];
+	var strs = ['1abcde','a123','a-eirit','-abbb','a12345','a234_'];
+	for (var i = 0, len = strs.length; i < len; i++) {
+		var item = strs[i];
+		console.log(checkName(item));
+	}
+})();
+	</pre>
+	<ol>
+		<li>^n:匹配任何开头为n的字符串</li>
+		<li>[a-zA-Z]:26个大小定字母，注意[a-z]中间还有[,\,],^_,,等字符</li>
+		<li>\w:单词字符,[a-zA-Z_0-9] </li>
+		<li>X{n}X，恰好 n 次</li>
+		<li>X{n,}X，至少 n 次</li>
+		<li>X{n,m}X，至少 n 次，但是不超过 m 次</li>
+	</ol>
+	<script type="text/javascript">
+		(function(){
+
+			var checkName = function(str){
+				var reg = /^[a-zA-Z]{1}\w{4,19}/;
+				return reg.test(str);
+			};
+			// var result = [false,false,false,false,true,true];
+			var strs = ['1abcde','a123','a-eirit','-abbb','a12345','a234_'];
+			for (var i = 0, len = strs.length; i < len; i++) {
+				var item = strs[i];
+				console.log(checkName(item));
+			}
+		})();
+	</script>
+</body>
+</html>

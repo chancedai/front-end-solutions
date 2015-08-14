@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+	<div id="map" style="width:1000px;height:800px;margin:0 auto;"></div>
+	<script src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="maps_api.js"></script>
+	<script>
+	// http://argon-fire-726.appspot.com/img/avion/google_0.png
+	var root_repli = 'http://storage.googleapis.com/rtw-bucket/';
+var root_repli_url = root_repli+'airplane/datas/';
+	var base_url = 'http://argon-fire-726.appspot.com/';
+		var file_datas;
+		var data = {"Status":{"id":"1","event_active":"41","file_datas":"generated","is_virtual":false,"is_arrived":false,"is_live_active":true},"Event":{"id":"41","leg_id":null,"name":"test","flight_nb":null,"subtitle":"test","distance":"2","duration":"123","type":"","iframe":"","informations":"","start_event":"2014-12-11 16:59:00","end_event":"2014-12-13 16:59:00","departure":"PAY","departure_time":"2014-12-11 16:59:00","arrival":"PAY","arrival_time":"2014-12-11 16:59:00","start_lat":null,"start_lng":null,"created":"2014-12-11 15:59:47","modified":"2014-12-11 15:59:47","is_flight":true,"is_visible":null,"live_module_active":true,"chat_module_active":true,"panel_module_active":true,"map_module_active":true,"altitude_module_active":true,"timeline_active":true,"disqus_module_active":true,"google_plus_widget_active":true,"facebook_widget_active":true,"twitter_widget_active":true,"storify_active":false,"youtube_playlist_active":false,"qzzr_active":false,"pilot_id":"1","Pilot":{"id":"1","first_name":"Bertrand","last_name":"Piccard","picture":"https:\/\/pbs.twimg.com\/profile_images\/421350707199897600\/-6FB3iFm_400x400.jpeg","age":"56","weight":"70","height":"182","flight_hrs":"7000","skill":"Self-hypnosis","record":"Breitling orbiter","nationality":"Swiss","background":"Psychiatrist, avdenturer","dream":"A world powered by clean energies","job":"Initiator and president of solar impulse","full_name":"Bertrand Piccard"},"Step":[],"Milestone":[]}};
+		checkActualEventAndInitMap(true);
+	    function checkActualEventAndInitMap(test_flight_datas) {
+	    	var flight = data;
+	        // get flight infos
+	        // $.getJSON('./events/getActualEvent/', function(flight){
+
+	            var actualFlightId = flight.Event.id;
+
+	            if (test_flight_datas && file_datas == flight.Status.file_datas) {
+	                return false; // if file datas didnt change we do not need to init
+	            }
+	            file_datas = flight.Status.file_datas;
+
+
+	            /**
+	             *  Map
+	             */
+	           // var Location_start = new google.maps.LatLng(flight.Event.start_lat, flight.Event.start_lng);// payerne : new google.maps.LatLng(46.8224, 6.9380)
+	            var Location_start = new google.maps.LatLng(24.466667, 54.36666700000001); // abu dahbi
+
+	            var mapOptions = {
+	                zoom : 5,
+	                mapTypeControl: false,
+	                disableDefaultUI:true,
+	                styles : [{"featureType": "road", "stylers": [ { "visibility": "off" } ] },{ "featureType": "administrative.neighborhood", "elementType": "geometry", "stylers": [ { "visibility": "on" } ] } ],
+	                mapTypeId: google.maps.MapTypeId.SATELLITE//google.maps.MapTypeId.HYBRID
+	            };
+
+	            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	            iconSize = new google.maps.Size(200, 200);
+	            icon = new google.maps.MarkerImage(base_url+'img/avion/google_0.png', null, null, new google.maps.Point(60, 60), iconSize);
+	            marker = new google.maps.Marker({
+	                position : Location_start,
+	                map : map,
+	                title : 'Solarimpulse',
+	                icon : icon
+	            });
+
+	            map.setCenter(Location_start);
+
+	            if (window.location.pathname != '/map') {
+	                /**
+	                 * flight profil
+	                 */
+	                var url_fp = '/media/airplane/flight_profil/fp_'+actualFlightId+'.xml';
+	                $.get(url_fp, function(xml_fp){ // get xml data init
+
+	                    // dashed line
+	                    var lineSymbol = {
+	                        path: 'M 0,-1 0,1',
+	                        strokeWeight: 5,
+	                        strokeOpacity: 1,
+	                        strokeColor: '#ffbf3b',
+	                        scale: 3
+	                    };
+
+	                    var flightProfilCoordinates = [];
+
+	                    $(xml_fp).find('situation').each(function(){
+
+	                        var lat = parseFloat($(this).find("gps_latitude").text());
+	                        var lon = parseFloat($(this).find("gps_longitude").text());
+	                        var pos = new google.maps.LatLng(lat, lon);
+	                        flightProfilCoordinates.push(pos);
+	                    });
+	                    var profilPath = new google.maps.Polyline({
+	                        path: flightProfilCoordinates,
+	                        strokeColor: '#ffbf3b',
+	                        strokeOpacity: 0,
+	                        strokeWeight: 5,
+	                        icons: [{ // dashed line
+	                            icon: lineSymbol,
+	                            offset: '100%',
+	                            repeat: '10px'}]
+	                    });
+	                    profilPath.setMap(map);
+
+	                });
+
+	            } // end  if /map
+
+
+	            /**
+	             * flight path
+	             */
+	            $.get(root_repli_url+'data_airplane_flight_'+actualFlightId+'.xml', function(data){
+	                //console.log(data);
+	                flight = $(data);
+	                var telemetries = flight.find('situation');
+
+	                flightPlanCoordinates = [];
+	                var pos;
+	                var tel_heading = 0;
+
+	                $.each(telemetries, function(k, tel){
+
+	                    var lat = $(tel).children('GPS_Latitude').text();
+	                    var lon = $(tel).children('GPS_Longitude').text();
+	                    tel_heading = $(tel).children('Heading_degrees').text();
+
+	                    pos = new google.maps.LatLng(lat, lon);
+	                    //Attention, on ne tire pas la ligne avec la dernière valeur
+	                    if(k < (telemetries.length-1)){
+	                        flightPlanCoordinates.push(pos);
+	                    }
+
+	                });
+
+	                if (typeof pos == 'undefined')
+	                    pos = Location_start; // if no data, we set the location start as defined in the event
+
+	                map.setCenter(pos); // set center to last telemetries
+	                marker.setPosition(pos); // set position of the plane
+	                //set image (heading)
+	                var image_id = Math.round(tel_heading / 10) * 10;
+
+
+	                if (image_id < 0) image_id = 360+image_id;
+	                var image_url = base_url+'img/avion/rotate/google_'+image_id+'.png';
+	                icon = new google.maps.MarkerImage(image_url, null, null, new google.maps.Point(50, 50), iconSize);
+	                marker.setIcon(icon);
+
+	                var flightPath = new google.maps.Polyline({
+	                    path: flightPlanCoordinates,
+	                    strokeColor: strokeColor,
+	                    strokeOpacity: strokeOpa,
+	                    strokeWeight: strokeWeight
+	                });
+
+	                flightPath.setMap(map);
+	            })
+
+
+
+	            return true;
+	        // });
+	    }
+	</script>
+</body>
+</html>

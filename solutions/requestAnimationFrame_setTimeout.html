@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Script-based animation using requestAnimationFrame</title>
+<style type="text/css">
+div { position: absolute; left: 10px; top:100px; padding: 50px;
+  background: crimson; color: white; }
+</style>
+<script type="text/javascript">
+    (function(win){
+        // handle multiple browsers for requestAnimationFrame()
+        win.requestAFrame = (function () {
+            return win.requestAnimationFrame ||
+                    win.webkitRequestAnimationFrame ||
+                    win.mozRequestAnimationFrame ||
+                    win.oRequestAnimationFrame ||
+                    // if all else fails, use setTimeout
+                    function (callback) {
+                        return win.setTimeout(callback, 1000 / 60); // shoot for 60 fps
+                    };
+        })();
+
+        // handle multiple browsers for cancelAnimationFrame()
+        win.cancelAFrame = (function () {
+            return win.cancelAnimationFrame ||
+                    win.webkitCancelAnimationFrame ||
+                    win.mozCancelAnimationFrame ||
+                    win.oCancelAnimationFrame ||
+                    function (id) {
+                        win.clearTimeout(id);
+                    };
+        })();
+    })(window);
+    var requestId = 0;
+    var startime = 0;
+    var lpos = 0;
+    var elm;
+    var getNow = function(){
+        var win = window;
+        if(win.performance&&win.performance.now){
+            return win.performance.now();
+        }else if(Date.now){
+            return Date.now();
+        }else{
+            return (new Date()).getTime();
+        }
+    };
+    function init() {
+        elm = document.getElementById("animated");
+    }
+
+    function render() {
+        elm.style.left = (lpos += 1) + "px";
+        requestId = window.requestAFrame(render);
+        if(lpos>600){
+            window.cancelAFrame(requestId);
+        }
+    }
+
+    function start() {
+        lpos = 0;
+        startime = getNow();
+        requestId = window.requestAFrame(render);
+    }
+    function stop() {
+        if (requestId){
+            window.cancelAFrame(requestId);
+        }
+    }
+
+
+
+
+
+</script>
+</head>
+<body onload="init();">
+
+<div id="animated">Hello there.</div>
+<button onclick="start()">Start</button>
+<button onclick="stop()">Stop</button>
+</body>
+</html>

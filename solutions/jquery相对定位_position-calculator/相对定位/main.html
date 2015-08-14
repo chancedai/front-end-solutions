@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="jquery.js"></script>
+  <script src="position-calculator.js"></script>
+  <style type="text/css">
+		.demo-20141217175118{background:rgba(0,0,0, 0.5); filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#7f000000', EndColorStr='#7f000000');*zoom:1;padding: 10px;position: absolute;top:-9999px;}
+		:root .demo-20141217175118{filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr='#00000000', EndColorStr='#00000000'); }
+  </style>
+  <meta charset="utf-8">
+  <script>
+    jQuery(function($) {
+
+      var tip = $('<div class="demo-20141217175118"></div>').appendTo(document.body);
+
+      function showTooltip(event) {
+        tip.text($(this).data('tooltip'));
+        tip.show().css({top:0, left:0});
+
+        var calculator = new PositionCalculator({
+          item: tip,
+          itemAt: 'bottom left',
+          target: this,
+          targetAt: 'top right',
+          flip: 'both'
+        });
+        var posResult = calculator.calculate();
+
+        tip.css({
+          top: posResult.moveBy.y + 'px',
+          left: posResult.moveBy.x + 'px'
+        })
+      }
+
+      $('.has_tooltip').on('mouseenter', showTooltip);
+      $('.has_tooltip').on('mouseout', function(){tip.hide()});
+    });
+  </script>
+</head>
+<body>
+  <input type="text" class="has_tooltip" data-tooltip="this is a tooltip" value="hover me"/>
+</body>
+</html>

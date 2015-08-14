@@ -1,0 +1,52 @@
+<html>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<head>
+
+</head>
+<body bgcolor="#E6E6FA">
+		<canvas width="400" height="400" id="demo_201405172300_canvas"></canvas>
+		<button id="demo_201405172300_btn1">直接下载没扩展名</button>
+		<button id="demo_201405172300_btn2">新窗口打开图片再下载</button>
+		<a id="demo_201405172300_btn3" href="" download="test.png">直接下载并带后缀名</a>
+		<script>
+		(function(){
+			var addEvent = function(ele, type, handler) {
+				if (ele.addEventListener) {
+					ele.addEventListener(type, handler, false);
+				} else {
+					ele.attachEvent('on' + type, handler);
+				}
+			};
+			var draw0 = function(canvas) {
+				if (!canvas) {
+					return;
+				}
+				var context = canvas.getContext('2d');
+				context.beginPath();
+				context.arc(200, 150, 100, 0, Math.PI * 2, true);
+				context.closePath();
+				context.fillStyle = 'rgba(0,255,0,0.25)';
+				context.fill();
+			};
+			var byId = function(id){
+				return document.getElementById(id);
+			};
+			var canvas = byId('demo_201405172300_canvas');
+			draw0(canvas);
+			byId('demo_201405172300_btn1').onclick = function(){
+				// 直接改图片的mimeType，强制改成steam流类型的
+				var image = canvas.toDataURL('image/png').replace('image/png', 'image/octet-stream');
+				window.location.href = image;
+			};
+			byId('demo_201405172300_btn2').onclick = function(){
+				var image = canvas.toDataURL("image/png");
+				var win = window.open('about:blank', 'image from canvas');
+				win.document.write("<img src='" + image + "' alt='from canvas'/>");
+			};
+
+			var newBtn = byId('demo_201405172300_btn3');
+			newBtn.href = canvas.toDataURL('image/png');
+		})();
+	</script>
+</body>
+</html>

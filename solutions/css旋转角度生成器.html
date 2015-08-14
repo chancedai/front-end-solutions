@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>css旋转角度生成器</title>
+    <style type="text/css">
+    #demo_201406101346 textarea{width:500px;height:100px;}
+    #demo_201406101346 a,#demo_201406101346 a:hover{display:block; width:20px;height:20px; transform: rotate(180deg); -o-transform: rotate(180deg); -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg);filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);}
+    </style>
+</head>
+<body>
+    <div id="demo_201406101346">
+        <input type="number" name="" id="" value="180" node-type="input">
+        <p></p>
+        <textarea node-type="result">
+
+        </textarea>
+        <i class="sina-top-bar-ico sina-top-bar-ico-down"><span></span><em></em></i>
+        <a href="javascript:;">上</a>
+        <p>注意：ie8下，父元素使用了翻转，绝对定位的子元素无法翻转！！！</p>
+    </div>
+    <script type="text/javascript">
+    ;(function(){
+        var byAttr = function(node, attname, attvalue){var match = []; var item; var args = []; for(var i = 0, len = node.childNodes.length; i < len; i ++){item = node.childNodes[i]; if(item.nodeType === 1){if(attvalue!=='*'){if(item.getAttribute(attname) === attvalue){match.push(item); } }else{if(item.getAttribute(attname) !== ''){match.push(item); } } if(item.childNodes.length > 0){args = Array.apply(null,arguments); args[0] = item; match = match.concat(arguments.callee.apply(null,args)); } } } return match; };
+        var getDom = function(wrap, type) {var nodes,dom; nodes = byAttr(wrap,type,'*'); dom = {__wrap__:wrap }; for(var i = 0, len = nodes.length; i < len; i++) {var j = nodes[i].getAttribute(type); if(j){dom[j] || (dom[j]=nodes[i]); } } return dom; };
+        var dom = getDom(document.getElementById('demo_201406101346'),'node-type');
+        var onchange = function(){
+            var val = dom.input.value;
+            val = parseFloat(val);
+            var ieStyle = '';
+            if(val%90===0){
+                // 0：不旋转；1：90度 ;2：180度；3：270度,如 IE： filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+                ieStyle = 'filter:progid:DXImageTransform.Microsoft.BasicImage(rotation='+(val/90>3?0:val/90)+');';
+            }else{
+                // 任意角度
+                // M11 = cos(度数) ，M12 = -sin(度数)，M13= sin(度数)，M14=cos(度数)
+                //（度数与弧度的转化）
+                var deg2radians = Math.PI/180;
+                //deg是需要旋转的度数
+                var rad = val * deg2radians;
+                var sin = Math.sin(rad);
+                var cos = Math.cos(rad);
+                var rSin = -sin;
+                ieStyle = 'filter: progid:DXImageTransform.Microsoft.Matrix(sizingMethod=\'auto expand\', M11='+cos+', M12='+rSin+', M21='+sin+', M22='+cos+');';
+            }
+
+            dom.result.value = 'transform: rotate('+val+'deg); -o-transform: rotate('+val+'deg); -webkit-transform: rotate('+val+'deg); -moz-transform: rotate('+val+'deg);'+ieStyle;
+        };
+        dom.input.onchange = function(){
+            onchange();
+        };
+        onchange();
+    })();
+    </script>
+</body>
+</html>

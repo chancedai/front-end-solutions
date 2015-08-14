@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+	<ol>
+		<li>
+			<p>自定义标签在ie9以下浏览器的问题：</p>
+<div id="demo_20130515183638">
+	<abc>我是&lt;abc&gt;,我包含着<span>&lt;span&gt;</span></abc>
+</div>
+<pre lang="html">
+<!-- ie9以下浏览器，对应的css样式不起作用，且不能包含子元素， 如： -->
+
+<!-- 高级浏览器 -->
+<abc><span></span></abc>
+
+<!-- ie9以下浏览器 -->
+<abc></abc>
+我是<abc>,我包含着
+<span>span</span>
+</abc><//abc>
+</pre>
+		</li>
+		<li>
+<p>解决方法：在head引用 html5shiv-printshiv.min.js.</p>
+<pre lang="html">
+<head>
+<!--[if lt IE 9]>
+<script src="http://imgs.bq69.com/blog/wp-content/themes/dcTheme/js/html5shiv-printshiv.min.js"></script>
+<![endif]-->
+</head>
+</pre>
+		</li>
+		<li>详细解决方案： <a href="https://github.com/aFarkas/html5shiv" target="_blank">html5shiv</a> </li>
+	</ol>
+
+	<style type="text/css">
+	#demo_20130515183638 abc{display:block;border:1px solid #000;padding:5px;background: #ddd;margin:0 0 10px 0;}
+	#demo_20130515183638 span{background: #000;color:#fff;}
+	</style>
+</body>
+</html>

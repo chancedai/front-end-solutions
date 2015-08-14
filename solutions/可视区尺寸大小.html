@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>可视区大小</title>
+    <style type="text/css">
+    .demo-20150617163353{font-family: "Microsoft YaHei", "微软雅黑", "SimSun", "宋体", Arial, Helvetica, sans-serif;}
+    .demo-20150617163353 .text{font-size: 30px;line-height: 50px;}
+    #demo_201402121034{width:1200px;font-size: 12px;}
+    #demo_201402121034 p,#demo_201402121034 h2,#demo_201402121034 h1{margin:0;padding:5px 0px;}
+    </style>
+</head>
+<body>
+    <div class="demo-20150617163353">
+    	<div id="demo_201402121034"></div>
+        <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </div>
+    </div>
+    <script type="text/javascript" src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        // 下面列举一些比较常用的宽度和高度的获取方法。
+        // 网页可见区域宽：document.body.clientWidth
+        // 网页可见区域高：document.body.clientHeight
+        // 网页可见区域宽：document.body.offsetWidth (包括边线的宽)
+        // 网页可见区域高：document.body.offsetHeight (包括边线的宽)
+        // 网页正文全文宽：document.body.scrollWidth
+        // 网页正文全文高：document.body.scrollHeight
+        // 网页被卷去的高：document.body.scrollTop
+        // 网页被卷去的左：document.body.scrollLeft
+        // 网页正文部分上：window.screenTop
+        // 网页正文部分左：window.screenLeft
+        // 屏幕分辨率的高：window.screen.height
+        // 屏幕分辨率的宽：window.screen.width
+        // 屏幕可用工作区高度：window.screen.availHeight
+        // 屏幕可用工作区宽度：window.screen.availWidth
+        // 浏览器窗口高度：window.innerHeight
+        // 浏览器窗口宽度：window.innerWidth （包括滚动条的宽度）
+
+        var getInfoOf = (function(){
+            var win = window;
+            var doc = document;
+            var body = doc.body;
+            var docEle = doc.documentElement;
+            return {
+                scroll : function() {
+                    return {
+                        left:win.pageXOffset || (docEle && docEle.scrollLeft) || body.scrollLeft,
+                        top:win.pageYOffset || (docEle && docEle.scrollTop) || body.scrollTop
+                    };
+                },
+                screenSize:function(){
+                    return {
+                        width:win.screen.width,
+                        height:win.screen.height
+                    };
+                },
+                browserSize:function(){
+                    return {
+                      height: Math.max(body.scrollHeight, docEle.scrollHeight),
+                      width: Math.max(body.scrollWidth, docEle.scrollWidth)
+                    };
+                },
+                visibleSize:function(){
+                    return {
+                        width:win.innerWidth || (docEle && docEle.clientWidth) || body.clientWidth,
+                        height:win.innerHeight ||  (docEle && docEle.clientHeight) || body.clientHeight
+                    };
+                }
+            };
+        })();
+        var wrap = document.getElementById('demo_201402121034');
+        var $win = $(window);
+    	var display = function(){
+
+            var scroll = getInfoOf.scroll();
+            var screenSize = getInfoOf.screenSize();
+            var browserSize = getInfoOf.browserSize();
+            var visibleSize = getInfoOf.visibleSize();
+            wrap.innerHTML = [
+                '<h2>网页被卷去的left,top</h2>',
+                '<p><strong>left:</strong>'+scroll.left+',<strong>top:</strong>'+scroll.top+'</p>',
+                '<h2>屏幕宽高(ie在双屏时，统一为主屏宽高)，对前端意义不大</h2>',
+                '<p><strong>width:</strong>'+screenSize.width+',<strong>height:</strong>'+screenSize.height+'</p>',
+                '<h2>浏览器可使用区宽高（宽不包括滚动条区）</h2>',
+                '<p><strong>width:</strong>'+browserSize.width+',<strong>height:</strong>'+browserSize.height+'</p>',
+                '<h2>浏览器可见区宽高（宽包括滚动条区）</h2>',
+                '<p><strong>width:</strong>'+visibleSize.width+',<strong>height:</strong>'+visibleSize.height+'</p>',
+                '<h2>jquery获取window的宽高</h2>',
+                '<p><strong>width:</strong>'+$win.width()+',<strong>height:</strong>'+$win.height()+'</p>',
+            ''].join('');
+    	};
+    	display();
+    	window.onresize = function(){
+    		display();
+    	};
+        window.onscroll = function(){
+            display();
+        };
+
+    </script>
+</body>
+</html>

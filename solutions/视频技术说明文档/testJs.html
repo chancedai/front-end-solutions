@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>播放器初始化示例</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body class="S_deflt P_defltPlay">
+  <div id="myflashBox"></div>
+  <script type="text/javascript" >
+        var sinaBokePlayerConfig_o = {
+  				container: "myflashBox",  //Div容器的id
+  				playerWidth: 544,         //宽
+  				playerHeight: 436,         //高
+  				autoLoad: 1,                         //自动加载
+  				autoPlay: 1,                         //自动播放
+  				pid: 28,
+  				as: 0,                                                 //广告
+  				tjAD: 0,                                         //显示擎天柱广告
+  				tj: 1,                                                 //片尾推荐
+  				continuePlayer : 1,  //连续播放
+  				casualPlay: 1,                 //任意拖动视频
+  				head: 0,                                 //播放片头动画
+  				logo: 0                                         //显示logo
+			  };
+
+     /**
+      * 兼容以前模式,不过得少许修改
+  window.__onloadFun__ = function(){
+    var player = SinaBokePlayer_o.showFlashPlayer();
+    player.on("flashInitCompleted",function(){
+      player.playVideo(99555836);
+    })
+}
+**/
+      </script>
+      <script src="sinaFlashLoad.js"></script>
+      <script>
+        var player = sinaVideoPlayer(sinaBokePlayerConfig_o);
+        player.on("flashInitCompleted",function(){
+          player.playVideo("99555836","0",0);
+        });
+        player.on("playCompleted",function(){
+          player.playVideo("99555836","0",0);
+        });
+        player.init();
+
+
+      </script>
+</body>
+</html>

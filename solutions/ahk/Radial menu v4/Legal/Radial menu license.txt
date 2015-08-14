@@ -1,0 +1,47 @@
+﻿---------------------------------------------------------------------------------------------------------------
+Radial menu v4
+Author:	Boris Mudrinić (Learning one on AHK forum)
+Contact:	boris.mudrinic@gmail.com
+Thanks:	Chris Mallett, Lexikos, Tic (Tariq Porter), Majkinetor (Miodrag Milić), HotKeyIt, Rseding91, Fincs, Jackeiku, TomXIII, Sean, TheGood, Bentschi, Elesar, None,  
+Me Lance, Patchen, SpeedY, Preston, and others...
+
+License:
+Expression "Radial menu" here means Radial menu codes and program itself, and any part of whole Radial menu package except files which are not created by me*. As the author of Radial menu, I'm reserving all my rights, but I'm temporary allowing that any person who agrees on all terms in this license can use Radial menu.
+
+Radial menu is temporary free for non-commercial, personal use under some conditions. Without my written permission, you (user) are not allowed to (re)distribute, sell or rent Radial menu, or use it on any commercial way, nor have any profit from it in general. You are also not allowed to have any profit from giving information where Radial menu can be obtained. I'm not responsible for any damages arising from use of Radial menu. Everyone is encouraged to improve Radial menu, but no matter how much anyone improve it, my share in authorship will always be minimum 81%. Everyone can create another program based on Radial menu (derived program) under the following conditions: 1) my share in authorship in derived program will always be minimum 51%, 2) author of derived program has to mention my name and contact in it and mark me as the major author, 3) he has to inform me about his program, 4) he can not (re)distribute, sell or rent it without my written permission. This license is only temporary; I can change it whenever I want, on any way I want. License change can be published anywhere on AutoHotkey or AHKscript forum, but most likely in RADIAL MENU scripts topic. URL addresses of those locations are written below**. You agree that: 1) you will visit those locations at least twice per month, and check out has Radial menu license changed, 2) if you can't find any of them, or you can't find valid license, you will contact me and report that, and ask me which license is valid, 3) if you can't contact me, or you can but I don't reply, you are losing the right to use and possess Radial menu, 4) if you notice any sort of license or copyright violation by any person, you will report that to me immediately and you will testify on court in case of litigation. On issues not regulated with this license Croatian laws apply. In case of litigation, Croatian laws and language apply and Municipal court in Zagreb has jurisdiction.
+
+If you don't agree on all terms in this license, you are not allowed to use Radial menu, and you must exit and delete it from computer and any other device that can store electronic data immediately. You are even not allowed just to take a look at any file in Radial menu. If you are unsure what you are allowed or not allowed to do, contact me.
+
+
+---------------------------------------------------------------------------------------------------------------
+* Files which are not not created by me: (Thanks to the authors!)
+- Gdip.ahk. Created by Tic (Tariq Porter).
+- Gdip_All.ahk. Tic's Gdip.ahk modifed by Rseding91, using fincs 64 bit compatible Gdip.ahk
+- Some images. For details, see "About.txt" in each skin folder.
+- Sounds. For details, see "About.txt" in "Internal\Sounds" folder or in each skin folder.
+- Radial menu.exe. This file is in fact renamed AutoHotkey.exe (AHK in later text). AHK is created by Chris Mallett and Lexikos, with portions by AutoIt Team and various AHK community members. It is licensed under GNU General public license which is included in "Legal" folder. You can get AHK source code and other relevant information at https://github.com/Lexikos/AutoHotkey_L, www.autohotkey.com, ahkscript.org and in "Legal" folder. What I'm protecting as my work is a set of instructions for AHK contained in ahk, txt and other files; Radial menu is one big, complex AutoHotkey script which is licensed under Radial menu license. Understand that when you run Radial menu.exe and Radial menu.ahk exists in the same folder, you are using Radial menu program and Radial menu license applies.
+
+
+---------------------------------------------------------------------------------------------------------------
+** URL addresses to monitor:
+AutoHotkey community forum	www.autohotkey.com/board/
+AHKscript forum			ahkscript.org/boards/
+RADIAL MENU scripts		www.autohotkey.com/community/viewtopic.php?f=2&t=50813
+
+
+
+---------------------------------------------------------------------------------------------------------------
+Radial menu uses a few lines of codes written by Majkinetor, TomXIII, Sean, TheGood, HotKeyIt, Bentschi and SKAN. Thank you! I also want to say thanks to all other individuals in AHK community who helped to improve Radial menu. Thanks for your altruism, enthusiasm, great ideas and solutions!
+
+Explicit permissions. I have;
+- Tic's permission to use his GDI+ library as I see fit, including to sell. Tic's GDI+ library: www.autohotkey.com/community/viewtopic.php?f=2&t=32238
+- Rseding91's permission to use his Gdip_All.ahk under the same terms as Tic wrote for his Gdip.ahk, which allows distribution for both commercial and non-commercial use
+- Fincs permission do whatewer I want with his 64 bit compatible Gdip.ahk 
+- Sean's permission to use his functions freely if I give him a credit
+- Me Lance's permission to distribute his Simply Steel skin with the radial menu packages
+Thank you all!
+
+
+---------------------------------------------------------------------------------------------------------------
+Finally, it's good to know that the author of this program is a lawyer. However, I hope that you will obey license/authorship terms and act like moral person in  
+general not because you fear me as a lawyer, but because you respect my hard work and decision to share it with community.

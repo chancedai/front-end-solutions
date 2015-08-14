@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sublime添加代码片断</title>
+</head>
+<body>
+    <ol>
+            <li>在sublime中输入ctrl+shift+p，在弹出中输入browse packages，打开packages文件夹</li>
+            <li>新建一个文件夹，如DaichangSnippets</li>
+            <li>创建一个后缀名为sublime-snippet的文件</li>
+            <li>输入类似以下内容：
+            <pre lang="xml">
+&lt;snippet&gt;
+    &lt;content&gt;&lt;![CDATA[
+console.log(${1:msg})${0}
+]]&gt;&lt;/content&gt;
+    &lt;tabTrigger&gt;cl&lt;/tabTrigger&gt;
+    &lt;!-- &lt;scope&gt;source.js&lt;/scope&gt; &#x6ce8;&#x91ca;&#x8303;&#x56f4;&#x53ef;&#x4ee5;ctrl+shift+p&#x91cc;&#x51fa;&#x73b0; --&gt;
+    &lt;description&gt;console.log - javascript&lt;/description&gt;
+&lt;/snippet&gt;
+    </pre>
+        </li>
+    </ol>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="gb2312" />
+	<title>搜索框</title>
+	<style type="text/css">
+    .demo_201401151448,.demo_201401151448 form{position:relative;}
+    .demo_201401151448 .input,.demo_201401151448 .input:focus{border:1px solid #aaa;outline:none;padding:0 0 0 3px;margin-right:3px;width:120px;height:23px;line-height:24px\9; *line-height:24px;background:none;float:left;display:inline;font-family:"Microsoft Yahei","微软雅黑";position:relative;z-index:100;color:#333;font-size: 13px;}
+    .demo_201401151448 .btn{width:50px; height:25px;line-height:25px;*line-height:26px; margin:0;padding:0 8px;background:#ccc; border:0;cursor:pointer;float:left;display:inline;position:relative;z-index:100;}
+    .demo_201401151448 .gray,.demo_201401151448 .gray:focus{color:#999;}
+	</style>
+
+</head>
+<body>
+    <div class="demo_201401151448">
+        <form name="topSearchForm" method="get" action="http://search.sina.com.cn/" target="_blank">
+            <input type="text" name="q" class="input gray" value="搜索图片">
+            <input type="hidden" name="from" value="slide">
+            <input type="hidden" name="c" value="img">
+            <input type="hidden" name="slide" value="1">
+            <input type="hidden" name="size" value="l">
+            <input type="submit" class="btn" value="搜索">
+        </form>
+        <script type="text/javascript">
+        (function() {
+            var form = document.topSearchForm;
+            var input = form.q;
+            var txt = input.value;
+            var txtClz = 'input';
+            var defaultTxtClz = 'gray';
+            input.onfocus = function() {
+                if (this.value == txt) {
+                    this.value = '';
+                    this.className = txtClz
+                }
+            };
+            input.onblur = function() {
+                if (this.value == '') {
+                    this.value = txt;
+                    this.className = txtClz+' '+defaultTxtClz;
+                }
+            };
+            form.onsubmit = function() {
+                var kw = input.value;
+                if (!kw || kw == txt) {
+                    input.focus();
+                    return false;
+                }
+            }
+        })();
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>限流阀throttle</title>
+</head>
+<body>
+    <pre lang="js">
+    	var throttle = function(method, context,interval) {
+            clearTimeout(method.__tId__);
+            method.__tId__ = setTimeout(function() {
+                method.call(context);
+            }, interval||100);
+        };
+    </pre>
+</body>
+</html>

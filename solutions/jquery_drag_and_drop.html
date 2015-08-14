@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>添加开机启动</title>
+    <style type="text/css">
+    #demo_201405061744{width:100px;height:100px;background:#ddd;position:absolute;}
+    </style>
+</head>
+<body>
+    <div id="demo_201405061744">
+
+    </div>
+    <script src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        var ele = document.getElementById('demo_201405061744');
+        ele.addEventListener ("mousedown" , eleMouseDown , false);
+
+        function eleMouseDown () {
+            stateMouseDown = true;
+            document.addEventListener ("mousemove" , eleMouseMove , false);
+        }
+
+        function eleMouseMove (ev) {
+            var pX = ev.pageX;
+            var pY = ev.pageY;
+            ele.style.left = pX + "px";
+            ele.style.top = pY + "px";
+            document.addEventListener ("mouseup" , eleMouseUp , false);
+        }
+
+        function eleMouseUp () {
+            document.removeEventListener ("mousemove" , eleMouseMove , false);
+            document.removeEventListener ("mouseup" , eleMouseUp , false);
+        }
+    </script>
+</body>
+</html>

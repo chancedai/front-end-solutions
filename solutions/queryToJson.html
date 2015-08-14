@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>产生1到N的随机数</title>
+    <link rel="stylesheet" type="text/css" href="http://ent.sina.com.cn/470/2014/0410/json.human.css">
+    <script type="text/javascript" src="http://ent.sina.com.cn/470/2014/0410/json.human.js"></script>
+</head>
+<body>
+    <div id="demo_201404101311">
+    </div>
+    <script type="text/javascript">
+        (function(){
+            var queryToJson = function(str) {
+                if(typeof str !== 'string'){
+                    return str;
+                }
+                var strList = str.split('&');
+                var strJson = {};
+                var hash;
+                var val;
+                var key;
+                for (var i = 0, len = strList.length; i < len; i++) {
+                    if (strList[i]) {
+                        hash = strList[i].split('=');
+                        key = hash[0];
+                        val = hash[1]||'';
+                        strJson[key] = val;
+                    }
+                }
+                return strJson;
+            };
+            // {a: "123", b: "456", c: "", d: "678"}
+            console.log(queryToJson('&a=123&b=456&c&d=678'));
+            console.log({a: "123", b: "456", c: "", d: "678"});
+
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>editor</title>
+    <style type="text/css">
+    #demo_20150525141643{margin:0 auto;width:1000px;}
+    </style>
+</head>
+<body>
+    <div id="demo_20150525141643">
+        <textarea name="story" id="j_editor" placeholder="请输入文章内容" style="visibility:hidden;"></textarea>
+        <p><button>保存</button></p>
+    </div>
+    <script charset="utf-8" src="ueditor/ueditor.config.js"></script>
+    <script charset="utf-8" src="ueditor/ueditor.all.min.js"></script>
+    <script>
+        ;(function(exports) {
+            // exports.UEDITOR_CONFIG.maximumWords = 10000; //最多字数
+            exports.UEDITOR_CONFIG.wordCount = true;
+            exports.UEDITOR_CONFIG.initialFrameWidth = 750; //初始化编辑器宽度,默认1000
+            exports.UEDITOR_CONFIG.initialFrameHeight = 300; //初始化编辑器高度,默认320
+            // exports.UEDITOR_CONFIG.autoHeightEnabled = false; //不自动增高
+            // exports.UEDITOR_CONFIG.initialStyle = "p{font:12px/20px 'Microsoft Yahei','微软雅黑','SimSun','宋体','Arial Narrow',serif;}";
+            exports.UEDITOR_CONFIG.pasteplain = true;
+            var Editor = new UE.ui.Editor();
+            Editor.render("j_editor");
+            Editor.addListener('ready', function(msg) {
+                Editor.container.style.visibility='visible';
+            });
+            exports.IVT_ARITICLE_EDITOR = Editor;
+
+            // 保存
+            var wrap = document.getElementById('demo_20150525141643');
+            // var textArea = wrap.getElementsByTagName('textarea')[0]
+            var btn = wrap.getElementsByTagName('button')[0];
+            btn.onclick = function(){
+                // 获取编辑内容 Editor.getContent();
+                alert(Editor.getContent());
+            };
+        })(window);
+    </script>
+</body>
+</html>

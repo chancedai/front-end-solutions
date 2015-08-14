@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>半透明遮盖层</title>
+    <style type="text/css">
+        .demo-201403301559{font-size:100px;line-height:200px;}
+        .demo-confirm{width:470px;height:250px;z-index:10001;}
+        .demo-confirm .hd{padding:20px;line-height:20px;background-color:#488a2f; background-image:linear-gradient(135deg,#488a2f 30%,#7bbd62 70%);border-radius:4px 4px 0 0;color:#fff;text-align:right;}
+        .demo-confirm .bd{height:150px;padding:20px; background-color:#fff;}
+        .demo-confirm .bd p{padding:0;margin:0;}
+        .demo-confirm .hd a:link,.demo-confirm .hd a:visited{color:#fff;text-decoration:none;}
+        .demo-confirm .hd a:hover,.demo-confirm .hd a:active{color:#fff;text-decoration:underline;}
+        .demo-confirm .ft{padding:20px; background-color:#656f76;line-height:20px;border-radius:0 0 4px 4px;text-align:right;}
+        .demo-confirm .ft a{display:inline-block;margin:0 0 0 20px;}
+        .demo-confirm .ft a:link,.demo-confirm .ft a:visited{color:#fff;text-decoration:none;}
+        .demo-confirm .ft a:hover,.demo-confirm .ft a:active{color:#fff;text-decoration:underline;}
+        .box-clz{
+            -webkit-transition: -webkit-transform .3s ease-out;
+            -moz-transition: -moz-transform .3s ease-out;
+            -o-transition: -o-transform .3s ease-out;
+            transition: transform .3s ease-out;
+            -webkit-transform: translate(0,-25%);
+            -ms-transform: translate(0,-25%);
+            transform: translate(0,-25%)
+            -webkit-transform: translate(0,0);
+            -ms-transform: translate(0,0);
+            transform: translate(0,0)
+        }
+        body,html{padding:0;margin:0;}
+    </style>
+</head>
+<body>
+    <div class="demo-201403301559">
+        <!-- <div class="demo-confirm">
+            <div class="hd">
+                <a href="javascript:;" dialog-type="close">关闭</a>
+            </div>
+            <div class="bd">
+                <p>您的评论内容有违规内容，请修改！</p>
+            </div>
+            <div class="ft">
+                <a href="javascript:;" dialog-type="confirm">继续发布</a>
+                <a href="javascript:;" dialog-type="cancel">去修改</a>
+            </div>
+        </div> -->
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation  <select>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+            <option value="">ii</option>
+        </select> ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <div class="demo-wrap" id="demo_20150127144843" style="display:none;">
+        <div class="demo-confirm" dialog-type="wrap">
+            <div class="hd">
+                <a href="javascript:;" dialog-type="close">关闭</a>
+            </div>
+            <div class="bd">
+                <p>您的评论内容有违规内容，请修改！</p>
+            </div>
+            <div class="ft">
+                <a href="javascript:;" dialog-type="confirm">继续发布</a>
+                <a href="javascript:;" dialog-type="cancel">去修改</a>
+            </div>
+        </div>
+    </div>
+
+         <script language="javascript" type="text/javascript">
+         (function(win){
+            var doc = document;
+            var ua = navigator.userAgent.toLowerCase();
+            var isIE = /msie/.test(ua);
+            var isIE6 = /msie 6/.test(ua);
+            var byId = function(id) {
+                if (typeof id === 'string') {
+                    return doc.getElementById(id);
+                }
+                return id;
+            };
+            var byTag = function(tag){
+                if (typeof tag === 'string') {
+                    return doc.getElementsByTagName(tag);
+                }
+                return tag;
+            };
+            var isNode = function(node){
+                return !!(
+                    (node !== undefined) &&
+                    node.nodeName &&
+                    node.nodeType
+                );
+            };
+            var byAttr = function(node, attname, attvalue) {
+                if (typeof node == 'string') {
+                    node = byId(node);
+                }
+                var nodes = [];
+                attvalue = attvalue || '';
+                var getAttr = function(node) {
+                    return node.getAttribute(attname);
+                };
+                for (var i = 0, l = node.childNodes.length; i < l; i++) {
+                    if (node.childNodes[i].nodeType == 1) {
+                        var fit = false;
+                        if (attvalue) {
+                            fit = (getAttr(node.childNodes[i]) == attvalue);
+                        } else {
+                            fit = !! getAttr(node.childNodes[i]);
+                        }
+                        if (fit) {
+                            nodes.push(node.childNodes[i]);
+                        }
+                        if (node.childNodes[i].childNodes.length > 0) {
+                            nodes = nodes.concat(arguments.callee.call(null, node.childNodes[i], attname, attvalue));
+                        }
+                    }
+                }
+                return nodes;
+            };
+            var hasClass = function(el, clz) {
+                if (!el) {
+                    return false;
+                }
+                return el.className.match(new RegExp('(\\s|^)' + clz + '(\\s|$)'));
+            };
+            var addClass = function(el, clz) {
+                if (!hasClass(el, clz)) {
+                    el.className = el.className.replace(/(^\s*)|(\s*$)/g, '') + ' ' + clz;
+                }
+            };
+            var removeClass = function(el, clz) {
+                if (hasClass(el, clz)) {
+                    var reg = new RegExp('(\\s|^)' + clz + '(\\s|$)');
+                    el.className = el.className.replace(reg, ' ');
+                }
+            };
+            var getWinSize = function(_target) {
+                var w, h;
+                if (_target) {
+                    target = _target.document;
+                } else {
+                    target = document;
+                }
+
+                if (target.compatMode === "CSS1Compat") {
+                    w = target.documentElement["clientWidth"];
+                    h = target.documentElement["clientHeight"];
+                } else if (self.innerHeight) { // all except Explorer
+                    if (_target) {
+                        target = _target.self;
+                    } else {
+                        target = self;
+                    }
+                    w = target.innerWidth;
+                    h = target.innerHeight;
+
+                } else if (target.documentElement && target.documentElement.clientHeight) { // Explorer 6 Strict Mode
+                    w = target.documentElement.clientWidth;
+                    h = target.documentElement.clientHeight;
+
+                } else if (target.body) { // other Explorers
+                    w = target.body.clientWidth;
+                    h = target.body.clientHeight;
+                }
+                return {
+                    width: w,
+                    height: h
+                };
+            };
+            var builder = function(wrap, type) {
+                var list, nodes,ids;
+                wrap = (function(){
+                    if(typeof wrap == 'string'){
+                        return byId(wrap);
+                    }
+                    return wrap;
+                })();
+                nodes = byAttr(wrap,type);
+                list = {};
+                ids = {};
+                for(var i = 0, len = nodes.length; i < len; i++) {
+                    var j = nodes[i].getAttribute(type);
+                    if(!j){
+                        continue;
+                    }
+                    list[j] || (list[j] = []);
+                    list[j].push(nodes[i]);
+                    ids[j] || (ids[j]=nodes[i]);
+                }
+                return {
+                    box: wrap,
+                    list: list,
+                    ids: ids
+                };
+            };
+            var removeNode = function(el){
+                if(el&&el.parentNode){
+                    el.parentNode.removeChild(el);
+                }
+            }
+            var setStyle = function(el,styles){
+                if(!el){
+                    return;
+                }
+                for(var i in styles){
+                    el.style[i] = styles[i];
+                }
+            };
+            var addEvent = function(el, type, fn, useCapture) {
+                if (!el) {
+                    return
+                }
+                if (typeof useCapture === 'undefined') {
+                    useCapture = false;
+                }
+                if (el.addEventListener) {
+                    el.addEventListener(type, fn, useCapture);
+                    return true;
+                } else if (el.attachEvent) {
+                    el.attachEvent('on' + type, fn);
+                    return true;
+                } else {
+                    el['on' + type] = fn;
+                }
+            };
+            var isFunction = function(fn) {
+                return typeof fn === 'function';
+            };
+            var extend = function(destination, source) {
+                for (var property in source) {
+                    destination[property] = source[property];
+                }
+                return destination;
+            };
+            var Mask = function(config){
+                var self = this;
+                var defaults = {
+                    opacity:0.3,
+                    zIndex:1e4,
+                    overlayClz:'overlay-clz'
+                };
+                config = extend(defaults, config);
+                self.config = config;
+                self.overlay = null;
+                self.visible = false;
+                self._create();
+            };
+            Mask.prototype = {
+                _create: function(){
+                    var self = this;
+                    var config = self.config;
+                    opacity = config.opacity;
+                   if(self.overlay){
+                       return;
+                   }
+                   var ieOpacity = opacity*100;
+                   var iframe;
+                   var hackDiv;
+                   var overlay = doc.createElement('div');
+                   overlay.className = config.overlayClz;
+                   setStyle(overlay,{
+                       zIndex:config.zIndex,
+                       left:'0px',
+                       top:'0px',
+                       width:'100%',
+                       height:'100%',
+                       position:'fixed',
+                       backgroundColor:'#000',
+                       filter:'Alpha(Opacity='+ieOpacity+')',
+                       opacity:opacity
+                   });
+                   if(isIE){
+                       iframe = doc.createElement('iframe');
+                       iframe.frameBorder=0;
+                       iframe.scrolling='no';
+                       setStyle(iframe,{
+                           filter : 'Alpha(Opacity=0)',
+                           width : '100%',
+                           height : '100%'
+                       });
+                       setStyle(overlay,{
+                           filter:'Alpha(Opacity='+ieOpacity+')'
+                       });
+                       overlay.appendChild(iframe);
+                       // 添加一个div遮盖iframe,用于绑定关闭事件
+                       hackDiv = doc.createElement('div');
+                       setStyle(hackDiv,{
+                           left:'0px',
+                           top:'0px',
+                           width:'100%',
+                           height:'100%',
+                           position:'absolute'
+                       });
+                       overlay.appendChild(hackDiv);
+                   }
+                   if(isIE6){
+                        // 先append 否则css expression不起作用
+                        doc.body.appendChild(overlay);
+                        for (var i in {
+                            Top: 1,
+                            Left: 1
+                        }){
+                            overlay.style.setExpression(i.toLowerCase(), "(_=(document.documentElement.scroll" + i + " || document.body.scroll" + i + "))+'px'");
+                        }
+                        setStyle(overlay,{
+                            position:'absolute'
+                        });
+                        setStyle(doc.body,{
+                            width:'100%',
+                            height:'100%'
+                        });
+                   }else{
+                       doc.body.appendChild(overlay);
+                   }
+                   self.overlay = overlay;
+                   self.iframe = iframe;
+               },
+              on:function(){
+                var self = this;
+                  setStyle(self.overlay,{
+                      display:'block'
+                  });
+                  self.visible = true;
+              },
+              off:function(){
+                var self = this;
+                  setStyle(self.overlay,{
+                      display:'none'
+                  });
+                  self.visible = false;
+              },
+              isVisible:function(){
+                  return visible;
+              }
+            };
+            var Dialog = function(html,config){
+                var self = this;
+                var defaults = {
+                    mask:true,
+                    opacity:0.3,
+                    modal:false,
+                    zIndex:1e4,
+                    overlayClz:'overlay-clz',
+                    boxClz:'box-clz',
+                    scroll:true,
+                    getWidth:function(self){
+                        // 如果offsetWidth不准确，可以自定义些方法获取 width
+                        var wrap = self.dom.ids.wrap;
+                        return wrap.offsetWidth;
+                    },
+                    getHeight:function(self){
+                        // 如果offsetHeight不准确，可以自定义些方法获取 height
+                        var wrap = self.dom.ids.wrap;
+                        return wrap.offsetHeight;
+                    }
+                };
+                self.isVisible = false;
+                self.config = extend(defaults, config||{});
+                self._render(html);
+            };
+            Dialog.prototype = {
+                _render:function(html){
+                    var self = this;
+                    var config = self.config;
+                    // 创建半透明层
+                    if(config.mask){
+                        self.mask = new Mask({
+                            opacity:config.opacity,
+                            zIndex:config.zIndex-1,
+                            overlayClz:config.overlayClz
+                        });
+                    }
+                    if(isNode(html)){
+                        self.box = html;
+                    }else{
+                        self.box = doc.createElement('div');
+                        self.box.innerHTML = html||'';
+                        doc.body.appendChild(self.box);
+                    }
+                    addClass(self.box,config.boxClz);
+                    setStyle(self.box,{
+                        display:'none',
+                        zIndex:config.zIndex
+                    });
+                    var dom = builder(self.box,'dialog-type');
+                    self.dom = dom;
+                    if(isFunction(config.afterRender)){
+                        config.afterRender(self);
+                    }
+                    // 绑定事件
+                    self._bind();
+                },
+                _bind:function(){
+                    var self = this;
+                    var config = self.config;
+                    var ids = self.dom.ids;
+                    addEvent(ids.close,'click',function(){
+                        if(isFunction(config.onClose)){
+                            config.onClose();
+                        }
+                        self.hide();
+                    });
+                    addEvent(ids.confirm,'click',function(){
+                        if(isFunction(config.onConfirm)){
+                            config.onConfirm();
+                        }
+                        self.hide();
+                    });
+                    addEvent(ids.cancel,'click',function(){
+                        if(isFunction(config.onCancel)){
+                            config.onCancel();
+                        }
+                        if(isFunction(config.onClose)){
+                            config.onClose();
+                        }
+                        self.hide();
+                    });
+                    // 点击窗口外区域关闭
+                    if((!config.modal) && config.mask){
+                        addEvent(self.mask.overlay,'click',function(){
+                            self.hide();
+                        });
+                    }
+                },
+                show:function(html){
+                    var self = this;
+                    var config = self.config;
+                    var box = self.box;
+                    if(config.width){
+                        setStyle(box,{
+                            width:config.width
+                        });
+                    }
+                    if(config.height){
+                        setStyle(box,{
+                            height:config.height
+                        });
+                    }
+                    setStyle(box,{
+                        display:''
+                    });
+                    self.isVisible = true;
+                    if(config.mask){
+                        self.mask.on();
+                    }
+                    if(!self.config.scroll){
+                      setStyle(doc.body,{
+                        overflow:'hidden'
+                      });
+                    }
+                    self.center();
+                    if(isFunction(config.onShow)){
+                        config.onShow(self);
+                    }
+                },
+                hide:function(){
+                    var self = this;
+                    var config = self.config;
+                    if(!self.box){
+                        self.box = doc.createElement('div');
+                    }
+                    var box = self.box;
+                    if(config.width){
+                        setStyle(box,{
+                            width:config.width
+                        });
+                    }
+                    if(config.height){
+                        setStyle(box,{
+                            height:config.height
+                        });
+                    }
+                    setStyle(box,{
+                        display:'none'
+                    });
+                    self.isVisible = false;
+                    if(config.mask){
+                        self.mask.off();
+                    }
+                    if(!self.config.scroll){
+                      setStyle(doc.body,{
+                        overflow:'auto'
+                      });
+                    }
+                    if(isFunction(config.onHide)){
+                        config.onHide(self);
+                    }
+                },
+                center:function(){
+                    // 支持两种定位模式，fixed(不跟随页面滚动)，absolute(跟随页面滚动)
+                    var self = this;
+                    var config = self.config;
+                    if(!self.isVisible){
+                        return;
+                    }
+                    var px = 'px';
+                    var winSize = getWinSize();
+                    var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+                    var position = config.position||'fixed';
+                    var left,top,marginLeft,marginTop;
+
+                    left = '50%';
+                    marginLeft = -(config.getWidth(self)/2)+px;
+                    marginTop = -(config.getHeight(self)/2)+px;
+
+                    if(position==='absolute'){
+                        top = (winSize.height/2 + scrollTop)+px;
+                    }else{
+                        top = '50%';
+                    }
+                    setStyle(self.box,{
+                        position:position,
+                        left:left,
+                        top:top,
+                        marginLeft:marginLeft,
+                        marginTop:marginTop
+                    });
+                    self.box.style.marginLeft = marginLeft;
+                    if(isIE6&&position==='fixed'){
+                        self.box.style.setExpression('top',"_=(document.documentElement.scrollTop || document.body.scrollTop) + Math.round(50 * (document.documentElement.offsetHeight || document.body.clientHeight) / 100) + 'px'");
+                        setStyle(self.box,{
+                            position:'absolute'
+                        });
+                    }
+                },
+                destory:function(){
+                    var self = this;
+                    removeNode(self.box);
+                    if(config.mask){
+                        removeNode(self.mask.overlay);
+                    }
+                    self = null;
+                }
+            };
+            win.__Dialog__ = Dialog;
+         })(window);
+
+         var confirm = document.getElementById('demo_20150127144843');
+         // confirm框
+         Dialog1 = new __Dialog__(confirm,{
+            scroll:false,
+            onConfirm:function(){
+                alert('直接发布');
+            },
+            onCancel:function(){
+                alert('去修改');
+            },
+            onClose:function(){
+                alert('关闭');
+            },
+            onHide:function(){
+                document.title = '隐藏';
+            },
+            afterRender:function(self){
+                if(window.console){
+                    // 渲染完毕，你还可以添加更多事件
+                    console.log(self);
+                }
+
+            }
+         });
+         // 等待滚动条稳定后再定位
+        setTimeout(function(){
+             Dialog1.show();
+        },500);
+    </script>
+</body>
+</html>

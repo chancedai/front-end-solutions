@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>模拟滚动条</title>
+	<style type="text/css">
+    .demo-201406111300{float:left;}
+    .demo-201406111300 a{display:block;width:100px;height:50px;line-height:50px;background:#444;color:#fff;text-align:center;right:-1px;}
+    .demo-201406111300-fixed{width:100px;}
+	</style>
+
+</head>
+<body>
+    <p>容器浮动 子元素定宽并设置right值 但在ie7下，width不是100,变为auto</p>
+    <div class="demo-201406111300">
+        <a href="#url">100px宽</a>
+    </div>
+    <p style="clear:both;">只能通过设置容器宽度来修复</p>
+    <div class="demo-201406111300 demo-201406111300-fixed">
+        <a href="#url">100px宽</a>
+    </div>
+</body>
+</html>

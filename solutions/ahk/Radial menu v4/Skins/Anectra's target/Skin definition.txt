@@ -1,0 +1,53 @@
+﻿SkinName = 		Anectra's target
+
+ItemSize = 		76
+RadiusSizeFactor = 	0.787
+AutoSubmenuMarking = 	0.93
+
+ItemGlow =		ItemGlow.png
+
+TextBoxShrink = 		0.9
+TextFont = 		Arial
+TextSize = 		11
+TextColor = 		000011
+TextTrans = 		ff
+TextRendering = 		5
+
+TextShadow = 		1
+TextShadowColor = 	ffffff
+TextShadowTrans = 	aa
+TextShadowOffset = 	1
+
+IconShrink = 		0.72
+IconTrans = 		ARGB|0.94|0|0.05|0.66
+
+ItemBack = 		ItemBack.png
+ItemBackShrink = 		1
+ItemBackTrans = 		1
+
+ItemFore = 		
+ItemForeShrink = 		
+ItemForeTrans = 		
+
+ItemShadow = 		ItemShadow.png
+ItemShadowShrink = 	0.9
+ItemShadowTrans = 	1
+
+MenuBack = 		MenuBack.png
+MenuBackSize = 		fac+0.34
+MenuBackTrans = 		1
+
+MenuBackOuterRim = 	
+MenuBackOuterRimWidth = 
+MenuBackOuterRimTrans = 	
+
+MenuFore = 		MenuFore.png
+MenuForeSize = 		fac+0.75
+MenuForeTrans = 		0.3
+
+
+
+
+
+
+

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>拖拽</title>
+    <style type="text/css">
+    body{height:1000px;}
+    #demo_201405061744{width:100px;height:100px;background:#ddd;position:absolute;}
+    #demo_201405071123{position: absolute;left:50%;top:50%;width:100px;height:100px;border:1px solid #000;}
+    #demo_201405071123.hover{border-color:red;}
+    #demo_201405121101{background:#ddd;padding:10px;position:absolute;left:300px;}
+
+    .drag-separate .drag-clone{display:block;opacity:0.5;}
+    .drag-back .drag-clone{display:none;}
+    </style>
+</head>
+<body>
+    <div id="demo_201405061744">
+    </div>
+    <div id="demo_201405121101">
+        <img width="150" draggable="false" src="http://sinastorage.com/storage.service.mix.sina.com.cn/57940d33ff09affb0f9d81d4fb417dcfsina" alt="">
+    </div>
+    <div id="demo_201405071123">
+
+    </div>
+
+    <script src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="dnd.js"></script>
+    <script type="text/javascript">
+        $('#demo_201405061744').dNd({
+            speed:10,
+            interval:23,
+            dropItems:'#demo_201405071123',
+            replace:function(){
+                var item = $(this);
+                return item.clone();
+            },
+            moving:function(e,dropItem,lastDropItem){
+                if(dropItem){
+                    dropItem.addClass('hover');
+                }else{
+                    lastDropItem&&lastDropItem.removeClass('hover');
+                }
+            },
+            drop:function(e,dropItem){
+                var item = $(this);
+                item.appendTo(dropItem).css({
+                    position:'static'
+                });
+            }
+        });
+
+        $('#demo_201405121101').find('img').dNd({
+            speed:10,
+            interval:23,
+            dropItems:'#demo_201405071123',
+            replace:function(){
+                var item = $(this);
+                var clone = item.clone();
+
+                return clone;
+            },
+            start:function(){
+                var item = $(this);
+                if(item.data('clone')!==1){
+                    item.data('clone',1);
+                    var clone = item.clone();
+                    item.parent().append(clone);
+                    item.attr('parent-id',item.parent().attr('id'));
+                    clone.addClass('drag-clone');
+                }
+                item.parent().addClass('drag-separate').removeClass('drag-back');
+            },
+            moving:function(e,dropItem,lastDropItem){
+                if(dropItem){
+                    dropItem.addClass('hover');
+                }else{
+                    lastDropItem&&lastDropItem.removeClass('hover');
+                }
+            },
+            drop:function(e,dropItem){
+                var item = $(this);
+                if(dropItem&&dropItem.length>0){
+                    item.appendTo(dropItem).css({
+                        position:'static'
+                    });
+                }else{
+                    var parent = $('#'+item.attr('parent-id'));
+                    item.attr('style','').appendTo(parent);
+                    item.parent().removeClass('drag-separate').addClass('drag-back');
+                }
+
+            }
+        });
+    </script>
+</body>
+</html>

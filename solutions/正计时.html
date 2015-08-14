@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正计时</title>
+</head>
+<body>
+    <h1 id="demo_201402111612"></h1>
+    <script type="text/javascript">
+        // 计时器
+        (function(){
+            var Timer = (function(){
+                var getTime = function(seconds){
+                    var minutes = seconds/60;
+                    minutes = parseInt(minutes);
+                    var seconds = seconds%60;
+
+                    var hours = minutes/60;
+                    hours = parseInt(hours);
+                    minutes = minutes%60;
+                    return {
+                        hours:hours,
+                        minutes:minutes,
+                        seconds:seconds
+                    };
+                };
+                var doubleNum = function(num){
+                    var str = num;
+                    if(num<10){
+                        str = '0'+num;
+                    }
+                    return str;
+                };
+                var render = function(wrap,seconds){
+                    var spliter = ':';
+                    var time = getTime(seconds);
+                    var text = doubleNum(time.hours) +spliter+doubleNum(time.minutes) +spliter+doubleNum(time.seconds) ;
+                    if(wrap){
+                        wrap.innerHTML = text;
+                    }
+                    return text;
+                };
+                var Timer = function(wrap,start){
+                    this.wrap = wrap;
+                    this.time = start;
+                    this.runing = false;
+                    this.interval = null;
+                    this.timing();
+                };
+                Timer.prototype = {
+                    start:function(){
+                        this.runing = true;
+                    },
+                    stop:function(){
+                        this.runing = false;
+                    },
+                    timing:function(){
+                        var self = this;
+                        render(wrap,self.time);
+                        self.interval = setInterval(function(){
+                            if(!self.runing){
+                                return;
+                            }
+                            self.time++;
+                            render(wrap,self.time);
+                        },1e3);
+                    },
+                    destroy:function(){
+                        var self = this;
+                        clearInterval(self.interval);
+                    }
+                };
+                return Timer;
+            })();
+            //初始化
+            var wrap = document.getElementById('demo_201402111612');
+            var T1 = new Timer(wrap,0);
+            T1.start();
+        })();
+    </script>
+</body>
+</html>

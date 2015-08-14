@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <title>title</title>
+    <style type="text/css">
+    /*http://mjs.sinaimg.cn/wap/dpool/PHOTO_V2/201409011720/images/nav_arrow.png*/
+		/*list-nav*/
+		.list-nav{position: relative; overflow: hidden;height:53px;line-height:49px;overflow:hidden;background: #eee;border-bottom: 1px solid #EAEAEA;}
+		.list-nav:after{position: absolute; content: ''; top: 0;right:0; width: 3px; height: 100%; z-index: 1; background: url(http://mjs.sinaimg.cn/wap/dpool/PHOTO_V2/201409011720/images/nav_arrow.png) no-repeat -1px center; background-size: 8px 34px;}
+		.list-nav-end:after{display:none;}
+		.list-nav .inner{white-space:nowrap;-webkit-backface-visibility:hidden;}
+		.list-nav a,.list-nav span{-webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -o-user-select: none; user-select: none;padding:0 10px;border: solid #eee; border-width: 2px 0;}
+		.list-nav .current{color:#cb1e3b;border-bottom-color: #CB1E3B;}
+    </style>
+</head>
+<body>
+
+	<div class="list-nav" id="demo_20141218154257">
+		<div class="inner">
+				<span>...最前</span>
+				<span>手机</span>
+				<span>星座</span>
+				<span>篮球</span>
+				<span>新闻</span>
+				<span>军事</span>
+				<span>秘密333</span>
+				<span>音乐</span>
+				<span>科技2</span>
+				<span>体育</span>
+				<span>足球yyyr</span>
+				<span>台球</span>
+				<span>手机</span>
+				<span>星座</span>
+				<span>篮球</span>
+				<span>新闻</span>
+				<span>军事</span>
+				<span>秘密</span>
+				<span>音乐8999</span>
+				<span>科技</span>
+				<span>体育</span>
+				<span>足球</span>
+				<span>台球</span>
+				<span>最后...</span>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function setiScroll(wrapper) {
+			var spt = document.createElement("script");
+			spt.setAttribute("src", "http://mjs.sinaimg.cn/wap/h5/dpool/hd_pic/photo/201408211030/js/iScroll_v4.2.5.min.js");
+			spt.onload = function() {
+				new iScroll(wrapper, {
+					vScroll: false,
+					hScrollbar: false,
+					onTouchEnd: function() {
+						if (this.x > 0) {
+							this.wrapper.classList.remove("list-nav-move");
+						} else {
+							this.wrapper.classList.add("list-nav-move");
+						}
+						if (this.x < this.wrapperW - this.scrollerW) {
+							this.wrapper.classList.add("list-nav-end");
+						} else {
+							this.wrapper.classList.remove("list-nav-end");
+						}
+					}
+				});
+			}
+			document.body.appendChild(spt);
+		}
+		setiScroll('demo_20141218154257');
+	</script>
+</body>
+</html>

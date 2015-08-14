@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>半透明遮盖层</title>
+    <style type="text/css">
+    html,body{ height:100%; margin:0; padding:0; font-size:14px;}
+    .demo-201403301543{font-size:100px;line-height:200px;}
+    .demo-201403301543 li{font-size:14px;line-height:24px;}
+    .mask{height:100%; width:100%; position:fixed; _position:absolute; top:0; z-index:999;opacity:0.3; filter: alpha(opacity=30); background-color:#000; }
+</style>
+</head>
+<body>
+    <div class="demo-201403301543">
+        <ol>
+            <li>半透明效果可以使用 css3 中的 opacity 属性，在低版本的IE浏览器中使用IE的alpha 滤镜。代码: <pre lang="css">.opacity{ opacity:0.3; filter: alpha(opacity=30); background-color:#000; } </pre></li>
+            <li>要覆盖整个可视区域通常的做法是: <pre lang="css"> html,body{ height:100%}.mask{height:100%;width:100%;}</pre></li>
+            <li>但是这样做当内容超过一屏时只有IE6下显示的效果是我们所期望的，在其他浏览器中首屏以下的没能被遮盖住，为了兼容其他浏览器我们可以使用<pre lang="css">position:fixed;</pre> 来解决这个问题</li>
+        </ol>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <div class="mask"></div>
+</body>
+</html>

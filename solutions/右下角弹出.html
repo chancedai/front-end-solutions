@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=uft-8" />
+    <script language="javascript" src="http://www.chinahds.com/js/jquery-1.8.2.min.js" ></script>
+    <title>弹出提示框右下角显示</title>
+    <style type="text/css">
+body{ margin:0px;padding:0px; height:5000px; }
+.botk{right:5px;position:fixed;width:100px;_position:absolute; _top: expression(documentElement.scrollTop + documentElement.clientHeight-this.offsetHeight); z-index:999; height:100px;filter: Alpha(opacity=90);-moz-opacity:.9;opacity:0.9;background:#ffffff; color:#ffffff; bottom:5px;}
+.botts{width:100px; height:100px; position:absolute; z-index:9999;background:#000000;}
+#adclose{width:20px; height:20px; position:absolute; cursor:pointer; z-index:99999}
+</style>
+    <script type="text/javascript">
+$(document).ready(function(e) {
+
+var wintopfir=$(".botk").height();
+var wintopsec=wintopfir-100;
+$("#bottomad").css({top:wintopfir+"px"});
+$("#bottomad").animate({top:wintopsec+"px" }, 2000);
+$("#adclose").click( function () { $("#bottomad").hide(); });
+});
+
+</script>
+</head>
+<body>
+    <div class="botk">
+        <div id="bottomad" class="botts">
+            <div id="adclose">X</div>
+            一个jquery实现的右下角慢慢弹出提示公告，学习做的。大家给意见哈。
+        </div>
+    </div>
+</body>
+</html>

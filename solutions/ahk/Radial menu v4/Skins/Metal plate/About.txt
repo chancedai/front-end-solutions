@@ -1,0 +1,4 @@
+﻿Metal plate skin
+
+- ItemGlow.png by Learning one (Boris Mudrinić), can be used freely.
+- all other images by Learning one (Boris Mudrinić) based on images by unknown author(s) (Thank you!)

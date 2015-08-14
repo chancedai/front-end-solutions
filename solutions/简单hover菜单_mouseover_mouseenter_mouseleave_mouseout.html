@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        .last{ width:1000px;margin:0 auto;position:absolute;height:30px;line-height:30px;background:#ccc;}
+        /*如果.list无背景，无导致ie8及以下浏览器的mouseout bug*/
+        .last .list{position:absolute;left:0;top:0;margin:0;padding:40px 0 0 0;display:none;background:url(#url);}
+        .last ul{background:#ccc;padding:0;margin:0;list-style:none;line-height:100px;}
+        .hover .list{display:block;}
+    </style>
+</head>
+<body>
+    <div id="SI_TopMenu_1" class="last">
+        <a href="#url" target="_blank">关于我们</a>
+        <div class="list">
+            <ul onmouseleave="this.parentNode.parentNode.className='last'">
+                <li>菜单菜单</li>
+                <li>菜单菜单</li>
+                <li>菜单菜单</li>
+                <li>菜单菜单</li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+    <!--<script src="http://news.sina.com.cn/js/792/2014-03-18/80/jquery-1.11.0.min.js"></script>-->
+    <script type="text/javascript">
+    ;(function(){
+        var Menu = function(w){
+            this.wrap = w;
+            this.list = w.getElementsByTagName('div')[0];
+            this.oClz = w.className;
+            this.hClz = this.oClz+' hover';
+            this.timer = null;
+            this.bind();
+        };
+        Menu.prototype = {
+            bind:function(){
+                var self = this;
+                this.list.onmousenter = function(){
+                    self.show();
+                    console.log('listin---------------------');
+                };
+                this.wrap.onmouseenter = function(){
+                    self.show();
+                    console.log('wrapin');
+                };
+                this.wrap.onmouseleave = function(e){
+                    self.hide(1e3);
+                    console.log('wrapout');
+                };
+            },
+            show:function(){
+                var self = this;
+                clearTimeout(self.timer);
+                self.wrap.className = this.hClz;
+            },
+            hide:function(time){
+                var self = this;
+                clearTimeout(self.timer);
+                this.timer = setTimeout(function(){
+                    self.wrap.className = self.oClz;
+                },time||0);
+            }
+        };
+        new Menu(document.getElementById('SI_TopMenu_1'));
+    })();
+    </script>
+</body>
+</html>

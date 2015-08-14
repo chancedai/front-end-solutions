@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>今天日期</title>
+</head>
+<body>
+
+    <script language="javascript">
+    var getTDate = function() {
+        // 1401617386413
+        var curDate = new Date(),
+            year = curDate.getFullYear(),
+            month = curDate.getMonth() + 1,
+            day = curDate.getDate();
+        if (month < 10) {
+            month = '0' + month;
+        }
+        if(day<10){
+            day = '0' + day;
+        }
+        return year + '' + month + day;
+    };
+    console.log(getTDate());
+    </script>
+</body>
+</html>

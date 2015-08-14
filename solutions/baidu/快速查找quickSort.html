@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>title</title>
+</head>
+<body>
+	<h1>快速排序</h1>
+
+		<script type="text/javascript">
+			(function(){
+				var quickSort = function(arr){
+					// 元素个数小于等于1，不用排序
+					if(arr.length <=1){
+						return arr;
+					}
+					// 选择基准，可直接选第一个
+					var pivotIndex = 0;
+					var pivot = arr.splice(pivotIndex, 1)[0];
+					// 左边
+					var left = [];
+					// 右边
+					var right = [];
+					// 开始遍历数组，小于"基准"的元素放入左边的子集，大于基准的元素放入右边的子集
+					for (var i = 0, len = arr.length; i < len; i++) {
+						var item = arr[i];
+						if(item < pivot){
+							left.push(item);
+						}else{
+							right.push(item);
+						}
+					}
+					// 使用递归不断重复这个过程，就可以得到排序后的数组
+					return arguments.callee(left).concat([pivot], arguments.callee(right));
+				};
+
+				var arr1 = [2,45,65,7,34,89,1,3,64554,2,7,754,23,865,23,12,976,3,25];
+				console.log(quickSort(arr1));
+
+			})();
+		</script>
+</body>
+</html>

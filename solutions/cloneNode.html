@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FTP</title>
+</head>
+<body>
+    <div id="demo_20140819174749">
+    	<p class="txt">不错呀</p>
+    	<p class="txt">挺好的</p>
+    </div>
+    <script type="text/javascript">
+    var byClz = (function() {
+		    var by;
+		    var doc = document;
+		    if ('function' === typeof doc.getElementsByClassName) {
+		        by = function(clz, wrap) {
+		            if (wrap) {
+		                return wrap.getElementsByClassName(clz);
+		            } else {
+		                return doc.getElementsByClassName(clz);
+		            }
+		        };
+		    } else {
+		        by = function(clz, wrap) {
+		            for (var i = -1, results = [], finder = new RegExp('(?:^|\\s)' + clz + '(?:\\s|$)'), a = wrap && wrap.getElementsByTagName && wrap.getElementsByTagName('*') || doc.all || doc.getElementsByTagName('*'), l = a.length; ++i < l; finder.test(a[i].className) && results.push(a[i]));
+		            a = null;
+		            return results;
+		        };
+		    }
+		    return by;
+		})();
+	   var  insertAfter = function (newElement, targetElement) {
+	    	var parent = targetElement.parentNode;
+	    	if(parent.lastChild == targetElement) {
+	    		parent.appendChild(newElement);
+	    	} else {
+	    		parent.insertBefore(newElement, targetElement.nextSibling);
+	    	}
+	    	return newElement;
+	    };
+    	var wrap = document.getElementById('demo_20140819174749');
+    	// var ps = wrap.getElementsByTagName('p');
+    	var ps = byClz('txt',wrap);
+    	// html节点是动态引用的，出错！！！
+    	for (var i = 0, len = ps.length; i < len; i++) {
+    		var item = ps[i];
+    		// var newItem = item.cloneNode(true);
+    		var newItem = document.createElement('p');
+    		newItem.className = 'txt';
+    		newItem.innerHTML += ';我是复制的.';
+    		insertAfter(newItem,item);
+    	}
+    </script>
+</body>
+</html>

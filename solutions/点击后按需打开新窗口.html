@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<title>点击后按需打开新窗口</title>
+	<style type="text/css">
+	</style>
+
+</head>
+<body>
+    <div class="demo">
+        <a href="javascript:;" id="demo_201401071018">点击我</a>
+        <script type="text/javascript">
+        ;(function(){
+            var trigger = document.getElementById('demo_201401071018');
+            var getNew = function(){
+                // return window.open('','窗口',['toolbar=0,status=0,resizable=1,width=440,height=430,left=',(screen.width-440)/2,',top=',(screen.height-430)/2].join(''));
+                var newwin =  window.open('','窗口',['width=1,height=1,left=','9999999',',top=','9999999'].join(''));
+                window.focus();
+                return newwin;
+            };
+            var jsLoad=function(url, cb) {
+                var head = document.getElementsByTagName('head')[0];
+                var js = document.createElement('script'),
+                    isLoaded = false;
+                js.onload = js.onreadystatechange = function() {
+                    if (!isLoaded && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+                        isLoaded = true;
+                        js.onload = js.onreadystatechange = null;
+                        typeof cb == 'function' && cb();
+                    }
+                };
+                js.src = url;
+                try {
+                    head.appendChild(js);
+                } catch (e) {}
+            }
+            trigger.onclick = function(){
+                var newWin = getNew();
+                jsLoad('http://i0.sinaimg.cn/dy/js/jquery/jquery-1.7.2.min.js',function(){
+                    newWin.location.href = 'http://weibo.com/';
+                    newWin.resizeTo(screen.width,screen.height);
+                });
+            };
+        })();
+        </script>
+    </div>
+</body>
+</html>

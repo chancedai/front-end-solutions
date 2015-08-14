@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画</title>
+	<style type="text/css">
+	.demo-201404061558 li{position:relative;height:100px;min-height:100px;}
+	.demo-201404061558 .item{position:absolute;top:30px;left:0;width:60px;border-radius:30px; line-height:60px; height:60px;background:#ddd;color:#000;text-align:center;cursor:pointer;}
+	</style>
+</head>
+<body>
+	<ol class="demo-201404061558">
+		<li>
+			<div id="dmoe_201404061534" class="item">Click</div>
+		</li>
+
+	</ol>
+	<script type="text/javascript">
+		var animate = (function() {
+			var win = window;
+			// handle multiple browsers for requestAnimationFrame()
+			var requestFrame = (function() {
+				return win.requestAnimationFrame ||
+					win.webkitRequestAnimationFrame ||
+					win.mozRequestAnimationFrame ||
+					win.oRequestAnimationFrame ||
+					// if all else fails, use setTimeout
+					function(callback) {
+						return win.setTimeout(callback, 1000 / 60); // shoot for 60 fps
+					};
+			})();
+
+			// handle multiple browsers for cancelAnimationFrame()
+			var cancelFrame = (function() {
+				return win.cancelAnimationFrame ||
+					win.webkitCancelAnimationFrame ||
+					win.mozCancelAnimationFrame ||
+					win.oCancelAnimationFrame ||
+					function(id) {
+						win.clearTimeout(id);
+					};
+			})();
+
+			return function(element, name, from, to, duration) {
+				duration = duration || 800;
+				var style = element.style,
+					startTime = new Date;
+				var go = function() {
+					var progress = new Date() - startTime;
+					if (progress >= duration) {
+						style[name] = to + 'px';
+						cancelFrame(requestId);
+						return;
+					}
+
+					var now = (to - from) * (progress / duration);
+					style[name] = now.toFixed() + 'px';
+					requestFrame(go);
+				};
+				style[name] = from + 'px';
+
+				var requestId = requestFrame(go);
+			};
+		})();
+
+		var animate2 = (function() {
+			var win = window; var requestFrame = (function() {return win.requestAnimationFrame || win.webkitRequestAnimationFrame || win.mozRequestAnimationFrame || win.oRequestAnimationFrame || function(callback) {return win.setTimeout(callback, 1000 / 60); }; })(); var cancelFrame = (function() {return win.cancelAnimationFrame || win.webkitCancelAnimationFrame || win.mozCancelAnimationFrame || win.oCancelAnimationFrame || function(id) {win.clearTimeout(id); }; })();
+			return function(duration,start,move,stop) {
+				duration = duration || 800;
+				var startTime = new Date;
+				var go = function() {
+					var progress = new Date() - startTime;
+					if (progress >= duration) {
+						stop();
+						cancelFrame(requestId);
+						return;
+					}
+					move(progress / duration);
+					requestFrame(go);
+				};
+				start();
+				var requestId = requestFrame(go);
+			};
+		})();
+
+		var btn = document.getElementById('dmoe_201404061534');
+		var ease = function(p) {
+			if ((p /= 0.5) < 1) return 1 / 2 * p * p;
+			return -1 / 2 * ((--p) * (p - 2) - 1);
+		};
+		btn.onclick = function(){
+			// animate(btn, 'left', 0, 500, 3000);
+			animate2(3000,function(){
+				btn.style.left = 0;
+			},function(per){
+				btn.style.left = Math.round(500 * ease(per)) + 'px';
+			},function(){
+				btn.style.left = '500px';
+			});
+		};
+	</script>
+</body>
+</html>

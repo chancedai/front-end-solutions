@@ -1,0 +1,30 @@
+﻿[Item1]
+Text= 		Stand by
+Action= 		RWRM RM\Internal\Codes\Stand by.ahk
+
+[Item2]	
+Icon= 		Shut down.png
+Action= 		RWRM RM\Internal\Codes\Shut down.ahk
+
+[Item3]
+Text= 		Turn off monitor
+Action= 		fun RMApp_TurnOffMonitor
+
+[Item4]
+Icon= 		Restart.png
+Action= 		RWRM RM\Internal\Codes\Restart.ahk
+
+[Item5]
+Text= 		Start screen saver
+Action= 		fun RMApp_StartScreenSaver
+
+[Item6]
+Icon= 		Hibernate.png
+Action= 		RWRM RM\Internal\Codes\Hibernate.ahk
+
+
+
+
+;==================================================================
+[General]
+OneRingerAtt =		1
