@@ -99,6 +99,49 @@ function timeFormat(time) {
                 }
                 return timeStr;
             }
+
+
+
+            function readableDate(time){
+              var oDate = new Date(time * 1000), cDate = new Date(), interval = cDate - oDate,
+                hour, minute, hourStr, minuteStr, result;
+
+              var hourSeconds = 1 * 60 * 60 * 1000;
+
+              console.log(interval,hourSeconds);
+              //一小时内
+              if(interval < hourSeconds){
+                if(Math.ceil(interval/60000) == 0){
+                  result = '\u521A\u521A';
+                } else {
+                  result = (Math.ceil(interval/60000)).toString() + '\u5206\u949F\u524D';
+                }
+              } else {
+                //今年之内
+                hour = oDate.getHours();
+                minute = oDate.getMinutes();
+                hourStr = hour < 10 ? '0' + hour.toString() : hour.toString();
+                minuteStr = minute < 10 ? '0' + minute.toString() : minute.toString();
+                // if(cDate.getFullYear() === oDate.getFullYear() && cDate.getMonth() === oDate.getMonth()){
+                if(cDate.getFullYear() === oDate.getFullYear()){
+                  //今日之内
+                  if(cDate.getMonth() === oDate.getMonth() && cDate.getDate() === oDate.getDate()){
+                    result = '\u4ECA\u5929' + hourStr + ':' + minuteStr;
+                  } else {
+                    //今日以前
+                    result = (oDate.getMonth() + 1).toString() + '\u6708' + oDate.getDate().toString() + '\u65E5 ' + hourStr + ':' + minuteStr;
+                  }
+                } else {
+                  //今年以前
+                  result = oDate.getFullYear().toString() + '\u5E74 ' + (oDate.getMonth() + 1).toString() + '\u6708' + oDate.getDate().toString() + '\u65E5 ' + hourStr + ':' + minuteStr;
+                }
+              }
+              return result;
+            }
+
+            ttt = readableDate(1437113469);
+            console.log('2015.7.17',ttt);
+
         })();
     </script>
 </body>

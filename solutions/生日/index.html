@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Birthday Picker</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="bday-picker.js"></script>
+</head>
+<body>
+    <div id="picker1"></div>
+    <script type="text/javascript">
+      $("#picker1").birthdaypicker({
+        onChange:function(date){
+          console.log(date);
+        }
+      });
+      console.log($('#birthdate').val());
+
+    </script>
+</body>
+</html>
